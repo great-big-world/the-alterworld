@@ -1,0 +1,24 @@
+{
+  "mappings": {
+    "dev/creoii/greatbigworld/thealterworld/mixin/world/VanillaBiomeParametersMixin": {
+      "<init>": "Lnet/minecraft/class_6554;<init>()V",
+      "Lnet/minecraft/world/biome/source/util/VanillaBiomeParameters;writeBiomeParameters(Ljava/util/function/Consumer;Lnet/minecraft/world/biome/source/util/MultiNoiseUtil$ParameterRange;Lnet/minecraft/world/biome/source/util/MultiNoiseUtil$ParameterRange;Lnet/minecraft/world/biome/source/util/MultiNoiseUtil$ParameterRange;Lnet/minecraft/world/biome/source/util/MultiNoiseUtil$ParameterRange;Lnet/minecraft/world/biome/source/util/MultiNoiseUtil$ParameterRange;FLnet/minecraft/registry/RegistryKey;)V": "Lnet/minecraft/class_6554;method_38187(Ljava/util/function/Consumer;Lnet/minecraft/class_6544$class_6546;Lnet/minecraft/class_6544$class_6546;Lnet/minecraft/class_6544$class_6546;Lnet/minecraft/class_6544$class_6546;Lnet/minecraft/class_6544$class_6546;FLnet/minecraft/class_5321;)V",
+      "getBiomeOrWindsweptSavanna": "Lnet/minecraft/class_6554;method_40009(IILnet/minecraft/class_6544$class_6546;Lnet/minecraft/class_5321;)Lnet/minecraft/class_5321;",
+      "writeLowBiomes": "Lnet/minecraft/class_6554;method_38200(Ljava/util/function/Consumer;Lnet/minecraft/class_6544$class_6546;)V",
+      "writeMidBiomes": "Lnet/minecraft/class_6554;method_38196(Ljava/util/function/Consumer;Lnet/minecraft/class_6544$class_6546;)V",
+      "writeValleyBiomes": "Lnet/minecraft/class_6554;method_38203(Ljava/util/function/Consumer;Lnet/minecraft/class_6544$class_6546;)V"
+    }
+  },
+  "data": {
+    "named:intermediary": {
+      "dev/creoii/greatbigworld/thealterworld/mixin/world/VanillaBiomeParametersMixin": {
+        "<init>": "Lnet/minecraft/class_6554;<init>()V",
+        "Lnet/minecraft/world/biome/source/util/VanillaBiomeParameters;writeBiomeParameters(Ljava/util/function/Consumer;Lnet/minecraft/world/biome/source/util/MultiNoiseUtil$ParameterRange;Lnet/minecraft/world/biome/source/util/MultiNoiseUtil$ParameterRange;Lnet/minecraft/world/biome/source/util/MultiNoiseUtil$ParameterRange;Lnet/minecraft/world/biome/source/util/MultiNoiseUtil$ParameterRange;Lnet/minecraft/world/biome/source/util/MultiNoiseUtil$ParameterRange;FLnet/minecraft/registry/RegistryKey;)V": "Lnet/minecraft/class_6554;method_38187(Ljava/util/function/Consumer;Lnet/minecraft/class_6544$class_6546;Lnet/minecraft/class_6544$class_6546;Lnet/minecraft/class_6544$class_6546;Lnet/minecraft/class_6544$class_6546;Lnet/minecraft/class_6544$class_6546;FLnet/minecraft/class_5321;)V",
+        "getBiomeOrWindsweptSavanna": "Lnet/minecraft/class_6554;method_40009(IILnet/minecraft/class_6544$class_6546;Lnet/minecraft/class_5321;)Lnet/minecraft/class_5321;",
+        "writeLowBiomes": "Lnet/minecraft/class_6554;method_38200(Ljava/util/function/Consumer;Lnet/minecraft/class_6544$class_6546;)V",
+        "writeMidBiomes": "Lnet/minecraft/class_6554;method_38196(Ljava/util/function/Consumer;Lnet/minecraft/class_6544$class_6546;)V",
+        "writeValleyBiomes": "Lnet/minecraft/class_6554;method_38203(Ljava/util/function/Consumer;Lnet/minecraft/class_6544$class_6546;)V"
+      }
+    }
+  }
+}

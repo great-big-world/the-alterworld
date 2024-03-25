@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"dev.creoii.greatbigworld.thealterworld","l":"TheAlterworld"},{"p":"dev.creoii.greatbigworld.thealterworld.client","l":"TheAlterworldClient"},{"p":"dev.creoii.greatbigworld.thealterworld.mixin.world","l":"VanillaBiomeParametersMixin"}];updateSearchResults();

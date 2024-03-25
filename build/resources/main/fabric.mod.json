@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "the_alterworld",
+  "version": "0.1.0+1.20.4",
+  "name": "The Alterworld",
+  "description": "",
+  "authors": [
+    "creoii"
+  ],
+  "contact": {},
+  "license": "All Rights Reserved",
+  "icon": "assets/the_alterworld/icon.png",
+  "environment": "*",
+  "accessWidener": "the_alterworld.accesswidener",
+  "entrypoints": {
+    "main": [
+      "dev.creoii.greatbigworld.thealterworld.TheAlterworld"
+    ],
+    "client": [
+      "dev.creoii.greatbigworld.thealterworld.client.TheAlterworldClient"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.15.7",
+    "fabric": "*",
+    "minecraft": "1.20.4"
+  },
+  "mixins": [
+    "the_alterworld.mixins.json"
+  ],
+  "custom": {
+    "modmenu": {
+      "parent": {
+        "id": "great_big_world",
+        "name": "Great Big World",
+        "description": ""
+      }
+    }
+  }
+}
