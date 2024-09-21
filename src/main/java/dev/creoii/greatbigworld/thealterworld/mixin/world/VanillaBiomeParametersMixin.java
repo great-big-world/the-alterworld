@@ -66,4 +66,9 @@ public abstract class VanillaBiomeParametersMixin {
     private void gbw$removeLushCaves(VanillaBiomeParameters instance, Consumer<Pair<MultiNoiseUtil.NoiseHypercube, RegistryKey<Biome>>> parameters, MultiNoiseUtil.ParameterRange temperature, MultiNoiseUtil.ParameterRange humidity, MultiNoiseUtil.ParameterRange continentalness, MultiNoiseUtil.ParameterRange erosion, MultiNoiseUtil.ParameterRange weirdness, float offset, RegistryKey<Biome> biome) {
 
     }
+
+    @Inject(method = "getBadlandsBiome", at = @At("HEAD"), cancellable = true)
+    private void gbw$removeBadlands(int humidity, MultiNoiseUtil.ParameterRange weirdness, CallbackInfoReturnable<RegistryKey<Biome>> cir) {
+        cir.setReturnValue(BiomeKeys.DESERT);
+    }
 }
