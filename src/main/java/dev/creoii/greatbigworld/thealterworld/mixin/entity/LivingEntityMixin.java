@@ -3,6 +3,7 @@ package dev.creoii.greatbigworld.thealterworld.mixin.entity;
 import com.llamalad7.mixinextras.sugar.Local;
 import dev.creoii.greatbigworld.thealterworld.TheAlterworld;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldStatusEffects;
+import dev.creoii.greatbigworld.thealterworld.world.PlanarFractureManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -38,6 +39,9 @@ public abstract class LivingEntityMixin extends Entity {
                 ServerWorld serverWorld2 = target.world();
                 if (getWorld().getServer().isWorldAllowed(serverWorld2) && (serverWorld2.getRegistryKey() == getWorld().getRegistryKey() || canTeleportBetween(getWorld(), serverWorld2))) {
                     teleportTo(target);
+
+                    PlanarFractureManager manager = PlanarFractureManager.getServerState(serverWorld2.getServer());
+                    manager.clearReturnPos((LivingEntity) (Object) this);
                 }
             }
         }
@@ -51,8 +55,17 @@ public abstract class LivingEntityMixin extends Entity {
         } else {
             BlockPos blockPos = serverWorld.getSpawnPos();
             Set<PositionFlag> set = PositionFlag.combine(PositionFlag.DELTA, PositionFlag.ROT);
-            if (entity instanceof ServerPlayerEntity serverPlayerEntity) {
-                return serverPlayerEntity.getRespawnTarget(false, TeleportTarget.NO_OP);
+            if (entity instanceof LivingEntity living) {
+                PlanarFractureManager manager = PlanarFractureManager.getServerState(serverWorld.getServer());
+
+                Vec3d returnPos = manager.getReturnPos(living);
+                if (returnPos != null) {
+                    return new TeleportTarget(serverWorld, returnPos, Vec3d.ZERO, 0f, 0f, set, TeleportTarget.SEND_TRAVEL_THROUGH_PORTAL_PACKET.then(TeleportTarget.ADD_PORTAL_CHUNK_TICKET));
+                }
+
+                if (entity instanceof ServerPlayerEntity serverPlayerEntity) {
+                    return serverPlayerEntity.getRespawnTarget(false, TeleportTarget.NO_OP);
+                }
             }
             return new TeleportTarget(serverWorld, entity.getWorldSpawnPos(serverWorld, blockPos).toBottomCenterPos(), Vec3d.ZERO, 0f, 0f, set, TeleportTarget.SEND_TRAVEL_THROUGH_PORTAL_PACKET.then(TeleportTarget.ADD_PORTAL_CHUNK_TICKET));
         }

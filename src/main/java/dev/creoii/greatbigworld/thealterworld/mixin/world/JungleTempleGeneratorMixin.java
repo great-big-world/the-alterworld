@@ -2,6 +2,7 @@ package dev.creoii.greatbigworld.thealterworld.mixin.world;
 
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldBlocks;
 import net.minecraft.block.Blocks;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.structure.JungleTempleGenerator;
 import net.minecraft.structure.ShiftableStructurePiece;
 import net.minecraft.structure.StructurePieceType;
@@ -11,6 +12,7 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.StructureWorldAccess;
+import net.minecraft.world.dimension.DimensionTypes;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import org.spongepowered.asm.mixin.Final;
@@ -30,7 +32,7 @@ public abstract class JungleTempleGeneratorMixin extends ShiftableStructurePiece
 
     @Inject(method = "generate", at = @At(value = "INVOKE", target = "Lnet/minecraft/structure/JungleTempleGenerator;fill(Lnet/minecraft/world/StructureWorldAccess;Lnet/minecraft/util/math/BlockBox;IIIIII)V", ordinal = 10))
     private void gbw$placeJungleTemplePortal(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox chunkBox, ChunkPos chunkPos, BlockPos pivot, CallbackInfo ci) {
-        if (random.nextInt(4) != 0) {
+        if (random.nextInt(4) != 0 && world.getRegistryManager().getOptional(RegistryKeys.DIMENSION_TYPE).get().getEntry(world.getDimension()).matchesKey(DimensionTypes.OVERWORLD)) {
             addBlock(world, TheAlterworldBlocks.ANCIENT_MOSAIC.getDefaultState(), 4, -4, 14, chunkBox);
             addBlock(world, TheAlterworldBlocks.ANCIENT_MOSAIC.getDefaultState(), 5, -4, 14, chunkBox);
             addBlock(world, TheAlterworldBlocks.ANCIENT_MOSAIC.getDefaultState(), 6, -4, 14, chunkBox);

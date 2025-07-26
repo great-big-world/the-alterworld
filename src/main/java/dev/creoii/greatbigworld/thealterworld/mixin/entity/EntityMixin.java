@@ -4,14 +4,18 @@ import dev.creoii.greatbigworld.thealterworld.block.AlterworldPortalBlock;
 import dev.creoii.greatbigworld.thealterworld.block.AncientMosaicBlock;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldBlocks;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldStatusEffects;
+import dev.creoii.greatbigworld.thealterworld.world.PlanarFractureManager;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -26,6 +30,7 @@ public abstract class EntityMixin {
     @Shadow public abstract BlockState getBlockStateAtPos();
     @Shadow private World world;
     @Shadow private BlockPos blockPos;
+    @Shadow private Vec3d pos;
 
     @Inject(method = "tickPortalTeleportation", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;teleportTo(Lnet/minecraft/world/TeleportTarget;)Lnet/minecraft/entity/Entity;"), cancellable = true)
     private void gbw$applyFracturedRealmEffect(CallbackInfo ci) {
@@ -53,6 +58,11 @@ public abstract class EntityMixin {
                                     world.setBlockState(pos, TheAlterworldBlocks.FRACTURED_ANCIENT_MOSAIC.getDefaultState(), 18);
                             }
                         });
+                    }
+
+                    if (world instanceof ServerWorld serverWorld && living instanceof PlayerEntity player) {
+                        PlanarFractureManager manager = PlanarFractureManager.getServerState(serverWorld.getServer());
+                        manager.setReturnPos(player, pos);
                     }
                 } else {
                     living.removeStatusEffect(TheAlterworldStatusEffects.PLANAR_FRACTURE);

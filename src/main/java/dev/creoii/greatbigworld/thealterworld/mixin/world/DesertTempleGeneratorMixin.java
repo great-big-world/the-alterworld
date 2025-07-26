@@ -4,6 +4,7 @@ import com.llamalad7.mixinextras.sugar.Local;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldBlocks;
 import net.minecraft.block.Blocks;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.structure.DesertTempleGenerator;
 import net.minecraft.structure.ShiftableStructurePiece;
 import net.minecraft.structure.StructureContext;
@@ -14,6 +15,7 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.StructureWorldAccess;
+import net.minecraft.world.dimension.DimensionTypes;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import org.spongepowered.asm.mixin.Mixin;
@@ -43,7 +45,7 @@ public abstract class DesertTempleGeneratorMixin extends ShiftableStructurePiece
 
     @Inject(method = "generate", at = @At(value = "INVOKE", target = "Lnet/minecraft/structure/DesertTempleGenerator;addBlock(Lnet/minecraft/world/StructureWorldAccess;Lnet/minecraft/block/BlockState;IIILnet/minecraft/util/math/BlockBox;)V", ordinal = 34, shift = At.Shift.AFTER))
     private void gbw$placeDesertTemplePortal(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox chunkBox, ChunkPos chunkPos, BlockPos pivot, CallbackInfo ci, @Local int l) {
-        if (!hasPlacedPortal && random.nextInt(3) == 0 && l > 7) {
+        if (!hasPlacedPortal && random.nextInt(3) == 0 && l > 7 && world.getRegistryManager().getOptional(RegistryKeys.DIMENSION_TYPE).get().getEntry(world.getDimension()).matchesKey(DimensionTypes.OVERWORLD)) {
             int x = random.nextBoolean() ? 4 : width - 5;
             addBlock(world, TheAlterworldBlocks.ANCIENT_MOSAIC.getDefaultState(), x, 0, l, chunkBox);
             addBlock(world, TheAlterworldBlocks.ANCIENT_MOSAIC.getDefaultState(), x, 0, l - 1, chunkBox);
