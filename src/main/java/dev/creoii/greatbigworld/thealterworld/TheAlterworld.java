@@ -16,6 +16,9 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
+/**
+ * Fix spawn pos for fractured alterworld portal
+ */
 public class TheAlterworld implements ModInitializer {
     public static final RegistryKey<World> ALTERWORLD_KEY = RegistryKey.of(RegistryKeys.WORLD, Identifier.of(GreatBigWorld.NAMESPACE, "the_alterworld"));;
 
@@ -25,8 +28,8 @@ public class TheAlterworld implements ModInitializer {
         TheAlterworldItems.register();
         TheAlterworldStatusEffects.register();
 
-        List<RegistryKey<LootTable>> ARCHAEOLOGY_COMMON_LOOT_TABLES = List.of(LootTables.DESERT_WELL_ARCHAEOLOGY, LootTables.OCEAN_RUIN_COLD_ARCHAEOLOGY, LootTables.OCEAN_RUIN_WARM_ARCHAEOLOGY, LootTables.TRAIL_RUINS_COMMON_ARCHAEOLOGY);
-        List<RegistryKey<LootTable>> ARCHAEOLOGY_RARE_LOOT_TABLES = List.of(LootTables.DESERT_PYRAMID_ARCHAEOLOGY, LootTables.TRAIL_RUINS_RARE_ARCHAEOLOGY);
+        final List<RegistryKey<LootTable>> ARCHAEOLOGY_COMMON_LOOT_TABLES = List.of(LootTables.DESERT_WELL_ARCHAEOLOGY, LootTables.OCEAN_RUIN_COLD_ARCHAEOLOGY, LootTables.OCEAN_RUIN_WARM_ARCHAEOLOGY, LootTables.TRAIL_RUINS_COMMON_ARCHAEOLOGY);
+        final List<RegistryKey<LootTable>> ARCHAEOLOGY_RARE_LOOT_TABLES = List.of(LootTables.DESERT_PYRAMID_ARCHAEOLOGY, LootTables.TRAIL_RUINS_RARE_ARCHAEOLOGY);
         LootTableEvents.MODIFY.register((registryKey, builder, lootTableSource, wrapperLookup) -> {
             if (lootTableSource.isBuiltin()) {
                 if (ARCHAEOLOGY_COMMON_LOOT_TABLES.contains(registryKey)) {

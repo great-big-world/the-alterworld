@@ -11,6 +11,7 @@
     "entity.EntityMixin",
     "entity.LivingEntityMixin",
     "world.DesertTempleGeneratorMixin",
+    "world.JungleTempleGeneratorMixin",
     "world.VanillaBiomeParametersMixin"
   ],
   "client": [
