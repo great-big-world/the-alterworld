@@ -1,12 +1,10 @@
 package dev.creoii.greatbigworld.thealterworld.world;
 
-import dev.creoii.greatbigworld.thealterworld.TheAlterworld;
 import dev.creoii.greatbigworld.thealterworld.block.AlterworldPortalBlock;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldBlocks;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.NetherPortalBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.registry.tag.BlockTags;
@@ -15,12 +13,8 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.*;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
-import net.minecraft.world.BlockLocating;
 import net.minecraft.world.BlockView;
-import net.minecraft.world.Heightmap;
 import net.minecraft.world.WorldAccess;
-import net.minecraft.world.border.WorldBorder;
-import net.minecraft.world.poi.PointOfInterestStorage;
 import org.apache.commons.lang3.mutable.MutableInt;
 import org.jetbrains.annotations.Nullable;
 
@@ -158,105 +152,6 @@ public class AlterworldPortal {
         return 21;
     }
 
-    public static Optional<BlockPos> getPortalPos(ServerWorld world, BlockPos pos, WorldBorder worldBorder) {
-        PointOfInterestStorage pointOfInterestStorage = world.getPointOfInterestStorage();
-        pointOfInterestStorage.preloadChunks(world, pos, 16);
-        return pointOfInterestStorage.getPosition(poiType -> poiType.matchesKey(TheAlterworld.ALTERWORLD_PORTAL_POI_KEY), pos1 -> true, PointOfInterestStorage.OccupationStatus.ANY, pos, 16, world.random);
-    }
-
-    public static Optional<BlockLocating.Rectangle> createPortal(ServerWorld world, BlockPos pos, Direction.Axis axis) {
-        Direction direction = Direction.get(Direction.AxisDirection.POSITIVE, axis);
-        double d = -1f;
-        BlockPos blockPos = null;
-        double e = -1f;
-        BlockPos blockPos2 = null;
-        WorldBorder worldBorder = world.getWorldBorder();
-        int i = Math.min(world.getTopYInclusive(), world.getBottomY() + world.getLogicalHeight() - 1);
-        BlockPos.Mutable mutable = pos.mutableCopy();
-
-        for(BlockPos.Mutable mutable2 : BlockPos.iterateInSquare(pos, 16, Direction.EAST, Direction.SOUTH)) {
-            int k = Math.min(i, world.getTopY(Heightmap.Type.MOTION_BLOCKING, mutable2.getX(), mutable2.getZ()));
-            if (worldBorder.contains(mutable2) && worldBorder.contains(mutable2.move(direction, 1))) {
-                mutable2.move(direction.getOpposite(), 1);
-
-                for(int l = k; l >= world.getBottomY(); --l) {
-                    mutable2.setY(l);
-                    if (isBlockStateValid(world, mutable2)) {
-                        int m;
-                        for(m = l; l > world.getBottomY() && isBlockStateValid(world, mutable2.move(Direction.DOWN)); --l) {
-                        }
-
-                        if (l + 4 <= i) {
-                            int n = m - l;
-                            if (n <= 0 || n >= 3) {
-                                mutable2.setY(l);
-                                if (isValidPortalPos(world, mutable2, mutable, direction, 0)) {
-                                    double f = pos.getSquaredDistance(mutable2);
-                                    if (isValidPortalPos(world, mutable2, mutable, direction, -1) && isValidPortalPos(world, mutable2, mutable, direction, 1) && (d == (double)-1.0F || d > f)) {
-                                        d = f;
-                                        blockPos = mutable2.toImmutable();
-                                    }
-
-                                    if (d == (double)-1f && (e == (double)-1f || e > f)) {
-                                        e = f;
-                                        blockPos2 = mutable2.toImmutable();
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        if (d == (double)-1f && e != (double)-1f) {
-            blockPos = blockPos2;
-            d = e;
-        }
-
-        if (d == (double)-1f) {
-            int o = Math.max(world.getBottomY() + 1, 70);
-            int p = i - 9;
-            if (p < o) {
-                return Optional.empty();
-            }
-
-            blockPos = (new BlockPos(pos.getX() - direction.getOffsetX(), MathHelper.clamp(pos.getY(), o, p), pos.getZ() - direction.getOffsetZ() * 1)).toImmutable();
-            blockPos = worldBorder.clampFloored(blockPos);
-            Direction direction2 = direction.rotateYClockwise();
-
-            for(int l = -1; l < 2; ++l) {
-                for(int m = 0; m < 2; ++m) {
-                    for(int n = -1; n < 3; ++n) {
-                        BlockState blockState = n < 0 ? Blocks.REINFORCED_DEEPSLATE.getDefaultState() : Blocks.AIR.getDefaultState();
-                        mutable.set(blockPos, m * direction.getOffsetX() + l * direction2.getOffsetX(), n, m * direction.getOffsetZ() + l * direction2.getOffsetZ());
-                        world.setBlockState(mutable, blockState);
-                    }
-                }
-            }
-        }
-
-        for(int o = -1; o < 21; ++o) {
-            for(int p = -1; p < 7; ++p) {
-                if (o == -1 || o == 20 || p == -1 || p == 6) {
-                    mutable.set(blockPos, o * direction.getOffsetX(), p, o * direction.getOffsetZ());
-                    world.setBlockState(mutable, Blocks.REINFORCED_DEEPSLATE.getDefaultState(), 3);
-                }
-            }
-        }
-
-        BlockState blockState2 = TheAlterworldBlocks.ALTERWORLD_PORTAL.getDefaultState().with(NetherPortalBlock.AXIS, axis).with(AlterworldPortalBlock.FRACTURED, false);
-
-        for(int p = 0; p < 20; ++p) {
-            for(int k = 0; k < 6; ++k) {
-                mutable.set(blockPos, p * direction.getOffsetX(), k, p * direction.getOffsetZ());
-                world.setBlockState(mutable, blockState2, 18);
-            }
-        }
-
-        return Optional.of(new BlockLocating.Rectangle(blockPos.toImmutable(), 20, 6));
-    }
-
     private static boolean validStateInsidePortal(BlockState state) {
         return state.isAir() || state.isOf(Blocks.SCULK_VEIN) || state.isIn(BlockTags.FIRE) || state.isOf(TheAlterworldBlocks.ALTERWORLD_PORTAL);
     }
@@ -285,29 +180,5 @@ public class AlterworldPortal {
         } else {
             return fallback;
         }
-    }
-
-    private static boolean isBlockStateValid(ServerWorld world, BlockPos.Mutable pos) {
-        BlockState blockState = world.getBlockState(pos);
-        return blockState.isReplaceable() && blockState.getFluidState().isEmpty();
-    }
-
-    private static boolean isValidPortalPos(ServerWorld world, BlockPos pos, BlockPos.Mutable temp, Direction portalDirection, int distanceOrthogonalToPortal) {
-        Direction direction = portalDirection.rotateYClockwise();
-
-        for(int i = -1; i < 20; ++i) {
-            for(int j = -1; j < 6; ++j) {
-                temp.set(pos, portalDirection.getOffsetX() * i + direction.getOffsetX() * distanceOrthogonalToPortal, j, portalDirection.getOffsetZ() * i + direction.getOffsetZ() * distanceOrthogonalToPortal);
-                if (j < 0 && !world.getBlockState(temp).isSolid()) {
-                    return false;
-                }
-
-                if (j >= 0 && !isBlockStateValid(world, temp)) {
-                    return false;
-                }
-            }
-        }
-
-        return true;
     }
 }

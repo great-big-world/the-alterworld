@@ -5,22 +5,45 @@ import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldBlocks;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldItems;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldStatusEffects;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.object.builder.v1.world.poi.PointOfInterestHelper;
+import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
+import net.minecraft.loot.LootTable;
+import net.minecraft.loot.LootTables;
+import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
-import net.minecraft.world.poi.PointOfInterestType;
 
+import java.util.List;
+
+/**
+ * Todo:
+ * - Add Fractured Portal to temple structures
+ * - Dont clear Fractured Portal on Milk drink
+ */
 public class TheAlterworld implements ModInitializer {
     public static final RegistryKey<World> ALTERWORLD_KEY = RegistryKey.of(RegistryKeys.WORLD, Identifier.of(GreatBigWorld.NAMESPACE, "the_alterworld"));;
-    public static RegistryKey<PointOfInterestType> ALTERWORLD_PORTAL_POI_KEY = RegistryKey.of(RegistryKeys.POINT_OF_INTEREST_TYPE, Identifier.of(GreatBigWorld.NAMESPACE, "alterworld_portal"));
 
     @Override
     public void onInitialize() {
         TheAlterworldBlocks.register();
         TheAlterworldItems.register();
         TheAlterworldStatusEffects.register();
-        PointOfInterestHelper.register(ALTERWORLD_KEY.getValue(), 0, 1, TheAlterworldBlocks.ALTERWORLD_PORTAL);
+
+        List<RegistryKey<LootTable>> ARCHAEOLOGY_COMMON_LOOT_TABLES = List.of(LootTables.DESERT_WELL_ARCHAEOLOGY, LootTables.OCEAN_RUIN_COLD_ARCHAEOLOGY, LootTables.OCEAN_RUIN_WARM_ARCHAEOLOGY, LootTables.TRAIL_RUINS_COMMON_ARCHAEOLOGY);
+        List<RegistryKey<LootTable>> ARCHAEOLOGY_RARE_LOOT_TABLES = List.of(LootTables.DESERT_PYRAMID_ARCHAEOLOGY, LootTables.TRAIL_RUINS_RARE_ARCHAEOLOGY);
+        LootTableEvents.MODIFY.register((registryKey, builder, lootTableSource, wrapperLookup) -> {
+            if (lootTableSource.isBuiltin()) {
+                if (ARCHAEOLOGY_COMMON_LOOT_TABLES.contains(registryKey)) {
+                    builder.modifyPools(builder1 -> {
+                        builder1.with(ItemEntry.builder(TheAlterworldItems.ANCIENT_BRICKS));
+                    });
+                } else if (ARCHAEOLOGY_RARE_LOOT_TABLES.contains(registryKey)) {
+                    builder.modifyPools(builder1 -> {
+                        builder1.with(ItemEntry.builder(TheAlterworldItems.ANCIENT_BRICKS));
+                    });
+                }
+            }
+        });
     }
 }

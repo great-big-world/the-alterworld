@@ -3,7 +3,6 @@ package dev.creoii.greatbigworld.thealterworld.registry;
 import dev.creoii.greatbigworld.GreatBigWorld;
 import dev.creoii.greatbigworld.architectsassembly.block.VerticalSlabBlock;
 import dev.creoii.greatbigworld.thealterworld.block.AlterworldPortalBlock;
-import dev.creoii.greatbigworld.thealterworld.block.AncientMosaicBlock;
 import dev.creoii.greatbigworld.util.RegistryHelper;
 import net.minecraft.block.*;
 import net.minecraft.util.Identifier;
@@ -19,8 +18,8 @@ public class TheAlterworldBlocks {
 
     public static void register() {
         ALTERWORLD_PORTAL = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "alterworld_portal"), AlterworldPortalBlock::new, AbstractBlock.Settings.copy(Blocks.NETHER_PORTAL).luminance(state -> 1));
-        ANCIENT_MOSAIC = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "ancient_mosaic"), AncientMosaicBlock::new, AbstractBlock.Settings.copy(Blocks.END_STONE).mapColor(MapColor.TERRACOTTA_GREEN));
-        ANCIENT_BRICKS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "ancient_bricks"), AbstractBlock.Settings.copy(Blocks.END_STONE).mapColor(MapColor.TERRACOTTA_GREEN));
+        ANCIENT_MOSAIC = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "ancient_mosaic"), Block::new, AbstractBlock.Settings.copy(Blocks.END_STONE).mapColor(MapColor.TERRACOTTA_GREEN));
+        ANCIENT_BRICKS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "ancient_bricks"), PillarBlock::new, AbstractBlock.Settings.copy(Blocks.END_STONE).mapColor(MapColor.TERRACOTTA_GREEN));
         ANCIENT_BRICK_STAIRS = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "ancient_brick_stairs"), settings -> new StairsBlock(ANCIENT_BRICKS.getDefaultState(), settings), AbstractBlock.Settings.copy(ANCIENT_BRICKS));
         ANCIENT_BRICK_SLAB = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "ancient_brick_slab"), SlabBlock::new, AbstractBlock.Settings.copy(ANCIENT_BRICKS));
         VERTICAL_ANCIENT_BRICK_SLAB = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "vertical_ancient_brick_slab"), VerticalSlabBlock::new, AbstractBlock.Settings.copy(ANCIENT_BRICKS));
