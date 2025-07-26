@@ -3,7 +3,6 @@ package dev.creoii.greatbigworld.thealterworld.block;
 import com.mojang.serialization.MapCodec;
 import dev.creoii.greatbigworld.thealterworld.TheAlterworld;
 import dev.creoii.greatbigworld.thealterworld.world.AlterworldPortal;
-import dev.creoii.greatbigworld.thealterworld.world.FracturedAlterworldPortal;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCollisionHandler;

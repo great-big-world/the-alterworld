@@ -3,6 +3,7 @@ package dev.creoii.greatbigworld.thealterworld.mixin.block;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import dev.creoii.greatbigworld.thealterworld.TheAlterworld;
+import dev.creoii.greatbigworld.thealterworld.block.AncientMosaicBlock;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldBlocks;
 import dev.creoii.greatbigworld.thealterworld.world.AlterworldPortal;
 import dev.creoii.greatbigworld.thealterworld.world.FracturedAlterworldPortal;
@@ -34,12 +35,13 @@ public class AbstractFireBlockMixin {
                 boolean anyTrue = FireBlock.DIRECTION_PROPERTIES.entrySet().stream().anyMatch(directionBooleanPropertyEntry -> state.get(directionBooleanPropertyEntry.getValue()));
                 boolean fractured = false;
                 if (!anyTrue) {
-                    fractured = world.getBlockState(pos.down()).isOf(TheAlterworldBlocks.ANCIENT_MOSAIC);
+                    BlockState down = world.getBlockState(pos.down());
+                    fractured = down.getBlock() instanceof AncientMosaicBlock ancientMosaicBlock && !ancientMosaicBlock.isFractured();
                 } else {
                     for (Map.Entry<Direction, BooleanProperty> entry : FireBlock.DIRECTION_PROPERTIES.entrySet()) {
                         if (state.get(entry.getValue())) {
-                            Direction dir = entry.getKey();
-                            fractured = world.getBlockState(pos.offset(dir)).isOf(TheAlterworldBlocks.ANCIENT_MOSAIC);
+                            BlockState offset = world.getBlockState(pos.offset(entry.getKey()));
+                            fractured = offset.getBlock() instanceof AncientMosaicBlock ancientMosaicBlock && !ancientMosaicBlock.isFractured();
                         }
 
                         if (fractured)

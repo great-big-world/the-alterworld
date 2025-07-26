@@ -1,11 +1,15 @@
 {
   "block.great_big_world.alterworld_portal": "Alterworld Portal",
   "block.great_big_world.ancient_mosaic": "Ancient Mosaic",
+  "block.great_big_world.fractured_ancient_mosaic": "Fractured Ancient Mosaic",
+  "block.great_big_world.fractured_ancient_mosaic.variant": "Ancient Mosaic",
   "block.great_big_world.ancient_bricks": "Ancient Bricks",
   "block.great_big_world.ancient_brick_stairs": "Ancient Brick Stairs",
   "block.great_big_world.ancient_brick_slab": "Ancient Brick Slab",
   "block.great_big_world.vertical_ancient_brick_slab": "Vertical Ancient Brick Slab",
   "block.great_big_world.ancient_brick_wall": "Ancient Brick Wall",
 
-  "effect.great_big_world.planar_fracture": "Planar Fracture"
+  "effect.great_big_world.planar_fracture": "Planar Fracture",
+
+  "variant.item.fractured": "Fractured"
 }

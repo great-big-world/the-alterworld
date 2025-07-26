@@ -1,16 +1,29 @@
 {
   "variants": {
-    "axis=x": {
+    "facing=east": {
       "model": "great_big_world:block/ancient_bricks_horizontal",
       "x": 90,
       "y": 90
     },
-    "axis=y": {
+    "facing=west": {
+      "model": "great_big_world:block/ancient_bricks_horizontal",
+      "x": 270,
+      "y": 90
+    },
+    "facing=up": {
       "model": "great_big_world:block/ancient_bricks"
     },
-    "axis=z": {
+    "facing=down": {
+      "model": "great_big_world:block/ancient_bricks",
+      "x": 180
+    },
+    "facing=north": {
       "model": "great_big_world:block/ancient_bricks_horizontal",
       "x": 90
+    },
+    "facing=south": {
+      "model": "great_big_world:block/ancient_bricks_horizontal",
+      "x": 270
     }
   }
 }

@@ -157,6 +157,8 @@ public class FracturedAlterworldPortal {
 
     public void createPortal(WorldAccess world) {
         BlockState blockState = TheAlterworldBlocks.ALTERWORLD_PORTAL.getDefaultState().with(Properties.HORIZONTAL_AXIS, axis).with(AlterworldPortalBlock.FRACTURED, true);
-        BlockPos.iterate(lowerCorner, lowerCorner.offset(Direction.UP, height - 1).offset(negativeDir, width - 1)).forEach(pos -> world.setBlockState(pos, blockState, 18));
+        BlockPos.iterate(lowerCorner, lowerCorner.offset(Direction.UP, height - 1).offset(negativeDir, width - 1)).forEach(pos -> {
+            world.setBlockState(pos, blockState, 18);
+        });
     }
 }

@@ -1,6 +1,7 @@
 package dev.creoii.greatbigworld.thealterworld.mixin.entity;
 
 import dev.creoii.greatbigworld.thealterworld.block.AlterworldPortalBlock;
+import dev.creoii.greatbigworld.thealterworld.block.AncientMosaicBlock;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldBlocks;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldStatusEffects;
 import net.minecraft.block.BlockState;
@@ -8,7 +9,12 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.state.property.Properties;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
+import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -19,6 +25,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class EntityMixin {
     @Shadow public abstract Random getRandom();
     @Shadow public abstract BlockState getBlockStateAtPos();
+    @Shadow private World world;
+    @Shadow private BlockPos blockPos;
+
+    @Shadow private Vec3d pos;
 
     @Inject(method = "tickPortalTeleportation", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;teleportTo(Lnet/minecraft/world/TeleportTarget;)Lnet/minecraft/entity/Entity;", shift = At.Shift.AFTER), cancellable = true)
     private void gbw$applyFracturedRealmEffect(CallbackInfo ci) {
@@ -28,6 +38,25 @@ public abstract class EntityMixin {
                 if (state.get(AlterworldPortalBlock.FRACTURED)) {
                     int ticks = getRandom().nextBetween(620, 3620);
                     living.addStatusEffect(new StatusEffectInstance(TheAlterworldStatusEffects.PLANAR_FRACTURE, ticks /* 30 seconds to 3 minutes */, 0, false, false));
+                    world.breakBlock(blockPos, false);
+
+                    if (state.get(Properties.HORIZONTAL_AXIS) == Direction.Axis.X) {
+                        BlockPos.iterate(blockPos.getX(), blockPos.getY() - 1, blockPos.getZ() - 2, blockPos.getX(), blockPos.getY() + 3, blockPos.getZ() + 2).forEach(pos -> {
+                            BlockState state1 = world.getBlockState(pos);
+                            if (state1.getBlock() instanceof AncientMosaicBlock ancientMosaicBlock) {
+                                if (!ancientMosaicBlock.isFractured())
+                                    world.setBlockState(pos, TheAlterworldBlocks.FRACTURED_ANCIENT_MOSAIC.getDefaultState(), 18);
+                            }
+                        });
+                    } else {
+                        BlockPos.iterate(blockPos.getX() - 2, blockPos.getY() - 1, blockPos.getZ(), blockPos.getX() + 2, blockPos.getY() + 3, blockPos.getZ()).forEach(pos -> {
+                            BlockState state1 = world.getBlockState(pos);
+                            if (state1.getBlock() instanceof AncientMosaicBlock ancientMosaicBlock) {
+                                if (!ancientMosaicBlock.isFractured())
+                                    world.setBlockState(pos, TheAlterworldBlocks.FRACTURED_ANCIENT_MOSAIC.getDefaultState(), 18);
+                            }
+                        });
+                    }
                 } else {
                     living.removeStatusEffect(TheAlterworldStatusEffects.PLANAR_FRACTURE);
                 }
