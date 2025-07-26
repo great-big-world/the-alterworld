@@ -1,3 +1,7 @@
+loom {
+    accessWidenerPath = file("src/main/resources/the_alterworld.accesswidener")
+}
+
 configurations {
     common {
         canBeResolved = true

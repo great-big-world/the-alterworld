@@ -24,6 +24,7 @@
     "fabric": "*",
     "minecraft": "${minecraft_version}"
   },
+  "accessWidener": "the_alterworld.accesswidener",
   "mixins": [
     "the_alterworld.mixins.json"
   ],

@@ -4,6 +4,7 @@
   "package": "dev.creoii.greatbigworld.thealterworld.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "ClearAllEffectsConsumeEffectMixin",
     "block.AbstractFireBlockMixin",
     "block.EndPortalBlockMixin",
     "block.NetherPortalBlockMixin",
