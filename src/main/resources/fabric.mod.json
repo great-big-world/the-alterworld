@@ -11,7 +11,14 @@
   "license": "All Rights Reserved",
   "icon": "assets/the_alterworld/icon.png",
   "environment": "*",
-  "entrypoints": {},
+  "entrypoints": {
+    "main": [
+      "dev.creoii.greatbigworld.thealterworld.TheAlterworld"
+    ],
+    "client": [
+      "dev.creoii.greatbigworld.thealterworld.client.TheAlterworldClient"
+    ]
+  },
   "depends": {
     "fabricloader": ">=${loader_version}",
     "fabric": "*",

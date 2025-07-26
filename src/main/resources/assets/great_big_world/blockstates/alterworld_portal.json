@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "great_big_world:block/alterworld_portal_ns"
+    },
+    "axis=z": {
+      "model": "great_big_world:block/alterworld_portal_ew"
+    }
+  }
+}
