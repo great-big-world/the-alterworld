@@ -4,9 +4,11 @@
   "package": "dev.creoii.greatbigworld.thealterworld.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "block.AbstractFireBlockMixin",
+    "block.EndPortalBlockMixin",
+    "block.NetherPortalBlockMixin",
     "entity.EntityMixin",
     "entity.LivingEntityMixin",
-    "block.AbstractFireBlockMixin",
     "world.VanillaBiomeParametersMixin"
   ],
   "client": [

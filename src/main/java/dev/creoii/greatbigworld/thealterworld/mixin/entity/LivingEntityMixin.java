@@ -32,7 +32,7 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Inject(method = "onStatusEffectsRemoved", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/effect/StatusEffect;onRemoved(Lnet/minecraft/entity/attribute/AttributeContainer;)V"))
     private void gbw$removeFracturedRealmEffect(Collection<StatusEffectInstance> effects, CallbackInfo ci, @Local StatusEffectInstance statusEffectInstance) {
-        if (statusEffectInstance.equals(TheAlterworldStatusEffects.FRACTURED_REALM) && getWorld().getRegistryKey() == TheAlterworld.ALTERWORLD_KEY) {
+        if (statusEffectInstance.equals(TheAlterworldStatusEffects.PLANAR_FRACTURE) && getWorld().getRegistryKey() == TheAlterworld.ALTERWORLD_KEY) {
             TeleportTarget target = createTeleportTarget((ServerWorld) getWorld(), this, getBlockPos());
             if (target != null) {
                 ServerWorld serverWorld2 = target.world();
