@@ -16,11 +16,6 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-/**
- * Todo:
- * - Add Fractured Portal to temple structures
- * - Dont clear Fractured Portal on Milk drink
- */
 public class TheAlterworld implements ModInitializer {
     public static final RegistryKey<World> ALTERWORLD_KEY = RegistryKey.of(RegistryKeys.WORLD, Identifier.of(GreatBigWorld.NAMESPACE, "the_alterworld"));;
 
