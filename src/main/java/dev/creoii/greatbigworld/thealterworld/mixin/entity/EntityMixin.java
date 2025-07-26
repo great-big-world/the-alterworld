@@ -12,7 +12,6 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -28,9 +27,7 @@ public abstract class EntityMixin {
     @Shadow private World world;
     @Shadow private BlockPos blockPos;
 
-    @Shadow private Vec3d pos;
-
-    @Inject(method = "tickPortalTeleportation", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;teleportTo(Lnet/minecraft/world/TeleportTarget;)Lnet/minecraft/entity/Entity;", shift = At.Shift.AFTER), cancellable = true)
+    @Inject(method = "tickPortalTeleportation", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;teleportTo(Lnet/minecraft/world/TeleportTarget;)Lnet/minecraft/entity/Entity;"), cancellable = true)
     private void gbw$applyFracturedRealmEffect(CallbackInfo ci) {
         BlockState state = getBlockStateAtPos();
         if (state.isOf(TheAlterworldBlocks.ALTERWORLD_PORTAL)) {
@@ -41,7 +38,7 @@ public abstract class EntityMixin {
                     world.breakBlock(blockPos, false);
 
                     if (state.get(Properties.HORIZONTAL_AXIS) == Direction.Axis.X) {
-                        BlockPos.iterate(blockPos.getX(), blockPos.getY() - 1, blockPos.getZ() - 2, blockPos.getX(), blockPos.getY() + 3, blockPos.getZ() + 2).forEach(pos -> {
+                        BlockPos.iterate(blockPos.getX() - 2, blockPos.getY() - 1, blockPos.getZ(), blockPos.getX() + 2, blockPos.getY() + 3, blockPos.getZ()).forEach(pos -> {
                             BlockState state1 = world.getBlockState(pos);
                             if (state1.getBlock() instanceof AncientMosaicBlock ancientMosaicBlock) {
                                 if (!ancientMosaicBlock.isFractured())
@@ -49,7 +46,7 @@ public abstract class EntityMixin {
                             }
                         });
                     } else {
-                        BlockPos.iterate(blockPos.getX() - 2, blockPos.getY() - 1, blockPos.getZ(), blockPos.getX() + 2, blockPos.getY() + 3, blockPos.getZ()).forEach(pos -> {
+                        BlockPos.iterate(blockPos.getX(), blockPos.getY() - 1, blockPos.getZ() - 2, blockPos.getX(), blockPos.getY() + 3, blockPos.getZ() + 2).forEach(pos -> {
                             BlockState state1 = world.getBlockState(pos);
                             if (state1.getBlock() instanceof AncientMosaicBlock ancientMosaicBlock) {
                                 if (!ancientMosaicBlock.isFractured())
