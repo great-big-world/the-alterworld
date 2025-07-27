@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "great_big_world:block/ancient_mosaic_fractured"
+      "model": "great_big_world:block/fractured_ancient_mosaic"
     }
   }
 }

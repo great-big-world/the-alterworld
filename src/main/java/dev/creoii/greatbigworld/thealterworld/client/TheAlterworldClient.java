@@ -9,5 +9,6 @@ public class TheAlterworldClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         BlockRenderLayerMap.INSTANCE.putBlock(TheAlterworldBlocks.ALTERWORLD_PORTAL, RenderLayer.getTranslucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(TheAlterworldBlocks.ANCIENT_MOSAIC, RenderLayer.getCutoutMipped());
     }
 }

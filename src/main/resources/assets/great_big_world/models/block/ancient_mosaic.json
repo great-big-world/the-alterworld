@@ -1,6 +1,7 @@
 {
-  "parent": "block/cube_all",
+  "parent": "great_big_world:block/cube_all_emissive_layer",
   "textures": {
-    "all": "great_big_world:block/ancient_mosaic"
+    "all": "great_big_world:block/ancient_mosaic",
+    "emissive": "great_big_world:block/ancient_mosaic_runes"
   }
 }
