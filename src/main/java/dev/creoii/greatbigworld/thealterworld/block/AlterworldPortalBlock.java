@@ -1,11 +1,14 @@
 package dev.creoii.greatbigworld.thealterworld.block;
 
 import com.mojang.serialization.MapCodec;
+import dev.creoii.greatbigworld.GreatBigWorld;
 import dev.creoii.greatbigworld.thealterworld.TheAlterworld;
+import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldStatusEffects;
 import dev.creoii.greatbigworld.thealterworld.world.AlterworldPortal;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCollisionHandler;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.s2c.play.PositionFlag;
@@ -57,6 +60,8 @@ public class AlterworldPortalBlock extends Block implements Portal {
 
     protected void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity, EntityCollisionHandler handler) {
         if (entity.canUsePortals(false)) {
+            if (entity instanceof LivingEntity living && living.hasStatusEffect(TheAlterworldStatusEffects.PLANAR_FRACTURE) && state.get(FRACTURED))
+                entity.dismountVehicle();
             entity.tryUsePortal(this, pos);
         }
     }
@@ -72,7 +77,7 @@ public class AlterworldPortalBlock extends Block implements Portal {
 
     @Override
     public @Nullable TeleportTarget createTeleportTarget(ServerWorld world, Entity entity, BlockPos pos) {
-        RegistryKey<World> registryKey = world.getRegistryKey() == TheAlterworld.ALTERWORLD_KEY ? World.OVERWORLD : TheAlterworld.ALTERWORLD_KEY;
+        RegistryKey<World> registryKey = world.getRegistryKey() == GreatBigWorld.ALTERWORLD_KEY ? World.OVERWORLD : GreatBigWorld.ALTERWORLD_KEY;
         ServerWorld serverWorld = world.getServer().getWorld(registryKey);
         if (serverWorld == null) {
             return null;

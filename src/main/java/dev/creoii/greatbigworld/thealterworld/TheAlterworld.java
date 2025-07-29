@@ -1,6 +1,5 @@
 package dev.creoii.greatbigworld.thealterworld;
 
-import dev.creoii.greatbigworld.GreatBigWorld;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldBlocks;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldItems;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldStatusEffects;
@@ -10,9 +9,6 @@ import net.minecraft.loot.LootTable;
 import net.minecraft.loot.LootTables;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.util.Identifier;
-import net.minecraft.world.World;
 
 import java.util.List;
 
@@ -20,8 +16,6 @@ import java.util.List;
  * Fix spawn pos for fractured alterworld portal
  */
 public class TheAlterworld implements ModInitializer {
-    public static final RegistryKey<World> ALTERWORLD_KEY = RegistryKey.of(RegistryKeys.WORLD, Identifier.of(GreatBigWorld.NAMESPACE, "the_alterworld"));;
-
     @Override
     public void onInitialize() {
         TheAlterworldBlocks.register();

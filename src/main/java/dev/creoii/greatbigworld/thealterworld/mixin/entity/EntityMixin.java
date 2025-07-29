@@ -38,6 +38,8 @@ public abstract class EntityMixin {
         if (state.isOf(TheAlterworldBlocks.ALTERWORLD_PORTAL)) {
             if (((Entity) (Object) this) instanceof LivingEntity living) {
                 if (state.get(AlterworldPortalBlock.FRACTURED)) {
+                    System.out.println("dismount");
+                    living.dismountVehicle();
                     int ticks = getRandom().nextBetween(620, 3620);
                     living.addStatusEffect(new StatusEffectInstance(TheAlterworldStatusEffects.PLANAR_FRACTURE, ticks /* 30 seconds to 3 minutes */, 0, false, false));
                     world.breakBlock(blockPos, false);
@@ -65,7 +67,11 @@ public abstract class EntityMixin {
                         manager.setReturnPos(player, pos);
                     }
                 } else {
-                    living.removeStatusEffect(TheAlterworldStatusEffects.PLANAR_FRACTURE);
+                    if (living.hasStatusEffect(TheAlterworldStatusEffects.PLANAR_FRACTURE)) {
+                        System.out.println("dismount");
+                        living.dismountVehicle();
+                        living.removeStatusEffect(TheAlterworldStatusEffects.PLANAR_FRACTURE);
+                    }
                 }
             }
         } else if (state.isOf(Blocks.NETHER_PORTAL) || state.isOf(Blocks.END_PORTAL)) {

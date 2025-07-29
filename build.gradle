@@ -14,4 +14,5 @@ configurations {
 dependencies {
     common(project(path: ':core', configuration: 'namedElements')) { transitive false }
     common(project(path: ':architects-assembly', configuration: 'namedElements')) { transitive false }
+    common(project(path: ':flora-and-fauna', configuration: 'namedElements')) { transitive false }
 }

@@ -2,6 +2,7 @@ package dev.creoii.greatbigworld.thealterworld.mixin.block;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
+import dev.creoii.greatbigworld.GreatBigWorld;
 import dev.creoii.greatbigworld.thealterworld.TheAlterworld;
 import dev.creoii.greatbigworld.thealterworld.block.AncientMosaicBlock;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldBlocks;
@@ -29,7 +30,7 @@ public class AbstractFireBlockMixin {
     @Inject(method = "onBlockAdded", at = @At("TAIL"))
     private void gbw$createAlterworldPortal(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify, CallbackInfo ci) {
         if (!oldState.isOf(state.getBlock())) {
-            if (world.getRegistryKey() == World.OVERWORLD || world.getRegistryKey() == TheAlterworld.ALTERWORLD_KEY) {
+            if (world.getRegistryKey() == World.OVERWORLD || world.getRegistryKey() == GreatBigWorld.ALTERWORLD_KEY) {
                 BlockState newState = world.getBlockState(pos);
 
                 boolean anyTrue = FireBlock.DIRECTION_PROPERTIES.entrySet().stream().anyMatch(directionBooleanPropertyEntry -> state.get(directionBooleanPropertyEntry.getValue()));
@@ -70,7 +71,7 @@ public class AbstractFireBlockMixin {
 
     @Inject(method = "isOverworldOrNether", at = @At("HEAD"), cancellable = true)
     private static void gbw$allowNetherPortalsInAlterworld(World world, CallbackInfoReturnable<Boolean> cir) {
-        if (world.getRegistryKey() == TheAlterworld.ALTERWORLD_KEY)
+        if (world.getRegistryKey() == GreatBigWorld.ALTERWORLD_KEY)
             cir.setReturnValue(true);
     }
 
