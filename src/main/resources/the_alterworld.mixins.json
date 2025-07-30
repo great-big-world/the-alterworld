@@ -10,8 +10,8 @@
     "block.NetherPortalBlockMixin",
     "entity.EntityMixin",
     "entity.LivingEntityMixin",
-    "world.DesertTempleGeneratorMixin",
-    "world.JungleTempleGeneratorMixin",
+    "world.structure.DesertTempleGeneratorMixin",
+    "world.structure.JungleTempleGeneratorMixin",
     "world.VanillaBiomeParametersMixin"
   ],
   "client": [

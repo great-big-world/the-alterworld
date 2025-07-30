@@ -1,4 +1,4 @@
-package dev.creoii.greatbigworld.thealterworld.mixin.world;
+package dev.creoii.greatbigworld.thealterworld.mixin.world.structure;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldBlocks;

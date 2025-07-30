@@ -1,4 +1,4 @@
-package dev.creoii.greatbigworld.thealterworld.mixin.world;
+package dev.creoii.greatbigworld.thealterworld.mixin.world.structure;
 
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldBlocks;
 import net.minecraft.block.BlockState;
@@ -20,7 +20,9 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(JungleTempleGenerator.class)
@@ -29,6 +31,11 @@ public abstract class JungleTempleGeneratorMixin extends ShiftableStructurePiece
 
     protected JungleTempleGeneratorMixin(StructurePieceType type, int x, int y, int z, int width, int height, int depth, Direction orientation) {
         super(type, x, y, z, width, height, depth, orientation);
+    }
+
+    @ModifyConstant(method = "<init>(Lnet/minecraft/util/math/random/Random;II)V", constant = @Constant(intValue = 15))
+    private static int gbw$expandJungleTempleZSize(int constant) {
+        return constant + 1;
     }
 
     @Inject(method = "generate", at = @At(value = "INVOKE", target = "Lnet/minecraft/structure/JungleTempleGenerator;fill(Lnet/minecraft/world/StructureWorldAccess;Lnet/minecraft/util/math/BlockBox;IIIIII)V", ordinal = 10))
@@ -56,6 +63,9 @@ public abstract class JungleTempleGeneratorMixin extends ShiftableStructurePiece
             addBlock(world, Blocks.AIR.getDefaultState(), 6, -2, 14, chunkBox);
             addBlock(world, Blocks.AIR.getDefaultState(), 5, -1, 14, chunkBox);
             addBlock(world, Blocks.AIR.getDefaultState(), 6, -1, 14, chunkBox);
+
+            fillWithOutline(world, chunkBox, 4, -4, 15, 7, 0, 15, false, random, COBBLESTONE_RANDOMIZER);
+            fillWithOutline(world, chunkBox, 4, 1, 13, 7, 1, 15, false, random, COBBLESTONE_RANDOMIZER);
         }
     }
 }
