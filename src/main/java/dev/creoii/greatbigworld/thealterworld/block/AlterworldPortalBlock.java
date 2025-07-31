@@ -2,12 +2,12 @@ package dev.creoii.greatbigworld.thealterworld.block;
 
 import com.mojang.serialization.MapCodec;
 import dev.creoii.greatbigworld.GreatBigWorld;
-import dev.creoii.greatbigworld.thealterworld.TheAlterworld;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldStatusEffects;
 import dev.creoii.greatbigworld.thealterworld.world.AlterworldPortal;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCollisionHandler;
+import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -84,14 +84,34 @@ public class AlterworldPortalBlock extends Block implements Portal {
         } else {
             WorldBorder worldBorder = serverWorld.getWorldBorder();
             BlockPos blockPos = worldBorder.clampFloored(entity.getX(), entity.getY(), entity.getZ());
+            Vec3d vec3d = findOpenPosition(blockPos.toBottomCenterPos(), serverWorld, entity, entity.getDimensions(entity.getPose()));
+            BlockPos foundPos = new BlockPos((int) vec3d.x, (int) vec3d.y, (int) vec3d.z);
             if (!world.getBlockState(pos).get(FRACTURED)) {
                 Optional<AlterworldPortal> optional2 = AlterworldPortal.getNewPortal(serverWorld, pos, Direction.Axis.X);
                 optional2.ifPresent(portal -> {
                     portal.createPortal(serverWorld);
                 });
+            } else if (serverWorld.getBlockState(foundPos).isSolidBlock(serverWorld, foundPos)) {
+                EntityDimensions dimensions = entity.getDimensions(entity.getPose());
+                vec3d = BlockPos.findClosest(foundPos, 16, 64, blockPos1 -> {
+                    Box box = dimensions.getBoxAt(Vec3d.ofBottomCenter(blockPos1));
+                    return serverWorld.isSpaceEmpty(entity, box, false);
+                }).orElse(serverWorld.getTopPosition(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, foundPos)).toBottomCenterPos();
             }
-            Vec3d vec3d = AlterworldPortal.findOpenPosition(blockPos.toBottomCenterPos(), world, entity, entity.getDimensions(entity.getPose()));
             return new TeleportTarget(serverWorld, vec3d, Vec3d.ZERO, 0f, 0f, PositionFlag.combine(PositionFlag.DELTA, PositionFlag.ROT), TeleportTarget.SEND_TRAVEL_THROUGH_PORTAL_PACKET.then(entityx -> entityx.addPortalChunkTicketAt(blockPos)));
+        }
+    }
+
+    public static Vec3d findOpenPosition(Vec3d fallback, ServerWorld world, Entity entity, EntityDimensions dimensions) {
+        if (!(dimensions.width() > 4f) && !(dimensions.height() > 4f)) {
+            double d = (double)dimensions.height() / (double)2f;
+            Vec3d vec3d = fallback.add(0f, d, 0f);
+            VoxelShape voxelShape = VoxelShapes.cuboid(Box.of(vec3d, dimensions.width(), 0f, dimensions.width()).stretch(0f, 1f, 0f).expand(1e-6));
+            Optional<Vec3d> optional = world.findClosestCollision(entity, voxelShape, vec3d, dimensions.width(), dimensions.height(), dimensions.width());
+            Optional<Vec3d> optional2 = optional.map((pos) -> pos.subtract(0f, d, 0f));
+            return optional2.orElse(fallback);
+        } else {
+            return fallback;
         }
     }
 

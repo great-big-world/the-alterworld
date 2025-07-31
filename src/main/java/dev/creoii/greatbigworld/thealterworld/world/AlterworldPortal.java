@@ -5,14 +5,9 @@ import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldBlocks;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityDimensions;
 import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.*;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
 import org.apache.commons.lang3.mutable.MutableInt;
@@ -167,18 +162,5 @@ public class AlterworldPortal {
 
     public boolean wasAlreadyValid() {
         return isValid() && foundPortalBlocks == width * height;
-    }
-
-    public static Vec3d findOpenPosition(Vec3d fallback, ServerWorld world, Entity entity, EntityDimensions dimensions) {
-        if (!(dimensions.width() > 4f) && !(dimensions.height() > 4f)) {
-            double d = (double)dimensions.height() / (double)2f;
-            Vec3d vec3d = fallback.add(0f, d, 0f);
-            VoxelShape voxelShape = VoxelShapes.cuboid(Box.of(vec3d, dimensions.width(), 0f, dimensions.width()).stretch(0f, 1f, 0f).expand(1e-6));
-            Optional<Vec3d> optional = world.findClosestCollision(entity, voxelShape, vec3d, dimensions.width(), dimensions.height(), dimensions.width());
-            Optional<Vec3d> optional2 = optional.map((pos) -> pos.subtract(0f, d, 0f));
-            return optional2.orElse(fallback);
-        } else {
-            return fallback;
-        }
     }
 }
