@@ -12,6 +12,7 @@
     "entity.LivingEntityMixin",
     "world.ServerWorldMixin",
     "world.VanillaBiomeParametersMixin",
+    "world.WanderingTraderManagerMixin",
     "world.structure.DesertTempleGeneratorMixin",
     "world.structure.JungleTempleGeneratorMixin"
   ],
