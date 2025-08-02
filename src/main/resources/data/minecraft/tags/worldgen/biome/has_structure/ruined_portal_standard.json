@@ -1,5 +1,13 @@
 {
   "replace": true,
   "values": [
+    "#great_big_world:is_alter_beach",
+    "#great_big_world:is_alter_river",
+    "#great_big_world:is_alter_taiga",
+    "#great_big_world:is_alter_forest",
+    "great_big_world:alter_dripstone_caves",
+    "minecraft:lush_caves",
+    "great_big_world:alter_snowy_plains",
+    "great_big_world:alter_plains"
   ]
 }

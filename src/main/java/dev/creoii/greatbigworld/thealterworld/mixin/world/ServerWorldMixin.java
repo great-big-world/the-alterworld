@@ -34,6 +34,9 @@ public abstract class ServerWorldMixin extends World {
             } else if (entity instanceof ChickenEntity chicken) {
                 Optional<RegistryEntry.Reference<ChickenVariant>> defaultVariant = getRegistryManager().getOptionalEntry(ChickenVariants.DEFAULT);
                 defaultVariant.ifPresent(chicken::setVariant);
+            } else if (entity instanceof WolfEntity wolf) {
+                Optional<RegistryEntry.Reference<WolfVariant>> defaultVariant = getRegistryManager().getOptionalEntry(WolfVariants.DEFAULT);
+                defaultVariant.ifPresent(wolf::setVariant);
             }
         }
     }

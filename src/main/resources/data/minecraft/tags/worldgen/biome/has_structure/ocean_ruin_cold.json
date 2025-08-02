@@ -1,5 +1,11 @@
 {
   "replace": true,
   "values": [
+    "great_big_world:alter_frozen_ocean",
+    "great_big_world:alter_cold_ocean",
+    "great_big_world:alter_ocean",
+    "great_big_world:alter_deep_frozen_ocean",
+    "great_big_world:alter_deep_cold_ocean",
+    "great_big_world:alter_deep_ocean"
   ]
 }

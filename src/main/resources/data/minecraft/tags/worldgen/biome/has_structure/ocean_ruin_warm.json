@@ -1,5 +1,8 @@
 {
   "replace": true,
   "values": [
+    "great_big_world:alter_lukewarm_ocean",
+    "great_big_world:alter_warm_ocean",
+    "great_big_world:alter_deep_lukewarm_ocean"
   ]
 }

@@ -1,0 +1,9 @@
+{
+  "values": [
+    "great_big_world:alter_frozen_ocean",
+    "great_big_world:alter_ocean",
+    "great_big_world:alter_cold_ocean",
+    "great_big_world:alter_lukewarm_ocean",
+    "great_big_world:alter_warm_ocean"
+  ]
+}

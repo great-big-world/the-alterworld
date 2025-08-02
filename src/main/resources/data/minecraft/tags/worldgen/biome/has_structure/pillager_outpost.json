@@ -1,5 +1,11 @@
 {
   "replace": true,
   "values": [
+    "great_big_world:alter_desert",
+    "great_big_world:alter_plains",
+    "great_big_world:alter_snowy_plains",
+    "great_big_world:alter_taiga",
+    "#great_big_world:is_alter_mountain",
+    "great_big_world:alter_grove"
   ]
 }

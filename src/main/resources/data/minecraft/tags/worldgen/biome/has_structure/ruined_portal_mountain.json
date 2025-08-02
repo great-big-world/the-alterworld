@@ -1,5 +1,9 @@
 {
   "replace": true,
   "values": [
+    "#minecraft:is_badlands",
+    "#great_big_world:is_alter_hill",
+    "great_big_world:alter_stony_shore",
+    "#great_big_world:is_alter_mountain"
   ]
 }

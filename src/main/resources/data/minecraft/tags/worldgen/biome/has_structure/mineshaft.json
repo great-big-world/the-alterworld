@@ -1,0 +1,20 @@
+{
+  "replace": true,
+  "values": [
+    "#great_big_world:is_alter_ocean",
+    "#great_big_world:is_alter_river",
+    "#great_big_world:is_alter_beach",
+    "#great_big_world:is_alter_mountain",
+    "#great_big_world:is_alter_hill",
+    "#great_big_world:is_alter_taiga",
+    "#great_big_world:is_alter_jungle",
+    "#great_big_world:is_alter_forest",
+    "great_big_world:alter_stony_shore",
+    "great_big_world:alter_desert",
+    "great_big_world:alter_snowy_plains",
+    "great_big_world:alter_plains",
+    "great_big_world:alter_swamp",
+    "great_big_world:alter_dripstone_caves",
+    "minecraft:lush_caves"
+  ]
+}

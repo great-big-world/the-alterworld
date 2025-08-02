@@ -12,8 +12,8 @@
   "disable_mob_generation": false,
   "legacy_random_source": false,
   "noise": {
-    "height": 384,
-    "min_y": -64,
+    "height": 448,
+    "min_y": -128,
     "size_horizontal": 1,
     "size_vertical": 2
   },
@@ -529,7 +529,7 @@
                     "if_true": {
                       "type": "minecraft:biome",
                       "biome_is": [
-                        "minecraft:swamp"
+                        "great_big_world:alter_swamp"
                       ]
                     },
                     "then_run": {
@@ -936,8 +936,8 @@
                       "if_true": {
                         "type": "minecraft:biome",
                         "biome_is": [
-                          "minecraft:frozen_ocean",
-                          "minecraft:deep_frozen_ocean"
+                          "great_big_world:alter_frozen_ocean",
+                          "great_big_world:alter_deep_frozen_ocean"
                         ]
                       },
                       "then_run": {
@@ -996,7 +996,7 @@
                           "if_true": {
                             "type": "minecraft:biome",
                             "biome_is": [
-                              "minecraft:frozen_peaks"
+                              "great_big_world:alter_frozen_peaks"
                             ]
                           },
                           "then_run": {
@@ -1067,7 +1067,7 @@
                           "if_true": {
                             "type": "minecraft:biome",
                             "biome_is": [
-                              "minecraft:snowy_slopes"
+                              "great_big_world:alter_snowy_slopes"
                             ]
                           },
                           "then_run": {
@@ -1132,7 +1132,7 @@
                           "if_true": {
                             "type": "minecraft:biome",
                             "biome_is": [
-                              "minecraft:jagged_peaks"
+                              "great_big_world:alter_jagged_peaks"
                             ]
                           },
                           "then_run": {
@@ -1173,7 +1173,7 @@
                           "if_true": {
                             "type": "minecraft:biome",
                             "biome_is": [
-                              "minecraft:grove"
+                              "great_big_world:alter_grove"
                             ]
                           },
                           "then_run": {
@@ -1229,7 +1229,7 @@
                               "if_true": {
                                 "type": "minecraft:biome",
                                 "biome_is": [
-                                  "minecraft:stony_peaks"
+                                  "great_big_world:alter_stony_peaks"
                                 ]
                               },
                               "then_run": {
@@ -1264,7 +1264,7 @@
                               "if_true": {
                                 "type": "minecraft:biome",
                                 "biome_is": [
-                                  "minecraft:stony_shore"
+                                  "great_big_world:alter_stony_shore"
                                 ]
                               },
                               "then_run": {
@@ -1344,9 +1344,9 @@
                               "if_true": {
                                 "type": "minecraft:biome",
                                 "biome_is": [
-                                  "minecraft:warm_ocean",
-                                  "minecraft:beach",
-                                  "minecraft:snowy_beach"
+                                  "great_big_world:alter_warm_ocean",
+                                  "great_big_world:alter_beach",
+                                  "great_big_world:alter_snowy_beach"
                                 ]
                               },
                               "then_run": {
@@ -1382,7 +1382,7 @@
                               "if_true": {
                                 "type": "minecraft:biome",
                                 "biome_is": [
-                                  "minecraft:desert"
+                                  "great_big_world:alter_desert"
                                 ]
                               },
                               "then_run": {
@@ -1418,7 +1418,7 @@
                               "if_true": {
                                 "type": "minecraft:biome",
                                 "biome_is": [
-                                  "minecraft:dripstone_caves"
+                                  "great_big_world:alter_dripstone_caves"
                                 ]
                               },
                               "then_run": {
@@ -1769,8 +1769,8 @@
                       "if_true": {
                         "type": "minecraft:biome",
                         "biome_is": [
-                          "minecraft:frozen_ocean",
-                          "minecraft:deep_frozen_ocean"
+                          "great_big_world:alter_frozen_ocean",
+                          "great_big_world:alter_deep_frozen_ocean"
                         ]
                       },
                       "then_run": {
@@ -1807,7 +1807,7 @@
                           "if_true": {
                             "type": "minecraft:biome",
                             "biome_is": [
-                              "minecraft:frozen_peaks"
+                              "great_big_world:alter_frozen_peaks"
                             ]
                           },
                           "then_run": {
@@ -1878,7 +1878,7 @@
                           "if_true": {
                             "type": "minecraft:biome",
                             "biome_is": [
-                              "minecraft:snowy_slopes"
+                              "great_big_world:alter_snowy_slopes"
                             ]
                           },
                           "then_run": {
@@ -1943,7 +1943,7 @@
                           "if_true": {
                             "type": "minecraft:biome",
                             "biome_is": [
-                              "minecraft:jagged_peaks"
+                              "great_big_world:alter_jagged_peaks"
                             ]
                           },
                           "then_run": {
@@ -1958,7 +1958,7 @@
                           "if_true": {
                             "type": "minecraft:biome",
                             "biome_is": [
-                              "minecraft:grove"
+                              "great_big_world:alter_grove"
                             ]
                           },
                           "then_run": {
@@ -2005,7 +2005,7 @@
                               "if_true": {
                                 "type": "minecraft:biome",
                                 "biome_is": [
-                                  "minecraft:stony_peaks"
+                                  "great_big_world:alter_stony_peaks"
                                 ]
                               },
                               "then_run": {
@@ -2040,7 +2040,7 @@
                               "if_true": {
                                 "type": "minecraft:biome",
                                 "biome_is": [
-                                  "minecraft:stony_shore"
+                                  "great_big_world:alter_stony_shore"
                                 ]
                               },
                               "then_run": {
@@ -2120,9 +2120,9 @@
                               "if_true": {
                                 "type": "minecraft:biome",
                                 "biome_is": [
-                                  "minecraft:warm_ocean",
-                                  "minecraft:beach",
-                                  "minecraft:snowy_beach"
+                                  "great_big_world:alter_warm_ocean",
+                                  "great_big_world:alter_beach",
+                                  "great_big_world:alter_snowy_beach"
                                 ]
                               },
                               "then_run": {
@@ -2158,7 +2158,7 @@
                               "if_true": {
                                 "type": "minecraft:biome",
                                 "biome_is": [
-                                  "minecraft:desert"
+                                  "great_big_world:alter_desert"
                                 ]
                               },
                               "then_run": {
@@ -2194,7 +2194,7 @@
                               "if_true": {
                                 "type": "minecraft:biome",
                                 "biome_is": [
-                                  "minecraft:dripstone_caves"
+                                  "great_big_world:alter_dripstone_caves"
                                 ]
                               },
                               "then_run": {
@@ -2366,9 +2366,9 @@
                     "if_true": {
                       "type": "minecraft:biome",
                       "biome_is": [
-                        "minecraft:warm_ocean",
-                        "minecraft:beach",
-                        "minecraft:snowy_beach"
+                        "great_big_world:alter_warm_ocean",
+                        "great_big_world:alter_beach",
+                        "great_big_world:alter_snowy_beach"
                       ]
                     },
                     "then_run": {
@@ -2393,7 +2393,7 @@
                     "if_true": {
                       "type": "minecraft:biome",
                       "biome_is": [
-                        "minecraft:desert"
+                        "great_big_world:alter_desert"
                       ]
                     },
                     "then_run": {
@@ -2433,8 +2433,8 @@
                     "if_true": {
                       "type": "minecraft:biome",
                       "biome_is": [
-                        "minecraft:frozen_peaks",
-                        "minecraft:jagged_peaks"
+                        "great_big_world:alter_frozen_peaks",
+                        "great_big_world:alter_jagged_peaks"
                       ]
                     },
                     "then_run": {
@@ -2449,9 +2449,9 @@
                     "if_true": {
                       "type": "minecraft:biome",
                       "biome_is": [
-                        "minecraft:warm_ocean",
-                        "minecraft:lukewarm_ocean",
-                        "minecraft:deep_lukewarm_ocean"
+                        "great_big_world:alter_warm_ocean",
+                        "great_big_world:alter_lukewarm_ocean",
+                        "great_big_world:alter_deep_lukewarm_ocean"
                       ]
                     },
                     "then_run": {
