@@ -10,6 +10,8 @@
     "block.NetherPortalBlockMixin",
     "entity.EntityMixin",
     "entity.LivingEntityMixin",
+    "entity.SkeletonEntityMixin",
+    "entity.ZombieEntityMixin",
     "world.ServerWorldMixin",
     "world.VanillaBiomeParametersMixin",
     "world.WanderingTraderManagerMixin",
