@@ -529,7 +529,8 @@
                     "if_true": {
                       "type": "minecraft:biome",
                       "biome_is": [
-                        "minecraft:swamp"
+                        "minecraft:swamp",
+                        "great_big_world:swamp_river"
                       ]
                     },
                     "then_run": {
@@ -1362,7 +1363,8 @@
                               "if_true": {
                                 "type": "minecraft:biome",
                                 "biome_is": [
-                                  "minecraft:desert"
+                                  "minecraft:desert",
+                                  "great_big_world:desert_river"
                                 ]
                               },
                               "then_run": {
@@ -2118,7 +2120,8 @@
                               "if_true": {
                                 "type": "minecraft:biome",
                                 "biome_is": [
-                                  "minecraft:desert"
+                                  "minecraft:desert",
+                                  "great_big_world:desert_river"
                                 ]
                               },
                               "then_run": {
@@ -2353,7 +2356,8 @@
                     "if_true": {
                       "type": "minecraft:biome",
                       "biome_is": [
-                        "minecraft:desert"
+                        "minecraft:desert",
+                        "great_big_world:desert_river"
                       ]
                     },
                     "then_run": {

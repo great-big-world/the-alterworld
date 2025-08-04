@@ -1651,7 +1651,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:swamp_river"
+          "biome": "great_big_world:alter_swamp_river"
         },
         {
           "parameters": {
@@ -7801,7 +7801,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:swamp_river"
+          "biome": "great_big_world:alter_swamp_river"
         },
         {
           "parameters": {
@@ -9421,7 +9421,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:cold_river"
+          "biome": "great_big_world:alter_cold_river"
         },
         {
           "parameters": {
@@ -9481,7 +9481,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:cold_river"
+          "biome": "great_big_world:alter_cold_river"
         },
         {
           "parameters": {
@@ -9541,7 +9541,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:jungle_river"
+          "biome": "great_big_world:alter_jungle_river"
         },
         {
           "parameters": {
@@ -9571,7 +9571,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:desert_river"
+          "biome": "great_big_world:alter_desert_river"
         },
         {
           "parameters": {
@@ -9601,7 +9601,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:cold_river"
+          "biome": "great_big_world:alter_cold_river"
         },
         {
           "parameters": {
@@ -9661,7 +9661,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:cold_river"
+          "biome": "great_big_world:alter_cold_river"
         },
         {
           "parameters": {
@@ -9721,7 +9721,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:jungle_river"
+          "biome": "great_big_world:alter_jungle_river"
         },
         {
           "parameters": {
@@ -9751,7 +9751,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:desert_river"
+          "biome": "great_big_world:alter_desert_river"
         },
         {
           "parameters": {
@@ -10411,7 +10411,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:cold_river"
+          "biome": "great_big_world:alter_cold_river"
         },
         {
           "parameters": {
@@ -10471,7 +10471,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:cold_river"
+          "biome": "great_big_world:alter_cold_river"
         },
         {
           "parameters": {
@@ -10531,7 +10531,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:jungle_river"
+          "biome": "great_big_world:alter_jungle_river"
         },
         {
           "parameters": {
@@ -10561,7 +10561,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:desert_river"
+          "biome": "great_big_world:alter_desert_river"
         },
         {
           "parameters": {
@@ -20851,7 +20851,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:swamp_river"
+          "biome": "great_big_world:alter_swamp_river"
         },
         {
           "parameters": {
@@ -23881,7 +23881,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:swamp_river"
+          "biome": "great_big_world:alter_swamp_river"
         },
         {
           "parameters": {
@@ -30031,7 +30031,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:swamp_river"
+          "biome": "great_big_world:alter_swamp_river"
         },
         {
           "parameters": {
@@ -31651,7 +31651,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:cold_river"
+          "biome": "great_big_world:alter_cold_river"
         },
         {
           "parameters": {
@@ -31711,7 +31711,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:cold_river"
+          "biome": "great_big_world:alter_cold_river"
         },
         {
           "parameters": {
@@ -31771,7 +31771,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:jungle_river"
+          "biome": "great_big_world:alter_jungle_river"
         },
         {
           "parameters": {
@@ -31801,7 +31801,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:desert_river"
+          "biome": "great_big_world:alter_desert_river"
         },
         {
           "parameters": {
@@ -31831,7 +31831,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:cold_river"
+          "biome": "great_big_world:alter_cold_river"
         },
         {
           "parameters": {
@@ -31891,7 +31891,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:cold_river"
+          "biome": "great_big_world:alter_cold_river"
         },
         {
           "parameters": {
@@ -31951,7 +31951,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:jungle_river"
+          "biome": "great_big_world:alter_jungle_river"
         },
         {
           "parameters": {
@@ -31981,7 +31981,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:desert_river"
+          "biome": "great_big_world:alter_desert_river"
         },
         {
           "parameters": {
@@ -32641,7 +32641,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:cold_river"
+          "biome": "great_big_world:alter_cold_river"
         },
         {
           "parameters": {
@@ -32701,7 +32701,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:cold_river"
+          "biome": "great_big_world:alter_cold_river"
         },
         {
           "parameters": {
@@ -32761,7 +32761,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:jungle_river"
+          "biome": "great_big_world:alter_jungle_river"
         },
         {
           "parameters": {
@@ -32791,7 +32791,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:desert_river"
+          "biome": "great_big_world:alter_desert_river"
         },
         {
           "parameters": {
@@ -43081,7 +43081,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:swamp_river"
+          "biome": "great_big_world:alter_swamp_river"
         },
         {
           "parameters": {
@@ -44436,7 +44436,7 @@
       ],
       "type": "minecraft:multi_noise"
     },
-    "settings": "minecraft:overworld",
+    "settings": "great_big_world:the_alterworld",
     "type": "minecraft:noise"
   }
 }
