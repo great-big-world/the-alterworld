@@ -66,7 +66,8 @@
     [
       "minecraft:patch_tall_grass",
       "minecraft:trees_savanna",
-      "minecraft:flower_warm",
+      "great_big_world:flower/poppy_uncommon",
+      "great_big_world:flower/dandelion_uncommon",
       "minecraft:patch_grass_savanna",
       "minecraft:brown_mushroom_normal",
       "minecraft:red_mushroom_normal",

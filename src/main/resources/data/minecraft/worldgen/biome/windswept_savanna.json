@@ -65,8 +65,9 @@
     ],
     [
       "minecraft:trees_windswept_savanna",
-      "minecraft:flower_default",
       "minecraft:patch_grass_normal",
+      "great_big_world:flower/poppy_uncommon",
+      "great_big_world:flower/dandelion_uncommon",
       "minecraft:brown_mushroom_normal",
       "minecraft:red_mushroom_normal",
       "minecraft:patch_pumpkin"

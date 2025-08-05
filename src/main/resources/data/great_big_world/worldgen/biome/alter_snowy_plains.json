@@ -137,8 +137,8 @@
     ],
     [
       "minecraft:trees_snowy",
-      "minecraft:flower_default",
       "minecraft:patch_grass_badlands",
+      "great_big_world:flower/poppy_uncommon",
       "minecraft:patch_pumpkin"
     ],
     [

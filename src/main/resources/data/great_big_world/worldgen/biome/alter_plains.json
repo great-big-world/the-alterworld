@@ -153,8 +153,16 @@
     [
       "minecraft:patch_tall_grass_2",
       "minecraft:trees_plains",
-      "minecraft:flower_plains",
       "minecraft:patch_grass_plain",
+      "great_big_world:flower/red_tulip_uncommon",
+      "great_big_world:flower/orange_tulip_uncommon",
+      "great_big_world:flower/pink_tulip_uncommon",
+      "great_big_world:flower/white_tulip_uncommon",
+      "great_big_world:flower/poppy_uncommon",
+      "great_big_world:flower/dandelion_uncommon",
+      "great_big_world:flower/azure_bluet_uncommon",
+      "great_big_world:flower/oxeye_daisy_uncommon",
+      "great_big_world:flower/cornflower_uncommon",
       "minecraft:patch_pumpkin"
     ],
     [

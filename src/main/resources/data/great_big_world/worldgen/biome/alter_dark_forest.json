@@ -79,10 +79,10 @@
     ],
     [
       "minecraft:dark_forest_vegetation",
-      "minecraft:forest_flowers",
-      "minecraft:flower_default",
       "great_big_world:grass_forest",
       "great_big_world:grass_forest_clearings",
+      "great_big_world:flower/poppy_uncommon",
+      "great_big_world:flower/lily_of_the_valley_uncommon",
       "minecraft:brown_mushroom_normal",
       "minecraft:red_mushroom_normal",
       "minecraft:patch_pumpkin",

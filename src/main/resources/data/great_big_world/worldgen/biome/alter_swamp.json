@@ -83,14 +83,15 @@
       "minecraft:trees_swamp",
       "great_big_world:grass_swamp",
       "great_big_world:grass_swamp_marsh",
+      "great_big_world:flower/blue_orchid",
+      "minecraft:patch_dead_bush",
       "minecraft:patch_waterlily",
       "minecraft:brown_mushroom_swamp",
       "minecraft:red_mushroom_swamp",
       "minecraft:brown_mushroom_normal",
       "minecraft:red_mushroom_normal",
       "minecraft:patch_sugar_cane_swamp",
-      "minecraft:seagrass_swamp",
-      "great_big_world:flower/blue_orchid"
+      "minecraft:seagrass_swamp"
     ],
     [
       "minecraft:freeze_top_layer"
