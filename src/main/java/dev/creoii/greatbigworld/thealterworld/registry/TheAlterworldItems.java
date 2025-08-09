@@ -26,7 +26,7 @@ public class TheAlterworldItems {
         ANCIENT_BRICK_WALL = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "ancient_brick_wall"), TheAlterworldBlocks.ANCIENT_BRICK_WALL);
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register(entries -> {
-            entries.addAfter(Items.REINFORCED_DEEPSLATE, ANCIENT_MOSAIC.getDefaultStack(), FRACTURED_ANCIENT_MOSAIC.getDefaultStack(), ANCIENT_BRICKS.getDefaultStack(), ANCIENT_BRICK_STAIRS.getDefaultStack(), ANCIENT_BRICK_SLAB.getDefaultStack(), ANCIENT_BRICK_WALL.getDefaultStack());
+            entries.addAfter(Items.REINFORCED_DEEPSLATE, ANCIENT_MOSAIC, FRACTURED_ANCIENT_MOSAIC, ANCIENT_BRICKS, ANCIENT_BRICK_STAIRS, ANCIENT_BRICK_SLAB, ANCIENT_BRICK_WALL);
         });
     }
 }
