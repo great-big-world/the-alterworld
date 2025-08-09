@@ -1,0 +1,11 @@
+{
+  "structure.ancient_city.portal_open": {
+    "sounds": [
+      "mob/warden/sonic_boom1",
+      "mob/warden/sonic_boom2",
+      "mob/warden/sonic_boom3",
+      "mob/warden/sonic_boom4"
+    ],
+    "subtitle": "great_big_world.subtitles.structure.ancient_city.portal_open"
+  }
+}

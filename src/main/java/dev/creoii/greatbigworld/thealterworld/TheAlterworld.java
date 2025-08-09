@@ -1,9 +1,6 @@
 package dev.creoii.greatbigworld.thealterworld;
 
-import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldBlocks;
-import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldItems;
-import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldStatusEffects;
-import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldStructureTriggers;
+import dev.creoii.greatbigworld.thealterworld.registry.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.minecraft.loot.LootTable;
@@ -19,6 +16,7 @@ public class TheAlterworld implements ModInitializer {
         TheAlterworldBlocks.register();
         TheAlterworldItems.register();
         TheAlterworldStatusEffects.register();
+        TheAlterworldSoundEvents.register();
         TheAlterworldStructureTriggers.register();
 
         final List<RegistryKey<LootTable>> ARCHAEOLOGY_COMMON_LOOT_TABLES = List.of(LootTables.DESERT_WELL_ARCHAEOLOGY, LootTables.OCEAN_RUIN_COLD_ARCHAEOLOGY, LootTables.OCEAN_RUIN_WARM_ARCHAEOLOGY, LootTables.TRAIL_RUINS_COMMON_ARCHAEOLOGY);
