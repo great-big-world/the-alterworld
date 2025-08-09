@@ -1,11 +1,14 @@
 package dev.creoii.greatbigworld.thealterworld.registry;
 
 import dev.creoii.greatbigworld.GreatBigWorld;
+import dev.creoii.greatbigworld.thealterworld.block.AncientPedestalBlock;
+import dev.creoii.greatbigworld.thealterworld.block.AncientPedestalBlockEntity;
 import dev.creoii.greatbigworld.thealterworld.world.AlterworldPortal;
 import dev.creoii.greatbigworld.world.structuretrigger.StructureTrigger;
 import dev.creoii.greatbigworld.world.structuretrigger.StructureTriggerGroup;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.Identifier;
@@ -26,14 +29,16 @@ public final class TheAlterworldStructureTriggers {
                 @SuppressWarnings("unchecked")
                 MutableObject<List<BlockPos>> mutableObject = (MutableObject<List<BlockPos>>) group.getData();
                 BlockState state1 = world.getBlockState(pos);
-                BlockState state2 = world.getBlockState(pos.up());
-                if (state1.isOf(Blocks.SOUL_SAND)) {
-                    if (state2.isOf(Blocks.SOUL_FIRE) && !mutableObject.getValue().contains(pos)) {
-                        mutableObject.getValue().add(pos);
-                    } else if (!state2.isOf(Blocks.SOUL_FIRE) && mutableObject.getValue().contains(pos)) {
-                        mutableObject.getValue().remove(pos);
+                if (state1.isOf(TheAlterworldBlocks.ANCIENT_PEDESTAL)) {
+                    BlockEntity blockEntity = world.getBlockEntity(pos);
+                    if (blockEntity instanceof AncientPedestalBlockEntity ancientPedestalBlockEntity) {
+                        if (!ancientPedestalBlockEntity.getStack().isEmpty() && !mutableObject.getValue().contains(pos)) {
+                            mutableObject.getValue().add(pos);
+                        } else if (ancientPedestalBlockEntity.getStack().isEmpty() && mutableObject.getValue().contains(pos)) {
+                            mutableObject.getValue().remove(pos);
+                        }
+                        return mutableObject.getValue().size() < 4;
                     }
-                    return mutableObject.getValue().size() < 4;
                 }
             }
             return false;
@@ -46,6 +51,18 @@ public final class TheAlterworldStructureTriggers {
                     Optional<AlterworldPortal> optional = AlterworldPortal.getNewPortal(world, pos, Direction.Axis.X);
                     optional.ifPresent(portal -> {
                         world.playSound(null, pos, TheAlterworldSoundEvents.STRUCTURE_ANCIENT_CITY_PORTAL_OPEN, SoundCategory.AMBIENT, 1.5f, .75f);
+
+                        mutableObject.getValue().forEach(pos1 -> {
+                            BlockState state1 = world.getBlockState(pos1);
+                            if (state1.isOf(TheAlterworldBlocks.ANCIENT_PEDESTAL)) {
+                                BlockEntity blockEntity = world.getBlockEntity(pos);
+                                if (blockEntity instanceof AncientPedestalBlockEntity ancientPedestalBlockEntity) {
+                                    ancientPedestalBlockEntity.setStack(ItemStack.EMPTY);
+                                    world.setBlockState(pos1, state1.with(AncientPedestalBlock.LIT, true));
+                                }
+                            }
+                        });
+
                         portal.createPortal(world);
                     });
                     return false;

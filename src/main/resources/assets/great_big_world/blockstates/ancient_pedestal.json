@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "great_big_world:block/ancient_pedestal"
+    },
+    "lit=true": {
+      "model": "great_big_world:block/ancient_pedestal_lit"
+    }
+  }
+}

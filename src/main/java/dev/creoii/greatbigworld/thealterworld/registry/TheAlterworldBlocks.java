@@ -5,6 +5,7 @@ import dev.creoii.greatbigworld.architectsassembly.block.VerticalSlabBlock;
 import dev.creoii.greatbigworld.block.FacingBlock;
 import dev.creoii.greatbigworld.thealterworld.block.AlterworldPortalBlock;
 import dev.creoii.greatbigworld.thealterworld.block.AncientMosaicBlock;
+import dev.creoii.greatbigworld.thealterworld.block.AncientPedestalBlock;
 import dev.creoii.greatbigworld.util.RegistryHelper;
 import net.minecraft.block.*;
 import net.minecraft.util.Identifier;
@@ -18,6 +19,7 @@ public class TheAlterworldBlocks {
     public static Block VERTICAL_ANCIENT_BRICK_SLAB;
     public static Block ANCIENT_BRICK_STAIRS;
     public static Block ANCIENT_BRICK_WALL;
+    public static Block ANCIENT_PEDESTAL;
 
     public static void register() {
         ALTERWORLD_PORTAL = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "alterworld_portal"), AlterworldPortalBlock::new, AbstractBlock.Settings.copy(Blocks.NETHER_PORTAL).luminance(state -> state.get(AlterworldPortalBlock.FRACTURED) ? 5 : 1));
@@ -28,5 +30,6 @@ public class TheAlterworldBlocks {
         ANCIENT_BRICK_SLAB = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "ancient_brick_slab"), SlabBlock::new, AbstractBlock.Settings.copy(ANCIENT_BRICKS));
         VERTICAL_ANCIENT_BRICK_SLAB = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "vertical_ancient_brick_slab"), VerticalSlabBlock::new, AbstractBlock.Settings.copy(ANCIENT_BRICKS));
         ANCIENT_BRICK_WALL = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "ancient_brick_wall"), WallBlock::new, AbstractBlock.Settings.copy(ANCIENT_BRICKS));
+        ANCIENT_PEDESTAL = RegistryHelper.registerBlock(Identifier.of(GreatBigWorld.NAMESPACE, "ancient_pedestal"), AncientPedestalBlock::new, AbstractBlock.Settings.copy(ANCIENT_BRICKS).strength(30f, 30f));
     }
 }
