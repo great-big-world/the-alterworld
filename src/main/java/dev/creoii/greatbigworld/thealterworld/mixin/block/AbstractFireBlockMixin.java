@@ -3,10 +3,8 @@ package dev.creoii.greatbigworld.thealterworld.mixin.block;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import dev.creoii.greatbigworld.GreatBigWorld;
-import dev.creoii.greatbigworld.thealterworld.TheAlterworld;
 import dev.creoii.greatbigworld.thealterworld.block.AncientMosaicBlock;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldBlocks;
-import dev.creoii.greatbigworld.thealterworld.world.AlterworldPortal;
 import dev.creoii.greatbigworld.thealterworld.world.FracturedAlterworldPortal;
 import net.minecraft.block.AbstractFireBlock;
 import net.minecraft.block.BlockState;
@@ -31,6 +29,8 @@ public class AbstractFireBlockMixin {
     private void gbw$createAlterworldPortal(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify, CallbackInfo ci) {
         if (!oldState.isOf(state.getBlock())) {
             if (world.getRegistryKey() == World.OVERWORLD || world.getRegistryKey() == GreatBigWorld.ALTERWORLD_KEY) {
+                if (!state.isOf(Blocks.FIRE))
+                    return;
                 BlockState newState = world.getBlockState(pos);
 
                 boolean anyTrue = FireBlock.DIRECTION_PROPERTIES.entrySet().stream().anyMatch(directionBooleanPropertyEntry -> state.get(directionBooleanPropertyEntry.getValue()));
@@ -53,13 +53,6 @@ public class AbstractFireBlockMixin {
                 if (fractured) {
                     Optional<FracturedAlterworldPortal> optional2 = FracturedAlterworldPortal.getNewPortal(world, pos, Direction.Axis.X);
                     optional2.ifPresent(portal -> {
-                        if (newState.getBlock() instanceof FireBlock) {
-                            portal.createPortal(world);
-                        }
-                    });
-                } else {
-                    Optional<AlterworldPortal> optional = AlterworldPortal.getNewPortal(world, pos, Direction.Axis.X);
-                    optional.ifPresent(portal -> {
                         if (newState.getBlock() instanceof FireBlock) {
                             portal.createPortal(world);
                         }
