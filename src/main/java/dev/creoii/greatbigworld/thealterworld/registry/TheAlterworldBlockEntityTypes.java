@@ -1,7 +1,7 @@
 package dev.creoii.greatbigworld.thealterworld.registry;
 
 import dev.creoii.greatbigworld.GreatBigWorld;
-import dev.creoii.greatbigworld.thealterworld.block.AncientPedestalBlockEntity;
+import dev.creoii.greatbigworld.thealterworld.block.entity.AncientPedestalBlockEntity;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.registry.Registries;

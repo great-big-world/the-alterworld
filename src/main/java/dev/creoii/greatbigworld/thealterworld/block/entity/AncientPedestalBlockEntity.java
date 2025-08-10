@@ -1,4 +1,4 @@
-package dev.creoii.greatbigworld.thealterworld.block;
+package dev.creoii.greatbigworld.thealterworld.block.entity;
 
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldBlockEntityTypes;
 import net.minecraft.block.BlockState;

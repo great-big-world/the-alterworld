@@ -1,7 +1,7 @@
 package dev.creoii.greatbigworld.thealterworld.client.render;
 
 import dev.creoii.greatbigworld.thealterworld.block.AncientPedestalBlock;
-import dev.creoii.greatbigworld.thealterworld.block.AncientPedestalBlockEntity;
+import dev.creoii.greatbigworld.thealterworld.block.entity.AncientPedestalBlockEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;

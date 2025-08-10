@@ -2,7 +2,7 @@ package dev.creoii.greatbigworld.thealterworld.registry;
 
 import dev.creoii.greatbigworld.GreatBigWorld;
 import dev.creoii.greatbigworld.thealterworld.block.AncientPedestalBlock;
-import dev.creoii.greatbigworld.thealterworld.block.AncientPedestalBlockEntity;
+import dev.creoii.greatbigworld.thealterworld.block.entity.AncientPedestalBlockEntity;
 import dev.creoii.greatbigworld.thealterworld.world.AlterworldPortal;
 import dev.creoii.greatbigworld.world.structuretrigger.StructureTrigger;
 import dev.creoii.greatbigworld.world.structuretrigger.StructureTriggerGroup;
@@ -60,6 +60,7 @@ public final class TheAlterworldStructureTriggers {
                                     ancientPedestalBlockEntity.setStack(ItemStack.EMPTY);
                                 }
                                 world.setBlockState(pos1, state1.with(AncientPedestalBlock.LIT, true));
+                                world.updateNeighbor(pos1.down(), state1.getBlock(), null);
                             }
                         });
 

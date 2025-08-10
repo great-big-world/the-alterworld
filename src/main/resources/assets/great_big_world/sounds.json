@@ -7,5 +7,13 @@
       "mob/warden/sonic_boom4"
     ],
     "subtitle": "great_big_world.subtitles.structure.ancient_city.portal_open"
-  }
+  },
+  "block.ancient_pedestal.place": {
+  "sounds": [
+    "block/end_portal/eyeplace1",
+    "block/end_portal/eyeplace2",
+    "block/end_portal/eyeplace3"
+  ],
+  "subtitle": "great_big_world.subtitles.block.ancient_pedestal.place"
+}
 }
