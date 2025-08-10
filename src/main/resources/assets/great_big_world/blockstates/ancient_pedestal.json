@@ -3,8 +3,13 @@
     "lit=false": {
       "model": "great_big_world:block/ancient_pedestal"
     },
-    "lit=true": {
-      "model": "great_big_world:block/ancient_pedestal_lit"
-    }
+    "lit=true": [
+      {
+        "model": "great_big_world:block/ancient_pedestal_lit0"
+      },
+      {
+        "model": "great_big_world:block/ancient_pedestal_lit1"
+      }
+    ]
   }
 }

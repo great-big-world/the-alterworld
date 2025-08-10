@@ -55,11 +55,11 @@ public final class TheAlterworldStructureTriggers {
                         mutableObject.getValue().forEach(pos1 -> {
                             BlockState state1 = world.getBlockState(pos1);
                             if (state1.isOf(TheAlterworldBlocks.ANCIENT_PEDESTAL)) {
-                                BlockEntity blockEntity = world.getBlockEntity(pos);
+                                BlockEntity blockEntity = world.getBlockEntity(pos1);
                                 if (blockEntity instanceof AncientPedestalBlockEntity ancientPedestalBlockEntity) {
                                     ancientPedestalBlockEntity.setStack(ItemStack.EMPTY);
-                                    world.setBlockState(pos1, state1.with(AncientPedestalBlock.LIT, true));
                                 }
+                                world.setBlockState(pos1, state1.with(AncientPedestalBlock.LIT, true));
                             }
                         });
 

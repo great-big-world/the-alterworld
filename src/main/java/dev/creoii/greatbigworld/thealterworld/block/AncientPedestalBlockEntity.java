@@ -1,6 +1,6 @@
 package dev.creoii.greatbigworld.thealterworld.block;
 
-import dev.creoii.greatbigworld.relicsandruins.registry.RelicsAndRuinsBlockEntityTypes;
+import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldBlockEntityTypes;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.item.ItemStack;
@@ -14,7 +14,7 @@ public class AncientPedestalBlockEntity extends BlockEntity {
     private ItemStack stack;
 
     public AncientPedestalBlockEntity(BlockPos pos, BlockState state) {
-        super(RelicsAndRuinsBlockEntityTypes.ANCIENT_PEDESTAL, pos, state);
+        super(TheAlterworldBlockEntityTypes.ANCIENT_PEDESTAL, pos, state);
         stack = ItemStack.EMPTY;
     }
 

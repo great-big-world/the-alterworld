@@ -1,6 +1,6 @@
 package dev.creoii.greatbigworld.thealterworld.block;
 
-import dev.creoii.greatbigworld.relicsandruins.item.RelicItem;
+import dev.creoii.greatbigworld.thealterworld.item.RelicItem;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockState;
@@ -43,6 +43,8 @@ public class AncientPedestalBlock extends Block implements BlockEntityProvider {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof AncientPedestalBlockEntity ancientPedestalBlockEntity && ancientPedestalBlockEntity.getStack().isEmpty()) {
                 ancientPedestalBlockEntity.setStack(stack);
+                stack.decrementUnlessCreative(1, player);
+                return ActionResult.SUCCESS;
             }
         }
         return super.onUseWithItem(stack, state, world, pos, player, hand, hit);

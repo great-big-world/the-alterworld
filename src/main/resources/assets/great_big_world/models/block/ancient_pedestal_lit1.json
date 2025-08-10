@@ -2,7 +2,7 @@
 	"parent": "block/block",
 	"textures": {
 		"particle": "side",
-		"fire": "minecraft:block/soul_fire"
+		"fire": "minecraft:block/soul_fire_1"
 	},
 	"elements": [
 		{

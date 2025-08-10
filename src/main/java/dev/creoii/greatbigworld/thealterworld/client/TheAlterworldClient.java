@@ -13,6 +13,7 @@ public class TheAlterworldClient implements ClientModInitializer {
     public void onInitializeClient() {
         BlockRenderLayerMap.INSTANCE.putBlock(TheAlterworldBlocks.ALTERWORLD_PORTAL, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(TheAlterworldBlocks.ANCIENT_MOSAIC, RenderLayer.getCutoutMipped());
+        BlockRenderLayerMap.INSTANCE.putBlock(TheAlterworldBlocks.ANCIENT_PEDESTAL, RenderLayer.getCutout());
 
         BlockEntityRendererFactories.register(TheAlterworldBlockEntityTypes.ANCIENT_PEDESTAL, AncientPedestalBlockEntityRenderer::new);
     }
