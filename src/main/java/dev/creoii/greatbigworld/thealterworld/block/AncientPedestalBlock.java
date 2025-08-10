@@ -3,13 +3,12 @@ package dev.creoii.greatbigworld.thealterworld.block;
 import dev.creoii.greatbigworld.thealterworld.block.entity.AncientPedestalBlockEntity;
 import dev.creoii.greatbigworld.thealterworld.item.RelicItem;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldSoundEvents;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockEntityProvider;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ShapeContext;
+import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.particle.ShriekParticleEffect;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
@@ -18,7 +17,6 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
@@ -58,6 +56,9 @@ public class AncientPedestalBlock extends Block implements BlockEntityProvider {
                 ancientPedestalBlockEntity.setStack(stack);
                 stack.decrementUnlessCreative(1, player);
                 world.playSound(player, pos.getX() + .5d, pos.getY() + .5d, pos.getZ() + .5d, TheAlterworldSoundEvents.BLOCK_ANCIENT_PEDESTAL_PLACE, SoundCategory.BLOCKS, 1f, 1f);
+                if (!world.isClient) {
+                    ((ServerWorld) world).spawnParticles(new ShriekParticleEffect(0), pos.getX() + .5d, pos.getY() + 12d, pos.getZ() + .5d, 1, 0d, 0d, 0d, 0d);
+                }
                 return ActionResult.SUCCESS;
             }
         }
@@ -67,19 +68,6 @@ public class AncientPedestalBlock extends Block implements BlockEntityProvider {
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(LIT);
-    }
-
-    @Override
-    protected boolean emitsRedstonePower(BlockState state) {
-        return state.get(LIT);
-    }
-
-    @Override
-    protected int getStrongRedstonePower(BlockState state, BlockView world, BlockPos pos, Direction direction) {
-        if (state.get(LIT) && direction == Direction.DOWN) {
-            return 15;
-        }
-        return super.getStrongRedstonePower(state, world, pos, direction);
     }
 
     protected boolean hasComparatorOutput(BlockState state) {
