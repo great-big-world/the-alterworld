@@ -1,6 +1,8 @@
 package dev.creoii.greatbigworld.thealterworld.mixin.world.structure;
 
 import com.llamalad7.mixinextras.sugar.Local;
+import dev.creoii.greatbigworld.thealterworld.TheAlterworld;
+import dev.creoii.greatbigworld.thealterworld.block.AncientTotemBlock;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -49,14 +51,24 @@ public abstract class DesertTempleGeneratorMixin extends ShiftableStructurePiece
         if (!hasPlacedPortal && random.nextInt(3) == 0 && l > 7) {
             BlockState frameState = world.getRegistryManager().getOptional(RegistryKeys.DIMENSION_TYPE).get().getEntry(world.getDimension()).matchesKey(DimensionTypes.OVERWORLD) ? TheAlterworldBlocks.ANCIENT_MOSAIC.getDefaultState() : Blocks.CHISELED_SANDSTONE.getDefaultState();
             int x = random.nextBoolean() ? 4 : width - 5;
+
+            boolean leftTotem = random.nextBoolean();
+
             addBlock(world, frameState, x, 0, l, chunkBox);
             addBlock(world, frameState, x, 0, l - 1, chunkBox);
             addBlock(world, frameState, x, 0, l - 2, chunkBox);
             addBlock(world, frameState, x, 0, l - 3, chunkBox);
             addBlock(world, frameState, x, 1, l, chunkBox);
             addBlock(world, frameState, x, 1, l - 3, chunkBox);
-            addBlock(world, frameState, x, 2, l, chunkBox);
-            addBlock(world, frameState, x, 2, l - 3, chunkBox);
+
+            if (leftTotem) {
+                AncientTotemBlock.place(this, TheAlterworld.RelicStructureType.JUNGLE_TEMPLE, world, x, 2, l, chunkBox);
+                addBlock(world, frameState, x, 2, l - 3, chunkBox);
+            } else {
+                addBlock(world, frameState, x, 2, l, chunkBox);
+                AncientTotemBlock.place(this, TheAlterworld.RelicStructureType.JUNGLE_TEMPLE, world, x, 2, l - 3, chunkBox);
+            }
+
             addBlock(world, frameState, x, 3, l, chunkBox);
             addBlock(world, frameState, x, 3, l - 3, chunkBox);
             addBlock(world, frameState, x, 4, l, chunkBox);

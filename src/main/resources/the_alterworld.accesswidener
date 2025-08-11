@@ -3,3 +3,5 @@ accessible method net/minecraft/entity/LivingEntity onStatusEffectsRemoved (Ljav
 accessible method net/minecraft/entity/passive/PigEntity setVariant (Lnet/minecraft/registry/entry/RegistryEntry;)V
 accessible method net/minecraft/entity/passive/WolfEntity setVariant (Lnet/minecraft/registry/entry/RegistryEntry;)V
 accessible class net/minecraft/structure/JungleTempleGenerator$CobblestoneRandomizer
+accessible method net/minecraft/structure/StructurePiece addBlock (Lnet/minecraft/world/StructureWorldAccess;Lnet/minecraft/block/BlockState;IIILnet/minecraft/util/math/BlockBox;)V
+accessible method net/minecraft/structure/StructurePiece offsetPos (III)Lnet/minecraft/util/math/BlockPos$Mutable;

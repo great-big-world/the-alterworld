@@ -1,5 +1,7 @@
 package dev.creoii.greatbigworld.thealterworld.mixin.world.structure;
 
+import dev.creoii.greatbigworld.thealterworld.TheAlterworld;
+import dev.creoii.greatbigworld.thealterworld.block.AncientTotemBlock;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -42,15 +44,24 @@ public abstract class JungleTempleGeneratorMixin extends ShiftableStructurePiece
     private void gbw$placeJungleTemplePortal(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox chunkBox, ChunkPos chunkPos, BlockPos pivot, CallbackInfo ci) {
         if (random.nextInt(4) != 0) {
             BlockState frameState = world.getRegistryManager().getOptional(RegistryKeys.DIMENSION_TYPE).get().getEntry(world.getDimension()).matchesKey(DimensionTypes.OVERWORLD) ? TheAlterworldBlocks.ANCIENT_MOSAIC.getDefaultState() : COBBLESTONE_RANDOMIZER.getBlock();
+            boolean leftTotem = random.nextBoolean();
+
             addBlock(world, frameState, 4, -4, 14, chunkBox);
             addBlock(world, frameState, 5, -4, 14, chunkBox);
             addBlock(world, frameState, 6, -4, 14, chunkBox);
             addBlock(world, frameState, 7, -4, 14, chunkBox);
             addBlock(world, frameState, 4, -3, 14, chunkBox);
-            addBlock(world, frameState, 4, -2, 14, chunkBox);
             addBlock(world, frameState, 4, -1, 14, chunkBox);
             addBlock(world, frameState, 7, -3, 14, chunkBox);
-            addBlock(world, frameState, 7, -2, 14, chunkBox);
+
+            if (leftTotem) {
+                AncientTotemBlock.place(this, TheAlterworld.RelicStructureType.JUNGLE_TEMPLE, world, 4, -2, 14, chunkBox);
+                addBlock(world, frameState, 7, -2, 14, chunkBox);
+            } else {
+                addBlock(world, frameState, 4, -2, 14, chunkBox);
+                AncientTotemBlock.place(this, TheAlterworld.RelicStructureType.JUNGLE_TEMPLE, world, 7, -2, 14, chunkBox);
+            }
+
             addBlock(world, frameState, 7, -1, 14, chunkBox);
             addBlock(world, frameState, 4, 0, 14, chunkBox);
             addBlock(world, frameState, 5, 0, 14, chunkBox);
