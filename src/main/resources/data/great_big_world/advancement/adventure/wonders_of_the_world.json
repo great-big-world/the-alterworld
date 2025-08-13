@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:story/root",
+  "parent": "minecraft:adventure/sleep_in_bed",
   "criteria": {
     "desert_pyramid": {
       "conditions": {
