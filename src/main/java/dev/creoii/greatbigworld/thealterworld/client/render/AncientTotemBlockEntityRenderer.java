@@ -42,7 +42,7 @@ public class AncientTotemBlockEntityRenderer implements BlockEntityRenderer<Anci
                     case SOUTH, UP, DOWN -> 0f;
                 };
                 matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(yaw));
-                MinecraftClient.getInstance().getItemRenderer().renderItem(entity.getStack(), ItemDisplayContext.FIXED, WorldRenderer.getLightmapCoordinates(entity.getWorld(), entity.getPos().offset(facing)), overlay, matrices, vertexConsumers, entity.getWorld(), 0);
+                MinecraftClient.getInstance().getItemRenderer().renderItem(entity.getStack(), ItemDisplayContext.GROUND, WorldRenderer.getLightmapCoordinates(entity.getWorld(), entity.getPos().offset(facing)), overlay, matrices, vertexConsumers, entity.getWorld(), 0);
             }
             matrices.pop();
         }

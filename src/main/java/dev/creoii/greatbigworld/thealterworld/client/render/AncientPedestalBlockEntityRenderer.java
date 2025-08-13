@@ -28,9 +28,9 @@ public class AncientPedestalBlockEntityRenderer implements BlockEntityRenderer<A
 
             matrices.push();
 
-            matrices.translate(.5d, 1d + Math.sin((entity.getWorld().getTime() + tickProgress) / 8d) / 16d, .5d);
+            matrices.translate(.5d, .8d + Math.sin((entity.getWorld().getTime() + tickProgress) / 8d) / 16d, .5d);
             matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees((entity.getWorld().getTime() + tickProgress) * 2f));
-            MinecraftClient.getInstance().getItemRenderer().renderItem(entity.getStack(), ItemDisplayContext.FIXED, WorldRenderer.getLightmapCoordinates(entity.getWorld(), entity.getPos().offset(Direction.UP)), overlay, matrices, vertexConsumers, entity.getWorld(), 0);
+            MinecraftClient.getInstance().getItemRenderer().renderItem(entity.getStack(), ItemDisplayContext.GROUND, WorldRenderer.getLightmapCoordinates(entity.getWorld(), entity.getPos().offset(Direction.UP)), overlay, matrices, vertexConsumers, entity.getWorld(), 0);
 
             matrices.pop();
         }
