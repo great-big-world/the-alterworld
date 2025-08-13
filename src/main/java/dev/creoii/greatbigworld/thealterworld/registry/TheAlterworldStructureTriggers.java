@@ -6,6 +6,7 @@ import dev.creoii.greatbigworld.thealterworld.block.entity.AncientPedestalBlockE
 import dev.creoii.greatbigworld.thealterworld.world.AlterworldPortal;
 import dev.creoii.greatbigworld.world.structuretrigger.StructureTrigger;
 import dev.creoii.greatbigworld.world.structuretrigger.StructureTriggerGroup;
+import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.item.ItemStack;
@@ -65,6 +66,12 @@ public final class TheAlterworldStructureTriggers {
                         });
 
                         portal.createPortal(world);
+
+                        if (!world.isClient) {
+                            PlayerLookup.tracking(world, pos).forEach(serverPlayerEntity -> {
+                                TheAlterworldCriteria.LIGHT_ANCIENT_PORTAL.trigger(serverPlayerEntity);
+                            });
+                        }
                     });
                     return false;
                 }

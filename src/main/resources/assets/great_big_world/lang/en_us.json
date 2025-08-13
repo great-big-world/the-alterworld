@@ -13,6 +13,11 @@
 
   "effect.great_big_world.planar_fracture": "Planar Fracture",
 
+  "advancements.story.ancients_awoken.title": "Ancients Awoken",
+  "advancements.story.ancients_awoken.description": "Open a permanent portal to the Alterworld",
+  "advancements.adventure.wonders_of_the_world.title": "Wonders of the World",
+  "advancements.adventure.wonders_of_the_world.description": "Visit all temples in the Overworld",
+
   "great_big_world.subtitles.structure.ancient_city.portal_open": "Ancient portal opens",
   "great_big_world.subtitles.block.ancient_pedestal.place": "Ancient pedestal activates",
 
