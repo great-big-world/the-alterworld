@@ -12,8 +12,8 @@
   "disable_mob_generation": false,
   "legacy_random_source": false,
   "noise": {
-    "height": 384,
-    "min_y": -64,
+    "height": 512,
+    "min_y": -192,
     "size_horizontal": 1,
     "size_vertical": 2
   },
@@ -46,7 +46,7 @@
                   "argument1": {
                     "type": "minecraft:y_clamped_gradient",
                     "from_value": 0,
-                    "from_y": -64,
+                    "from_y": -192,
                     "to_value": 1,
                     "to_y": -40
                   },
@@ -63,7 +63,7 @@
                           "from_value": 1,
                           "from_y": 240,
                           "to_value": 0,
-                          "to_y": 256
+                          "to_y": 384
                         },
                         "argument2": {
                           "type": "minecraft:add",
@@ -109,13 +109,8 @@
                                         "type": "minecraft:clamp",
                                         "input": {
                                           "type": "minecraft:add",
-                                          "argument1": 0.27,
-                                          "argument2": {
-                                            "type": "minecraft:noise",
-                                            "noise": "minecraft:cave_cheese",
-                                            "xz_scale": 1,
-                                            "y_scale": 0.6666666666666666
-                                          }
+                                          "argument1": "great_big_world:cheese_caves_small",
+                                          "argument2": "great_big_world:cheese_caves_large"
                                         },
                                         "max": 1,
                                         "min": -1
@@ -186,7 +181,7 @@
         "argument1": {
           "type": "minecraft:y_clamped_gradient",
           "from_value": 0,
-          "from_y": -64,
+          "from_y": -192,
           "to_value": 1,
           "to_y": -40
         },
@@ -203,7 +198,7 @@
                 "from_value": 1,
                 "from_y": 240,
                 "to_value": 0,
-                "to_y": 256
+                "to_y": 384
               },
               "argument2": {
                 "type": "minecraft:add",
@@ -230,7 +225,7 @@
                     }
                   },
                   "max": 64,
-                  "min": -64
+                  "min": -192
                 }
               }
             }
@@ -282,7 +277,7 @@
               "type": "minecraft:range_choice",
               "input": "minecraft:y",
               "max_exclusive": 51,
-              "min_inclusive": -60,
+              "min_inclusive": -188,
               "when_in_range": {
                 "type": "minecraft:noise",
                 "noise": "minecraft:ore_vein_a",
@@ -301,7 +296,7 @@
               "type": "minecraft:range_choice",
               "input": "minecraft:y",
               "max_exclusive": 51,
-              "min_inclusive": -60,
+              "min_inclusive": -188,
               "when_in_range": {
                 "type": "minecraft:noise",
                 "noise": "minecraft:ore_vein_b",
@@ -320,7 +315,7 @@
         "type": "minecraft:range_choice",
         "input": "minecraft:y",
         "max_exclusive": 51,
-        "min_inclusive": -60,
+        "min_inclusive": -188,
         "when_in_range": {
           "type": "minecraft:noise",
           "noise": "minecraft:ore_veininess",
@@ -2484,11 +2479,11 @@
         "if_true": {
           "type": "minecraft:vertical_gradient",
           "false_at_and_above": {
-            "absolute": 8
+            "absolute": -56
           },
           "random_name": "minecraft:deepslate",
           "true_at_and_below": {
-            "absolute": 0
+            "absolute": -64
           }
         },
         "then_run": {

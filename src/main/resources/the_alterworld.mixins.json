@@ -12,6 +12,8 @@
     "entity.LivingEntityMixin",
     "entity.SkeletonEntityMixin",
     "entity.ZombieEntityMixin",
+    "world.ChunkGeneratorSettingsMixin",
+    "world.NoiseChunkGeneratorMixin",
     "world.ServerWorldMixin",
     "world.VanillaBiomeParametersMixin",
     "world.WanderingTraderManagerMixin",
