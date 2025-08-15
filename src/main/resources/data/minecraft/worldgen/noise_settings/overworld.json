@@ -110,7 +110,7 @@
                                         "input": {
                                           "type": "minecraft:add",
                                           "argument1": "great_big_world:cheese_caves_small",
-                                          "argument2": "great_big_world:cheese_caves_large"
+                                          "argument2": "great_big_world:deep_cave_system"
                                         },
                                         "max": 1,
                                         "min": -1

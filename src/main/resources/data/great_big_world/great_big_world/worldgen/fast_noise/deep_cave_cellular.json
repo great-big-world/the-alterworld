@@ -1,0 +1,18 @@
+{
+  "noise_type": "cellular",
+  "frequency": 0.02,
+  "rotation_type_3d": "none",
+  "fractal": {
+    "type": "none",
+    "octaves": 1,
+    "gain": 0.0,
+    "lacunarity": 0.0,
+    "weighted_strength": 0.0,
+    "ping_pong_strength": 0.0
+  },
+  "cellular": {
+    "distance_function": "euclidean_squared",
+    "jitter_modifier": 0.9,
+    "return_type": "distance"
+  }
+}

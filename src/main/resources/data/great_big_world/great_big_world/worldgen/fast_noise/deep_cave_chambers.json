@@ -1,0 +1,18 @@
+{
+  "type": "value",
+  "frequency": 0.008,
+  "rotation_type_3d": "none",
+  "fractal": {
+    "type": "ridged",
+    "octaves": 2,
+    "gain": 0.65,
+    "lacunarity": 1.5,
+    "weighted_strength": 0.2,
+    "ping_pong_strength": 1.8
+  },
+  "cellular": {
+    "distance_function": "euclidean_squared",
+    "jitter_modifier": 0.9,
+    "return_type": "distance"
+  }
+}
