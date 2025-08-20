@@ -1,6 +1,7 @@
 package dev.creoii.greatbigworld.thealterworld.registry;
 
 import dev.creoii.greatbigworld.GreatBigWorld;
+import dev.creoii.greatbigworld.registry.GBWRegistries;
 import dev.creoii.greatbigworld.thealterworld.block.AncientPedestalBlock;
 import dev.creoii.greatbigworld.thealterworld.block.entity.AncientPedestalBlockEntity;
 import dev.creoii.greatbigworld.thealterworld.world.AlterworldPortal;
@@ -25,7 +26,7 @@ public final class TheAlterworldStructureTriggers {
     public static StructureTrigger ANCIENT_PORTAL_ACTIVATION;
 
     public static void register() {
-        ANCIENT_PORTAL_LIGHTER = Registry.register(GreatBigWorld.STRUCTURE_TRIGGERS, Identifier.of(GreatBigWorld.NAMESPACE, "ancient_portal_lighter"), new StructureTrigger(Identifier.of(GreatBigWorld.NAMESPACE, "ancient_portal_lighter"), StructureTriggerGroup.DataType.LIST, (world, pos, state, structureStart, group) -> {
+        ANCIENT_PORTAL_LIGHTER = Registry.register(GBWRegistries.STRUCTURE_TRIGGERS, Identifier.of(GreatBigWorld.NAMESPACE, "ancient_portal_lighter"), new StructureTrigger(Identifier.of(GreatBigWorld.NAMESPACE, "ancient_portal_lighter"), StructureTriggerGroup.DataType.LIST, (world, pos, state, structureStart, group) -> {
             if (group != null && group.getDataType() == StructureTriggerGroup.DataType.LIST) {
                 @SuppressWarnings("unchecked")
                 MutableObject<List<BlockPos>> mutableObject = (MutableObject<List<BlockPos>>) group.getData();
@@ -44,7 +45,7 @@ public final class TheAlterworldStructureTriggers {
             }
             return false;
         }));
-        ANCIENT_PORTAL_ACTIVATION = Registry.register(GreatBigWorld.STRUCTURE_TRIGGERS, Identifier.of(GreatBigWorld.NAMESPACE, "ancient_portal_activation"), new StructureTrigger(Identifier.of(GreatBigWorld.NAMESPACE, "ancient_portal_lighter"), StructureTriggerGroup.DataType.LIST, (world, pos, state, structureStart, group) -> {
+        ANCIENT_PORTAL_ACTIVATION = Registry.register(GBWRegistries.STRUCTURE_TRIGGERS, Identifier.of(GreatBigWorld.NAMESPACE, "ancient_portal_activation"), new StructureTrigger(Identifier.of(GreatBigWorld.NAMESPACE, "ancient_portal_lighter"), StructureTriggerGroup.DataType.LIST, (world, pos, state, structureStart, group) -> {
             if (group != null && group.getDataType() == StructureTriggerGroup.DataType.LIST) {
                 @SuppressWarnings("unchecked")
                 MutableObject<List<BlockPos>> mutableObject = (MutableObject<List<BlockPos>>) group.getData();

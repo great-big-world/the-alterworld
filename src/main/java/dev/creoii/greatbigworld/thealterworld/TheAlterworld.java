@@ -2,17 +2,21 @@ package dev.creoii.greatbigworld.thealterworld;
 
 import com.google.common.collect.Maps;
 import dev.creoii.greatbigworld.GreatBigWorld;
+import dev.creoii.greatbigworld.data.Mappings;
+import dev.creoii.greatbigworld.registry.GBWRegistries;
 import dev.creoii.greatbigworld.thealterworld.registry.*;
 import dev.creoii.greatbigworld.thealterworld.util.ExtendedChunkGeneratorSettings;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.event.registry.DynamicRegistrySetupCallback;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.minecraft.item.Item;
 import net.minecraft.loot.LootTable;
 import net.minecraft.loot.LootTables;
 import net.minecraft.loot.entry.ItemEntry;
+import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.gen.chunk.ChunkGeneratorSettings;
 import org.jetbrains.annotations.Nullable;
@@ -20,6 +24,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class TheAlterworld implements ModInitializer {
     private static final Map<RelicStructureType, List<Item>> RELICS = Maps.newEnumMap(RelicStructureType.class);
@@ -50,12 +55,21 @@ public class TheAlterworld implements ModInitializer {
             }
         });
 
-        DynamicRegistrySetupCallback.EVENT.register(dynamicRegistryView -> {
-            dynamicRegistryView.registerEntryAdded(RegistryKeys.CHUNK_GENERATOR_SETTINGS, (i, identifier, chunkGeneratorSettings) -> {
-                if (identifier.equals(ChunkGeneratorSettings.OVERWORLD.getValue()) || identifier.equals(GreatBigWorld.ALTERWORLD_KEY.getValue())) {
-                    ((ExtendedChunkGeneratorSettings) (Object) chunkGeneratorSettings).gbw$setLavaHeight(-182);
-                }
-            });
+        ServerLifecycleEvents.SERVER_STARTING.register(minecraftServer -> {
+            Optional<Registry<Mappings>> optionalRegistry = minecraftServer.getRegistryManager().getOptional(GBWRegistries.MAPPINGS_KEY);
+            Optional<Registry<ChunkGeneratorSettings>> optionalRegistry2 = minecraftServer.getRegistryManager().getOptional(RegistryKeys.CHUNK_GENERATOR_SETTINGS);
+            if (optionalRegistry.isPresent() && optionalRegistry2.isPresent()) {
+                Mappings mappings = optionalRegistry.get().get(Identifier.of(GreatBigWorld.NAMESPACE, "world_lava_heights"));
+                if (mappings == null)
+                    return;
+
+                optionalRegistry2.get().getEntrySet().forEach(entry -> {
+                    Mappings.Value value = mappings.getValue(minecraftServer.getRegistryManager(), entry.getKey().getValue());
+                    if (value.type() == Mappings.Value.PrimitiveType.STRING)
+                        return;
+                    ((ExtendedChunkGeneratorSettings) (Object) entry.getValue()).gbw$setLavaHeight(value.getAsNumber().intValue());
+                });
+            }
         });
     }
 

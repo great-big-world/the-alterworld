@@ -1,0 +1,8 @@
+{
+  "registry": "minecraft:worldgen/noise_settings",
+  "values": {
+    "minecraft:overworld": -182,
+    "great_big_world:the_alterworld": -182
+  },
+  "default": -54
+}
