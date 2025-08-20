@@ -38,16 +38,16 @@
                 "argument2": {
                   "type": "minecraft:noise",
                   "noise": "minecraft:spaghetti_2d_elevation",
-                  "xz_scale": 1,
-                  "y_scale": 0
+                  "xz_scale": 1.5,
+                  "y_scale": 0.5
                 }
               }
             },
             "argument2": {
               "type": "minecraft:y_clamped_gradient",
               "from_value": 8,
-              "from_y": -192,
-              "to_value": -40,
+              "from_y": -128,
+              "to_value": -32,
               "to_y": 320
             }
           }
