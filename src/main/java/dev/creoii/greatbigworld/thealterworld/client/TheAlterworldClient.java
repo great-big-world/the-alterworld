@@ -5,16 +5,16 @@ import dev.creoii.greatbigworld.thealterworld.client.render.AncientTotemBlockEnt
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldBlockEntityTypes;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldBlocks;
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
-import net.minecraft.client.render.RenderLayer;
+import net.fabricmc.fabric.api.client.rendering.v1.BlockRenderLayerMap;
+import net.minecraft.client.render.BlockRenderLayer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 
 public class TheAlterworldClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
-        BlockRenderLayerMap.INSTANCE.putBlock(TheAlterworldBlocks.ALTERWORLD_PORTAL, RenderLayer.getTranslucent());
-        BlockRenderLayerMap.INSTANCE.putBlock(TheAlterworldBlocks.ANCIENT_MOSAIC, RenderLayer.getCutoutMipped());
-        BlockRenderLayerMap.INSTANCE.putBlock(TheAlterworldBlocks.ANCIENT_PEDESTAL, RenderLayer.getCutout());
+        BlockRenderLayerMap.putBlock(TheAlterworldBlocks.ALTERWORLD_PORTAL, BlockRenderLayer.TRANSLUCENT);
+        BlockRenderLayerMap.putBlock(TheAlterworldBlocks.ANCIENT_MOSAIC, BlockRenderLayer.CUTOUT_MIPPED);
+        BlockRenderLayerMap.putBlock(TheAlterworldBlocks.ANCIENT_PEDESTAL, BlockRenderLayer.CUTOUT);
 
         BlockEntityRendererFactories.register(TheAlterworldBlockEntityTypes.ANCIENT_PEDESTAL, AncientPedestalBlockEntityRenderer::new);
         BlockEntityRendererFactories.register(TheAlterworldBlockEntityTypes.ANCIENT_TOTEM, AncientTotemBlockEntityRenderer::new);
