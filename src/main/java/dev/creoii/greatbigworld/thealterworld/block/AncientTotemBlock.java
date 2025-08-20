@@ -81,10 +81,10 @@ public class AncientTotemBlock extends Block implements BlockEntityProvider {
         structurePiece.addBlock(world, TheAlterworldBlocks.ANCIENT_TOTEM.getDefaultState(), x, y, z, chunkBox);
         BlockPos pos = structurePiece.offsetPos(x, y, z);
         if (world.getBlockEntity(pos) instanceof AncientTotemBlockEntity ancientTotemBlockEntity) {
-            System.out.println("found be");
+            //System.out.println("found be");
             Item relic = TheAlterworld.getRandomRelic(type, world.getRandom());
             if (relic != null) {
-                System.out.println("relic: " + relic.getTranslationKey());
+                //System.out.println("relic: " + relic.getTranslationKey());
                 ancientTotemBlockEntity.setStack(relic.getDefaultStack());
             }
         }
