@@ -66,6 +66,7 @@
       "minecraft:ore_gold_lower",
       "minecraft:ore_redstone",
       "minecraft:ore_redstone_lower",
+      "great_big_world:ore_redstone_scattered",
       "minecraft:ore_diamond",
       "minecraft:ore_diamond_medium",
       "minecraft:ore_diamond_large",
