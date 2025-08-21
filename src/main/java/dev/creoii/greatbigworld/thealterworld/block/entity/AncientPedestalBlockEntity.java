@@ -8,6 +8,8 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.storage.ReadView;
+import net.minecraft.storage.WriteView;
 import net.minecraft.util.math.BlockPos;
 
 public class AncientPedestalBlockEntity extends BlockEntity {
@@ -39,15 +41,17 @@ public class AncientPedestalBlockEntity extends BlockEntity {
         return BlockEntityUpdateS2CPacket.create(this);
     }
 
-    protected void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registries) {
-        super.readNbt(nbt, registries);
-        stack = nbt.get("stack", ItemStack.CODEC, registries.getOps(NbtOps.INSTANCE)).orElse(ItemStack.EMPTY);
+    @Override
+    protected void readData(ReadView view) {
+        super.readData(view);
+        stack = view.read("stack", ItemStack.CODEC).orElse(ItemStack.EMPTY);
     }
 
-    protected void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registries) {
-        super.writeNbt(nbt, registries);
+    @Override
+    protected void writeData(WriteView view) {
+        super.writeData(view);
         if (!stack.isEmpty()) {
-            nbt.put("stack", ItemStack.CODEC, registries.getOps(NbtOps.INSTANCE), stack);
+            view.put("stack", ItemStack.CODEC, stack);
         }
     }
 }
