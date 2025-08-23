@@ -26,7 +26,7 @@ public final class TheAlterworldStructureTriggers {
     public static StructureTrigger ANCIENT_PORTAL_ACTIVATION;
 
     public static void register() {
-        ANCIENT_PORTAL_LIGHTER = Registry.register(GBWRegistries.STRUCTURE_TRIGGERS, Identifier.of(GreatBigWorld.NAMESPACE, "ancient_portal_lighter"), new StructureTrigger(Identifier.of(GreatBigWorld.NAMESPACE, "ancient_portal_lighter"), StructureTriggerGroup.DataType.LIST, (world, pos, state, structureStart, group) -> {
+        ANCIENT_PORTAL_LIGHTER = Registry.register(GBWRegistries.STRUCTURE_TRIGGERS, Identifier.of(GreatBigWorld.NAMESPACE, "ancient_portal_lighter"), new StructureTrigger(Identifier.of(GreatBigWorld.NAMESPACE, "ancient_portal_lighter"), Identifier.of(GreatBigWorld.NAMESPACE, "ancient_portal_lighter"), StructureTriggerGroup.DataType.LIST, (world, pos, state, structureStart, group) -> {
             if (group != null && group.getDataType() == StructureTriggerGroup.DataType.LIST) {
                 @SuppressWarnings("unchecked")
                 MutableObject<List<BlockPos>> mutableObject = (MutableObject<List<BlockPos>>) group.getData();
@@ -45,7 +45,7 @@ public final class TheAlterworldStructureTriggers {
             }
             return false;
         }));
-        ANCIENT_PORTAL_ACTIVATION = Registry.register(GBWRegistries.STRUCTURE_TRIGGERS, Identifier.of(GreatBigWorld.NAMESPACE, "ancient_portal_activation"), new StructureTrigger(Identifier.of(GreatBigWorld.NAMESPACE, "ancient_portal_lighter"), StructureTriggerGroup.DataType.LIST, (world, pos, state, structureStart, group) -> {
+        ANCIENT_PORTAL_ACTIVATION = Registry.register(GBWRegistries.STRUCTURE_TRIGGERS, Identifier.of(GreatBigWorld.NAMESPACE, "ancient_portal_activation"), new StructureTrigger(Identifier.of(GreatBigWorld.NAMESPACE, "ancient_portal_activation"), Identifier.of(GreatBigWorld.NAMESPACE, "ancient_portal_lighter"), StructureTriggerGroup.DataType.LIST, (world, pos, state, structureStart, group) -> {
             if (group != null && group.getDataType() == StructureTriggerGroup.DataType.LIST) {
                 @SuppressWarnings("unchecked")
                 MutableObject<List<BlockPos>> mutableObject = (MutableObject<List<BlockPos>>) group.getData();
