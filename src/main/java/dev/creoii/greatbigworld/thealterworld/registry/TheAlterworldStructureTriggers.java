@@ -36,7 +36,7 @@ public final class TheAlterworldStructureTriggers {
                     if (blockEntity instanceof AncientPedestalBlockEntity ancientPedestalBlockEntity) {
                         if (!ancientPedestalBlockEntity.getStack().isEmpty() && !mutableObject.getValue().contains(pos)) {
                             mutableObject.getValue().add(pos);
-                        } else if (ancientPedestalBlockEntity.getStack().isEmpty() && mutableObject.getValue().contains(pos)) {
+                        } else if (ancientPedestalBlockEntity.getStack().isEmpty()) {
                             mutableObject.getValue().remove(pos);
                         }
                         return mutableObject.getValue().size() < 4;
