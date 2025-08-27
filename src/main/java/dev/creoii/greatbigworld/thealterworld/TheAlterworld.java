@@ -36,7 +36,6 @@ public class TheAlterworld implements ModInitializer {
         TheAlterworldBlockEntityTypes.register();
         TheAlterworldStatusEffects.register();
         TheAlterworldSoundEvents.register();
-        TheAlterworldCriteria.register();
         TheAlterworldStructureTriggers.register();
 
         final List<RegistryKey<LootTable>> ARCHAEOLOGY_COMMON_LOOT_TABLES = List.of(LootTables.DESERT_WELL_ARCHAEOLOGY, LootTables.OCEAN_RUIN_COLD_ARCHAEOLOGY, LootTables.OCEAN_RUIN_WARM_ARCHAEOLOGY, LootTables.TRAIL_RUINS_COMMON_ARCHAEOLOGY);
