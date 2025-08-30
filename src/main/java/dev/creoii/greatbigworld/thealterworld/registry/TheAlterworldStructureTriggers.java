@@ -6,54 +6,52 @@ import dev.creoii.greatbigworld.thealterworld.block.AncientPedestalBlock;
 import dev.creoii.greatbigworld.thealterworld.block.entity.AncientPedestalBlockEntity;
 import dev.creoii.greatbigworld.thealterworld.world.AlterworldPortal;
 import dev.creoii.greatbigworld.world.structuretrigger.StructureTrigger;
-import dev.creoii.greatbigworld.world.structuretrigger.StructureTriggerGroup;
+import dev.creoii.greatbigworld.thealterworld.world.AncientPortalTriggerData;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registry;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Pair;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import org.apache.commons.lang3.mutable.MutableObject;
 
-import java.util.List;
 import java.util.Optional;
 
 public final class TheAlterworldStructureTriggers {
-    public static StructureTrigger ANCIENT_PORTAL_LIGHTER;
+    public static final Identifier ANCIENT_PORTAL_ACTIVATION_TRIGGER = Identifier.of(GreatBigWorld.NAMESPACE, "ancient_portal_activation");
+
     public static StructureTrigger ANCIENT_PORTAL_ACTIVATION;
 
     public static void register() {
-        ANCIENT_PORTAL_LIGHTER = Registry.register(GBWRegistries.STRUCTURE_TRIGGERS, Identifier.of(GreatBigWorld.NAMESPACE, "ancient_portal_lighter"), new StructureTrigger(Identifier.of(GreatBigWorld.NAMESPACE, "ancient_portal_lighter"), Identifier.of(GreatBigWorld.NAMESPACE, "ancient_portal_lighter"), StructureTriggerGroup.DataType.LIST, (world, pos, state, structureStart, group) -> {
-            if (group != null && group.getDataType() == StructureTriggerGroup.DataType.LIST) {
-                @SuppressWarnings("unchecked")
-                MutableObject<List<BlockPos>> mutableObject = (MutableObject<List<BlockPos>>) group.getData();
-                BlockState state1 = world.getBlockState(pos);
-                if (state1.isOf(TheAlterworldBlocks.ANCIENT_PEDESTAL)) {
-                    BlockEntity blockEntity = world.getBlockEntity(pos);
-                    if (blockEntity instanceof AncientPedestalBlockEntity ancientPedestalBlockEntity) {
-                        if (!ancientPedestalBlockEntity.getStack().isEmpty() && !mutableObject.getValue().contains(pos)) {
-                            mutableObject.getValue().add(pos);
-                        } else if (ancientPedestalBlockEntity.getStack().isEmpty()) {
-                            mutableObject.getValue().remove(pos);
-                        }
-                        return mutableObject.getValue().size() < 4;
+        ANCIENT_PORTAL_ACTIVATION = Registry.register(GBWRegistries.STRUCTURE_TRIGGERS, ANCIENT_PORTAL_ACTIVATION_TRIGGER, new StructureTrigger(ANCIENT_PORTAL_ACTIVATION_TRIGGER, TheAlterworldStructureTriggerDataTypes.ANCIENT_PORTAL, (world, pos, state, structureStart, group) -> {
+            if (group != null && group.getData() instanceof AncientPortalTriggerData data) {
+                if (data.getPortalPos() == null) {
+                    Pair<BlockPos, Direction.Axis> pair = getPortalPosAndAxis(world, pos);
+                    data.setPortalPos(pair.getLeft());
+                    Direction.Axis searchAxis = pair.getRight();
+
+                    for (int i : new int[]{-4, -10, 4, 10}) {
+                        data.getPositions().put(pos.offset(searchAxis, i).down(4), false);
                     }
                 }
-            }
-            return false;
-        }));
-        ANCIENT_PORTAL_ACTIVATION = Registry.register(GBWRegistries.STRUCTURE_TRIGGERS, Identifier.of(GreatBigWorld.NAMESPACE, "ancient_portal_activation"), new StructureTrigger(Identifier.of(GreatBigWorld.NAMESPACE, "ancient_portal_activation"), Identifier.of(GreatBigWorld.NAMESPACE, "ancient_portal_lighter"), StructureTriggerGroup.DataType.LIST, (world, pos, state, structureStart, group) -> {
-            if (group != null && group.getDataType() == StructureTriggerGroup.DataType.LIST) {
-                @SuppressWarnings("unchecked")
-                MutableObject<List<BlockPos>> mutableObject = (MutableObject<List<BlockPos>>) group.getData();
-                if (mutableObject.getValue().size() >= 4) {
-                    Optional<AlterworldPortal> optional = AlterworldPortal.getNewPortal(world, pos, Direction.Axis.X);
-                    optional.ifPresent(portal -> {
-                        world.playSound(null, pos, TheAlterworldSoundEvents.STRUCTURE_ANCIENT_CITY_PORTAL_OPEN, SoundCategory.AMBIENT, 1.5f, .75f);
 
-                        mutableObject.getValue().forEach(pos1 -> {
+                data.getPositions().entrySet().stream().filter(entry -> !entry.getValue()).forEach(entry -> {
+                    BlockState state1 = world.getBlockState(entry.getKey());
+                    if (state1.isOf(TheAlterworldBlocks.ANCIENT_PEDESTAL) && world.getBlockEntity(entry.getKey()) instanceof AncientPedestalBlockEntity pedestal && !pedestal.getStack().isEmpty()) {
+                        entry.setValue(true);
+                    }
+                });
+
+                if (data.getPositions().values().stream().filter(aBoolean -> aBoolean).count() >= 4) {
+                    Optional<AlterworldPortal> optional = AlterworldPortal.getNewPortal(world, data.getPortalPos(), Direction.Axis.X);
+                    optional.ifPresent(portal -> {
+                        world.playSound(null, data.getPortalPos(), TheAlterworldSoundEvents.STRUCTURE_ANCIENT_CITY_PORTAL_OPEN, SoundCategory.AMBIENT, 1.5f, .75f);
+
+                        data.getPositions().keySet().forEach(pos1 -> {
                             BlockState state1 = world.getBlockState(pos1);
                             if (state1.isOf(TheAlterworldBlocks.ANCIENT_PEDESTAL)) {
                                 BlockEntity blockEntity = world.getBlockEntity(pos1);
@@ -73,5 +71,11 @@ public final class TheAlterworldStructureTriggers {
             }
             return false;
         }));
+    }
+
+    private static Pair<BlockPos, Direction.Axis> getPortalPosAndAxis(ServerWorld world, BlockPos source) {
+        BlockPos x = source.offset(Direction.Axis.X, 15);
+        BlockPos z = source.offset(Direction.Axis.Z, 15);
+        return world.getBlockState(x.down()).isOf(Blocks.REINFORCED_DEEPSLATE) ? new Pair<>(x, Direction.Axis.Z) : new Pair<>(z, Direction.Axis.X);
     }
 }
