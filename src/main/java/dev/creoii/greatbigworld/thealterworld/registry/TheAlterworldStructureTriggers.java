@@ -28,7 +28,7 @@ public final class TheAlterworldStructureTriggers {
 
     public static void register() {
         ANCIENT_PORTAL_ACTIVATION = Registry.register(GBWRegistries.STRUCTURE_TRIGGERS, ANCIENT_PORTAL_ACTIVATION_TRIGGER, new StructureTrigger(ANCIENT_PORTAL_ACTIVATION_TRIGGER, TheAlterworldStructureTriggerDataTypes.ANCIENT_PORTAL, (world, pos, state, structureStart, group) -> {
-            if (group != null && group.getData() instanceof AncientPortalTriggerData data) {
+            if (group != null && group.data() instanceof AncientPortalTriggerData data) {
                 if (data.getPortalPos() == null) {
                     Pair<BlockPos, Direction.Axis> pair = getPortalPosAndAxis(world, pos);
                     data.setPortalPos(pair.getLeft());
