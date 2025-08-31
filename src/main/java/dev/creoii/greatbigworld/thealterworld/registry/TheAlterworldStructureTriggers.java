@@ -10,7 +10,6 @@ import dev.creoii.greatbigworld.thealterworld.world.AncientPortalTriggerData;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registry;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -42,8 +41,7 @@ public final class TheAlterworldStructureTriggers {
 
                 positions.entrySet().stream().filter(entry -> !entry.getValue()).forEach(entry -> {
                     BlockState state1 = world.getBlockState(entry.getKey());
-                    System.out.println(entry.getKey().toShortString() + ": " + (state1.isOf(TheAlterworldBlocks.ANCIENT_PEDESTAL) && world.getBlockEntity(entry.getKey()) instanceof AncientPedestalBlockEntity pedestal) + ": " + (((AncientPedestalBlockEntity) world.getBlockEntity(entry.getKey())).getStack() == null ? "null" : ((AncientPedestalBlockEntity) world.getBlockEntity(entry.getKey())).getStack().getItem().getRegistryEntry().getIdAsString()));
-                    if (state1.isOf(TheAlterworldBlocks.ANCIENT_PEDESTAL) && world.getBlockEntity(entry.getKey()) instanceof AncientPedestalBlockEntity pedestal && !pedestal.getStack().isEmpty()) {
+                    if (state1.isOf(TheAlterworldBlocks.ANCIENT_PEDESTAL) && world.getBlockEntity(entry.getKey()) instanceof AncientPedestalBlockEntity pedestal && pedestal.getRelic() != null) {
                         entry.setValue(true);
                     }
                 });
@@ -58,7 +56,7 @@ public final class TheAlterworldStructureTriggers {
                             if (state1.isOf(TheAlterworldBlocks.ANCIENT_PEDESTAL)) {
                                 BlockEntity blockEntity = world.getBlockEntity(pos1);
                                 if (blockEntity instanceof AncientPedestalBlockEntity ancientPedestalBlockEntity) {
-                                    ancientPedestalBlockEntity.setStack(ItemStack.EMPTY);
+                                    ancientPedestalBlockEntity.setRelic(null);
                                 }
                                 world.setBlockState(pos1, state1.with(AncientPedestalBlock.LIT, true));
                                 world.updateNeighbor(pos1.down(), state1.getBlock(), null);

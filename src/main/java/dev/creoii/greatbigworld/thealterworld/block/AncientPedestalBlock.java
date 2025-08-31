@@ -56,7 +56,7 @@ public class AncientPedestalBlock extends Block implements BlockEntityProvider {
     @Override
     protected void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity, EntityCollisionHandler handler) {
         if (state.get(LIT) && entity instanceof LivingEntity && !world.isClient) {
-            entity.damage((ServerWorld) world, world.getDamageSources().campfire(), 2f);
+            entity.damage((ServerWorld) world, world.getDamageSources().inFire(), 2f);
         }
     }
 
@@ -64,8 +64,8 @@ public class AncientPedestalBlock extends Block implements BlockEntityProvider {
     protected ActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (stack.getItem() instanceof RelicItem relicItem && !state.get(LIT)) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof AncientPedestalBlockEntity ancientPedestalBlockEntity && ancientPedestalBlockEntity.getStack().isEmpty()) {
-                ancientPedestalBlockEntity.setStack(stack);
+            if (blockEntity instanceof AncientPedestalBlockEntity ancientPedestalBlockEntity && ancientPedestalBlockEntity.getRelic() == null) {
+                ancientPedestalBlockEntity.setRelic(stack.getItem());
                 stack.decrementUnlessCreative(1, player);
                 world.playSound(player, pos.getX() + .5d, pos.getY() + .5d, pos.getZ() + .5d, TheAlterworldSoundEvents.BLOCK_ANCIENT_PEDESTAL_PLACE, SoundCategory.BLOCKS, 1f, 1f);
                 if (!world.isClient) {

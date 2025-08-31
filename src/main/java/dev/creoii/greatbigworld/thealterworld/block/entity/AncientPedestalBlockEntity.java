@@ -3,38 +3,39 @@ package dev.creoii.greatbigworld.thealterworld.block.entity;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldBlockEntityTypes;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.Item;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
+import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.storage.ReadView;
 import net.minecraft.storage.WriteView;
 import net.minecraft.util.math.BlockPos;
 
 public class AncientPedestalBlockEntity extends BlockEntity {
-    private ItemStack stack;
+    private Item relic;
 
     public AncientPedestalBlockEntity(BlockPos pos, BlockState state) {
         super(TheAlterworldBlockEntityTypes.ANCIENT_PEDESTAL, pos, state);
-        stack = ItemStack.EMPTY;
+        relic = null;
     }
 
-    public ItemStack getStack() {
-        return stack;
+    public Item getRelic() {
+        return relic;
     }
 
-    public void setStack(ItemStack stack) {
-        this.stack = stack;
+    public void setRelic(Item relic) {
+        this.relic = relic;
+        markDirty();
     }
 
     public NbtCompound toInitialChunkDataNbt(RegistryWrapper.WrapperLookup registries) {
-        NbtCompound nbtCompound = super.toInitialChunkDataNbt(registries);
-        if (!stack.isEmpty()) {
-            nbtCompound.put("stack", ItemStack.CODEC, registries.getOps(NbtOps.INSTANCE), stack);
+        NbtCompound nbt = new NbtCompound();
+        if (relic != null) {
+            nbt.put("relic", Registries.ITEM.getCodec(), registries.getOps(NbtOps.INSTANCE), relic);
         }
-
-        return nbtCompound;
+        return nbt;
     }
 
     public BlockEntityUpdateS2CPacket toUpdatePacket() {
@@ -43,15 +44,13 @@ public class AncientPedestalBlockEntity extends BlockEntity {
 
     @Override
     protected void readData(ReadView view) {
-        super.readData(view);
-        stack = view.read("stack", ItemStack.CODEC).orElse(ItemStack.EMPTY);
+        relic = view.read("relic", Registries.ITEM.getCodec()).orElse(null);
     }
 
     @Override
     protected void writeData(WriteView view) {
-        super.writeData(view);
-        if (!stack.isEmpty()) {
-            view.put("stack", ItemStack.CODEC, stack);
+        if (relic != null) {
+            view.put("relic", Registries.ITEM.getCodec(), relic);
         }
     }
 }
