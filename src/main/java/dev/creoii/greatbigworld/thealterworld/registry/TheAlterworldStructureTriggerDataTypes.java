@@ -1,5 +1,6 @@
 package dev.creoii.greatbigworld.thealterworld.registry;
 
+import com.google.common.collect.Maps;
 import com.mojang.serialization.MapCodec;
 import dev.creoii.greatbigworld.GreatBigWorld;
 import dev.creoii.greatbigworld.registry.GBWRegistries;
@@ -7,11 +8,10 @@ import dev.creoii.greatbigworld.thealterworld.world.AncientPortalTriggerData;
 import dev.creoii.greatbigworld.world.structuretrigger.data.StructureTriggerDataType;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-
-import java.util.HashMap;
+import net.minecraft.util.math.BlockPos;
 
 public final class TheAlterworldStructureTriggerDataTypes {
-    public static final StructureTriggerDataType<AncientPortalTriggerData, AncientPortalTriggerData> ANCIENT_PORTAL = new StructureTriggerDataType<>() {
+    public static final StructureTriggerDataType<AncientPortalTriggerData> ANCIENT_PORTAL = new StructureTriggerDataType<>() {
         @Override
         public MapCodec<AncientPortalTriggerData> codec() {
             return AncientPortalTriggerData.CODEC;
@@ -19,7 +19,7 @@ public final class TheAlterworldStructureTriggerDataTypes {
 
         @Override
         public AncientPortalTriggerData create() {
-            return new AncientPortalTriggerData(null, new HashMap<>());
+            return new AncientPortalTriggerData(new BlockPos.Mutable(), Maps.newHashMap());
         }
     };
 

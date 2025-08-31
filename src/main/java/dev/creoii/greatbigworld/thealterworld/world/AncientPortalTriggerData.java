@@ -1,5 +1,6 @@
 package dev.creoii.greatbigworld.thealterworld.world;
 
+import com.google.common.collect.Maps;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -11,36 +12,17 @@ import net.minecraft.util.math.BlockPos;
 
 import java.util.Map;
 
-public class AncientPortalTriggerData extends StructureTriggerData {
+public record AncientPortalTriggerData(BlockPos.Mutable portalPos, Map<BlockPos, Boolean> positions) implements StructureTriggerData {
     public static final MapCodec<AncientPortalTriggerData> CODEC = RecordCodecBuilder.mapCodec(instance -> {
         return instance.group(Codecs.BLOCK_POS_STRING_CODEC.fieldOf("portal").forGetter(data -> {
-            return data.portalPos;
+            return data.portalPos.toImmutable();
         }), Codec.unboundedMap(Codecs.BLOCK_POS_STRING_CODEC, Codec.BOOL).fieldOf("positions").forGetter(data -> {
             return data.positions;
-        })).apply(instance, AncientPortalTriggerData::new);
+        })).apply(instance, (pos, map) -> new AncientPortalTriggerData(pos.mutableCopy(), Maps.newHashMap(map)));
     });
-    private BlockPos portalPos;
-    private final Map<BlockPos, Boolean> positions;
-
-    public AncientPortalTriggerData(BlockPos portalPos, Map<BlockPos, Boolean> positions) {
-        this.portalPos = portalPos;
-        this.positions = positions;
-    }
-
-    public BlockPos getPortalPos() {
-        return portalPos;
-    }
-
-    public void setPortalPos(BlockPos portalPos) {
-        this.portalPos = portalPos;
-    }
-
-    public Map<BlockPos, Boolean> getPositions() {
-        return positions;
-    }
 
     @Override
-    public StructureTriggerDataType<?, ?> getType() {
+    public StructureTriggerDataType<?> getType() {
         return TheAlterworldStructureTriggerDataTypes.ANCIENT_PORTAL;
     }
 }
