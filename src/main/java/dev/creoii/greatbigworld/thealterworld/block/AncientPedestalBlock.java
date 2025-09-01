@@ -1,25 +1,17 @@
 package dev.creoii.greatbigworld.thealterworld.block;
 
 import dev.creoii.greatbigworld.thealterworld.block.entity.AncientPedestalBlockEntity;
-import dev.creoii.greatbigworld.thealterworld.item.RelicItem;
-import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldSoundEvents;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCollisionHandler;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.particle.ShriekParticleEffect;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
@@ -58,23 +50,6 @@ public class AncientPedestalBlock extends Block implements BlockEntityProvider {
         if (state.get(LIT) && entity instanceof LivingEntity && !world.isClient) {
             entity.damage((ServerWorld) world, world.getDamageSources().inFire(), 2f);
         }
-    }
-
-    @Override
-    protected ActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (stack.getItem() instanceof RelicItem relicItem && !state.get(LIT)) {
-            BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof AncientPedestalBlockEntity ancientPedestalBlockEntity && ancientPedestalBlockEntity.getRelic() == null) {
-                ancientPedestalBlockEntity.setRelic(stack.getItem());
-                stack.decrementUnlessCreative(1, player);
-                world.playSound(player, pos.getX() + .5d, pos.getY() + .5d, pos.getZ() + .5d, TheAlterworldSoundEvents.BLOCK_ANCIENT_PEDESTAL_PLACE, SoundCategory.BLOCKS, 1f, 1f);
-                if (!world.isClient) {
-                    ((ServerWorld) world).spawnParticles(new ShriekParticleEffect(0), pos.getX() + .5d, pos.getY() + 12d, pos.getZ() + .5d, 1, 0d, 0d, 0d, 0d);
-                }
-                return ActionResult.SUCCESS;
-            }
-        }
-        return super.onUseWithItem(stack, state, world, pos, player, hand, hit);
     }
 
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {

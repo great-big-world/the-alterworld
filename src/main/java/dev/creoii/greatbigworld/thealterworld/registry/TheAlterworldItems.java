@@ -33,7 +33,7 @@ public class TheAlterworldItems {
             entries.addAfter(Items.REINFORCED_DEEPSLATE, ANCIENT_MOSAIC, FRACTURED_ANCIENT_MOSAIC, ANCIENT_BRICKS, ANCIENT_BRICK_STAIRS, ANCIENT_BRICK_SLAB, ANCIENT_BRICK_WALL, ANCIENT_TOTEM);
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(entries -> {
-            entries.add(ANCIENT_PEDESTAL);
+            entries.addAfter(Items.ENDER_EYE, ANCIENT_PEDESTAL);
         });
     }
 }
