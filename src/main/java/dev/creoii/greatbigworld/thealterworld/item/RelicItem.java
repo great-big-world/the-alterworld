@@ -9,8 +9,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
-import net.minecraft.particle.ShriekParticleEffect;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
@@ -33,10 +31,11 @@ public class RelicItem extends Item {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof AncientPedestalBlockEntity ancientPedestalBlockEntity && ancientPedestalBlockEntity.getRelic() == null) {
                 ancientPedestalBlockEntity.setRelic(stack.getItem());
+                world.updateComparators(pos, TheAlterworldBlocks.ANCIENT_PEDESTAL);
                 stack.decrementUnlessCreative(1, player);
-                world.playSound(player, pos.getX() + .5d, pos.getY() + .5d, pos.getZ() + .5d, TheAlterworldSoundEvents.BLOCK_ANCIENT_PEDESTAL_PLACE, SoundCategory.BLOCKS, 1f, 1f);
                 if (!world.isClient) {
-                    ((ServerWorld) world).spawnParticles(new ShriekParticleEffect(0), pos.getX() + .5d, pos.getY() + 12d, pos.getZ() + .5d, 1, 0d, 0d, 0d, 0d);
+                    world.playSound(player, pos.getX() + .5d, pos.getY() + .5d, pos.getZ() + .5d, TheAlterworldSoundEvents.BLOCK_ANCIENT_PEDESTAL_PLACE, SoundCategory.BLOCKS, 1f, 1f);
+                    world.syncWorldEvent(1503, pos, 0);
                 }
                 return ActionResult.SUCCESS;
             }

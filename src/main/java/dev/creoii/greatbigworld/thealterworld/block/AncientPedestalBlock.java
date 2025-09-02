@@ -1,18 +1,27 @@
 package dev.creoii.greatbigworld.thealterworld.block;
 
 import dev.creoii.greatbigworld.thealterworld.block.entity.AncientPedestalBlockEntity;
+import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldSoundEvents;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCollisionHandler;
+import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.pathing.NavigationType;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
@@ -59,15 +68,57 @@ public class AncientPedestalBlock extends Block implements BlockEntityProvider {
     }
 
     @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(LIT);
+    protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
+        ItemStack stack = player.getStackInHand(player.getActiveHand());
+        if (hit.getSide() == Direction.UP && world.getBlockEntity(pos) instanceof AncientPedestalBlockEntity pedestalBlockEntity) {
+            Vec3d vec3d = hit.getPos().subtract(pos.getX(), pos.getY(), pos.getZ());
+
+            if (vec3d.x >= .25d && vec3d.x <= .75d && vec3d.z >= .25d && vec3d.z <= .75d) {
+                if (pedestalBlockEntity.getRelic() == null)
+                    return ActionResult.PASS;
+
+                ItemStack relic = pedestalBlockEntity.getRelic().getDefaultStack();
+                if (stack.isOf(relic.getItem()) || stack.isEmpty()) {
+                    if (!world.isClient) {
+                        player.giveItemStack(relic);
+                        world.playSound(player, pos.getX() + .5d, pos.getY() + .5d, pos.getZ() + .5d, TheAlterworldSoundEvents.BLOCK_ANCIENT_PEDESTAL_PLACE, SoundCategory.BLOCKS, .8f, .5f);
+                    }
+                    pedestalBlockEntity.setRelic(null);
+                    return ActionResult.SUCCESS;
+                }
+            }
+        }
+        return ActionResult.PASS;
+    }
+
+    @Override
+    public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+        if (world.getBlockEntity(pos) instanceof AncientPedestalBlockEntity ancientPedestalBlock && ancientPedestalBlock.getRelic() != null) {
+            ItemEntity itemEntity = new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), ancientPedestalBlock.getRelic().getDefaultStack());
+            itemEntity.setToDefaultPickupDelay();
+            world.spawnEntity(itemEntity);
+        }
+        return super.onBreak(world, pos, state, player);
     }
 
     protected boolean hasComparatorOutput(BlockState state) {
-        return state.get(LIT);
+        return true;
+    }
+
+    @Override
+    protected boolean canPathfindThrough(BlockState state, NavigationType type) {
+        return false;
     }
 
     protected int getComparatorOutput(BlockState state, World world, BlockPos pos) {
-        return state.get(LIT) ? 15 : 0;
+        if (world.getBlockEntity(pos) instanceof AncientPedestalBlockEntity pedestalBlockEntity) {
+            return pedestalBlockEntity.getRelic() == null ? 0 : 15;
+        }
+        return 0;
+    }
+
+    @Override
+    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+        builder.add(LIT);
     }
 }
