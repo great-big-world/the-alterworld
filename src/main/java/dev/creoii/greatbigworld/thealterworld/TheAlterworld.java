@@ -32,6 +32,7 @@ public class TheAlterworld implements ModInitializer {
     @Override
     public void onInitialize() {
         TheAlterworldBlocks.register();
+        TheAlterworldDataComponentTypes.register();
         TheAlterworldItems.register();
         TheAlterworldBlockEntityTypes.register();
         TheAlterworldStatusEffects.register();

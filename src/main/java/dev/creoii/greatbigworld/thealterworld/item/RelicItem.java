@@ -12,12 +12,24 @@ import net.minecraft.item.ItemUsageContext;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class RelicItem extends Item {
     public RelicItem(Settings settings) {
         super(settings);
+    }
+
+    @Override
+    public ActionResult use(World world, PlayerEntity user, Hand hand) {
+        ItemStack stack = user.getStackInHand(hand);
+        if (!world.isClient) {
+            if (!stack.willBreakNextUse()) {
+                stack.damage(1, user, hand);
+            }
+        }
+        return ActionResult.SUCCESS;
     }
 
     @Override
