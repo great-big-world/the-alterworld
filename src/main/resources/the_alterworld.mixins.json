@@ -6,8 +6,12 @@
   "mixins": [
     "ClearAllEffectsConsumeEffectMixin",
     "block.AbstractFireBlockMixin",
+    "block.CalibratedSculkSensorBlockMixin",
     "block.EndPortalBlockMixin",
     "block.NetherPortalBlockMixin",
+    "block.SculkBlockMixin",
+    "block.SculkSensorBlockMixin",
+    "block.SculkShriekerBlockMixin",
     "entity.EntityMixin",
     "entity.LivingEntityMixin",
     "entity.SkeletonEntityMixin",
