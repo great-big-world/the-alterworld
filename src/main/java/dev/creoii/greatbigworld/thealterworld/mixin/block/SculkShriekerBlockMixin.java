@@ -59,6 +59,11 @@ public abstract class SculkShriekerBlockMixin extends BlockWithEntity {
         cir.setReturnValue(getShape(state.get(FACING)));
     }
 
+    @Inject(method = "getCullingShape", at = @At("HEAD"), cancellable = true)
+    private void gbw$fixCullingShapeForFacing(BlockState state, CallbackInfoReturnable<VoxelShape> cir) {
+        cir.setReturnValue(getShape(state.get(FACING)));
+    }
+
     @Override
     public BlockState rotate(BlockState state, BlockRotation rotation) {
         return state.with(FACING, rotation.rotate(state.get(FACING)));
