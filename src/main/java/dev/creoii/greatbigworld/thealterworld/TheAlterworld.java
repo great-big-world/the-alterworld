@@ -27,7 +27,6 @@ public class TheAlterworld implements ModInitializer {
         TheAlterworldDataComponentTypes.register();
         TheAlterworldItems.register();
         TheAlterworldBlockEntityTypes.register();
-        TheAlterworldFeatures.register();
         TheAlterworldStatusEffects.register();
         TheAlterworldSoundEvents.register();
         TheAlterworldStructureTriggerDataTypes.register();
