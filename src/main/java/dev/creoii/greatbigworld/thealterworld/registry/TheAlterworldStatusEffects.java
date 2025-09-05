@@ -8,7 +8,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
 
-public class TheAlterworldStatusEffects {
+public final class TheAlterworldStatusEffects {
     public static RegistryEntry<StatusEffect> PLANAR_FRACTURE;
 
     public static void register() {

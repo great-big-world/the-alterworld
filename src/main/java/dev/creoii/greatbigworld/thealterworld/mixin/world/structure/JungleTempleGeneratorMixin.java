@@ -1,7 +1,5 @@
 package dev.creoii.greatbigworld.thealterworld.mixin.world.structure;
 
-import dev.creoii.greatbigworld.thealterworld.TheAlterworld;
-import dev.creoii.greatbigworld.thealterworld.block.AncientTotemBlock;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -55,11 +53,9 @@ public abstract class JungleTempleGeneratorMixin extends ShiftableStructurePiece
             addBlock(world, frameState, 7, -3, 14, chunkBox);
 
             if (leftTotem) {
-                AncientTotemBlock.place(this, TheAlterworld.RelicStructureType.JUNGLE_TEMPLE, world, 4, -2, 14, chunkBox);
                 addBlock(world, frameState, 7, -2, 14, chunkBox);
             } else {
                 addBlock(world, frameState, 4, -2, 14, chunkBox);
-                AncientTotemBlock.place(this, TheAlterworld.RelicStructureType.JUNGLE_TEMPLE, world, 7, -2, 14, chunkBox);
             }
 
             addBlock(world, frameState, 7, -1, 14, chunkBox);

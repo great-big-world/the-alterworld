@@ -68,9 +68,7 @@ public class AlterworldPortalBlock extends Block implements Portal {
     public int getPortalDelay(ServerWorld world, Entity entity) {
         if (entity instanceof PlayerEntity playerEntity) {
             return Math.max(0, world.getGameRules().getInt(playerEntity.getAbilities().invulnerable ? GameRules.PLAYERS_NETHER_PORTAL_CREATIVE_DELAY : GameRules.PLAYERS_NETHER_PORTAL_DEFAULT_DELAY));
-        } else {
-            return 0;
-        }
+        } else return 0;
     }
 
     @Override

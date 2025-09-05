@@ -1,8 +1,6 @@
 package dev.creoii.greatbigworld.thealterworld.mixin.world.structure;
 
 import com.llamalad7.mixinextras.sugar.Local;
-import dev.creoii.greatbigworld.thealterworld.TheAlterworld;
-import dev.creoii.greatbigworld.thealterworld.block.AncientTotemBlock;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -62,11 +60,9 @@ public abstract class DesertTempleGeneratorMixin extends ShiftableStructurePiece
             addBlock(world, frameState, x, 1, l - 3, chunkBox);
 
             if (leftTotem) {
-                AncientTotemBlock.place(this, TheAlterworld.RelicStructureType.JUNGLE_TEMPLE, world, x, 2, l, chunkBox);
                 addBlock(world, frameState, x, 2, l - 3, chunkBox);
             } else {
                 addBlock(world, frameState, x, 2, l, chunkBox);
-                AncientTotemBlock.place(this, TheAlterworld.RelicStructureType.JUNGLE_TEMPLE, world, x, 2, l - 3, chunkBox);
             }
 
             addBlock(world, frameState, x, 3, l, chunkBox);

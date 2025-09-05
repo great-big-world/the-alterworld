@@ -9,7 +9,7 @@ import net.minecraft.item.ItemGroups;
 import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
 
-public class TheAlterworldItems {
+public final class TheAlterworldItems {
     public static Item ANCIENT_MOSAIC;
     public static Item FRACTURED_ANCIENT_MOSAIC;
     public static Item ANCIENT_BRICKS;
@@ -17,7 +17,6 @@ public class TheAlterworldItems {
     public static Item ANCIENT_BRICK_SLAB;
     public static Item ANCIENT_BRICK_WALL;
     public static Item ANCIENT_PEDESTAL;
-    public static Item ANCIENT_TOTEM;
 
     public static void register() {
         ANCIENT_MOSAIC = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "ancient_mosaic"), TheAlterworldBlocks.ANCIENT_MOSAIC);
@@ -27,10 +26,9 @@ public class TheAlterworldItems {
         ANCIENT_BRICK_SLAB = RegistryHelper.registerItem(Identifier.of(GreatBigWorld.NAMESPACE, "ancient_brick_slab"), settings -> new SlabItem(TheAlterworldBlocks.ANCIENT_BRICK_SLAB, TheAlterworldBlocks.VERTICAL_ANCIENT_BRICK_SLAB, settings.useBlockPrefixedTranslationKey()));
         ANCIENT_BRICK_WALL = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "ancient_brick_wall"), TheAlterworldBlocks.ANCIENT_BRICK_WALL);
         ANCIENT_PEDESTAL = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "ancient_pedestal"), TheAlterworldBlocks.ANCIENT_PEDESTAL);
-        ANCIENT_TOTEM = RegistryHelper.registerBlockItem(Identifier.of(GreatBigWorld.NAMESPACE, "ancient_totem"), TheAlterworldBlocks.ANCIENT_TOTEM);
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register(entries -> {
-            entries.addAfter(Items.REINFORCED_DEEPSLATE, ANCIENT_MOSAIC, FRACTURED_ANCIENT_MOSAIC, ANCIENT_BRICKS, ANCIENT_BRICK_STAIRS, ANCIENT_BRICK_SLAB, ANCIENT_BRICK_WALL, ANCIENT_TOTEM);
+            entries.addAfter(Items.REINFORCED_DEEPSLATE, ANCIENT_MOSAIC, FRACTURED_ANCIENT_MOSAIC, ANCIENT_BRICKS, ANCIENT_BRICK_STAIRS, ANCIENT_BRICK_SLAB, ANCIENT_BRICK_WALL);
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(entries -> {
             entries.addAfter(Items.ENDER_EYE, ANCIENT_PEDESTAL);

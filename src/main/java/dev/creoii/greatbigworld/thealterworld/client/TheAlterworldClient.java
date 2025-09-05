@@ -1,7 +1,6 @@
 package dev.creoii.greatbigworld.thealterworld.client;
 
 import dev.creoii.greatbigworld.thealterworld.client.render.AncientPedestalBlockEntityRenderer;
-import dev.creoii.greatbigworld.thealterworld.client.render.AncientTotemBlockEntityRenderer;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldBlockEntityTypes;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldBlocks;
 import net.fabricmc.api.ClientModInitializer;
@@ -17,6 +16,5 @@ public class TheAlterworldClient implements ClientModInitializer {
         BlockRenderLayerMap.putBlock(TheAlterworldBlocks.ANCIENT_PEDESTAL, BlockRenderLayer.CUTOUT);
 
         BlockEntityRendererFactories.register(TheAlterworldBlockEntityTypes.ANCIENT_PEDESTAL, ctx -> new AncientPedestalBlockEntityRenderer());
-        BlockEntityRendererFactories.register(TheAlterworldBlockEntityTypes.ANCIENT_TOTEM, AncientTotemBlockEntityRenderer::new);
     }
 }

@@ -8,7 +8,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.SculkPatchFeatureConfig;
 
-public class TheAlterworldFeatures {
+public final class TheAlterworldFeatures {
     public static final Feature<SculkPatchFeatureConfig> SCULK_PATCH = new SculkPatchFeature(SculkPatchFeatureConfig.CODEC);
 
     public static void register() {
