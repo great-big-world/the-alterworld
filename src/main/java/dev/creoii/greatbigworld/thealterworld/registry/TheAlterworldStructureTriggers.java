@@ -27,14 +27,15 @@ public final class TheAlterworldStructureTriggers {
     public static StructureTrigger ANCIENT_PORTAL_ACTIVATION;
 
     public static void register() {
+        final int[] ancientPedestalOffsets = new int[]{-4, -10, 4, 10};
         ANCIENT_PORTAL_ACTIVATION = Registry.register(GBWRegistries.STRUCTURE_TRIGGERS, ANCIENT_PORTAL_ACTIVATION_TRIGGER, new StructureTrigger(ANCIENT_PORTAL_ACTIVATION_TRIGGER, TheAlterworldStructureTriggerDataTypes.ANCIENT_PORTAL, (world, pos, state, structureStart, group) -> {
             if (group != null && group.data() instanceof AncientPortalTriggerData(BlockPos.Mutable portalPos, Map<BlockPos, Boolean> positions)) {
-                if (portalPos.equals(BlockPos.ORIGIN)) { // portal pos should never equal 0,0,0 since an Ancient Portal always generates at y=-162
+                if (portalPos.equals(BlockPos.ORIGIN)) { // portal pos should never equal 0,0,0 since an Ancient Portal always generates at y=-162 in the mod
                     Pair<BlockPos, Direction.Axis> pair = getPortalPosAndAxis(world, pos);
                     portalPos.set(pair.getLeft());
                     Direction.Axis searchAxis = pair.getRight();
 
-                    for (int i : new int[]{-4, -10, 4, 10}) {
+                    for (int i : ancientPedestalOffsets) {
                         positions.put(pos.offset(searchAxis, i).down(4), false);
                     }
                 }
@@ -46,7 +47,7 @@ public final class TheAlterworldStructureTriggers {
                     }
                 });
 
-                if (positions.values().stream().filter(aBoolean -> aBoolean).count() >= 4) {
+                if (positions.values().stream().filter(Boolean::booleanValue).count() >= 4) {
                     Optional<AlterworldPortal> optional = AlterworldPortal.getNewPortal(world, portalPos, Direction.Axis.X);
                     optional.ifPresent(portal -> {
                         world.playSound(null, portalPos, TheAlterworldSoundEvents.STRUCTURE_ANCIENT_CITY_PORTAL_OPEN, SoundCategory.AMBIENT, 2f, .75f);
