@@ -66,11 +66,11 @@ public final class TheAlterworldStructureTriggers {
 
                         portal.createPortal(world);
                     });
-                    return false;
+                    return true;
                 }
-                return true;
+                return false;
             }
-            return false;
+            return true;
         }));
     }
 
