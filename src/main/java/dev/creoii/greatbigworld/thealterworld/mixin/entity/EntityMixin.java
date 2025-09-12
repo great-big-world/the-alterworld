@@ -1,7 +1,7 @@
 package dev.creoii.greatbigworld.thealterworld.mixin.entity;
 
 import dev.creoii.greatbigworld.thealterworld.block.AlterworldPortalBlock;
-import dev.creoii.greatbigworld.thealterworld.block.AncientMosaicBlock;
+import dev.creoii.greatbigworld.thealterworld.block.ReinforcedDeepslateBlock;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldBlocks;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldStatusEffects;
 import dev.creoii.greatbigworld.thealterworld.world.PlanarFractureManager;
@@ -46,17 +46,17 @@ public abstract class EntityMixin {
                     if (state.get(Properties.HORIZONTAL_AXIS) == Direction.Axis.X) {
                         BlockPos.iterate(blockPos.getX() - 2, blockPos.getY() - 1, blockPos.getZ(), blockPos.getX() + 2, blockPos.getY() + 3, blockPos.getZ()).forEach(pos -> {
                             BlockState state1 = world.getBlockState(pos);
-                            if (state1.getBlock() instanceof AncientMosaicBlock ancientMosaicBlock) {
-                                if (!ancientMosaicBlock.isFractured())
-                                    world.setBlockState(pos, TheAlterworldBlocks.FRACTURED_ANCIENT_MOSAIC.getDefaultState(), 18);
+                            if (state1.getBlock() instanceof ReinforcedDeepslateBlock reinforcedDeepslateBlock) {
+                                if (!ReinforcedDeepslateBlock.isFractured(state1))
+                                    world.setBlockState(pos, TheAlterworldBlocks.REINFORCED_DEEPSLATE.getDefaultState().with(ReinforcedDeepslateBlock.FRACTURE, 8), 18);
                             }
                         });
                     } else {
                         BlockPos.iterate(blockPos.getX(), blockPos.getY() - 1, blockPos.getZ() - 2, blockPos.getX(), blockPos.getY() + 3, blockPos.getZ() + 2).forEach(pos -> {
                             BlockState state1 = world.getBlockState(pos);
-                            if (state1.getBlock() instanceof AncientMosaicBlock ancientMosaicBlock) {
-                                if (!ancientMosaicBlock.isFractured())
-                                    world.setBlockState(pos, TheAlterworldBlocks.FRACTURED_ANCIENT_MOSAIC.getDefaultState(), 18);
+                            if (state1.getBlock() instanceof ReinforcedDeepslateBlock reinforcedDeepslateBlock) {
+                                if (!ReinforcedDeepslateBlock.isFractured(state1))
+                                    world.setBlockState(pos, TheAlterworldBlocks.REINFORCED_DEEPSLATE.getDefaultState().with(ReinforcedDeepslateBlock.FRACTURE, 8), 18);
                             }
                         });
                     }

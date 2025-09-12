@@ -17,14 +17,21 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class RelicItem extends Item {
-    public RelicItem(Settings settings) {
+    private final int cooldown;
+
+    public RelicItem(Settings settings, int cooldown) {
         super(settings);
+        this.cooldown = cooldown;
+    }
+
+    public void activate(World world, PlayerEntity player, ItemStack stack) {
+        player.getItemCooldownManager().set(stack, cooldown);
     }
 
     @Override
     public ActionResult use(World world, PlayerEntity user, Hand hand) {
-        ItemStack stack = user.getStackInHand(hand);
         if (!world.isClient) {
+            ItemStack stack = user.getStackInHand(hand);
             if (!stack.willBreakNextUse()) {
                 stack.damage(1, user, hand);
             }

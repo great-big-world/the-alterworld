@@ -1,8 +1,0 @@
-{
-  "parent": "block/cube_bottom_top",
-  "textures": {
-    "side": "great_big_world:block/ancient_bricks",
-    "bottom": "great_big_world:block/ancient_bricks_bottom",
-    "top": "great_big_world:block/ancient_bricks_top"
-  }
-}

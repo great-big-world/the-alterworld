@@ -8,7 +8,6 @@ import dev.creoii.greatbigworld.thealterworld.world.AlterworldPortal;
 import dev.creoii.greatbigworld.world.structuretrigger.StructureTrigger;
 import dev.creoii.greatbigworld.thealterworld.world.AncientPortalTriggerData;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.registry.Registry;
 import net.minecraft.server.world.ServerWorld;
@@ -77,6 +76,6 @@ public final class TheAlterworldStructureTriggers {
     private static Pair<BlockPos, Direction.Axis> getPortalPosAndAxis(ServerWorld world, BlockPos source) {
         BlockPos x = source.offset(Direction.Axis.X, 15);
         BlockPos z = source.offset(Direction.Axis.Z, 15);
-        return world.getBlockState(x.down()).isOf(Blocks.REINFORCED_DEEPSLATE) ? new Pair<>(x, Direction.Axis.Z) : new Pair<>(z, Direction.Axis.X);
+        return world.getBlockState(x.down()).isOf(TheAlterworldBlocks.REINFORCED_DEEPSLATE) ? new Pair<>(x, Direction.Axis.Z) : new Pair<>(z, Direction.Axis.X);
     }
 }

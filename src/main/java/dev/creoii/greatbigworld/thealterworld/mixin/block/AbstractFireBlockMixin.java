@@ -3,7 +3,7 @@ package dev.creoii.greatbigworld.thealterworld.mixin.block;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import dev.creoii.greatbigworld.GreatBigWorld;
-import dev.creoii.greatbigworld.thealterworld.block.AncientMosaicBlock;
+import dev.creoii.greatbigworld.thealterworld.block.ReinforcedDeepslateBlock;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldBlocks;
 import dev.creoii.greatbigworld.thealterworld.world.FracturedAlterworldPortal;
 import net.minecraft.block.AbstractFireBlock;
@@ -37,12 +37,12 @@ public class AbstractFireBlockMixin {
                 boolean fractured = false;
                 if (!anyTrue) {
                     BlockState down = world.getBlockState(pos.down());
-                    fractured = down.getBlock() instanceof AncientMosaicBlock ancientMosaicBlock && !ancientMosaicBlock.isFractured();
+                    fractured = down.getBlock() instanceof ReinforcedDeepslateBlock && ReinforcedDeepslateBlock.isFractured(down);
                 } else {
                     for (Map.Entry<Direction, BooleanProperty> entry : FireBlock.DIRECTION_PROPERTIES.entrySet()) {
                         if (state.get(entry.getValue())) {
                             BlockState offset = world.getBlockState(pos.offset(entry.getKey()));
-                            fractured = offset.getBlock() instanceof AncientMosaicBlock ancientMosaicBlock && !ancientMosaicBlock.isFractured();
+                            fractured = offset.getBlock() instanceof ReinforcedDeepslateBlock && ReinforcedDeepslateBlock.isFractured(offset);
                         }
 
                         if (fractured)
@@ -71,6 +71,6 @@ public class AbstractFireBlockMixin {
     @ModifyExpressionValue(method = "shouldLightPortalAt", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/BlockState;isOf(Lnet/minecraft/block/Block;)Z"))
     private static boolean gbw$lightableAlterworldPortals(boolean original, @Local(argsOnly = true) World world, @Local(argsOnly = true) BlockPos pos, @Local BlockPos.Mutable mutable, @Local(ordinal = 1) Direction direction2) {
         BlockState state = world.getBlockState(mutable.set(pos).move(direction2));
-        return original || state.isOf(TheAlterworldBlocks.ANCIENT_MOSAIC) || state.isOf(Blocks.REINFORCED_DEEPSLATE);
+        return original || state.isOf(TheAlterworldBlocks.REINFORCED_DEEPSLATE);
     }
 }

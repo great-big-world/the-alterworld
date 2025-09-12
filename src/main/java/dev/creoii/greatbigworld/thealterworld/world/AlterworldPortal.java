@@ -17,7 +17,7 @@ import java.util.Optional;
 import java.util.function.Predicate;
 
 public class AlterworldPortal {
-    private static final AbstractBlock.ContextPredicate IS_VALID_FRAME_BLOCK = (state, world, pos) -> state.isOf(Blocks.REINFORCED_DEEPSLATE);
+    private static final AbstractBlock.ContextPredicate IS_VALID_FRAME_BLOCK = (state, world, pos) -> state.isOf(TheAlterworldBlocks.REINFORCED_DEEPSLATE);
     private final Direction.Axis axis;
     private final Direction negativeDir;
     private final int foundPortalBlocks;

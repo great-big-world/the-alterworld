@@ -4,6 +4,7 @@ import dev.creoii.greatbigworld.thealterworld.block.AlterworldPortalBlock;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldBlocks;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.*;
@@ -16,7 +17,7 @@ import java.util.Optional;
 import java.util.function.Predicate;
 
 public class FracturedAlterworldPortal {
-    private static final AbstractBlock.ContextPredicate IS_VALID_FRAME_BLOCK = (state, world, pos) -> state.isOf(TheAlterworldBlocks.ANCIENT_MOSAIC);
+    private static final AbstractBlock.ContextPredicate IS_VALID_FRAME_BLOCK = (state, world, pos) -> state.isOf(TheAlterworldBlocks.REINFORCED_DEEPSLATE);
     private final Direction.Axis axis;
     private final Direction negativeDir;
     private final int foundPortalBlocks;
@@ -103,7 +104,7 @@ public class FracturedAlterworldPortal {
 
     private static int getHeight(BlockView world, BlockPos lowerCorner, Direction negativeDir, int width, MutableInt foundPortalBlocks) {
         BlockPos.Mutable mutable = new BlockPos.Mutable();
-        boolean fractured = world.getBlockState(lowerCorner).isOf(TheAlterworldBlocks.ANCIENT_MOSAIC);
+        boolean fractured = world.getBlockState(lowerCorner).isOf(TheAlterworldBlocks.REINFORCED_DEEPSLATE);
         int i = getPotentialHeight(world, lowerCorner, negativeDir, mutable, width, foundPortalBlocks, fractured);
         return i >= 3 && i <= 4 && isHorizontalFrameValid(world, lowerCorner, negativeDir, mutable, width, i) ? i : 0;
     }
