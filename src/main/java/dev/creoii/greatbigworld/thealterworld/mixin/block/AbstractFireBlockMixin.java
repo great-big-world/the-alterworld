@@ -34,23 +34,23 @@ public class AbstractFireBlockMixin {
                 BlockState newState = world.getBlockState(pos);
 
                 boolean anyTrue = FireBlock.DIRECTION_PROPERTIES.entrySet().stream().anyMatch(directionBooleanPropertyEntry -> state.get(directionBooleanPropertyEntry.getValue()));
-                boolean fractured = false;
+                boolean canFracture = false;
                 if (!anyTrue) {
                     BlockState down = world.getBlockState(pos.down());
-                    fractured = down.getBlock() instanceof ReinforcedDeepslateBlock && ReinforcedDeepslateBlock.isFractured(down);
+                    canFracture = down.get(ReinforcedDeepslateBlock.CAN_FRACTURE, false);
                 } else {
                     for (Map.Entry<Direction, BooleanProperty> entry : FireBlock.DIRECTION_PROPERTIES.entrySet()) {
                         if (state.get(entry.getValue())) {
                             BlockState offset = world.getBlockState(pos.offset(entry.getKey()));
-                            fractured = offset.getBlock() instanceof ReinforcedDeepslateBlock && ReinforcedDeepslateBlock.isFractured(offset);
+                            canFracture = offset.get(ReinforcedDeepslateBlock.CAN_FRACTURE, false);
                         }
 
-                        if (fractured)
+                        if (canFracture)
                             break;
                     }
                 }
 
-                if (fractured) {
+                if (canFracture) {
                     Optional<FracturedAlterworldPortal> optional2 = FracturedAlterworldPortal.getNewPortal(world, pos, Direction.Axis.X);
                     optional2.ifPresent(portal -> {
                         if (newState.getBlock() instanceof FireBlock) {
