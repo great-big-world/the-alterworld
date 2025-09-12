@@ -69,6 +69,9 @@ public class AncientPedestalBlock extends Block implements BlockEntityProvider {
 
     @Override
     protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
+        if (state.get(LIT, false))
+            return ActionResult.PASS;
+
         ItemStack stack = player.getStackInHand(player.getActiveHand());
         if (hit.getSide() == Direction.UP && world.getBlockEntity(pos) instanceof AncientPedestalBlockEntity pedestalBlockEntity) {
             Vec3d vec3d = hit.getPos().subtract(pos.getX(), pos.getY(), pos.getZ());
