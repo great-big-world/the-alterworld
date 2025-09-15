@@ -45,11 +45,45 @@ public abstract class DesertTempleGeneratorMixin extends ShiftableStructurePiece
         nbt.putBoolean("hasPlacedPortal", hasPlacedPortal);
     }
 
-    @Inject(method = "generate", at = @At(value = "INVOKE", target = "Lnet/minecraft/structure/DesertTempleGenerator;addBlock(Lnet/minecraft/world/StructureWorldAccess;Lnet/minecraft/block/BlockState;IIILnet/minecraft/util/math/BlockBox;)V", ordinal = 34, shift = At.Shift.AFTER))
-    private void gbw$placeDesertTemplePortal(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox chunkBox, ChunkPos chunkPos, BlockPos pivot, CallbackInfo ci, @Local int l) {
-        if (!hasPlacedPortal && random.nextInt(3) == 0 && l > 7) {
+    @Inject(method = "generate", at = @At(value = "INVOKE", target = "Lnet/minecraft/structure/DesertTempleGenerator;addBlock(Lnet/minecraft/world/StructureWorldAccess;Lnet/minecraft/block/BlockState;IIILnet/minecraft/util/math/BlockBox;)V", ordinal = 32, shift = At.Shift.AFTER))
+    private void gbw$placeDesertTemplePortal1(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox chunkBox, ChunkPos chunkPos, BlockPos pivot, CallbackInfo ci, @Local int l) {
+        if (!hasPlacedPortal && random.nextInt(4) == 0 && l > 7 && l < 17) {
             BlockState frameState = world.getRegistryManager().getOptional(RegistryKeys.DIMENSION_TYPE).get().getEntry(world.getDimension()).matchesKey(DimensionTypes.OVERWORLD) ? TheAlterworldBlocks.REINFORCED_DEEPSLATE.getDefaultState().with(ReinforcedDeepslateBlock.CAN_FRACTURE, true) : Blocks.CHISELED_SANDSTONE.getDefaultState();
-            int x = random.nextBoolean() ? 4 : width - 5;
+            int x = 4;
+
+            addBlock(world, frameState, x, 0, l, chunkBox);
+            addBlock(world, frameState, x, 0, l - 1, chunkBox);
+            addBlock(world, frameState, x, 0, l - 2, chunkBox);
+            addBlock(world, frameState, x, 0, l - 3, chunkBox);
+            addBlock(world, frameState, x, 1, l, chunkBox);
+            addBlock(world, frameState, x, 1, l - 3, chunkBox);
+
+            addBlock(world, frameState, x, 2, l - 3, chunkBox);
+            addBlock(world, frameState, x, 2, l, chunkBox);
+
+            addBlock(world, frameState, x, 3, l, chunkBox);
+            addBlock(world, frameState, x, 3, l - 3, chunkBox);
+            addBlock(world, frameState, x, 4, l, chunkBox);
+            addBlock(world, frameState, x, 4, l - 1, chunkBox);
+            addBlock(world, frameState, x, 4, l - 2, chunkBox);
+            addBlock(world, frameState, x, 4, l - 3, chunkBox);
+
+            addBlock(world, Blocks.AIR.getDefaultState(), x, 1, l - 1, chunkBox);
+            addBlock(world, Blocks.AIR.getDefaultState(), x, 1, l - 2, chunkBox);
+            addBlock(world, Blocks.AIR.getDefaultState(), x, 2, l - 1, chunkBox);
+            addBlock(world, Blocks.AIR.getDefaultState(), x, 2, l - 2, chunkBox);
+            addBlock(world, Blocks.AIR.getDefaultState(), x, 3, l - 1, chunkBox);
+            addBlock(world, Blocks.AIR.getDefaultState(), x, 3, l - 2, chunkBox);
+
+            hasPlacedPortal = true;
+        }
+    }
+
+    @Inject(method = "generate", at = @At(value = "INVOKE", target = "Lnet/minecraft/structure/DesertTempleGenerator;addBlock(Lnet/minecraft/world/StructureWorldAccess;Lnet/minecraft/block/BlockState;IIILnet/minecraft/util/math/BlockBox;)V", ordinal = 34, shift = At.Shift.AFTER))
+    private void gbw$placeDesertTemplePortal2(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox chunkBox, ChunkPos chunkPos, BlockPos pivot, CallbackInfo ci, @Local int l) {
+        if (!hasPlacedPortal && random.nextBoolean() && l > 7 && l < 17) {
+            BlockState frameState = world.getRegistryManager().getOptional(RegistryKeys.DIMENSION_TYPE).get().getEntry(world.getDimension()).matchesKey(DimensionTypes.OVERWORLD) ? TheAlterworldBlocks.REINFORCED_DEEPSLATE.getDefaultState().with(ReinforcedDeepslateBlock.CAN_FRACTURE, true) : Blocks.CHISELED_SANDSTONE.getDefaultState();
+            int x = width - 5;
 
             addBlock(world, frameState, x, 0, l, chunkBox);
             addBlock(world, frameState, x, 0, l - 1, chunkBox);
