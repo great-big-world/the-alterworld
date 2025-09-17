@@ -5,7 +5,6 @@ import dev.creoii.greatbigworld.thealterworld.block.ReinforcedDeepslateBlock;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldBlocks;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldStatusEffects;
 import dev.creoii.greatbigworld.thealterworld.world.PlanarFractureManager;
-import dev.creoii.greatbigworld.world.dimension.PreviousDimensionManager;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
@@ -81,14 +80,6 @@ public abstract class EntityMixin {
             if (((Entity) (Object) this) instanceof LivingEntity living && living.hasStatusEffect(TheAlterworldStatusEffects.PLANAR_FRACTURE)) {
                 ci.cancel();
             }
-        }
-    }
-
-    @Inject(method = "remove", at = @At("HEAD"))
-    private void gbw$cleanPreviousDimensions(Entity.RemovalReason reason, CallbackInfo ci) {
-        if (reason.shouldDestroy() && world.getServer() != null && !isPlayer()) {
-            PreviousDimensionManager manager = PreviousDimensionManager.getServerState(world.getServer());
-            manager.remove(getUuid());
         }
     }
 }
