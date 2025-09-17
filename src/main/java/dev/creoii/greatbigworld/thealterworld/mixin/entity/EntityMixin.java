@@ -5,6 +5,7 @@ import dev.creoii.greatbigworld.thealterworld.block.ReinforcedDeepslateBlock;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldBlocks;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldStatusEffects;
 import dev.creoii.greatbigworld.thealterworld.world.PlanarFractureManager;
+import dev.creoii.greatbigworld.world.dimension.PreviousDimensionManager;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
@@ -24,6 +25,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.UUID;
+
 @Mixin(Entity.class)
 public abstract class EntityMixin {
     @Shadow public abstract Random getRandom();
@@ -31,6 +34,8 @@ public abstract class EntityMixin {
     @Shadow private World world;
     @Shadow private BlockPos blockPos;
     @Shadow private Vec3d pos;
+    @Shadow public abstract UUID getUuid();
+    @Shadow public abstract boolean isPlayer();
 
     @Inject(method = "tickPortalTeleportation", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;teleportTo(Lnet/minecraft/world/TeleportTarget;)Lnet/minecraft/entity/Entity;"), cancellable = true)
     private void gbw$applyFracturedRealmEffect(CallbackInfo ci) {
@@ -76,6 +81,14 @@ public abstract class EntityMixin {
             if (((Entity) (Object) this) instanceof LivingEntity living && living.hasStatusEffect(TheAlterworldStatusEffects.PLANAR_FRACTURE)) {
                 ci.cancel();
             }
+        }
+    }
+
+    @Inject(method = "remove", at = @At("HEAD"))
+    private void gbw$cleanPreviousDimensions(Entity.RemovalReason reason, CallbackInfo ci) {
+        if (reason.shouldDestroy() && world.getServer() != null && !isPlayer()) {
+            PreviousDimensionManager manager = PreviousDimensionManager.getServerState(world.getServer());
+            manager.remove(getUuid());
         }
     }
 }
