@@ -2,7 +2,6 @@ package dev.creoii.greatbigworld.thealterworld.mixin.entity;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import dev.creoii.greatbigworld.GreatBigWorld;
-import dev.creoii.greatbigworld.thealterworld.TheAlterworld;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldStatusEffects;
 import dev.creoii.greatbigworld.thealterworld.world.PlanarFractureManager;
 import net.minecraft.entity.Entity;
@@ -34,11 +33,11 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Inject(method = "onStatusEffectsRemoved", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/effect/StatusEffect;onRemoved(Lnet/minecraft/entity/attribute/AttributeContainer;)V"))
     private void gbw$removeFracturedRealmEffect(Collection<StatusEffectInstance> effects, CallbackInfo ci, @Local StatusEffectInstance statusEffectInstance) {
-        if (statusEffectInstance.equals(TheAlterworldStatusEffects.PLANAR_FRACTURE) && getWorld().getRegistryKey() == GreatBigWorld.ALTERWORLD_KEY) {
-            TeleportTarget target = createTeleportTarget((ServerWorld) getWorld(), this, getBlockPos());
+        if (statusEffectInstance.equals(TheAlterworldStatusEffects.PLANAR_FRACTURE) && getEntityWorld().getRegistryKey() == GreatBigWorld.ALTERWORLD_KEY) {
+            TeleportTarget target = createTeleportTarget((ServerWorld) getEntityWorld(), this, getBlockPos());
             if (target != null) {
                 ServerWorld serverWorld2 = target.world();
-                if (getWorld().getServer().isWorldAllowed(serverWorld2) && (serverWorld2.getRegistryKey() == getWorld().getRegistryKey() || canTeleportBetween(getWorld(), serverWorld2))) {
+                if (getEntityWorld().getServer().isEnterableWithPortal(serverWorld2) && (serverWorld2.getRegistryKey() == getEntityWorld().getRegistryKey() || canTeleportBetween(getEntityWorld(), serverWorld2))) {
                     teleportTo(target);
 
                     PlanarFractureManager manager = PlanarFractureManager.getServerState(serverWorld2.getServer());
@@ -54,7 +53,7 @@ public abstract class LivingEntityMixin extends Entity {
         if (serverWorld == null) {
             return null;
         } else {
-            BlockPos blockPos = serverWorld.getSpawnPos();
+            BlockPos blockPos = serverWorld.getSpawnPoint().getPos();
             Set<PositionFlag> set = PositionFlag.combine(PositionFlag.DELTA, PositionFlag.ROT);
             if (entity instanceof LivingEntity living) {
                 PlanarFractureManager manager = PlanarFractureManager.getServerState(serverWorld.getServer());

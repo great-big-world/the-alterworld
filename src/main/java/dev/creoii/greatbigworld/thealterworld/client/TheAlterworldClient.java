@@ -14,6 +14,6 @@ public class TheAlterworldClient implements ClientModInitializer {
         BlockRenderLayerMap.putBlock(TheAlterworldBlocks.ALTERWORLD_PORTAL, BlockRenderLayer.TRANSLUCENT);
         BlockRenderLayerMap.putBlock(TheAlterworldBlocks.ANCIENT_PEDESTAL, BlockRenderLayer.CUTOUT);
 
-        BlockEntityRendererFactories.register(TheAlterworldBlockEntityTypes.ANCIENT_PEDESTAL, ctx -> new AncientPedestalBlockEntityRenderer());
+        BlockEntityRendererFactories.register(TheAlterworldBlockEntityTypes.ANCIENT_PEDESTAL, ctx -> new AncientPedestalBlockEntityRenderer(ctx.itemModelManager()));
     }
 }

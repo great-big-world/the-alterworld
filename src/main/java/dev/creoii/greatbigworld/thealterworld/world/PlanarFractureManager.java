@@ -24,9 +24,9 @@ public class PlanarFractureManager extends PersistentState {
 
     @Nullable
     public Vec3d getReturnPos(LivingEntity living) {
-        if (living.getWorld().isClient)
+        if (living.getEntityWorld().isClient())
             return null;
-        PlanarFractureManager manager = getServerState(living.getWorld().getServer());
+        PlanarFractureManager manager = getServerState(living.getEntityWorld().getServer());
         return manager.entities.computeIfAbsent(living.getUuid(), uuid -> null);
     }
 

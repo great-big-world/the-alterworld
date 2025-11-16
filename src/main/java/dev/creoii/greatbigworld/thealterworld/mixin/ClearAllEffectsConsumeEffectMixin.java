@@ -20,7 +20,7 @@ import java.util.Map;
 public class ClearAllEffectsConsumeEffectMixin {
     @Inject(method = "onConsume", at = @At("HEAD"), cancellable = true)
     private void gbw$dontClearPlanarFractureEffectMilk(World world, ItemStack stack, LivingEntity user, CallbackInfoReturnable<Boolean> cir) {
-        if (world.isClient) {
+        if (world.isClient()) {
             cir.setReturnValue(false);
         } else if (user.getActiveStatusEffects().isEmpty()) {
             cir.setReturnValue(false);

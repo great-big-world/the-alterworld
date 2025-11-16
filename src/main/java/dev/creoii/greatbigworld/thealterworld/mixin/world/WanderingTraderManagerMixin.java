@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(WanderingTraderManager.class)
 public class WanderingTraderManagerMixin {
     @Inject(method = "spawn", at = @At("HEAD"), cancellable = true)
-    private void gbw$removeWanderingTraderFromOverworld(ServerWorld world, boolean spawnMonsters, boolean spawnAnimals, CallbackInfo ci) {
+    private void gbw$removeWanderingTraderFromOverworld(ServerWorld world, boolean spawnMonsters, CallbackInfo ci) {
         if (world.getRegistryKey() == ServerWorld.OVERWORLD)
             ci.cancel();
     }

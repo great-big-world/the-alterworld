@@ -16,6 +16,6 @@ public abstract class ZombieEntityMixin extends HostileEntity {
 
     @ModifyExpressionValue(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/ZombieEntity;isAlive()Z"))
     private boolean gbw$disableSkeletonCovertInOverworld(boolean original) {
-        return original && getWorld().getRegistryKey() != World.OVERWORLD;
+        return original && getEntityWorld().getRegistryKey() != World.OVERWORLD;
     }
 }

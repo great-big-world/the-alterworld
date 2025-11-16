@@ -30,7 +30,7 @@ public class RelicItem extends Item {
 
     @Override
     public ActionResult use(World world, PlayerEntity user, Hand hand) {
-        if (!world.isClient) {
+        if (!world.isClient()) {
             ItemStack stack = user.getStackInHand(hand);
             if (!stack.willBreakNextUse()) {
                 stack.damage(1, user, hand);
@@ -52,7 +52,7 @@ public class RelicItem extends Item {
                 ancientPedestalBlockEntity.setRelic(stack.getItem());
                 world.updateComparators(pos, TheAlterworldBlocks.ANCIENT_PEDESTAL);
                 stack.decrementUnlessCreative(1, player);
-                if (!world.isClient) {
+                if (!world.isClient()) {
                     world.playSound(player, pos.getX() + .5d, pos.getY() + .5d, pos.getZ() + .5d, TheAlterworldSoundEvents.BLOCK_ANCIENT_PEDESTAL_PLACE, SoundCategory.BLOCKS, 1f, 1f);
                     world.syncWorldEvent(1503, pos, 0);
                 }
