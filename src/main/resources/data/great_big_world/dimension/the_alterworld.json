@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:overworld",
+  "type": "great_big_world:the_alterworld",
   "generator": {
     "biome_source": {
       "biomes": [
