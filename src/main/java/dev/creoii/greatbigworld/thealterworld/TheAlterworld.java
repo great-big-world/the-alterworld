@@ -6,13 +6,17 @@ import dev.creoii.greatbigworld.registry.GBWRegistries;
 import dev.creoii.greatbigworld.thealterworld.registry.*;
 import dev.creoii.greatbigworld.thealterworld.util.ExtendedChunkGeneratorSettings;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.biome.v1.BiomeSelectionContext;
+import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
+import net.minecraft.world.dimension.DimensionOptions;
 import net.minecraft.world.gen.chunk.ChunkGeneratorSettings;
 
 import java.util.Optional;
+import java.util.function.Predicate;
 
 public class TheAlterworld implements ModInitializer {
     @Override
@@ -42,5 +46,13 @@ public class TheAlterworld implements ModInitializer {
                 });
             }
         });
+    }
+
+    public static Predicate<BiomeSelectionContext> foundInAlterworld() {
+        return context -> context.canGenerateIn(GreatBigWorld.ALTERWORLD_OPTIONS);
+    }
+
+    public static Predicate<BiomeSelectionContext> foundInOverworldLike() {
+        return context -> context.canGenerateIn(GreatBigWorld.ALTERWORLD_OPTIONS) || context.canGenerateIn(DimensionOptions.OVERWORLD);
     }
 }
