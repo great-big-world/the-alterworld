@@ -16,26 +16,11 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-public class AlterworldPortal {
+public record AlterworldPortal(Direction.Axis axis, int foundPortalBlocks, Direction negativeDir, BlockPos lowerCorner, int width, int height) {
     private static final AbstractBlock.ContextPredicate IS_VALID_FRAME_BLOCK = (state, world, pos) -> state.isOf(TheAlterworldBlocks.REINFORCED_DEEPSLATE);
-    private final Direction.Axis axis;
-    private final Direction negativeDir;
-    private final int foundPortalBlocks;
-    private final BlockPos lowerCorner;
-    private final int height;
-    private final int width;
-
-    private AlterworldPortal(Direction.Axis axis, int foundPortalBlocks, Direction negativeDir, BlockPos lowerCorner, int width, int height) {
-        this.axis = axis;
-        this.foundPortalBlocks = foundPortalBlocks;
-        this.negativeDir = negativeDir;
-        this.lowerCorner = lowerCorner;
-        this.width = width;
-        this.height = height;
-    }
 
     public static Optional<AlterworldPortal> getNewPortal(WorldAccess world, BlockPos pos, Direction.Axis firstCheckedAxis) {
-        return getOrEmpty(world, pos, (areaHelper) -> areaHelper.isValid() && areaHelper.foundPortalBlocks == 0, firstCheckedAxis);
+        return getOrEmpty(world, pos, areaHelper -> areaHelper.isValid() && areaHelper.foundPortalBlocks == 0, firstCheckedAxis);
     }
 
     public static Optional<AlterworldPortal> getOrEmpty(WorldAccess world, BlockPos pos, Predicate<AlterworldPortal> validator, Direction.Axis firstCheckedAxis) {
@@ -67,7 +52,7 @@ public class AlterworldPortal {
 
     @Nullable
     private static BlockPos getLowerCorner(BlockView world, Direction direction, BlockPos pow) {
-        for(int i = Math.max(world.getBottomY(), pow.getY() - 21); pow.getY() > i && validStateInsidePortal(world.getBlockState(pow.down())); pow = pow.down()) {
+        for (int i = Math.max(world.getBottomY(), pow.getY() - 21); pow.getY() > i && validStateInsidePortal(world.getBlockState(pow.down())); pow = pow.down()) {
         }
 
         Direction direction2 = direction.getOpposite();
@@ -83,7 +68,7 @@ public class AlterworldPortal {
     private static int getWidth(BlockView world, BlockPos lowerCorner, Direction negativeDir) {
         BlockPos.Mutable mutable = new BlockPos.Mutable();
 
-        for(int i = 0; i <= 21; ++i) {
+        for (int i = 0; i <= 21; ++i) {
             mutable.set(lowerCorner).move(negativeDir, i);
             BlockState blockState = world.getBlockState(mutable);
             if (!validStateInsidePortal(blockState)) {
@@ -109,7 +94,7 @@ public class AlterworldPortal {
     }
 
     private static boolean isHorizontalFrameValid(BlockView world, BlockPos lowerCorner, Direction direction, BlockPos.Mutable pos, int width, int height) {
-        for(int i = 0; i < width; ++i) {
+        for (int i = 0; i < width; ++i) {
             BlockPos.Mutable mutable = pos.set(lowerCorner).move(Direction.UP, height).move(direction, i);
             if (!IS_VALID_FRAME_BLOCK.test(world.getBlockState(mutable), world, mutable)) {
                 return false;
@@ -120,7 +105,7 @@ public class AlterworldPortal {
     }
 
     private static int getPotentialHeight(BlockView world, BlockPos lowerCorner, Direction negativeDir, BlockPos.Mutable pos, int width, MutableInt foundPortalBlocks) {
-        for(int i = 0; i < 21; ++i) {
+        for (int i = 0; i < 21; ++i) {
             pos.set(lowerCorner).move(Direction.UP, i).move(negativeDir, -1);
             if (!IS_VALID_FRAME_BLOCK.test(world.getBlockState(pos), world, pos)) {
                 return i;
@@ -131,7 +116,7 @@ public class AlterworldPortal {
                 return i;
             }
 
-            for(int j = 0; j < width; ++j) {
+            for (int j = 0; j < width; ++j) {
                 pos.set(lowerCorner).move(Direction.UP, i).move(negativeDir, j);
                 BlockState blockState = world.getBlockState(pos);
                 if (!validStateInsidePortal(blockState)) {
