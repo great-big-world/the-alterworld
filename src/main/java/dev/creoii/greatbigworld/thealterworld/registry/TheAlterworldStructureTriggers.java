@@ -1,7 +1,7 @@
 package dev.creoii.greatbigworld.thealterworld.registry;
 
 import dev.creoii.greatbigworld.GreatBigWorld;
-import dev.creoii.greatbigworld.client.ScreenShake;
+import dev.creoii.greatbigworld.client.ScreenShakeManager;
 import dev.creoii.greatbigworld.registry.GBWRegistries;
 import dev.creoii.greatbigworld.thealterworld.block.AncientPedestalBlock;
 import dev.creoii.greatbigworld.thealterworld.block.entity.AncientPedestalBlockEntity;
@@ -23,7 +23,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
 import java.util.Map;
 import java.util.Optional;
 
@@ -79,7 +78,7 @@ public final class TheAlterworldStructureTriggers {
                             }
                         });
 
-                        PlayerLookup.tracking(world, portalPos).forEach(serverPlayerEntity -> ServerPlayNetworking.send(serverPlayerEntity, new ScreenShakeS2C(2.5f, 320, ScreenShake.Easing.IN_OUT)));
+                        PlayerLookup.tracking(world, portalPos).forEach(serverPlayerEntity -> ServerPlayNetworking.send(serverPlayerEntity, new ScreenShakeS2C(2.5f, 320, ScreenShakeManager.Easing.IN_OUT)));
 
                         portal.createPortal(world);
                     });
