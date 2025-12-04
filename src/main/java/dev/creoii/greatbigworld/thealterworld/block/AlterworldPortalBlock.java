@@ -41,14 +41,17 @@ public class AlterworldPortalBlock extends Block implements Portal {
         setDefaultState(stateManager.getDefaultState().with(Properties.HORIZONTAL_AXIS, Direction.Axis.X).with(FRACTURED, false));
     }
 
+    @Override
     protected VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return SHAPES_BY_AXIS.get(state.get(Properties.HORIZONTAL_AXIS));
     }
 
+    @Override
     protected VoxelShape getInsideCollisionShape(BlockState state, BlockView world, BlockPos pos, Entity entity) {
         return state.getOutlineShape(world, pos);
     }
 
+    @Override
     protected BlockState getStateForNeighborUpdate(BlockState state, WorldView world, ScheduledTickView tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, Random random) {
         Direction.Axis axis = direction.getAxis();
         Direction.Axis axis2 = state.get(Properties.HORIZONTAL_AXIS);
@@ -56,7 +59,8 @@ public class AlterworldPortalBlock extends Block implements Portal {
         return !bl && !neighborState.isOf(this) && !AlterworldPortal.getOnAxis(world, pos, axis2).wasAlreadyValid() ? Blocks.AIR.getDefaultState() : super.getStateForNeighborUpdate(state, world, tickView, pos, direction, neighborPos, neighborState, random);
     }
 
-    protected void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity, EntityCollisionHandler handler) {
+    @Override
+    protected void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity, EntityCollisionHandler handler, boolean bl) {
         if (entity.canUsePortals(false)) {
             if (entity instanceof LivingEntity living && living.hasStatusEffect(TheAlterworldStatusEffects.PLANAR_FRACTURE) && state.get(FRACTURED))
                 entity.dismountVehicle();
