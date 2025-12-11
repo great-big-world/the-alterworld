@@ -6,9 +6,9 @@ import dev.creoii.greatbigworld.GreatBigWorld;
 import dev.creoii.greatbigworld.registry.GBWRegistries;
 import dev.creoii.greatbigworld.thealterworld.world.AncientPortalTriggerData;
 import dev.creoii.greatbigworld.world.structuretrigger.data.StructureTriggerDataType;
-import net.minecraft.registry.Registry;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.Identifier;
 
 public final class TheAlterworldStructureTriggerDataTypes {
     public static final StructureTriggerDataType<AncientPortalTriggerData> ANCIENT_PORTAL = new StructureTriggerDataType<>() {
@@ -19,11 +19,11 @@ public final class TheAlterworldStructureTriggerDataTypes {
 
         @Override
         public AncientPortalTriggerData create() {
-            return new AncientPortalTriggerData(new BlockPos.Mutable(), Maps.newHashMap());
+            return new AncientPortalTriggerData(new BlockPos.MutableBlockPos(), Maps.newHashMap());
         }
     };
 
     public static void register() {
-        Registry.register(GBWRegistries.STRUCTURE_TRIGGER_DATA_TYPES, Identifier.of(GreatBigWorld.NAMESPACE, "ancient_portal"), ANCIENT_PORTAL);
+        Registry.register(GBWRegistries.STRUCTURE_TRIGGER_DATA_TYPES, Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "ancient_portal"), ANCIENT_PORTAL);
     }
 }

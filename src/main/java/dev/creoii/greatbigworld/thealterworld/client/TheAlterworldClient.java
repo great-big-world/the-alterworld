@@ -5,15 +5,15 @@ import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldBlockEntityT
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldBlocks;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockRenderLayerMap;
-import net.minecraft.client.render.BlockRenderLayer;
-import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
+import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
 
 public class TheAlterworldClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
-        BlockRenderLayerMap.putBlock(TheAlterworldBlocks.ALTERWORLD_PORTAL, BlockRenderLayer.TRANSLUCENT);
-        BlockRenderLayerMap.putBlock(TheAlterworldBlocks.ANCIENT_PEDESTAL, BlockRenderLayer.CUTOUT);
+        BlockRenderLayerMap.putBlock(TheAlterworldBlocks.ALTERWORLD_PORTAL, ChunkSectionLayer.TRANSLUCENT);
+        BlockRenderLayerMap.putBlock(TheAlterworldBlocks.ANCIENT_PEDESTAL, ChunkSectionLayer.CUTOUT);
 
-        BlockEntityRendererFactories.register(TheAlterworldBlockEntityTypes.ANCIENT_PEDESTAL, ctx -> new AncientPedestalBlockEntityRenderer(ctx.itemModelManager()));
+        BlockEntityRenderers.register(TheAlterworldBlockEntityTypes.ANCIENT_PEDESTAL, ctx -> new AncientPedestalBlockEntityRenderer(ctx.itemModelResolver()));
     }
 }

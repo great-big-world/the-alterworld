@@ -3,31 +3,31 @@ package dev.creoii.greatbigworld.thealterworld.mixin.world.structure;
 import com.llamalad7.mixinextras.sugar.Local;
 import dev.creoii.greatbigworld.thealterworld.block.ReinforcedDeepslateBlock;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldBlocks;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.structure.DesertTempleGenerator;
-import net.minecraft.structure.ShiftableStructurePiece;
-import net.minecraft.structure.StructureContext;
-import net.minecraft.structure.StructurePieceType;
-import net.minecraft.util.math.BlockBox;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.StructureWorldAccess;
-import net.minecraft.world.dimension.DimensionTypes;
-import net.minecraft.world.gen.StructureAccessor;
-import net.minecraft.world.gen.chunk.ChunkGenerator;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.StructureManager;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
+import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import net.minecraft.world.level.levelgen.structure.ScatteredFeaturePiece;
+import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceSerializationContext;
+import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceType;
+import net.minecraft.world.level.levelgen.structure.structures.DesertPyramidPiece;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(DesertTempleGenerator.class)
-public abstract class DesertTempleGeneratorMixin extends ShiftableStructurePiece {
+@Mixin(DesertPyramidPiece.class)
+public abstract class DesertTempleGeneratorMixin extends ScatteredFeaturePiece {
     @Unique
     private boolean hasPlacedPortal = false;
 
@@ -35,79 +35,79 @@ public abstract class DesertTempleGeneratorMixin extends ShiftableStructurePiece
         super(type, x, y, z, width, height, depth, orientation);
     }
 
-    @Inject(method = "<init>(Lnet/minecraft/nbt/NbtCompound;)V", at = @At("TAIL"))
-    private void gbw$getBoolean(NbtCompound nbt, CallbackInfo ci) {
-        hasPlacedPortal = nbt.getBoolean("hasPlacedPortal", false);
+    @Inject(method = "<init>(Lnet/minecraft/nbt/CompoundTag;)V", at = @At("TAIL"))
+    private void gbw$getBoolean(CompoundTag nbt, CallbackInfo ci) {
+        hasPlacedPortal = nbt.getBooleanOr("hasPlacedPortal", false);
     }
 
-    @Inject(method = "writeNbt", at = @At("TAIL"))
-    private void gbw$putBoolean(StructureContext context, NbtCompound nbt, CallbackInfo ci) {
+    @Inject(method = "addAdditionalSaveData", at = @At("TAIL"))
+    private void gbw$putBoolean(StructurePieceSerializationContext context, CompoundTag nbt, CallbackInfo ci) {
         nbt.putBoolean("hasPlacedPortal", hasPlacedPortal);
     }
 
-    @Inject(method = "generate", at = @At(value = "INVOKE", target = "Lnet/minecraft/structure/DesertTempleGenerator;addBlock(Lnet/minecraft/world/StructureWorldAccess;Lnet/minecraft/block/BlockState;IIILnet/minecraft/util/math/BlockBox;)V", ordinal = 32, shift = At.Shift.AFTER))
-    private void gbw$placeDesertTemplePortal1(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox chunkBox, ChunkPos chunkPos, BlockPos pivot, CallbackInfo ci, @Local int l) {
+    @Inject(method = "postProcess", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/levelgen/structure/structures/DesertPyramidPiece;placeBlock(Lnet/minecraft/world/level/WorldGenLevel;Lnet/minecraft/world/level/block/state/BlockState;IIILnet/minecraft/world/level/levelgen/structure/BoundingBox;)V", ordinal = 32, shift = At.Shift.AFTER))
+    private void gbw$placeDesertTemplePortal1(WorldGenLevel world, StructureManager structureAccessor, ChunkGenerator chunkGenerator, RandomSource random, BoundingBox chunkBox, ChunkPos chunkPos, BlockPos pivot, CallbackInfo ci, @Local int l) {
         if (!hasPlacedPortal && random.nextInt(4) == 0 && l > 7 && l < 17) {
-            BlockState frameState = world.getRegistryManager().getOptional(RegistryKeys.DIMENSION_TYPE).get().getEntry(world.getDimension()).matchesKey(DimensionTypes.OVERWORLD) ? TheAlterworldBlocks.REINFORCED_DEEPSLATE.getDefaultState().with(ReinforcedDeepslateBlock.CAN_FRACTURE, true) : Blocks.CHISELED_SANDSTONE.getDefaultState();
+            BlockState frameState = world.registryAccess().lookup(Registries.DIMENSION_TYPE).get().wrapAsHolder(world.dimensionType()).is(BuiltinDimensionTypes.OVERWORLD) ? TheAlterworldBlocks.REINFORCED_DEEPSLATE.defaultBlockState().setValue(ReinforcedDeepslateBlock.CAN_FRACTURE, true) : Blocks.CHISELED_SANDSTONE.defaultBlockState();
             int x = 4;
 
-            addBlock(world, frameState, x, 0, l, chunkBox);
-            addBlock(world, frameState, x, 0, l - 1, chunkBox);
-            addBlock(world, frameState, x, 0, l - 2, chunkBox);
-            addBlock(world, frameState, x, 0, l - 3, chunkBox);
-            addBlock(world, frameState, x, 1, l, chunkBox);
-            addBlock(world, frameState, x, 1, l - 3, chunkBox);
+            placeBlock(world, frameState, x, 0, l, chunkBox);
+            placeBlock(world, frameState, x, 0, l - 1, chunkBox);
+            placeBlock(world, frameState, x, 0, l - 2, chunkBox);
+            placeBlock(world, frameState, x, 0, l - 3, chunkBox);
+            placeBlock(world, frameState, x, 1, l, chunkBox);
+            placeBlock(world, frameState, x, 1, l - 3, chunkBox);
 
-            addBlock(world, frameState, x, 2, l - 3, chunkBox);
-            addBlock(world, frameState, x, 2, l, chunkBox);
+            placeBlock(world, frameState, x, 2, l - 3, chunkBox);
+            placeBlock(world, frameState, x, 2, l, chunkBox);
 
-            addBlock(world, frameState, x, 3, l, chunkBox);
-            addBlock(world, frameState, x, 3, l - 3, chunkBox);
-            addBlock(world, frameState, x, 4, l, chunkBox);
-            addBlock(world, frameState, x, 4, l - 1, chunkBox);
-            addBlock(world, frameState, x, 4, l - 2, chunkBox);
-            addBlock(world, frameState, x, 4, l - 3, chunkBox);
+            placeBlock(world, frameState, x, 3, l, chunkBox);
+            placeBlock(world, frameState, x, 3, l - 3, chunkBox);
+            placeBlock(world, frameState, x, 4, l, chunkBox);
+            placeBlock(world, frameState, x, 4, l - 1, chunkBox);
+            placeBlock(world, frameState, x, 4, l - 2, chunkBox);
+            placeBlock(world, frameState, x, 4, l - 3, chunkBox);
 
-            addBlock(world, Blocks.AIR.getDefaultState(), x, 1, l - 1, chunkBox);
-            addBlock(world, Blocks.AIR.getDefaultState(), x, 1, l - 2, chunkBox);
-            addBlock(world, Blocks.AIR.getDefaultState(), x, 2, l - 1, chunkBox);
-            addBlock(world, Blocks.AIR.getDefaultState(), x, 2, l - 2, chunkBox);
-            addBlock(world, Blocks.AIR.getDefaultState(), x, 3, l - 1, chunkBox);
-            addBlock(world, Blocks.AIR.getDefaultState(), x, 3, l - 2, chunkBox);
+            placeBlock(world, Blocks.AIR.defaultBlockState(), x, 1, l - 1, chunkBox);
+            placeBlock(world, Blocks.AIR.defaultBlockState(), x, 1, l - 2, chunkBox);
+            placeBlock(world, Blocks.AIR.defaultBlockState(), x, 2, l - 1, chunkBox);
+            placeBlock(world, Blocks.AIR.defaultBlockState(), x, 2, l - 2, chunkBox);
+            placeBlock(world, Blocks.AIR.defaultBlockState(), x, 3, l - 1, chunkBox);
+            placeBlock(world, Blocks.AIR.defaultBlockState(), x, 3, l - 2, chunkBox);
 
             hasPlacedPortal = true;
         }
     }
 
-    @Inject(method = "generate", at = @At(value = "INVOKE", target = "Lnet/minecraft/structure/DesertTempleGenerator;addBlock(Lnet/minecraft/world/StructureWorldAccess;Lnet/minecraft/block/BlockState;IIILnet/minecraft/util/math/BlockBox;)V", ordinal = 34, shift = At.Shift.AFTER))
-    private void gbw$placeDesertTemplePortal2(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox chunkBox, ChunkPos chunkPos, BlockPos pivot, CallbackInfo ci, @Local int l) {
+    @Inject(method = "postProcess", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/levelgen/structure/structures/DesertPyramidPiece;placeBlock(Lnet/minecraft/world/level/WorldGenLevel;Lnet/minecraft/world/level/block/state/BlockState;IIILnet/minecraft/world/level/levelgen/structure/BoundingBox;)V", ordinal = 34, shift = At.Shift.AFTER))
+    private void gbw$placeDesertTemplePortal2(WorldGenLevel world, StructureManager structureAccessor, ChunkGenerator chunkGenerator, RandomSource random, BoundingBox chunkBox, ChunkPos chunkPos, BlockPos pivot, CallbackInfo ci, @Local int l) {
         if (!hasPlacedPortal && random.nextBoolean() && l > 7 && l < 17) {
-            BlockState frameState = world.getRegistryManager().getOptional(RegistryKeys.DIMENSION_TYPE).get().getEntry(world.getDimension()).matchesKey(DimensionTypes.OVERWORLD) ? TheAlterworldBlocks.REINFORCED_DEEPSLATE.getDefaultState().with(ReinforcedDeepslateBlock.CAN_FRACTURE, true) : Blocks.CHISELED_SANDSTONE.getDefaultState();
+            BlockState frameState = world.registryAccess().lookup(Registries.DIMENSION_TYPE).get().wrapAsHolder(world.dimensionType()).is(BuiltinDimensionTypes.OVERWORLD) ? TheAlterworldBlocks.REINFORCED_DEEPSLATE.defaultBlockState().setValue(ReinforcedDeepslateBlock.CAN_FRACTURE, true) : Blocks.CHISELED_SANDSTONE.defaultBlockState();
             int x = width - 5;
 
-            addBlock(world, frameState, x, 0, l, chunkBox);
-            addBlock(world, frameState, x, 0, l - 1, chunkBox);
-            addBlock(world, frameState, x, 0, l - 2, chunkBox);
-            addBlock(world, frameState, x, 0, l - 3, chunkBox);
-            addBlock(world, frameState, x, 1, l, chunkBox);
-            addBlock(world, frameState, x, 1, l - 3, chunkBox);
+            placeBlock(world, frameState, x, 0, l, chunkBox);
+            placeBlock(world, frameState, x, 0, l - 1, chunkBox);
+            placeBlock(world, frameState, x, 0, l - 2, chunkBox);
+            placeBlock(world, frameState, x, 0, l - 3, chunkBox);
+            placeBlock(world, frameState, x, 1, l, chunkBox);
+            placeBlock(world, frameState, x, 1, l - 3, chunkBox);
 
-            addBlock(world, frameState, x, 2, l - 3, chunkBox);
-            addBlock(world, frameState, x, 2, l, chunkBox);
+            placeBlock(world, frameState, x, 2, l - 3, chunkBox);
+            placeBlock(world, frameState, x, 2, l, chunkBox);
 
-            addBlock(world, frameState, x, 3, l, chunkBox);
-            addBlock(world, frameState, x, 3, l - 3, chunkBox);
-            addBlock(world, frameState, x, 4, l, chunkBox);
-            addBlock(world, frameState, x, 4, l - 1, chunkBox);
-            addBlock(world, frameState, x, 4, l - 2, chunkBox);
-            addBlock(world, frameState, x, 4, l - 3, chunkBox);
+            placeBlock(world, frameState, x, 3, l, chunkBox);
+            placeBlock(world, frameState, x, 3, l - 3, chunkBox);
+            placeBlock(world, frameState, x, 4, l, chunkBox);
+            placeBlock(world, frameState, x, 4, l - 1, chunkBox);
+            placeBlock(world, frameState, x, 4, l - 2, chunkBox);
+            placeBlock(world, frameState, x, 4, l - 3, chunkBox);
 
-            addBlock(world, Blocks.AIR.getDefaultState(), x, 1, l - 1, chunkBox);
-            addBlock(world, Blocks.AIR.getDefaultState(), x, 1, l - 2, chunkBox);
-            addBlock(world, Blocks.AIR.getDefaultState(), x, 2, l - 1, chunkBox);
-            addBlock(world, Blocks.AIR.getDefaultState(), x, 2, l - 2, chunkBox);
-            addBlock(world, Blocks.AIR.getDefaultState(), x, 3, l - 1, chunkBox);
-            addBlock(world, Blocks.AIR.getDefaultState(), x, 3, l - 2, chunkBox);
+            placeBlock(world, Blocks.AIR.defaultBlockState(), x, 1, l - 1, chunkBox);
+            placeBlock(world, Blocks.AIR.defaultBlockState(), x, 1, l - 2, chunkBox);
+            placeBlock(world, Blocks.AIR.defaultBlockState(), x, 2, l - 1, chunkBox);
+            placeBlock(world, Blocks.AIR.defaultBlockState(), x, 2, l - 2, chunkBox);
+            placeBlock(world, Blocks.AIR.defaultBlockState(), x, 3, l - 1, chunkBox);
+            placeBlock(world, Blocks.AIR.defaultBlockState(), x, 3, l - 2, chunkBox);
 
             hasPlacedPortal = true;
         }

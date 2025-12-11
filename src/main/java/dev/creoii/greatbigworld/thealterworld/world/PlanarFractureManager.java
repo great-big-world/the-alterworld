@@ -1,46 +1,46 @@
 package dev.creoii.greatbigworld.thealterworld.world;
 
 import com.mojang.serialization.Codec;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.core.UUIDUtil;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.Uuids;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.PersistentState;
-import net.minecraft.world.PersistentStateType;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.saveddata.SavedData;
+import net.minecraft.world.level.saveddata.SavedDataType;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.UUID;
 
-public class PlanarFractureManager extends PersistentState {
-    public static final Codec<PlanarFractureManager> CODEC = Codec.unboundedMap(Uuids.CODEC, Vec3d.CODEC).xmap(uuidVec3dMap -> {
+public class PlanarFractureManager extends SavedData {
+    public static final Codec<PlanarFractureManager> CODEC = Codec.unboundedMap(UUIDUtil.AUTHLIB_CODEC, Vec3.CODEC).xmap(uuidVec3dMap -> {
         PlanarFractureManager manager = new PlanarFractureManager();
         manager.entities = new HashMap<>(uuidVec3dMap);
         return manager;
     }, planarFractureManager -> planarFractureManager.entities);
-    private static final PersistentStateType<PlanarFractureManager> STATE_TYPE = new PersistentStateType<>("gbw_planar_fractures", PlanarFractureManager::new, CODEC, null);
-    public HashMap<UUID, Vec3d> entities = new HashMap<>();
+    private static final SavedDataType<PlanarFractureManager> STATE_TYPE = new SavedDataType<>("gbw_planar_fractures", PlanarFractureManager::new, CODEC, null);
+    public HashMap<UUID, Vec3> entities = new HashMap<>();
 
     @Nullable
-    public Vec3d getReturnPos(LivingEntity living) {
-        if (living.getEntityWorld().isClient())
+    public Vec3 getReturnPos(LivingEntity living) {
+        if (living.level().isClientSide())
             return null;
-        PlanarFractureManager manager = getServerState(living.getEntityWorld().getServer());
-        return manager.entities.computeIfAbsent(living.getUuid(), uuid -> null);
+        PlanarFractureManager manager = getServerState(living.level().getServer());
+        return manager.entities.computeIfAbsent(living.getUUID(), uuid -> null);
     }
 
-    public void setReturnPos(LivingEntity living, Vec3d pos) {
-        entities.put(living.getUuid(), pos);
+    public void setReturnPos(LivingEntity living, Vec3 pos) {
+        entities.put(living.getUUID(), pos);
     }
 
     public void clearReturnPos(LivingEntity living) {
-        entities.remove(living.getUuid());
+        entities.remove(living.getUUID());
     }
 
     public static PlanarFractureManager getServerState(MinecraftServer server) {
-        PlanarFractureManager manager = server.getWorld(World.OVERWORLD).getPersistentStateManager().getOrCreate(STATE_TYPE);
-        manager.markDirty();
+        PlanarFractureManager manager = server.getLevel(Level.OVERWORLD).getDataStorage().computeIfAbsent(STATE_TYPE);
+        manager.setDirty();
         return manager;
     }
 }

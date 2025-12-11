@@ -1,7 +1,7 @@
 accessWidener v2 named
-accessible method net/minecraft/entity/LivingEntity onStatusEffectsRemoved (Ljava/util/Collection;)V
-accessible method net/minecraft/entity/passive/PigEntity setVariant (Lnet/minecraft/registry/entry/RegistryEntry;)V
-accessible method net/minecraft/entity/passive/WolfEntity setVariant (Lnet/minecraft/registry/entry/RegistryEntry;)V
-accessible class net/minecraft/structure/JungleTempleGenerator$CobblestoneRandomizer
+accessible method net/minecraft/world/entity/LivingEntity onEffectsRemoved (Ljava/util/Collection;)V
+accessible method net/minecraft/world/entity/animal/pig/Pig setVariant (Lnet/minecraft/core/Holder;)V
+accessible method net/minecraft/world/entity/animal/wolf/Wolf setVariant (Lnet/minecraft/core/Holder;)V
+accessible class net/minecraft/world/level/levelgen/structure/structures/JungleTemplePiece$MossStoneSelector
 accessible method net/minecraft/structure/StructurePiece addBlock (Lnet/minecraft/world/StructureWorldAccess;Lnet/minecraft/block/BlockState;IIILnet/minecraft/util/math/BlockBox;)V
 accessible method net/minecraft/structure/StructurePiece offsetPos (III)Lnet/minecraft/util/math/BlockPos$Mutable;

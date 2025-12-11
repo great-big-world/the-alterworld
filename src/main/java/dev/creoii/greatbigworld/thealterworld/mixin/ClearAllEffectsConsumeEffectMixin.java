@@ -2,35 +2,35 @@ package dev.creoii.greatbigworld.thealterworld.mixin;
 
 import com.google.common.collect.Maps;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldStatusEffects;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.consume.ClearAllEffectsConsumeEffect;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Map;
+import net.minecraft.core.Holder;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.consume_effects.ClearAllStatusEffectsConsumeEffect;
+import net.minecraft.world.level.Level;
 
-@Mixin(ClearAllEffectsConsumeEffect.class)
+@Mixin(ClearAllStatusEffectsConsumeEffect.class)
 public class ClearAllEffectsConsumeEffectMixin {
-    @Inject(method = "onConsume", at = @At("HEAD"), cancellable = true)
-    private void gbw$dontClearPlanarFractureEffectMilk(World world, ItemStack stack, LivingEntity user, CallbackInfoReturnable<Boolean> cir) {
-        if (world.isClient()) {
+    @Inject(method = "apply", at = @At("HEAD"), cancellable = true)
+    private void gbw$dontClearPlanarFractureEffectMilk(Level world, ItemStack stack, LivingEntity user, CallbackInfoReturnable<Boolean> cir) {
+        if (world.isClientSide()) {
             cir.setReturnValue(false);
-        } else if (user.getActiveStatusEffects().isEmpty()) {
+        } else if (user.getActiveEffectsMap().isEmpty()) {
             cir.setReturnValue(false);
         } else {
-            Map<RegistryEntry<StatusEffect>, StatusEffectInstance> map = Maps.newHashMap(user.getActiveStatusEffects());
+            Map<Holder<MobEffect>, MobEffectInstance> map = Maps.newHashMap(user.getActiveEffectsMap());
             map.remove(TheAlterworldStatusEffects.PLANAR_FRACTURE);
             map.forEach((entry, statusEffectInstance) -> {
-                user.getActiveStatusEffects().remove(entry);
+                user.getActiveEffectsMap().remove(entry);
             });
-            user.onStatusEffectsRemoved(map.values());
+            user.onEffectsRemoved(map.values());
             cir.setReturnValue(true);
         }
         cir.cancel();

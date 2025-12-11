@@ -9,12 +9,11 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectionContext;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.util.Identifier;
-import net.minecraft.world.dimension.DimensionOptions;
-import net.minecraft.world.gen.chunk.ChunkGeneratorSettings;
-
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.level.dimension.LevelStem;
+import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -31,15 +30,15 @@ public class TheAlterworld implements ModInitializer {
         TheAlterworldStructureTriggers.register();
 
         ServerLifecycleEvents.SERVER_STARTING.register(minecraftServer -> {
-            Optional<Registry<Mappings>> optionalRegistry = minecraftServer.getRegistryManager().getOptional(GBWRegistries.MAPPINGS_KEY);
-            Optional<Registry<ChunkGeneratorSettings>> optionalRegistry2 = minecraftServer.getRegistryManager().getOptional(RegistryKeys.CHUNK_GENERATOR_SETTINGS);
+            Optional<Registry<Mappings>> optionalRegistry = minecraftServer.registryAccess().lookup(GBWRegistries.MAPPINGS_KEY);
+            Optional<Registry<NoiseGeneratorSettings>> optionalRegistry2 = minecraftServer.registryAccess().lookup(Registries.NOISE_SETTINGS);
             if (optionalRegistry.isPresent() && optionalRegistry2.isPresent()) {
-                Mappings mappings = optionalRegistry.get().get(Identifier.of(GreatBigWorld.NAMESPACE, "world_lava_heights"));
+                Mappings mappings = optionalRegistry.get().getValue(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "world_lava_heights"));
                 if (mappings == null)
                     return;
 
-                optionalRegistry2.get().getEntrySet().forEach(entry -> {
-                    Mappings.Value value = mappings.getValue(minecraftServer.getRegistryManager(), entry.getKey().getValue());
+                optionalRegistry2.get().entrySet().forEach(entry -> {
+                    Mappings.Value value = mappings.getValue(minecraftServer.registryAccess(), entry.getKey().identifier());
                     if (value.type() == Mappings.Value.PrimitiveType.STRING)
                         return;
                     ((ExtendedChunkGeneratorSettings) (Object) entry.getValue()).gbw$setLavaHeight(value.getAsNumber().intValue());
@@ -53,6 +52,6 @@ public class TheAlterworld implements ModInitializer {
     }
 
     public static Predicate<BiomeSelectionContext> foundInOverworldLike() {
-        return context -> context.canGenerateIn(GreatBigWorld.ALTERWORLD_OPTIONS) || context.canGenerateIn(DimensionOptions.OVERWORLD);
+        return context -> context.canGenerateIn(GreatBigWorld.ALTERWORLD_OPTIONS) || context.canGenerateIn(LevelStem.OVERWORLD);
     }
 }

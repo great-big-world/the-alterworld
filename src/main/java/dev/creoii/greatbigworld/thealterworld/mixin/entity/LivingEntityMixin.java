@@ -4,17 +4,6 @@ import com.llamalad7.mixinextras.sugar.Local;
 import dev.creoii.greatbigworld.GreatBigWorld;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldStatusEffects;
 import dev.creoii.greatbigworld.thealterworld.world.PlanarFractureManager;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.network.packet.s2c.play.PositionFlag;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.TeleportTarget;
-import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -24,21 +13,32 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Collection;
 import java.util.Set;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Relative;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.portal.TeleportTransition;
+import net.minecraft.world.phys.Vec3;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity {
-    public LivingEntityMixin(EntityType<?> type, World world) {
+    public LivingEntityMixin(EntityType<?> type, Level world) {
         super(type, world);
     }
 
-    @Inject(method = "onStatusEffectsRemoved", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/effect/StatusEffect;onRemoved(Lnet/minecraft/entity/attribute/AttributeContainer;)V"))
-    private void gbw$removeFracturedRealmEffect(Collection<StatusEffectInstance> effects, CallbackInfo ci, @Local StatusEffectInstance statusEffectInstance) {
-        if (statusEffectInstance.equals(TheAlterworldStatusEffects.PLANAR_FRACTURE) && getEntityWorld().getRegistryKey() == GreatBigWorld.ALTERWORLD_KEY) {
-            TeleportTarget target = createTeleportTarget((ServerWorld) getEntityWorld(), this, getBlockPos());
+    @Inject(method = "onEffectsRemoved", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/effect/MobEffect;removeAttributeModifiers(Lnet/minecraft/world/entity/ai/attributes/AttributeMap;)V"))
+    private void gbw$removeFracturedRealmEffect(Collection<MobEffectInstance> effects, CallbackInfo ci, @Local MobEffectInstance statusEffectInstance) {
+        if (statusEffectInstance.is(TheAlterworldStatusEffects.PLANAR_FRACTURE) && level().dimension() == GreatBigWorld.ALTERWORLD_KEY) {
+            TeleportTransition target = createTeleportTarget((ServerLevel) level(), this, blockPosition());
             if (target != null) {
-                ServerWorld serverWorld2 = target.world();
-                if (getEntityWorld().getServer().isEnterableWithPortal(serverWorld2) && (serverWorld2.getRegistryKey() == getEntityWorld().getRegistryKey() || canTeleportBetween(getEntityWorld(), serverWorld2))) {
-                    teleportTo(target);
+                ServerLevel serverWorld2 = target.newLevel();
+                if (/*level().getServer().isEnterableWithPortal(serverWorld2) && */(serverWorld2.dimension() == level().dimension() || canTeleport(level(), serverWorld2))) {
+                    teleport(target);
 
                     PlanarFractureManager manager = PlanarFractureManager.getServerState(serverWorld2.getServer());
                     manager.clearReturnPos((LivingEntity) (Object) this);
@@ -48,26 +48,26 @@ public abstract class LivingEntityMixin extends Entity {
     }
 
     @Unique
-    public @Nullable TeleportTarget createTeleportTarget(ServerWorld world, Entity entity, BlockPos pos) {
-        ServerWorld serverWorld = world.getServer().getWorld(World.OVERWORLD);
+    public @Nullable TeleportTransition createTeleportTarget(ServerLevel world, Entity entity, BlockPos pos) {
+        ServerLevel serverWorld = world.getServer().getLevel(Level.OVERWORLD);
         if (serverWorld == null) {
             return null;
         } else {
-            BlockPos blockPos = serverWorld.getSpawnPoint().getPos();
-            Set<PositionFlag> set = PositionFlag.combine(PositionFlag.DELTA, PositionFlag.ROT);
+            BlockPos blockPos = serverWorld.getRespawnData().pos();
+            Set<Relative> set = Relative.union(Relative.DELTA, Relative.ROTATION);
             if (entity instanceof LivingEntity living) {
                 PlanarFractureManager manager = PlanarFractureManager.getServerState(serverWorld.getServer());
 
-                Vec3d returnPos = manager.getReturnPos(living);
+                Vec3 returnPos = manager.getReturnPos(living);
                 if (returnPos != null) {
-                    return new TeleportTarget(serverWorld, returnPos, Vec3d.ZERO, 0f, 0f, set, TeleportTarget.SEND_TRAVEL_THROUGH_PORTAL_PACKET.then(TeleportTarget.ADD_PORTAL_CHUNK_TICKET));
+                    return new TeleportTransition(serverWorld, returnPos, Vec3.ZERO, 0f, 0f, set, TeleportTransition.PLAY_PORTAL_SOUND.then(TeleportTransition.PLACE_PORTAL_TICKET));
                 }
 
-                if (entity instanceof ServerPlayerEntity serverPlayerEntity) {
-                    return serverPlayerEntity.getRespawnTarget(false, TeleportTarget.NO_OP);
+                if (entity instanceof ServerPlayer serverPlayerEntity) {
+                    return serverPlayerEntity.findRespawnPositionAndUseSpawnBlock(false, TeleportTransition.DO_NOTHING);
                 }
             }
-            return new TeleportTarget(serverWorld, entity.getWorldSpawnPos(serverWorld, blockPos).toBottomCenterPos(), Vec3d.ZERO, 0f, 0f, set, TeleportTarget.SEND_TRAVEL_THROUGH_PORTAL_PACKET.then(TeleportTarget.ADD_PORTAL_CHUNK_TICKET));
+            return new TeleportTransition(serverWorld, entity.adjustSpawnLocation(serverWorld, blockPos).getBottomCenter(), Vec3.ZERO, 0f, 0f, set, TeleportTransition.PLAY_PORTAL_SOUND.then(TeleportTransition.PLACE_PORTAL_TICKET));
         }
     }
 }

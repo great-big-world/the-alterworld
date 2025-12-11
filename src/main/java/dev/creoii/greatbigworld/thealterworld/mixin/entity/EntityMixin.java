@@ -5,19 +5,6 @@ import dev.creoii.greatbigworld.thealterworld.block.ReinforcedDeepslateBlock;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldBlocks;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldStatusEffects;
 import dev.creoii.greatbigworld.thealterworld.world.PlanarFractureManager;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -25,59 +12,72 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.UUID;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.phys.Vec3;
 
 @Mixin(Entity.class)
 public abstract class EntityMixin {
-    @Shadow public abstract Random getRandom();
-    @Shadow public abstract BlockState getBlockStateAtPos();
-    @Shadow private World world;
-    @Shadow private BlockPos blockPos;
-    @Shadow private Vec3d pos;
-    @Shadow public abstract UUID getUuid();
-    @Shadow public abstract boolean isPlayer();
+    @Shadow public abstract RandomSource getRandom();
+    @Shadow public abstract BlockState getInBlockState();
+    @Shadow private Level level;
+    @Shadow private BlockPos blockPosition;
+    @Shadow private Vec3 position;
+    @Shadow public abstract UUID getUUID();
+    @Shadow public abstract boolean isAlwaysTicking();
 
-    @Inject(method = "tickPortalTeleportation", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;teleportTo(Lnet/minecraft/world/TeleportTarget;)Lnet/minecraft/entity/Entity;"), cancellable = true)
+    @Inject(method = "handlePortal", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;teleport(Lnet/minecraft/world/level/portal/TeleportTransition;)Lnet/minecraft/world/entity/Entity;"), cancellable = true)
     private void gbw$applyFracturedRealmEffect(CallbackInfo ci) {
-        BlockState state = getBlockStateAtPos();
-        if (state.isOf(TheAlterworldBlocks.ALTERWORLD_PORTAL)) {
+        BlockState state = getInBlockState();
+        if (state.is(TheAlterworldBlocks.ALTERWORLD_PORTAL)) {
             if (((Entity) (Object) this) instanceof LivingEntity living) {
-                if (state.get(AlterworldPortalBlock.FRACTURED)) {
-                    living.dismountVehicle();
-                    int ticks = getRandom().nextBetween(620, 3620);
-                    living.addStatusEffect(new StatusEffectInstance(TheAlterworldStatusEffects.PLANAR_FRACTURE, ticks /* 30 seconds to 3 minutes */, 0, false, false));
-                    world.breakBlock(blockPos, false);
+                if (state.getValue(AlterworldPortalBlock.FRACTURED)) {
+                    living.removeVehicle();
+                    int ticks = getRandom().nextIntBetweenInclusive(620, 3620);
+                    living.addEffect(new MobEffectInstance(TheAlterworldStatusEffects.PLANAR_FRACTURE, ticks /* 30 seconds to 3 minutes */, 0, false, false));
+                    level.destroyBlock(blockPosition, false);
 
-                    if (state.get(Properties.HORIZONTAL_AXIS) == Direction.Axis.X) {
-                        BlockPos.iterate(blockPos.getX() - 2, blockPos.getY() - 1, blockPos.getZ(), blockPos.getX() + 2, blockPos.getY() + 3, blockPos.getZ()).forEach(pos -> {
-                            BlockState state1 = world.getBlockState(pos);
+                    if (state.getValue(BlockStateProperties.HORIZONTAL_AXIS) == Direction.Axis.X) {
+                        BlockPos.betweenClosed(blockPosition.getX() - 2, blockPosition.getY() - 1, blockPosition.getZ(), blockPosition.getX() + 2, blockPosition.getY() + 3, blockPosition.getZ()).forEach(pos -> {
+                            BlockState state1 = level.getBlockState(pos);
                             if (state1.getBlock() instanceof ReinforcedDeepslateBlock reinforcedDeepslateBlock) {
                                 if (!ReinforcedDeepslateBlock.isFractured(state1))
-                                    world.setBlockState(pos, TheAlterworldBlocks.REINFORCED_DEEPSLATE.getDefaultState().with(ReinforcedDeepslateBlock.FRACTURE, 8), 18);
+                                    level.setBlock(pos, TheAlterworldBlocks.REINFORCED_DEEPSLATE.defaultBlockState().setValue(ReinforcedDeepslateBlock.FRACTURE, 8), 18);
                             }
                         });
                     } else {
-                        BlockPos.iterate(blockPos.getX(), blockPos.getY() - 1, blockPos.getZ() - 2, blockPos.getX(), blockPos.getY() + 3, blockPos.getZ() + 2).forEach(pos -> {
-                            BlockState state1 = world.getBlockState(pos);
+                        BlockPos.betweenClosed(blockPosition.getX(), blockPosition.getY() - 1, blockPosition.getZ() - 2, blockPosition.getX(), blockPosition.getY() + 3, blockPosition.getZ() + 2).forEach(pos -> {
+                            BlockState state1 = level.getBlockState(pos);
                             if (state1.getBlock() instanceof ReinforcedDeepslateBlock reinforcedDeepslateBlock) {
                                 if (!ReinforcedDeepslateBlock.isFractured(state1))
-                                    world.setBlockState(pos, TheAlterworldBlocks.REINFORCED_DEEPSLATE.getDefaultState().with(ReinforcedDeepslateBlock.FRACTURE, 8), 18);
+                                    level.setBlock(pos, TheAlterworldBlocks.REINFORCED_DEEPSLATE.defaultBlockState().setValue(ReinforcedDeepslateBlock.FRACTURE, 8), 18);
                             }
                         });
                     }
 
-                    if (world instanceof ServerWorld serverWorld && living instanceof PlayerEntity player) {
+                    if (level instanceof ServerLevel serverWorld && living instanceof Player player) {
                         PlanarFractureManager manager = PlanarFractureManager.getServerState(serverWorld.getServer());
-                        manager.setReturnPos(player, pos);
+                        manager.setReturnPos(player, position);
                     }
                 } else {
-                    if (living.hasStatusEffect(TheAlterworldStatusEffects.PLANAR_FRACTURE)) {
-                        living.dismountVehicle();
-                        living.removeStatusEffect(TheAlterworldStatusEffects.PLANAR_FRACTURE);
+                    if (living.hasEffect(TheAlterworldStatusEffects.PLANAR_FRACTURE)) {
+                        living.removeVehicle();
+                        living.removeEffect(TheAlterworldStatusEffects.PLANAR_FRACTURE);
                     }
                 }
             }
-        } else if (state.isOf(Blocks.NETHER_PORTAL) || state.isOf(Blocks.END_PORTAL)) {
-            if (((Entity) (Object) this) instanceof LivingEntity living && living.hasStatusEffect(TheAlterworldStatusEffects.PLANAR_FRACTURE)) {
+        } else if (state.is(Blocks.NETHER_PORTAL) || state.is(Blocks.END_PORTAL)) {
+            if (((Entity) (Object) this) instanceof LivingEntity living && living.hasEffect(TheAlterworldStatusEffects.PLANAR_FRACTURE)) {
                 ci.cancel();
             }
         }

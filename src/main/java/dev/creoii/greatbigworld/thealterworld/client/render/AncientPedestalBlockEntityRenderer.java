@@ -1,53 +1,52 @@
 package dev.creoii.greatbigworld.thealterworld.client.render;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
 import dev.creoii.greatbigworld.thealterworld.block.AncientPedestalBlock;
 import dev.creoii.greatbigworld.thealterworld.block.entity.AncientPedestalBlockEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.item.ItemModelManager;
-import net.minecraft.client.render.OverlayTexture;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.block.entity.BlockEntityRenderer;
-import net.minecraft.client.render.command.ModelCommandRenderer;
-import net.minecraft.client.render.command.OrderedRenderCommandQueue;
-import net.minecraft.client.render.item.ItemRenderState;
-import net.minecraft.client.render.state.CameraRenderState;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.item.ItemDisplayContext;
-import net.minecraft.util.math.RotationAxis;
-import net.minecraft.util.math.Vec3d;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
+import net.minecraft.client.renderer.item.ItemModelResolver;
+import net.minecraft.client.renderer.item.ItemStackRenderState;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.client.renderer.state.CameraRenderState;
+import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 
 @Environment(EnvType.CLIENT)
-public record AncientPedestalBlockEntityRenderer(ItemModelManager itemModelManager) implements BlockEntityRenderer<AncientPedestalBlockEntity, AncientPedestalBlockEntityRenderState> {
+public record AncientPedestalBlockEntityRenderer(ItemModelResolver itemModelManager) implements BlockEntityRenderer<AncientPedestalBlockEntity, AncientPedestalBlockEntityRenderState> {
     @Override
-    public void updateRenderState(AncientPedestalBlockEntity blockEntity, AncientPedestalBlockEntityRenderState state, float tickProgress, Vec3d cameraPos, @Nullable ModelCommandRenderer.CrumblingOverlayCommand crumblingOverlay) {
-        BlockEntityRenderer.super.updateRenderState(blockEntity, state, tickProgress, cameraPos, crumblingOverlay);
-        state.itemRenderState = new ItemRenderState();
-        if (blockEntity.hasWorld())
-            state.worldTime = blockEntity.getWorld().getTime();
-        state.tickProgress = tickProgress;
-        if (blockEntity.getRelic() != null)
-            state.update(blockEntity.getRelic().getDefaultStack(), itemModelManager);
+    public void submit(AncientPedestalBlockEntityRenderState state, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState cameraRenderState) {
+        if (!state.itemRenderState.isEmpty()) {
+            if (state.blockState.getValue(AncientPedestalBlock.LIT))
+                return;
+
+            poseStack.pushPose();
+
+            poseStack.translate(.5d, .8d + Math.sin((state.worldTime + state.tickProgress) / 8d) / 16d, .5d);
+            poseStack.mulPose(Axis.YP.rotationDegrees((state.worldTime + state.tickProgress) * 2f));
+            submitNodeCollector.submitItem(poseStack, ItemDisplayContext.GROUND, state.lightCoords, 0, 0, new int[]{}, List.of(), RenderTypes.LINES, ItemStackRenderState.FoilType.SPECIAL);
+            state.itemRenderState.submit(poseStack, submitNodeCollector, state.lightCoords, OverlayTexture.NO_OVERLAY, 0);
+
+            poseStack.popPose();
+        }
     }
 
     @Override
-    public void render(AncientPedestalBlockEntityRenderState state, MatrixStack matrices, OrderedRenderCommandQueue queue, CameraRenderState cameraState) {
-        if (!state.itemRenderState.isEmpty()) {
-            if (state.blockState.get(AncientPedestalBlock.LIT))
-                return;
-
-            matrices.push();
-
-            matrices.translate(.5d, .8d + Math.sin((state.worldTime + state.tickProgress) / 8d) / 16d, .5d);
-            matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees((state.worldTime + state.tickProgress) * 2f));
-            queue.submitItem(matrices, ItemDisplayContext.GROUND, state.lightmapCoordinates, 0, 0, new int[]{}, List.of(), RenderLayer.LINES, ItemRenderState.Glint.SPECIAL);
-            state.itemRenderState.render(matrices, queue, state.lightmapCoordinates, OverlayTexture.DEFAULT_UV, 0);
-
-            matrices.pop();
-        }
+    public void extractRenderState(AncientPedestalBlockEntity blockEntity, AncientPedestalBlockEntityRenderState state, float f, Vec3 vec3, ModelFeatureRenderer.@org.jspecify.annotations.Nullable CrumblingOverlay crumblingOverlay) {
+        BlockEntityRenderer.super.extractRenderState(blockEntity, state, f, vec3, crumblingOverlay);
+        state.itemRenderState = new ItemStackRenderState();
+        if (blockEntity.hasLevel())
+            state.worldTime = blockEntity.getLevel().getGameTime();
+        state.tickProgress = f;
+        if (blockEntity.getRelic() != null)
+            state.update(blockEntity.getRelic().getDefaultInstance(), itemModelManager);
     }
 
     @Override

@@ -1,17 +1,17 @@
 package dev.creoii.greatbigworld.thealterworld.mixin.world;
 
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.world.WanderingTraderManager;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.npc.wanderingtrader.WanderingTraderSpawner;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(WanderingTraderManager.class)
+@Mixin(WanderingTraderSpawner.class)
 public class WanderingTraderManagerMixin {
-    @Inject(method = "spawn", at = @At("HEAD"), cancellable = true)
-    private void gbw$removeWanderingTraderFromOverworld(ServerWorld world, boolean spawnMonsters, CallbackInfo ci) {
-        if (world.getRegistryKey() == ServerWorld.OVERWORLD)
+    @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
+    private void gbw$removeWanderingTraderFromOverworld(ServerLevel world, boolean spawnMonsters, CallbackInfo ci) {
+        if (world.dimension() == ServerLevel.OVERWORLD)
             ci.cancel();
     }
 }

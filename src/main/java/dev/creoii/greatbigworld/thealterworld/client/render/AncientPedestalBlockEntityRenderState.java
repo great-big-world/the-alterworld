@@ -2,19 +2,19 @@ package dev.creoii.greatbigworld.thealterworld.client.render;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.item.ItemModelManager;
-import net.minecraft.client.render.block.entity.state.BlockEntityRenderState;
-import net.minecraft.client.render.item.ItemRenderState;
-import net.minecraft.item.ItemDisplayContext;
-import net.minecraft.item.ItemStack;
+import net.minecraft.client.renderer.blockentity.state.BlockEntityRenderState;
+import net.minecraft.client.renderer.item.ItemModelResolver;
+import net.minecraft.client.renderer.item.ItemStackRenderState;
+import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.world.item.ItemStack;
 
 @Environment(EnvType.CLIENT)
 public class AncientPedestalBlockEntityRenderState extends BlockEntityRenderState {
-    protected ItemRenderState itemRenderState = new ItemRenderState();
+    protected ItemStackRenderState itemRenderState = new ItemStackRenderState();
     protected long worldTime;
     protected float tickProgress;
 
-    public void update(ItemStack stack, ItemModelManager itemModelManager) {
-        itemModelManager.update(this.itemRenderState, stack, ItemDisplayContext.NONE, null, null, 0);
+    public void update(ItemStack stack, ItemModelResolver itemModelManager) {
+        itemModelManager.appendItemLayers(this.itemRenderState, stack, ItemDisplayContext.NONE, null, null, 0);
     }
 }

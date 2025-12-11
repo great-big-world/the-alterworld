@@ -1,21 +1,21 @@
 package dev.creoii.greatbigworld.thealterworld.mixin.entity;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.mob.ZombieEntity;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.monster.zombie.Zombie;
+import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(ZombieEntity.class)
-public abstract class ZombieEntityMixin extends HostileEntity {
-    protected ZombieEntityMixin(EntityType<? extends HostileEntity> entityType, World world) {
+@Mixin(Zombie.class)
+public abstract class ZombieEntityMixin extends Monster {
+    protected ZombieEntityMixin(EntityType<? extends Monster> entityType, Level world) {
         super(entityType, world);
     }
 
-    @ModifyExpressionValue(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/ZombieEntity;isAlive()Z"))
+    @ModifyExpressionValue(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/monster/zombie/Zombie;isAlive()Z"))
     private boolean gbw$disableSkeletonCovertInOverworld(boolean original) {
-        return original && getEntityWorld().getRegistryKey() != World.OVERWORLD;
+        return original && level().dimension() != Level.OVERWORLD;
     }
 }

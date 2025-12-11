@@ -2,21 +2,21 @@ package dev.creoii.greatbigworld.thealterworld.mixin.world.structure;
 
 import dev.creoii.greatbigworld.thealterworld.block.ReinforcedDeepslateBlock;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldBlocks;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.structure.JungleTempleGenerator;
-import net.minecraft.structure.ShiftableStructurePiece;
-import net.minecraft.structure.StructurePieceType;
-import net.minecraft.util.math.BlockBox;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.StructureWorldAccess;
-import net.minecraft.world.dimension.DimensionTypes;
-import net.minecraft.world.gen.StructureAccessor;
-import net.minecraft.world.gen.chunk.ChunkGenerator;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.StructureManager;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
+import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import net.minecraft.world.level.levelgen.structure.ScatteredFeaturePiece;
+import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceType;
+import net.minecraft.world.level.levelgen.structure.structures.JungleTemplePiece;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -26,50 +26,50 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(JungleTempleGenerator.class)
-public abstract class JungleTempleGeneratorMixin extends ShiftableStructurePiece {
-    @Shadow @Final private static JungleTempleGenerator.CobblestoneRandomizer COBBLESTONE_RANDOMIZER;
+@Mixin(JungleTemplePiece.class)
+public abstract class JungleTempleGeneratorMixin extends ScatteredFeaturePiece {
+    @Shadow @Final private static JungleTemplePiece.MossStoneSelector STONE_SELECTOR;
 
     protected JungleTempleGeneratorMixin(StructurePieceType type, int x, int y, int z, int width, int height, int depth, Direction orientation) {
         super(type, x, y, z, width, height, depth, orientation);
     }
 
-    @ModifyConstant(method = "<init>(Lnet/minecraft/util/math/random/Random;II)V", constant = @Constant(intValue = 15))
+    @ModifyConstant(method = "<init>(Lnet/minecraft/util/RandomSource;II)V", constant = @Constant(intValue = 15))
     private static int gbw$expandJungleTempleZSize(int constant) {
         return constant + 1;
     }
 
-    @Inject(method = "generate", at = @At(value = "INVOKE", target = "Lnet/minecraft/structure/JungleTempleGenerator;fill(Lnet/minecraft/world/StructureWorldAccess;Lnet/minecraft/util/math/BlockBox;IIIIII)V", ordinal = 10))
-    private void gbw$placeJungleTemplePortal(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox chunkBox, ChunkPos chunkPos, BlockPos pivot, CallbackInfo ci) {
+    @Inject(method = "postProcess", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/levelgen/structure/structures/JungleTemplePiece;generateAirBox(Lnet/minecraft/world/level/WorldGenLevel;Lnet/minecraft/world/level/levelgen/structure/BoundingBox;IIIIII)V", ordinal = 10))
+    private void gbw$placeJungleTemplePortal(WorldGenLevel world, StructureManager structureAccessor, ChunkGenerator chunkGenerator, RandomSource random, BoundingBox chunkBox, ChunkPos chunkPos, BlockPos pivot, CallbackInfo ci) {
         if (random.nextInt(4) != 0) {
-            BlockState frameState = world.getRegistryManager().getOptional(RegistryKeys.DIMENSION_TYPE).get().getEntry(world.getDimension()).matchesKey(DimensionTypes.OVERWORLD) ? TheAlterworldBlocks.REINFORCED_DEEPSLATE.getDefaultState().with(ReinforcedDeepslateBlock.CAN_FRACTURE, true) : COBBLESTONE_RANDOMIZER.getBlock();
+            BlockState frameState = world.registryAccess().lookup(Registries.DIMENSION_TYPE).get().wrapAsHolder(world.dimensionType()).is(BuiltinDimensionTypes.OVERWORLD) ? TheAlterworldBlocks.REINFORCED_DEEPSLATE.defaultBlockState().setValue(ReinforcedDeepslateBlock.CAN_FRACTURE, true) : STONE_SELECTOR.getNext();
 
-            addBlock(world, frameState, 4, -4, 14, chunkBox);
-            addBlock(world, frameState, 5, -4, 14, chunkBox);
-            addBlock(world, frameState, 6, -4, 14, chunkBox);
-            addBlock(world, frameState, 7, -4, 14, chunkBox);
-            addBlock(world, frameState, 4, -3, 14, chunkBox);
-            addBlock(world, frameState, 4, -1, 14, chunkBox);
-            addBlock(world, frameState, 7, -3, 14, chunkBox);
+            placeBlock(world, frameState, 4, -4, 14, chunkBox);
+            placeBlock(world, frameState, 5, -4, 14, chunkBox);
+            placeBlock(world, frameState, 6, -4, 14, chunkBox);
+            placeBlock(world, frameState, 7, -4, 14, chunkBox);
+            placeBlock(world, frameState, 4, -3, 14, chunkBox);
+            placeBlock(world, frameState, 4, -1, 14, chunkBox);
+            placeBlock(world, frameState, 7, -3, 14, chunkBox);
 
-            addBlock(world, frameState, 7, -2, 14, chunkBox);
-            addBlock(world, frameState, 4, -2, 14, chunkBox);
+            placeBlock(world, frameState, 7, -2, 14, chunkBox);
+            placeBlock(world, frameState, 4, -2, 14, chunkBox);
 
-            addBlock(world, frameState, 7, -1, 14, chunkBox);
-            addBlock(world, frameState, 4, 0, 14, chunkBox);
-            addBlock(world, frameState, 5, 0, 14, chunkBox);
-            addBlock(world, frameState, 6, 0, 14, chunkBox);
-            addBlock(world, frameState, 7, 0, 14, chunkBox);
+            placeBlock(world, frameState, 7, -1, 14, chunkBox);
+            placeBlock(world, frameState, 4, 0, 14, chunkBox);
+            placeBlock(world, frameState, 5, 0, 14, chunkBox);
+            placeBlock(world, frameState, 6, 0, 14, chunkBox);
+            placeBlock(world, frameState, 7, 0, 14, chunkBox);
 
-            addBlock(world, Blocks.AIR.getDefaultState(), 5, -3, 14, chunkBox);
-            addBlock(world, Blocks.AIR.getDefaultState(), 6, -3, 14, chunkBox);
-            addBlock(world, Blocks.AIR.getDefaultState(), 5, -2, 14, chunkBox);
-            addBlock(world, Blocks.AIR.getDefaultState(), 6, -2, 14, chunkBox);
-            addBlock(world, Blocks.AIR.getDefaultState(), 5, -1, 14, chunkBox);
-            addBlock(world, Blocks.AIR.getDefaultState(), 6, -1, 14, chunkBox);
+            placeBlock(world, Blocks.AIR.defaultBlockState(), 5, -3, 14, chunkBox);
+            placeBlock(world, Blocks.AIR.defaultBlockState(), 6, -3, 14, chunkBox);
+            placeBlock(world, Blocks.AIR.defaultBlockState(), 5, -2, 14, chunkBox);
+            placeBlock(world, Blocks.AIR.defaultBlockState(), 6, -2, 14, chunkBox);
+            placeBlock(world, Blocks.AIR.defaultBlockState(), 5, -1, 14, chunkBox);
+            placeBlock(world, Blocks.AIR.defaultBlockState(), 6, -1, 14, chunkBox);
 
-            fillWithOutline(world, chunkBox, 4, -4, 15, 7, 0, 15, false, random, COBBLESTONE_RANDOMIZER);
-            fillWithOutline(world, chunkBox, 4, 1, 13, 7, 1, 15, false, random, COBBLESTONE_RANDOMIZER);
+            generateBox(world, chunkBox, 4, -4, 15, 7, 0, 15, false, random, STONE_SELECTOR);
+            generateBox(world, chunkBox, 4, 1, 13, 7, 1, 15, false, random, STONE_SELECTOR);
         }
     }
 }

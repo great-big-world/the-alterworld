@@ -1,13 +1,13 @@
 package dev.creoii.greatbigworld.thealterworld.mixin.block;
 
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldStatusEffects;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.NetherPortalBlock;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityCollisionHandler;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.InsideBlockEffectApplier;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.NetherPortalBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -15,9 +15,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(NetherPortalBlock.class)
 public class NetherPortalBlockMixin {
-    @Inject(method = "onEntityCollision", at = @At("HEAD"), cancellable = true)
-    private void gbw$disableNetherPortal(BlockState state, World world, BlockPos pos, Entity entity, EntityCollisionHandler handler, boolean bl, CallbackInfo ci) {
-        if (entity instanceof LivingEntity living && living.hasStatusEffect(TheAlterworldStatusEffects.PLANAR_FRACTURE))
+    @Inject(method = "entityInside", at = @At("HEAD"), cancellable = true)
+    private void gbw$disableNetherPortal(BlockState state, Level world, BlockPos pos, Entity entity, InsideBlockEffectApplier handler, boolean bl, CallbackInfo ci) {
+        if (entity instanceof LivingEntity living && living.hasEffect(TheAlterworldStatusEffects.PLANAR_FRACTURE))
             ci.cancel();
     }
 }

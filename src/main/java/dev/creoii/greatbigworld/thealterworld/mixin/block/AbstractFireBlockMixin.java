@@ -6,14 +6,6 @@ import dev.creoii.greatbigworld.GreatBigWorld;
 import dev.creoii.greatbigworld.thealterworld.block.ReinforcedDeepslateBlock;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldBlocks;
 import dev.creoii.greatbigworld.thealterworld.world.FracturedAlterworldPortal;
-import net.minecraft.block.AbstractFireBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.FireBlock;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -22,27 +14,35 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Map;
 import java.util.Optional;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseFireBlock;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FireBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 
-@Mixin(AbstractFireBlock.class)
+@Mixin(BaseFireBlock.class)
 public class AbstractFireBlockMixin {
-    @Inject(method = "onBlockAdded", at = @At("TAIL"))
-    private void gbw$createAlterworldPortal(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify, CallbackInfo ci) {
-        if (!oldState.isOf(state.getBlock())) {
-            if (world.getRegistryKey() == World.OVERWORLD || world.getRegistryKey() == GreatBigWorld.ALTERWORLD_KEY) {
-                if (!state.isOf(Blocks.FIRE))
+    @Inject(method = "onPlace", at = @At("TAIL"))
+    private void gbw$createAlterworldPortal(BlockState state, Level world, BlockPos pos, BlockState oldState, boolean notify, CallbackInfo ci) {
+        if (!oldState.is(state.getBlock())) {
+            if (world.dimension() == Level.OVERWORLD || world.dimension() == GreatBigWorld.ALTERWORLD_KEY) {
+                if (!state.is(Blocks.FIRE))
                     return;
                 BlockState newState = world.getBlockState(pos);
 
-                boolean anyTrue = FireBlock.DIRECTION_PROPERTIES.entrySet().stream().anyMatch(directionBooleanPropertyEntry -> state.get(directionBooleanPropertyEntry.getValue()));
+                boolean anyTrue = FireBlock.PROPERTY_BY_DIRECTION.entrySet().stream().anyMatch(directionBooleanPropertyEntry -> state.getValue(directionBooleanPropertyEntry.getValue()));
                 boolean canFracture = false;
                 if (!anyTrue) {
-                    BlockState down = world.getBlockState(pos.down());
-                    canFracture = down.get(ReinforcedDeepslateBlock.CAN_FRACTURE, false);
+                    BlockState down = world.getBlockState(pos.below());
+                    canFracture = down.getValueOrElse(ReinforcedDeepslateBlock.CAN_FRACTURE, false);
                 } else {
-                    for (Map.Entry<Direction, BooleanProperty> entry : FireBlock.DIRECTION_PROPERTIES.entrySet()) {
-                        if (state.get(entry.getValue())) {
-                            BlockState offset = world.getBlockState(pos.offset(entry.getKey()));
-                            canFracture = offset.get(ReinforcedDeepslateBlock.CAN_FRACTURE, false);
+                    for (Map.Entry<Direction, BooleanProperty> entry : FireBlock.PROPERTY_BY_DIRECTION.entrySet()) {
+                        if (state.getValue(entry.getValue())) {
+                            BlockState offset = world.getBlockState(pos.relative(entry.getKey()));
+                            canFracture = offset.getValueOrElse(ReinforcedDeepslateBlock.CAN_FRACTURE, false);
                         }
 
                         if (canFracture)
@@ -62,15 +62,15 @@ public class AbstractFireBlockMixin {
         }
     }
 
-    @Inject(method = "isOverworldOrNether", at = @At("HEAD"), cancellable = true)
-    private static void gbw$allowNetherPortalsInAlterworld(World world, CallbackInfoReturnable<Boolean> cir) {
-        if (world.getRegistryKey() == GreatBigWorld.ALTERWORLD_KEY)
+    @Inject(method = "inPortalDimension", at = @At("HEAD"), cancellable = true)
+    private static void gbw$allowNetherPortalsInAlterworld(Level world, CallbackInfoReturnable<Boolean> cir) {
+        if (world.dimension() == GreatBigWorld.ALTERWORLD_KEY)
             cir.setReturnValue(true);
     }
 
-    @ModifyExpressionValue(method = "shouldLightPortalAt", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/BlockState;isOf(Lnet/minecraft/block/Block;)Z"))
-    private static boolean gbw$lightableAlterworldPortals(boolean original, @Local(argsOnly = true) World world, @Local(argsOnly = true) BlockPos pos, @Local BlockPos.Mutable mutable, @Local(ordinal = 1) Direction direction2) {
+    @ModifyExpressionValue(method = "isPortal", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z"))
+    private static boolean gbw$lightableAlterworldPortals(boolean original, @Local(argsOnly = true) Level world, @Local(argsOnly = true) BlockPos pos, @Local BlockPos.MutableBlockPos mutable, @Local(ordinal = 1) Direction direction2) {
         BlockState state = world.getBlockState(mutable.set(pos).move(direction2));
-        return original || state.isOf(TheAlterworldBlocks.REINFORCED_DEEPSLATE);
+        return original || state.is(TheAlterworldBlocks.REINFORCED_DEEPSLATE);
     }
 }

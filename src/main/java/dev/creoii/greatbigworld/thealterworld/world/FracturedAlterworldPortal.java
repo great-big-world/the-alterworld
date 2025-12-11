@@ -2,43 +2,28 @@ package dev.creoii.greatbigworld.thealterworld.world;
 
 import dev.creoii.greatbigworld.thealterworld.block.AlterworldPortalBlock;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldBlocks;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.math.*;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import org.apache.commons.lang3.mutable.MutableInt;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 import java.util.function.Predicate;
 
-public class FracturedAlterworldPortal {
-    private static final AbstractBlock.ContextPredicate IS_VALID_FRAME_BLOCK = (state, world, pos) -> state.isOf(TheAlterworldBlocks.REINFORCED_DEEPSLATE);
-    private final Direction.Axis axis;
-    private final Direction negativeDir;
-    private final int foundPortalBlocks;
-    private final BlockPos lowerCorner;
-    private final int height;
-    private final int width;
+public record FracturedAlterworldPortal(Direction.Axis axis, int foundPortalBlocks, Direction negativeDir, BlockPos lowerCorner, int width, int height) {
+    private static final BlockBehaviour.StatePredicate IS_VALID_FRAME_BLOCK = (state, world, pos) -> state.is(TheAlterworldBlocks.REINFORCED_DEEPSLATE);
 
-    private FracturedAlterworldPortal(Direction.Axis axis, int foundPortalBlocks, Direction negativeDir, BlockPos lowerCorner, int width, int height) {
-        this.axis = axis;
-        this.foundPortalBlocks = foundPortalBlocks;
-        this.negativeDir = negativeDir;
-        this.lowerCorner = lowerCorner;
-        this.width = width;
-        this.height = height;
-    }
-
-    public static Optional<FracturedAlterworldPortal> getNewPortal(WorldAccess world, BlockPos pos, Direction.Axis firstCheckedAxis) {
+    public static Optional<FracturedAlterworldPortal> getNewPortal(LevelAccessor world, BlockPos pos, Direction.Axis firstCheckedAxis) {
         return getOrEmpty(world, pos, (areaHelper) -> areaHelper.isValid() && areaHelper.foundPortalBlocks == 0, firstCheckedAxis);
     }
 
-    public static Optional<FracturedAlterworldPortal> getOrEmpty(WorldAccess world, BlockPos pos, Predicate<FracturedAlterworldPortal> validator, Direction.Axis firstCheckedAxis) {
+    public static Optional<FracturedAlterworldPortal> getOrEmpty(LevelAccessor world, BlockPos pos, Predicate<FracturedAlterworldPortal> validator, Direction.Axis firstCheckedAxis) {
         Optional<FracturedAlterworldPortal> optional = Optional.of(getOnAxis(world, pos, firstCheckedAxis)).filter(validator);
         if (optional.isPresent()) {
             return optional;
@@ -48,7 +33,7 @@ public class FracturedAlterworldPortal {
         }
     }
 
-    public static FracturedAlterworldPortal getOnAxis(BlockView world, BlockPos pos, Direction.Axis axis) {
+    public static FracturedAlterworldPortal getOnAxis(BlockGetter world, BlockPos pos, Direction.Axis axis) {
         Direction direction = axis == Direction.Axis.X ? Direction.WEST : Direction.SOUTH;
         BlockPos blockPos = getLowerCorner(world, direction, pos);
         if (blockPos == null) {
@@ -66,24 +51,24 @@ public class FracturedAlterworldPortal {
     }
 
     @Nullable
-    private static BlockPos getLowerCorner(BlockView world, Direction direction, BlockPos pow) {
-        for(int i = Math.max(world.getBottomY(), pow.getY() - 4); pow.getY() > i && validStateInsidePortal(world.getBlockState(pow.down())); pow = pow.down()) {
+    private static BlockPos getLowerCorner(BlockGetter world, Direction direction, BlockPos pow) {
+        for (int i = Math.max(world.getMinY(), pow.getY() - 4); pow.getY() > i && validStateInsidePortal(world.getBlockState(pow.below())); pow = pow.below()) {
         }
 
         Direction direction2 = direction.getOpposite();
         int j = getWidth(world, pow, direction2) - 1;
-        return j < 0 ? null : pow.offset(direction2, j);
+        return j < 0 ? null : pow.relative(direction2, j);
     }
 
-    private static int getValidatedWidth(BlockView world, BlockPos lowerCorner, Direction negativeDir) {
+    private static int getValidatedWidth(BlockGetter world, BlockPos lowerCorner, Direction negativeDir) {
         int i = getWidth(world, lowerCorner, negativeDir);
         return i >= 2 && i <= 4 ? i : 0;
     }
 
-    private static int getWidth(BlockView world, BlockPos lowerCorner, Direction negativeDir) {
-        BlockPos.Mutable mutable = new BlockPos.Mutable();
+    private static int getWidth(BlockGetter world, BlockPos lowerCorner, Direction negativeDir) {
+        BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
 
-        for(int i = 0; i <= 3; ++i) {
+        for (int i = 0; i <= 3; ++i) {
             mutable.set(lowerCorner).move(negativeDir, i);
             BlockState blockState = world.getBlockState(mutable);
             if (!validStateInsidePortal(blockState)) {
@@ -102,16 +87,16 @@ public class FracturedAlterworldPortal {
         return 0;
     }
 
-    private static int getHeight(BlockView world, BlockPos lowerCorner, Direction negativeDir, int width, MutableInt foundPortalBlocks) {
-        BlockPos.Mutable mutable = new BlockPos.Mutable();
-        boolean fractured = world.getBlockState(lowerCorner).isOf(TheAlterworldBlocks.REINFORCED_DEEPSLATE);
+    private static int getHeight(BlockGetter world, BlockPos lowerCorner, Direction negativeDir, int width, MutableInt foundPortalBlocks) {
+        BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
+        boolean fractured = world.getBlockState(lowerCorner).is(TheAlterworldBlocks.REINFORCED_DEEPSLATE);
         int i = getPotentialHeight(world, lowerCorner, negativeDir, mutable, width, foundPortalBlocks, fractured);
         return i >= 3 && i <= 4 && isHorizontalFrameValid(world, lowerCorner, negativeDir, mutable, width, i) ? i : 0;
     }
 
-    private static boolean isHorizontalFrameValid(BlockView world, BlockPos lowerCorner, Direction direction, BlockPos.Mutable pos, int width, int height) {
-        for(int i = 0; i < width; ++i) {
-            BlockPos.Mutable mutable = pos.set(lowerCorner).move(Direction.UP, height).move(direction, i);
+    private static boolean isHorizontalFrameValid(BlockGetter world, BlockPos lowerCorner, Direction direction, BlockPos.MutableBlockPos pos, int width, int height) {
+        for (int i = 0; i < width; ++i) {
+            BlockPos.MutableBlockPos mutable = pos.set(lowerCorner).move(Direction.UP, height).move(direction, i);
             if (!IS_VALID_FRAME_BLOCK.test(world.getBlockState(mutable), world, mutable)) {
                 return false;
             }
@@ -120,8 +105,8 @@ public class FracturedAlterworldPortal {
         return true;
     }
 
-    private static int getPotentialHeight(BlockView world, BlockPos lowerCorner, Direction negativeDir, BlockPos.Mutable pos, int width, MutableInt foundPortalBlocks, boolean fractured) {
-        for(int i = 0; i < 5; ++i) {
+    private static int getPotentialHeight(BlockGetter world, BlockPos lowerCorner, Direction negativeDir, BlockPos.MutableBlockPos pos, int width, MutableInt foundPortalBlocks, boolean fractured) {
+        for (int i = 0; i < 5; ++i) {
             pos.set(lowerCorner).move(Direction.UP, i).move(negativeDir, -1);
             if (!IS_VALID_FRAME_BLOCK.test(world.getBlockState(pos), world, pos)) {
                 return i;
@@ -132,14 +117,14 @@ public class FracturedAlterworldPortal {
                 return i;
             }
 
-            for(int j = 0; j < width; ++j) {
+            for (int j = 0; j < width; ++j) {
                 pos.set(lowerCorner).move(Direction.UP, i).move(negativeDir, j);
                 BlockState blockState = world.getBlockState(pos);
                 if (!validStateInsidePortal(blockState)) {
                     return i;
                 }
 
-                if (blockState.isOf(TheAlterworldBlocks.ALTERWORLD_PORTAL)) {
+                if (blockState.is(TheAlterworldBlocks.ALTERWORLD_PORTAL)) {
                     foundPortalBlocks.increment();
                 }
             }
@@ -149,17 +134,17 @@ public class FracturedAlterworldPortal {
     }
 
     private static boolean validStateInsidePortal(BlockState state) {
-        return state.isAir() || state.isIn(BlockTags.FIRE) || state.isOf(TheAlterworldBlocks.ALTERWORLD_PORTAL);
+        return state.isAir() || state.is(BlockTags.FIRE) || state.is(TheAlterworldBlocks.ALTERWORLD_PORTAL);
     }
 
     public boolean isValid() {
         return width >= 2 && width <= 4 && height >= 3 && height <= 5;
     }
 
-    public void createPortal(WorldAccess world) {
-        BlockState blockState = TheAlterworldBlocks.ALTERWORLD_PORTAL.getDefaultState().with(Properties.HORIZONTAL_AXIS, axis).with(AlterworldPortalBlock.FRACTURED, true);
-        BlockPos.iterate(lowerCorner, lowerCorner.offset(Direction.UP, height - 1).offset(negativeDir, width - 1)).forEach(pos -> {
-            world.setBlockState(pos, blockState, 18);
+    public void createPortal(LevelAccessor world) {
+        BlockState blockState = TheAlterworldBlocks.ALTERWORLD_PORTAL.defaultBlockState().setValue(BlockStateProperties.HORIZONTAL_AXIS, axis).setValue(AlterworldPortalBlock.FRACTURED, true);
+        BlockPos.betweenClosed(lowerCorner, lowerCorner.relative(Direction.UP, height - 1).relative(negativeDir, width - 1)).forEach(pos -> {
+            world.setBlock(pos, blockState, 18);
         });
     }
 }

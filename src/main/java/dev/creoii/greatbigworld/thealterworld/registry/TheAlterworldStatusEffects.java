@@ -2,16 +2,16 @@ package dev.creoii.greatbigworld.thealterworld.registry;
 
 import dev.creoii.greatbigworld.GreatBigWorld;
 import dev.creoii.greatbigworld.thealterworld.effect.PlanarFractureEffect;
-import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.util.Identifier;
+import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.effect.MobEffect;
 
 public final class TheAlterworldStatusEffects {
-    public static RegistryEntry<StatusEffect> PLANAR_FRACTURE;
+    public static Holder<MobEffect> PLANAR_FRACTURE;
 
     public static void register() {
-        PLANAR_FRACTURE = Registry.registerReference(Registries.STATUS_EFFECT, Identifier.of(GreatBigWorld.NAMESPACE, "planar_fracture"), new PlanarFractureEffect());
+        PLANAR_FRACTURE = Registry.registerForHolder(BuiltInRegistries.MOB_EFFECT, Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "planar_fracture"), new PlanarFractureEffect());
     }
 }
