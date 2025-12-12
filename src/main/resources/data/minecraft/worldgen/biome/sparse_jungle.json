@@ -76,6 +76,7 @@
       "minecraft:spring_lava"
     ],
     [
+      "great_big_world:fallen_jungle_tree_sparse",
       "minecraft:trees_sparse_jungle",
       "great_big_world:flower/poppy_uncommon",
       "minecraft:patch_grass_jungle",
