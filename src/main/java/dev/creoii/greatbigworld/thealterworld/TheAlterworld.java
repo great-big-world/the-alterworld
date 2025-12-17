@@ -8,7 +8,6 @@ import dev.creoii.greatbigworld.thealterworld.registry.*;
 import dev.creoii.greatbigworld.thealterworld.util.ExtendedChunkGeneratorSettings;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectionContext;
-import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.minecraft.core.Registry;
