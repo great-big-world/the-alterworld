@@ -11,7 +11,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.UUID;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -33,8 +32,6 @@ public abstract class EntityMixin {
     @Shadow private Level level;
     @Shadow private BlockPos blockPosition;
     @Shadow private Vec3 position;
-    @Shadow public abstract UUID getUUID();
-    @Shadow public abstract boolean isAlwaysTicking();
 
     @Inject(method = "handlePortal", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;teleport(Lnet/minecraft/world/level/portal/TeleportTransition;)Lnet/minecraft/world/entity/Entity;"), cancellable = true)
     private void gbw$applyFracturedRealmEffect(CallbackInfo ci) {
@@ -50,17 +47,19 @@ public abstract class EntityMixin {
                     if (state.getValue(BlockStateProperties.HORIZONTAL_AXIS) == Direction.Axis.X) {
                         BlockPos.betweenClosed(blockPosition.getX() - 2, blockPosition.getY() - 1, blockPosition.getZ(), blockPosition.getX() + 2, blockPosition.getY() + 3, blockPosition.getZ()).forEach(pos -> {
                             BlockState state1 = level.getBlockState(pos);
-                            if (state1.getBlock() instanceof ReinforcedDeepslateBlock reinforcedDeepslateBlock) {
-                                if (!ReinforcedDeepslateBlock.isFractured(state1))
-                                    level.setBlock(pos, TheAlterworldBlocks.REINFORCED_DEEPSLATE.defaultBlockState().setValue(ReinforcedDeepslateBlock.FRACTURE, 8), 18);
+                            if (state1.getBlock() instanceof ReinforcedDeepslateBlock) {
+                                if (!ReinforcedDeepslateBlock.isFractured(state1)) {
+                                    ReinforcedDeepslateBlock.fractureAt((ServerLevel) level, pos, ticks);
+                                }
                             }
                         });
                     } else {
                         BlockPos.betweenClosed(blockPosition.getX(), blockPosition.getY() - 1, blockPosition.getZ() - 2, blockPosition.getX(), blockPosition.getY() + 3, blockPosition.getZ() + 2).forEach(pos -> {
                             BlockState state1 = level.getBlockState(pos);
-                            if (state1.getBlock() instanceof ReinforcedDeepslateBlock reinforcedDeepslateBlock) {
-                                if (!ReinforcedDeepslateBlock.isFractured(state1))
-                                    level.setBlock(pos, TheAlterworldBlocks.REINFORCED_DEEPSLATE.defaultBlockState().setValue(ReinforcedDeepslateBlock.FRACTURE, 8), 18);
+                            if (state1.getBlock() instanceof ReinforcedDeepslateBlock) {
+                                if (!ReinforcedDeepslateBlock.isFractured(state1)) {
+                                    ReinforcedDeepslateBlock.fractureAt((ServerLevel) level, pos, ticks);
+                                }
                             }
                         });
                     }

@@ -41,35 +41,33 @@ public abstract class JungleTempleGeneratorMixin extends ScatteredFeaturePiece {
 
     @Inject(method = "postProcess", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/levelgen/structure/structures/JungleTemplePiece;generateAirBox(Lnet/minecraft/world/level/WorldGenLevel;Lnet/minecraft/world/level/levelgen/structure/BoundingBox;IIIIII)V", ordinal = 10))
     private void gbw$placeJungleTemplePortal(WorldGenLevel world, StructureManager structureAccessor, ChunkGenerator chunkGenerator, RandomSource random, BoundingBox chunkBox, ChunkPos chunkPos, BlockPos pivot, CallbackInfo ci) {
-        if (random.nextInt(4) != 0) {
-            BlockState frameState = world.registryAccess().lookup(Registries.DIMENSION_TYPE).get().wrapAsHolder(world.dimensionType()).is(BuiltinDimensionTypes.OVERWORLD) ? TheAlterworldBlocks.REINFORCED_DEEPSLATE.defaultBlockState().setValue(ReinforcedDeepslateBlock.CAN_FRACTURE, true) : STONE_SELECTOR.getNext();
+        BlockState frameState = world.registryAccess().lookup(Registries.DIMENSION_TYPE).get().wrapAsHolder(world.dimensionType()).is(BuiltinDimensionTypes.OVERWORLD) ? TheAlterworldBlocks.REINFORCED_DEEPSLATE.defaultBlockState().setValue(ReinforcedDeepslateBlock.CAN_FRACTURE, true) : STONE_SELECTOR.getNext();
 
-            placeBlock(world, frameState, 4, -4, 14, chunkBox);
-            placeBlock(world, frameState, 5, -4, 14, chunkBox);
-            placeBlock(world, frameState, 6, -4, 14, chunkBox);
-            placeBlock(world, frameState, 7, -4, 14, chunkBox);
-            placeBlock(world, frameState, 4, -3, 14, chunkBox);
-            placeBlock(world, frameState, 4, -1, 14, chunkBox);
-            placeBlock(world, frameState, 7, -3, 14, chunkBox);
+        placeBlock(world, frameState, 4, -4, 14, chunkBox);
+        placeBlock(world, frameState, 5, -4, 14, chunkBox);
+        placeBlock(world, frameState, 6, -4, 14, chunkBox);
+        placeBlock(world, frameState, 7, -4, 14, chunkBox);
+        placeBlock(world, frameState, 4, -3, 14, chunkBox);
+        placeBlock(world, frameState, 4, -1, 14, chunkBox);
+        placeBlock(world, frameState, 7, -3, 14, chunkBox);
 
-            placeBlock(world, frameState, 7, -2, 14, chunkBox);
-            placeBlock(world, frameState, 4, -2, 14, chunkBox);
+        placeBlock(world, frameState, 7, -2, 14, chunkBox);
+        placeBlock(world, frameState, 4, -2, 14, chunkBox);
 
-            placeBlock(world, frameState, 7, -1, 14, chunkBox);
-            placeBlock(world, frameState, 4, 0, 14, chunkBox);
-            placeBlock(world, frameState, 5, 0, 14, chunkBox);
-            placeBlock(world, frameState, 6, 0, 14, chunkBox);
-            placeBlock(world, frameState, 7, 0, 14, chunkBox);
+        placeBlock(world, frameState, 7, -1, 14, chunkBox);
+        placeBlock(world, frameState, 4, 0, 14, chunkBox);
+        placeBlock(world, frameState, 5, 0, 14, chunkBox);
+        placeBlock(world, frameState, 6, 0, 14, chunkBox);
+        placeBlock(world, frameState, 7, 0, 14, chunkBox);
 
-            placeBlock(world, Blocks.AIR.defaultBlockState(), 5, -3, 14, chunkBox);
-            placeBlock(world, Blocks.AIR.defaultBlockState(), 6, -3, 14, chunkBox);
-            placeBlock(world, Blocks.AIR.defaultBlockState(), 5, -2, 14, chunkBox);
-            placeBlock(world, Blocks.AIR.defaultBlockState(), 6, -2, 14, chunkBox);
-            placeBlock(world, Blocks.AIR.defaultBlockState(), 5, -1, 14, chunkBox);
-            placeBlock(world, Blocks.AIR.defaultBlockState(), 6, -1, 14, chunkBox);
+        placeBlock(world, Blocks.AIR.defaultBlockState(), 5, -3, 14, chunkBox);
+        placeBlock(world, Blocks.AIR.defaultBlockState(), 6, -3, 14, chunkBox);
+        placeBlock(world, Blocks.AIR.defaultBlockState(), 5, -2, 14, chunkBox);
+        placeBlock(world, Blocks.AIR.defaultBlockState(), 6, -2, 14, chunkBox);
+        placeBlock(world, Blocks.AIR.defaultBlockState(), 5, -1, 14, chunkBox);
+        placeBlock(world, Blocks.AIR.defaultBlockState(), 6, -1, 14, chunkBox);
 
-            generateBox(world, chunkBox, 4, -4, 15, 7, 0, 15, false, random, STONE_SELECTOR);
-            generateBox(world, chunkBox, 4, 1, 13, 7, 1, 15, false, random, STONE_SELECTOR);
-        }
+        generateBox(world, chunkBox, 4, -4, 15, 7, 0, 15, false, random, STONE_SELECTOR);
+        generateBox(world, chunkBox, 4, 1, 13, 7, 1, 15, false, random, STONE_SELECTOR);
     }
 }

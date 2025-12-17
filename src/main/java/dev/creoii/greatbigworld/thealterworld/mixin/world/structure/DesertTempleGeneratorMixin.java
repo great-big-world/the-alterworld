@@ -47,7 +47,7 @@ public abstract class DesertTempleGeneratorMixin extends ScatteredFeaturePiece {
 
     @Inject(method = "postProcess", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/levelgen/structure/structures/DesertPyramidPiece;placeBlock(Lnet/minecraft/world/level/WorldGenLevel;Lnet/minecraft/world/level/block/state/BlockState;IIILnet/minecraft/world/level/levelgen/structure/BoundingBox;)V", ordinal = 32, shift = At.Shift.AFTER))
     private void gbw$placeDesertTemplePortal1(WorldGenLevel world, StructureManager structureAccessor, ChunkGenerator chunkGenerator, RandomSource random, BoundingBox chunkBox, ChunkPos chunkPos, BlockPos pivot, CallbackInfo ci, @Local int l) {
-        if (!hasPlacedPortal && random.nextInt(4) == 0 && l > 7 && l < 17) {
+        if (!hasPlacedPortal && l > 7 && l < 17) {
             BlockState frameState = world.registryAccess().lookup(Registries.DIMENSION_TYPE).get().wrapAsHolder(world.dimensionType()).is(BuiltinDimensionTypes.OVERWORLD) ? TheAlterworldBlocks.REINFORCED_DEEPSLATE.defaultBlockState().setValue(ReinforcedDeepslateBlock.CAN_FRACTURE, true) : Blocks.CHISELED_SANDSTONE.defaultBlockState();
             int x = 4;
 
@@ -81,7 +81,7 @@ public abstract class DesertTempleGeneratorMixin extends ScatteredFeaturePiece {
 
     @Inject(method = "postProcess", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/levelgen/structure/structures/DesertPyramidPiece;placeBlock(Lnet/minecraft/world/level/WorldGenLevel;Lnet/minecraft/world/level/block/state/BlockState;IIILnet/minecraft/world/level/levelgen/structure/BoundingBox;)V", ordinal = 34, shift = At.Shift.AFTER))
     private void gbw$placeDesertTemplePortal2(WorldGenLevel world, StructureManager structureAccessor, ChunkGenerator chunkGenerator, RandomSource random, BoundingBox chunkBox, ChunkPos chunkPos, BlockPos pivot, CallbackInfo ci, @Local int l) {
-        if (!hasPlacedPortal && random.nextBoolean() && l > 7 && l < 17) {
+        if (!hasPlacedPortal && l > 7 && l < 17) {
             BlockState frameState = world.registryAccess().lookup(Registries.DIMENSION_TYPE).get().wrapAsHolder(world.dimensionType()).is(BuiltinDimensionTypes.OVERWORLD) ? TheAlterworldBlocks.REINFORCED_DEEPSLATE.defaultBlockState().setValue(ReinforcedDeepslateBlock.CAN_FRACTURE, true) : Blocks.CHISELED_SANDSTONE.defaultBlockState();
             int x = width - 5;
 

@@ -3,12 +3,14 @@ package dev.creoii.greatbigworld.thealterworld;
 import dev.creoii.greatbigworld.GreatBigWorld;
 import dev.creoii.greatbigworld.data.Mappings;
 import dev.creoii.greatbigworld.registry.GBWRegistries;
+import dev.creoii.greatbigworld.thealterworld.block.ReinforcedDeepslateBlock;
 import dev.creoii.greatbigworld.thealterworld.registry.*;
 import dev.creoii.greatbigworld.thealterworld.util.ExtendedChunkGeneratorSettings;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectionContext;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
+import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
@@ -28,6 +30,9 @@ public class TheAlterworld implements ModInitializer {
         TheAlterworldSoundEvents.register();
         TheAlterworldStructureTriggerDataTypes.register();
         TheAlterworldStructureTriggers.register();
+        TheAlterworldParticleTypes.register();
+
+        PayloadTypeRegistry.playS2C().register(ReinforcedDeepslateBlock.FractureS2C.PACKET_ID, ReinforcedDeepslateBlock.FractureS2C.PACKET_CODEC);
 
         ServerLifecycleEvents.SERVER_STARTING.register(minecraftServer -> {
             Optional<Registry<Mappings>> optionalRegistry = minecraftServer.registryAccess().lookup(GBWRegistries.MAPPINGS_KEY);
