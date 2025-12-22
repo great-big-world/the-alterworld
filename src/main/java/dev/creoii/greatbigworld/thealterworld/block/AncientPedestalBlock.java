@@ -1,13 +1,15 @@
 package dev.creoii.greatbigworld.thealterworld.block;
 
+import dev.creoii.greatbigworld.swordsandshields.util.EnchantmentUtil;
 import dev.creoii.greatbigworld.thealterworld.block.entity.AncientPedestalBlockEntity;
+import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldBlocks;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldSoundEvents;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.InsideBlockEffectApplier;
@@ -34,13 +36,14 @@ import org.jetbrains.annotations.Nullable;
 
 public class AncientPedestalBlock extends Block implements EntityBlock {
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
+    public static final BooleanProperty HAS_OFFERING = BooleanProperty.create("has_offering");
     public static final VoxelShape TOP_SHAPE = Block.box(4f, 6f, 4f, 12f, 12f, 12f);
     public static final VoxelShape BASE_SHAPE = Block.box(0f, 0f, 0f, 16f, 6f, 16f);
     public static final VoxelShape SHAPE = Shapes.or(BASE_SHAPE, TOP_SHAPE);
 
     public AncientPedestalBlock(Properties settings) {
         super(settings);
-        registerDefaultState(getStateDefinition().any().setValue(LIT, false));
+        registerDefaultState(getStateDefinition().any().setValue(LIT, false).setValue(HAS_OFFERING, false));
     }
 
     protected boolean useShapeForLightOcclusion(BlockState state) {
@@ -71,25 +74,26 @@ public class AncientPedestalBlock extends Block implements EntityBlock {
     }
 
     @Override
-    protected InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
         if (state.getValueOrElse(LIT, false))
             return InteractionResult.PASS;
 
         ItemStack stack = player.getItemInHand(player.getUsedItemHand());
-        if (hit.getDirection() == Direction.UP && world.getBlockEntity(pos) instanceof AncientPedestalBlockEntity pedestalBlockEntity) {
+        if (level.getBlockEntity(pos) instanceof AncientPedestalBlockEntity pedestalBlockEntity) {
             Vec3 vec3d = hit.getLocation().subtract(pos.getX(), pos.getY(), pos.getZ());
 
             if (vec3d.x >= .25d && vec3d.x <= .75d && vec3d.z >= .25d && vec3d.z <= .75d) {
-                if (pedestalBlockEntity.getRelic() == null)
+                if (pedestalBlockEntity.getStack().isEmpty())
                     return InteractionResult.PASS;
 
-                ItemStack relic = pedestalBlockEntity.getRelic().getDefaultInstance();
+                ItemStack relic = pedestalBlockEntity.getStack();
                 if (stack.is(relic.getItem()) || stack.isEmpty()) {
-                    if (!world.isClientSide()) {
+                    level.setBlock(pos, state.setValue(HAS_OFFERING, false), 3);
+                    if (!level.isClientSide()) {
                         player.addItem(relic);
-                        world.playSound(player, pos.getX() + .5d, pos.getY() + .5d, pos.getZ() + .5d, TheAlterworldSoundEvents.BLOCK_ANCIENT_PEDESTAL_PLACE, SoundSource.BLOCKS, .8f, .5f);
+                        level.playSound(player, pos.getX() + .5d, pos.getY() + .5d, pos.getZ() + .5d, TheAlterworldSoundEvents.BLOCK_ANCIENT_PEDESTAL_PLACE, SoundSource.BLOCKS, .8f, .5f);
                     }
-                    pedestalBlockEntity.setRelic(null);
+                    pedestalBlockEntity.setStack(ItemStack.EMPTY);
                     return InteractionResult.SUCCESS;
                 }
             }
@@ -98,9 +102,32 @@ public class AncientPedestalBlock extends Block implements EntityBlock {
     }
 
     @Override
+    protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+        if (isOfferable(stack) && state.is(TheAlterworldBlocks.ANCIENT_PEDESTAL) && !state.getValue(BlockStateProperties.LIT)) {
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+            if (blockEntity instanceof AncientPedestalBlockEntity ancientPedestalBlockEntity && ancientPedestalBlockEntity.getStack() == null) {
+                ancientPedestalBlockEntity.setStack(stack);
+                level.setBlock(pos, state.setValue(HAS_OFFERING, true), 3);
+                level.updateNeighbourForOutputSignal(pos, TheAlterworldBlocks.ANCIENT_PEDESTAL);
+                stack.consume(1, player);
+                if (!level.isClientSide()) {
+                    level.playSound(player, pos.getX() + .5d, pos.getY() + .5d, pos.getZ() + .5d, TheAlterworldSoundEvents.BLOCK_ANCIENT_PEDESTAL_PLACE, SoundSource.BLOCKS, 1f, 1f);
+                    level.levelEvent(1503, pos, 0);
+                }
+                return InteractionResult.SUCCESS;
+            }
+        }
+        return super.useItemOn(stack, state, level, pos, player, interactionHand, blockHitResult);
+    }
+
+    private static boolean isOfferable(ItemStack stack) {
+        return EnchantmentUtil.getEnchantmentPower(stack) >= 15;
+    }
+
+    @Override
     public BlockState playerWillDestroy(Level world, BlockPos pos, BlockState state, Player player) {
-        if (world.getBlockEntity(pos) instanceof AncientPedestalBlockEntity ancientPedestalBlock && ancientPedestalBlock.getRelic() != null) {
-            ItemEntity itemEntity = new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), ancientPedestalBlock.getRelic().getDefaultInstance());
+        if (world.getBlockEntity(pos) instanceof AncientPedestalBlockEntity ancientPedestalBlock && ancientPedestalBlock.getStack() != null && !state.getValue(LIT)) {
+            ItemEntity itemEntity = new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), ancientPedestalBlock.getStack());
             itemEntity.setDefaultPickUpDelay();
             world.addFreshEntity(itemEntity);
         }
@@ -118,13 +145,13 @@ public class AncientPedestalBlock extends Block implements EntityBlock {
 
     protected int getComparatorOutput(BlockState state, Level world, BlockPos pos) {
         if (world.getBlockEntity(pos) instanceof AncientPedestalBlockEntity pedestalBlockEntity) {
-            return pedestalBlockEntity.getRelic() == null ? 0 : 15;
+            return pedestalBlockEntity.getStack() == null ? 0 : 15;
         }
         return 0;
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(LIT);
+        builder.add(LIT, HAS_OFFERING);
     }
 }

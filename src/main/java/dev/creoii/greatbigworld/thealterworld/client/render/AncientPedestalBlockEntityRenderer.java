@@ -45,8 +45,8 @@ public record AncientPedestalBlockEntityRenderer(ItemModelResolver itemModelMana
         if (blockEntity.hasLevel())
             state.worldTime = blockEntity.getLevel().getGameTime();
         state.tickProgress = f;
-        if (blockEntity.getRelic() != null)
-            state.update(blockEntity.getRelic().getDefaultInstance(), itemModelManager);
+        if (blockEntity.getStack() != null)
+            state.update(blockEntity.getStack(), itemModelManager);
     }
 
     @Override

@@ -17,7 +17,11 @@ public final class TheAlterworldBlocks {
 
     public static void register() {
         ALTERWORLD_PORTAL = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "alterworld_portal"), AlterworldPortalBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.NETHER_PORTAL).lightLevel(state -> state.getValue(AlterworldPortalBlock.FRACTURED) ? 5 : 3));
-        ANCIENT_PEDESTAL = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "ancient_pedestal"), AncientPedestalBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.REINFORCED_DEEPSLATE).strength(30f, 30f).lightLevel(state -> state.getValue(AncientPedestalBlock.LIT) ? 11 : 0));
-        REINFORCED_DEEPSLATE = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "reinforced_deepslate"), ReinforcedDeepslateBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.REINFORCED_DEEPSLATE));
+        ANCIENT_PEDESTAL = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "ancient_pedestal"), AncientPedestalBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.REINFORCED_DEEPSLATE).strength(30f, 30f).lightLevel(state -> {
+            return state.getValue(AncientPedestalBlock.LIT) ? 11 : state.getValue(AncientPedestalBlock.HAS_OFFERING) ? 5 : 0;
+        }));
+        REINFORCED_DEEPSLATE = RegistryHelper.registerBlock(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "reinforced_deepslate"), ReinforcedDeepslateBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.REINFORCED_DEEPSLATE).lightLevel(state -> {
+            return state.getValue(ReinforcedDeepslateBlock.FRACTURED) ? 5 : 0;
+        }));
     }
 }

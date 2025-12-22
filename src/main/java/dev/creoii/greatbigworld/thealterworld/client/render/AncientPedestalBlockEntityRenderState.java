@@ -15,6 +15,6 @@ public class AncientPedestalBlockEntityRenderState extends BlockEntityRenderStat
     protected float tickProgress;
 
     public void update(ItemStack stack, ItemModelResolver itemModelManager) {
-        itemModelManager.appendItemLayers(this.itemRenderState, stack, ItemDisplayContext.NONE, null, null, 0);
+        itemModelManager.appendItemLayers(itemRenderState, stack, ItemDisplayContext.GROUND, null, null, 0);
     }
 }

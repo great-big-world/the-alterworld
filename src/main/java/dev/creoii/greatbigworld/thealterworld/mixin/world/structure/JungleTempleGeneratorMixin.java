@@ -41,7 +41,8 @@ public abstract class JungleTempleGeneratorMixin extends ScatteredFeaturePiece {
 
     @Inject(method = "postProcess", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/levelgen/structure/structures/JungleTemplePiece;generateAirBox(Lnet/minecraft/world/level/WorldGenLevel;Lnet/minecraft/world/level/levelgen/structure/BoundingBox;IIIIII)V", ordinal = 10))
     private void gbw$placeJungleTemplePortal(WorldGenLevel world, StructureManager structureAccessor, ChunkGenerator chunkGenerator, RandomSource random, BoundingBox chunkBox, ChunkPos chunkPos, BlockPos pivot, CallbackInfo ci) {
-        BlockState frameState = world.registryAccess().lookup(Registries.DIMENSION_TYPE).get().wrapAsHolder(world.dimensionType()).is(BuiltinDimensionTypes.OVERWORLD) ? TheAlterworldBlocks.REINFORCED_DEEPSLATE.defaultBlockState().setValue(ReinforcedDeepslateBlock.CAN_FRACTURE, true) : STONE_SELECTOR.getNext();
+        BlockState runeState = world.registryAccess().lookup(Registries.DIMENSION_TYPE).get().wrapAsHolder(world.dimensionType()).is(BuiltinDimensionTypes.OVERWORLD) ? TheAlterworldBlocks.REINFORCED_DEEPSLATE.defaultBlockState().setValue(ReinforcedDeepslateBlock.CAN_FRACTURE, true).setValue(ReinforcedDeepslateBlock.RUNE, ReinforcedDeepslateBlock.Rune.JUNGLE) : STONE_SELECTOR.getNext();
+        BlockState frameState = world.registryAccess().lookup(Registries.DIMENSION_TYPE).get().wrapAsHolder(world.dimensionType()).is(BuiltinDimensionTypes.OVERWORLD) ? Blocks.REINFORCED_DEEPSLATE.defaultBlockState() : STONE_SELECTOR.getNext();
 
         placeBlock(world, frameState, 4, -4, 14, chunkBox);
         placeBlock(world, frameState, 5, -4, 14, chunkBox);
@@ -51,7 +52,7 @@ public abstract class JungleTempleGeneratorMixin extends ScatteredFeaturePiece {
         placeBlock(world, frameState, 4, -1, 14, chunkBox);
         placeBlock(world, frameState, 7, -3, 14, chunkBox);
 
-        placeBlock(world, frameState, 7, -2, 14, chunkBox);
+        placeBlock(world, runeState, 7, -2, 14, chunkBox);
         placeBlock(world, frameState, 4, -2, 14, chunkBox);
 
         placeBlock(world, frameState, 7, -1, 14, chunkBox);

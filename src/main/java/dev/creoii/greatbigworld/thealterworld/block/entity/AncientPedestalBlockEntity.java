@@ -3,37 +3,39 @@ package dev.creoii.greatbigworld.thealterworld.block.entity;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.world.item.Item;
+import net.minecraft.resources.RegistryOps;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 
 public class AncientPedestalBlockEntity extends BlockEntity {
-    private Item relic;
+    private ItemStack stack;
 
     public AncientPedestalBlockEntity(BlockPos pos, BlockState state) {
         super(TheAlterworldBlockEntityTypes.ANCIENT_PEDESTAL, pos, state);
-        relic = null;
+        stack = ItemStack.EMPTY;
     }
 
-    public Item getRelic() {
-        return relic;
+    public ItemStack getStack() {
+        return stack;
     }
 
-    public void setRelic(Item relic) {
-        this.relic = relic;
+    public void setStack(ItemStack stack) {
+        this.stack = stack;
         setChanged();
     }
 
     public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
         CompoundTag nbt = new CompoundTag();
-        if (relic != null) {
-            nbt.store("relic", BuiltInRegistries.ITEM.byNameCodec(), registries.createSerializationContext(NbtOps.INSTANCE), relic);
+        if (!stack.isEmpty()) {
+            RegistryOps<Tag> registryOps = registries.createSerializationContext(NbtOps.INSTANCE);
+            nbt.store("stack", ItemStack.CODEC, registryOps, stack);
         }
         return nbt;
     }
@@ -44,13 +46,13 @@ public class AncientPedestalBlockEntity extends BlockEntity {
 
     @Override
     protected void loadAdditional(ValueInput view) {
-        relic = view.read("relic", BuiltInRegistries.ITEM.byNameCodec()).orElse(null);
+        stack = view.read("stack", ItemStack.CODEC).orElse(ItemStack.EMPTY);
     }
 
     @Override
     protected void saveAdditional(ValueOutput view) {
-        if (relic != null) {
-            view.store("relic", BuiltInRegistries.ITEM.byNameCodec(), relic);
+        if (!stack.isEmpty()) {
+            view.store("stack", ItemStack.CODEC, stack);
         }
     }
 }

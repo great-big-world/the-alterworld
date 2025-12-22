@@ -19,6 +19,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Tuple;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
@@ -55,7 +56,7 @@ public final class TheAlterworldStructureTriggers {
 
                 positions.entrySet().stream().filter(entry -> !entry.getValue()).forEach(entry -> {
                     BlockState state1 = world.getBlockState(entry.getKey());
-                    if (state1.is(TheAlterworldBlocks.ANCIENT_PEDESTAL) && world.getBlockEntity(entry.getKey()) instanceof AncientPedestalBlockEntity pedestal && pedestal.getRelic() != null) {
+                    if (state1.is(TheAlterworldBlocks.ANCIENT_PEDESTAL) && world.getBlockEntity(entry.getKey()) instanceof AncientPedestalBlockEntity pedestal && pedestal.getStack() != null) {
                         entry.setValue(true);
                         StructureTriggerManager.getServerState(world).setDirty();
                     }
@@ -71,7 +72,7 @@ public final class TheAlterworldStructureTriggers {
                             if (state1.is(TheAlterworldBlocks.ANCIENT_PEDESTAL)) {
                                 BlockEntity blockEntity = world.getBlockEntity(pos1);
                                 if (blockEntity instanceof AncientPedestalBlockEntity ancientPedestalBlockEntity) {
-                                    ancientPedestalBlockEntity.setRelic(null);
+                                    ancientPedestalBlockEntity.setStack(ItemStack.EMPTY);
                                 }
                                 world.setBlockAndUpdate(pos1, state1.setValue(AncientPedestalBlock.LIT, true));
                                 world.neighborChanged(pos1.below(), state1.getBlock(), null);
