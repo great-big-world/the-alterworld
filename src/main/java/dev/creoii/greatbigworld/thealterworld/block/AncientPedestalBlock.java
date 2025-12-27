@@ -105,7 +105,7 @@ public class AncientPedestalBlock extends Block implements EntityBlock {
     protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
         if (isOfferable(stack) && state.is(TheAlterworldBlocks.ANCIENT_PEDESTAL) && !state.getValue(BlockStateProperties.LIT)) {
             BlockEntity blockEntity = level.getBlockEntity(pos);
-            if (blockEntity instanceof AncientPedestalBlockEntity ancientPedestalBlockEntity && ancientPedestalBlockEntity.getStack() == null) {
+            if (blockEntity instanceof AncientPedestalBlockEntity ancientPedestalBlockEntity && ancientPedestalBlockEntity.getStack().isEmpty()) {
                 ancientPedestalBlockEntity.setStack(stack);
                 level.setBlock(pos, state.setValue(HAS_OFFERING, true), 3);
                 level.updateNeighbourForOutputSignal(pos, TheAlterworldBlocks.ANCIENT_PEDESTAL);
@@ -121,7 +121,7 @@ public class AncientPedestalBlock extends Block implements EntityBlock {
     }
 
     private static boolean isOfferable(ItemStack stack) {
-        return EnchantmentUtil.getEnchantmentPower(stack) >= 15;
+        return EnchantmentUtil.getEnchantmentPower(stack) >= 11;
     }
 
     @Override
@@ -145,7 +145,7 @@ public class AncientPedestalBlock extends Block implements EntityBlock {
 
     protected int getComparatorOutput(BlockState state, Level world, BlockPos pos) {
         if (world.getBlockEntity(pos) instanceof AncientPedestalBlockEntity pedestalBlockEntity) {
-            return pedestalBlockEntity.getStack() == null ? 0 : 15;
+            return pedestalBlockEntity.getStack().isEmpty() ? 0 : 15;
         }
         return 0;
     }

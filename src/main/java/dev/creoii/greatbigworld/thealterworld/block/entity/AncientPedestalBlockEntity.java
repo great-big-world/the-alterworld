@@ -4,10 +4,7 @@ import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldBlockEntityT
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.NbtOps;
-import net.minecraft.nbt.Tag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.resources.RegistryOps;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -32,12 +29,7 @@ public class AncientPedestalBlockEntity extends BlockEntity {
     }
 
     public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
-        CompoundTag nbt = new CompoundTag();
-        if (!stack.isEmpty()) {
-            RegistryOps<Tag> registryOps = registries.createSerializationContext(NbtOps.INSTANCE);
-            nbt.store("stack", ItemStack.CODEC, registryOps, stack);
-        }
-        return nbt;
+        return saveWithoutMetadata(registries);
     }
 
     public ClientboundBlockEntityDataPacket getUpdatePacket() {

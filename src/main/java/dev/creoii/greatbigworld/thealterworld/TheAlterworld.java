@@ -13,6 +13,7 @@ import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;
 import java.util.Optional;
@@ -57,5 +58,9 @@ public class TheAlterworld implements ModInitializer {
 
     public static Predicate<BiomeSelectionContext> foundInOverworldLike() {
         return context -> context.canGenerateIn(GreatBigWorld.ALTERWORLD_OPTIONS) || context.canGenerateIn(LevelStem.OVERWORLD);
+    }
+
+    public static boolean disableVariantsInOverworld(EntitySpawnReason reason) {
+        return reason == EntitySpawnReason.NATURAL || reason == EntitySpawnReason.BREEDING || reason == EntitySpawnReason.TRIAL_SPAWNER || reason == EntitySpawnReason.SPAWNER || reason == EntitySpawnReason.SPAWN_ITEM_USE || reason == EntitySpawnReason.CONVERSION || reason == EntitySpawnReason.BUCKET || reason == EntitySpawnReason.DISPENSER || reason == EntitySpawnReason.REINFORCEMENT || reason == EntitySpawnReason.JOCKEY || reason == EntitySpawnReason.EVENT || reason == EntitySpawnReason.CHUNK_GENERATION || reason == EntitySpawnReason.STRUCTURE;
     }
 }

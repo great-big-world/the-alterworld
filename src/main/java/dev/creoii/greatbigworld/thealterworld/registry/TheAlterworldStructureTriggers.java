@@ -56,7 +56,7 @@ public final class TheAlterworldStructureTriggers {
 
                 positions.entrySet().stream().filter(entry -> !entry.getValue()).forEach(entry -> {
                     BlockState state1 = world.getBlockState(entry.getKey());
-                    if (state1.is(TheAlterworldBlocks.ANCIENT_PEDESTAL) && world.getBlockEntity(entry.getKey()) instanceof AncientPedestalBlockEntity pedestal && pedestal.getStack() != null) {
+                    if (state1.is(TheAlterworldBlocks.ANCIENT_PEDESTAL) && state1.getValue(AncientPedestalBlock.HAS_OFFERING)) {
                         entry.setValue(true);
                         StructureTriggerManager.getServerState(world).setDirty();
                     }
@@ -79,7 +79,7 @@ public final class TheAlterworldStructureTriggers {
                             }
                         });
 
-                        PlayerLookup.tracking(world, portalPos).forEach(serverPlayerEntity -> ServerPlayNetworking.send(serverPlayerEntity, new ScreenShakeS2C(2.5f, 320, ScreenShakeManager.Easing.IN_OUT)));
+                        //PlayerLookup.tracking(world, portalPos).forEach(serverPlayerEntity -> ServerPlayNetworking.send(serverPlayerEntity, new ScreenShakeS2C(2.5f, 320, ScreenShakeManager.Easing.IN_OUT)));
 
                         portal.createPortal(world);
                     });
@@ -94,7 +94,7 @@ public final class TheAlterworldStructureTriggers {
 
     @Nullable
     private static Tuple<BlockPos, Direction.Axis> getPortalPosAndAxis(ServerLevel world, BlockPos source) {
-        for (int i = -15; i <= 15; i += 30) { // pos offsets of -15 & 15
+        for (int i : new int[]{-15, 15}) {
             BlockPos x = source.relative(Direction.Axis.X, i);
             BlockPos z = source.relative(Direction.Axis.Z, i);
 

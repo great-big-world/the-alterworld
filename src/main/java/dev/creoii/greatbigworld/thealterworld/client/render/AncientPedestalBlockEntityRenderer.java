@@ -15,6 +15,7 @@ import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
@@ -45,7 +46,7 @@ public record AncientPedestalBlockEntityRenderer(ItemModelResolver itemModelMana
         if (blockEntity.hasLevel())
             state.worldTime = blockEntity.getLevel().getGameTime();
         state.tickProgress = f;
-        if (blockEntity.getStack() != null)
+        if (blockEntity.getStack() != ItemStack.EMPTY)
             state.update(blockEntity.getStack(), itemModelManager);
     }
 
