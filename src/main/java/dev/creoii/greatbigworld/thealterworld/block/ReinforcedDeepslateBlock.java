@@ -4,9 +4,11 @@ import dev.creoii.greatbigworld.GreatBigWorld;
 import dev.creoii.greatbigworld.block.KnowledgeBlock;
 import dev.creoii.greatbigworld.knowledge.Knowledge;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldBlocks;
+import dev.creoii.greatbigworld.thealterworld.world.FracturedAlterworldPortal;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -27,6 +29,8 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.Optional;
+
 public class ReinforcedDeepslateBlock extends KnowledgeBlock {
     public static final EnumProperty<Rune> RUNE = EnumProperty.create("rune", Rune.class);
     public static final BooleanProperty CAN_FRACTURE = BooleanProperty.create("can_fracture");
@@ -46,6 +50,19 @@ public class ReinforcedDeepslateBlock extends KnowledgeBlock {
         return state.getValue(RUNE).getKnowledgePool();
     }
 
+    @Override
+    protected InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult blockHitResult) {
+        InteractionResult result = super.useWithoutItem(state, world, pos, player, blockHitResult);
+        if (!world.isClientSide() && (world.dimension() == Level.OVERWORLD || world.dimension() == GreatBigWorld.ALTERWORLD_KEY)) {
+            Optional<FracturedAlterworldPortal> optional2 = FracturedAlterworldPortal.getNewPortal(world, pos, Direction.Axis.X);
+            if (optional2.isPresent()) { // never present??
+                optional2.get().createPortal(world);
+                return InteractionResult.SUCCESS_SERVER;
+            }
+        }
+        return result;
+    }
+
     public static void fractureAt(ServerLevel level, BlockPos pos, int lifetime) {
         BlockState state = level.getBlockState(pos);
         if (state.is(TheAlterworldBlocks.REINFORCED_DEEPSLATE)) {
@@ -57,13 +74,6 @@ public class ReinforcedDeepslateBlock extends KnowledgeBlock {
                 ServerPlayNetworking.send(serverPlayer, new FractureS2C(vec3, lifetime, rune));
             });
         }
-    }
-
-    @Override
-    protected InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult) {
-        if (!level.isClientSide())
-            fractureAt((ServerLevel) level, blockPos, 250);
-        return super.useWithoutItem(blockState, level, blockPos, player, blockHitResult);
     }
 
     @Override

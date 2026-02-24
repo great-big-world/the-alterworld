@@ -1,17 +1,13 @@
 package dev.creoii.greatbigworld.thealterworld.registry;
 
 import dev.creoii.greatbigworld.GreatBigWorld;
-import dev.creoii.greatbigworld.client.ScreenShakeManager;
 import dev.creoii.greatbigworld.registry.GBWRegistries;
 import dev.creoii.greatbigworld.thealterworld.block.AncientPedestalBlock;
 import dev.creoii.greatbigworld.thealterworld.block.entity.AncientPedestalBlockEntity;
 import dev.creoii.greatbigworld.thealterworld.world.AlterworldPortal;
-import dev.creoii.greatbigworld.util.network.ScreenShakeS2C;
 import dev.creoii.greatbigworld.world.structuretrigger.StructureTrigger;
 import dev.creoii.greatbigworld.thealterworld.world.AncientPortalTriggerData;
 import dev.creoii.greatbigworld.world.structuretrigger.StructureTriggerManager;
-import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
@@ -19,9 +15,12 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Tuple;
+import net.minecraft.world.entity.ai.targeting.TargetingConditions;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
@@ -29,6 +28,7 @@ import java.util.Optional;
 
 public final class TheAlterworldStructureTriggers {
     private static final int[] ANCIENT_PORTAL_OFFSETS = new int[]{-4, -10, 4, 10};
+    private static final TargetingConditions PORTAL_ACTIVATION_TARGETING_CONDITIONS = TargetingConditions.forNonCombat().range(128d).ignoreLineOfSight().ignoreInvisibilityTesting();
 
     public static final Identifier ANCIENT_PORTAL_ACTIVATION_TRIGGER = Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "ancient_portal_activation");
 
@@ -66,6 +66,19 @@ public final class TheAlterworldStructureTriggers {
                     Optional<AlterworldPortal> optional = AlterworldPortal.getNewPortal(world, portalPos, searchAxis);
                     optional.ifPresent(portal -> {
                         world.playSound(null, portalPos, TheAlterworldSoundEvents.STRUCTURE_ANCIENT_CITY_PORTAL_OPEN, SoundSource.AMBIENT, 2f, .75f);
+
+                        Player player = world.getNearestPlayer(PORTAL_ACTIVATION_TARGETING_CONDITIONS, portalPos.getX(), portalPos.getY(), portalPos.getZ());
+                        if (player != null && player.isAlive()) {
+                            BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
+                            for (int x = portalPos.getX() - 32; x <= portalPos.getX() + 32; x += 8) {
+                                for (int y = portalPos.getY() - 8; y <= portalPos.getY() + 8; y += 8) {
+                                    for (int z = portalPos.getZ() - 32; z <= portalPos.getZ() + 32; z += 8) {
+                                        mutable.set(x, y, z);
+                                        world.gameEvent(TheAlterworldGameEvents.ANCIENT_PORTAL_ACTIVATED, mutable, GameEvent.Context.of(player));
+                                    }
+                                }
+                            }
+                        }
 
                         positions.keySet().forEach(pos1 -> {
                             BlockState state1 = world.getBlockState(pos1);

@@ -2,6 +2,7 @@ package dev.creoii.greatbigworld.thealterworld.world;
 
 import dev.creoii.greatbigworld.thealterworld.block.AlterworldPortalBlock;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldBlocks;
+import dev.creoii.greatbigworld.thealterworld.util.TheAlterworldBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
@@ -134,7 +135,7 @@ public record AlterworldPortal(Direction.Axis axis, int foundPortalBlocks, Direc
     }
 
     private static boolean validStateInsidePortal(BlockState state) {
-        return state.isAir() || state.is(Blocks.SCULK_VEIN) || state.is(BlockTags.FIRE) || state.is(TheAlterworldBlocks.ALTERWORLD_PORTAL);
+        return state.isAir() || state.is(Blocks.SCULK_VEIN) || state.is(TheAlterworldBlockTags.ANCIENT_PORTAL_REPLACEABLE) || state.is(BlockTags.FIRE) || state.is(TheAlterworldBlocks.ALTERWORLD_PORTAL);
     }
 
     public boolean isValid() {
