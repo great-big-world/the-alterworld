@@ -2,7 +2,7 @@
   "required": true,
   "minVersion": "0.8",
   "package": "dev.creoii.greatbigworld.thealterworld.mixin",
-  "compatibilityLevel": "JAVA_21",
+  "compatibilityLevel": "JAVA_24",
   "mixins": [
     "ClearAllEffectsConsumeEffectMixin",
     "block.AbstractFireBlockMixin",
