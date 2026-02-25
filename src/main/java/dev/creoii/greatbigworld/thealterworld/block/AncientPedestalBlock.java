@@ -5,6 +5,7 @@ import dev.creoii.greatbigworld.thealterworld.block.entity.AncientPedestalBlockE
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldBlocks;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldSoundEvents;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -134,17 +135,17 @@ public class AncientPedestalBlock extends Block implements EntityBlock {
         return super.playerWillDestroy(world, pos, state, player);
     }
 
-    protected boolean hasAnalogOutputSignal(BlockState state) {
-        return true;
-    }
-
     @Override
     protected boolean isPathfindable(BlockState state, PathComputationType type) {
         return false;
     }
 
-    protected int getComparatorOutput(BlockState state, Level world, BlockPos pos) {
-        if (world.getBlockEntity(pos) instanceof AncientPedestalBlockEntity pedestalBlockEntity) {
+    protected boolean hasAnalogOutputSignal(BlockState blockState) {
+        return true;
+    }
+
+    protected int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos blockPos, Direction direction) {
+        if (level.getBlockEntity(blockPos) instanceof AncientPedestalBlockEntity pedestalBlockEntity) {
             return pedestalBlockEntity.getStack().isEmpty() ? 0 : 15;
         }
         return 0;
