@@ -625,7 +625,8 @@
                     "if_true": {
                       "type": "minecraft:biome",
                       "biome_is": [
-                        "minecraft:mangrove_swamp"
+                        "minecraft:mangrove_swamp",
+                        "great_big_world:alter_mangrove_swamp"
                       ]
                     },
                     "then_run": {
@@ -1706,7 +1707,8 @@
                           "if_true": {
                             "type": "minecraft:biome",
                             "biome_is": [
-                              "minecraft:mangrove_swamp"
+                              "minecraft:mangrove_swamp",
+                              "great_big_world:alter_mangrove_swamp"
                             ]
                           },
                           "then_run": {
@@ -2348,7 +2350,8 @@
                           "if_true": {
                             "type": "minecraft:biome",
                             "biome_is": [
-                              "minecraft:mangrove_swamp"
+                              "minecraft:mangrove_swamp",
+                              "great_big_world:alter_mangrove_swamp"
                             ]
                           },
                           "then_run": {
