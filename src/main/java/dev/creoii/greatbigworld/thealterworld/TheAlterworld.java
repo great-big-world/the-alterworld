@@ -2,6 +2,7 @@ package dev.creoii.greatbigworld.thealterworld;
 
 import dev.creoii.greatbigworld.GreatBigWorld;
 import dev.creoii.greatbigworld.data.Mappings;
+import dev.creoii.greatbigworld.registry.GBWBlockEntityTypes;
 import dev.creoii.greatbigworld.registry.GBWRegistries;
 import dev.creoii.greatbigworld.thealterworld.block.ReinforcedDeepslateBlock;
 import dev.creoii.greatbigworld.thealterworld.registry.*;
@@ -10,12 +11,14 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectionContext;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
+import net.fabricmc.fabric.mixin.lookup.BlockEntityTypeAccessor;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;
+
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -34,6 +37,9 @@ public class TheAlterworld implements ModInitializer {
         TheAlterworldParticleTypes.register();
 
         PayloadTypeRegistry.playS2C().register(ReinforcedDeepslateBlock.FractureS2C.PACKET_ID, ReinforcedDeepslateBlock.FractureS2C.PACKET_CODEC);
+
+        if (GBWBlockEntityTypes.KNOWLEDGE_BLOCK != null)
+            ((BlockEntityTypeAccessor) GBWBlockEntityTypes.KNOWLEDGE_BLOCK).getBlocks().add(TheAlterworldBlocks.REINFORCED_DEEPSLATE);
 
         ServerLifecycleEvents.SERVER_STARTING.register(minecraftServer -> {
             Optional<Registry<Mappings>> optionalRegistry = minecraftServer.registryAccess().lookup(GBWRegistries.MAPPINGS_KEY);

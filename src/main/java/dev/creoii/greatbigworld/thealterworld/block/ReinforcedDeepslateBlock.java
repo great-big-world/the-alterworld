@@ -2,13 +2,12 @@ package dev.creoii.greatbigworld.thealterworld.block;
 
 import dev.creoii.greatbigworld.GreatBigWorld;
 import dev.creoii.greatbigworld.block.KnowledgeBlock;
+import dev.creoii.greatbigworld.block.entity.KnowledgeBlockEntity;
 import dev.creoii.greatbigworld.knowledge.Knowledge;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldBlocks;
-import dev.creoii.greatbigworld.thealterworld.world.FracturedAlterworldPortal;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -22,16 +21,17 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.item.equipment.trim.TrimPatterns;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
+import org.jspecify.annotations.Nullable;
 
-import java.util.Optional;
-
-public class ReinforcedDeepslateBlock extends KnowledgeBlock {
+public class ReinforcedDeepslateBlock extends KnowledgeBlock implements EntityBlock {
     public static final EnumProperty<Rune> RUNE = EnumProperty.create("rune", Rune.class);
     public static final BooleanProperty CAN_FRACTURE = BooleanProperty.create("can_fracture");
     public static final BooleanProperty FRACTURED = BooleanProperty.create("fractured");
@@ -39,6 +39,11 @@ public class ReinforcedDeepslateBlock extends KnowledgeBlock {
     public ReinforcedDeepslateBlock(Properties settings) {
         super(settings);
         registerDefaultState(getStateDefinition().any().setValue(CAN_FRACTURE, false).setValue(FRACTURED, false).setValue(RUNE, Rune.NONE));
+    }
+
+    @Override
+    public @Nullable BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
+        return new KnowledgeBlockEntity(blockPos, blockState);
     }
 
     public static boolean isFractured(BlockState state) {
@@ -51,16 +56,8 @@ public class ReinforcedDeepslateBlock extends KnowledgeBlock {
     }
 
     @Override
-    protected InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult blockHitResult) {
-        InteractionResult result = super.useWithoutItem(state, world, pos, player, blockHitResult);
-        if (!world.isClientSide() && (world.dimension() == Level.OVERWORLD || world.dimension() == GreatBigWorld.ALTERWORLD_KEY)) {
-            Optional<FracturedAlterworldPortal> optional2 = FracturedAlterworldPortal.getNewPortal(world, pos, Direction.Axis.X);
-            if (optional2.isPresent()) { // never present??
-                optional2.get().createPortal(world);
-                return InteractionResult.SUCCESS_SERVER;
-            }
-        }
-        return result;
+    protected InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult) {
+        return InteractionResult.PASS;
     }
 
     public static void fractureAt(ServerLevel level, BlockPos pos, int lifetime) {
@@ -70,6 +67,7 @@ public class ReinforcedDeepslateBlock extends KnowledgeBlock {
 
             String rune = state.getValue(RUNE).getSerializedName();
             Vec3 vec3 = Vec3.atLowerCornerOf(pos).add(0d, .5d, 0d);
+            System.out.println(lifetime);
             PlayerLookup.tracking(level, pos).forEach(serverPlayer -> {
                 ServerPlayNetworking.send(serverPlayer, new FractureS2C(vec3, lifetime, rune));
             });

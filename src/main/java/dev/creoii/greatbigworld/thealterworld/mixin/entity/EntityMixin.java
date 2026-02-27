@@ -49,7 +49,7 @@ public abstract class EntityMixin {
                             BlockState state1 = level.getBlockState(pos);
                             if (state1.getBlock() instanceof ReinforcedDeepslateBlock) {
                                 if (!ReinforcedDeepslateBlock.isFractured(state1)) {
-                                    ReinforcedDeepslateBlock.fractureAt((ServerLevel) level, pos, ticks);
+                                    ReinforcedDeepslateBlock.fractureAt((ServerLevel) level, pos, ticks * 2);
                                 }
                             }
                         });
@@ -58,7 +58,7 @@ public abstract class EntityMixin {
                             BlockState state1 = level.getBlockState(pos);
                             if (state1.getBlock() instanceof ReinforcedDeepslateBlock) {
                                 if (!ReinforcedDeepslateBlock.isFractured(state1)) {
-                                    ReinforcedDeepslateBlock.fractureAt((ServerLevel) level, pos, ticks);
+                                    ReinforcedDeepslateBlock.fractureAt((ServerLevel) level, pos, ticks * 2);
                                 }
                             }
                         });

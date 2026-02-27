@@ -31,7 +31,6 @@ public class AbstractFireBlockMixin {
             if (world.dimension() == Level.OVERWORLD || world.dimension() == GreatBigWorld.ALTERWORLD_KEY) {
                 if (!state.is(Blocks.FIRE))
                     return;
-                BlockState newState = world.getBlockState(pos);
 
                 boolean anyTrue = FireBlock.PROPERTY_BY_DIRECTION.entrySet().stream().anyMatch(directionBooleanPropertyEntry -> state.getValue(directionBooleanPropertyEntry.getValue()));
                 boolean canFracture = false;
@@ -51,12 +50,12 @@ public class AbstractFireBlockMixin {
                 }
 
                 if (canFracture) {
-                    Optional<FracturedAlterworldPortal> optional2 = FracturedAlterworldPortal.getNewPortal(world, pos, Direction.Axis.X);
+                    /*Optional<FracturedAlterworldPortal> optional2 = FracturedAlterworldPortal.getNewPortal(world, pos, Direction.Axis.X);
                     optional2.ifPresent(portal -> {
                         if (newState.getBlock() instanceof FireBlock) {
                             portal.createPortal(world);
                         }
-                    });
+                    });*/
                 }
             }
         }
