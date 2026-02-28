@@ -15,6 +15,7 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -36,7 +37,7 @@ import java.util.Optional;
 public class BrushItemMixin {
     @Inject(method = "onUseTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;playSound(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/core/BlockPos;Lnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;)V", shift = At.Shift.AFTER))
     private void gbw$brushCavePaintings(Level level, LivingEntity livingEntity, ItemStack itemStack, int i, CallbackInfo ci, @Local(ordinal = 1) int j, @Local Player player, @Local BlockState blockState, @Local BlockPos blockPos) {
-        if (!level.isClientSide() && j > 40 && blockState.is(TheAlterworldBlocks.REINFORCED_DEEPSLATE) && (level.dimension() == Level.OVERWORLD || level.dimension() == GreatBigWorld.ALTERWORLD_KEY)) {
+        if (blockState.is(TheAlterworldBlocks.REINFORCED_DEEPSLATE) && (level.dimension() == Level.OVERWORLD || level.dimension() == GreatBigWorld.ALTERWORLD_KEY)) {
             if (blockState.hasProperty(ReinforcedDeepslateBlock.CAN_FRACTURE) && !blockState.getValue(ReinforcedDeepslateBlock.CAN_FRACTURE))
                 return;
 
@@ -46,33 +47,42 @@ public class BrushItemMixin {
                 if (knowledgeBlockEntity.hasPlayerLearned(player))
                     return;
 
-                for (Direction direction : Direction.Plane.HORIZONTAL) {
-                    BlockPos pos1 = blockPos.relative(direction);
+                if (j == 5) {
+                    level.playSound(livingEntity, blockPos, SoundEvents.PORTAL_TRAVEL, SoundSource.BLOCKS, .1f, .5f);
+                } else if (j == 45) {
+                    level.playSound(livingEntity, blockPos, SoundEvents.PORTAL_TRAVEL, SoundSource.BLOCKS, .2f, .75f);
+                } else if (j > 85) {
+                    level.playSound(livingEntity, blockPos, SoundEvents.PORTAL_TRAVEL, SoundSource.BLOCKS, .4f, 1f);
+                    if (!level.isClientSide()) {
+                        for (Direction direction : Direction.Plane.HORIZONTAL) {
+                            BlockPos pos1 = blockPos.relative(direction);
 
-                    BlockState state = level.getBlockState(pos1);
-                    if (!state.canBeReplaced() && !state.isAir())
-                        continue;
+                            BlockState state = level.getBlockState(pos1);
+                            if (!state.canBeReplaced() && !state.isAir())
+                                continue;
 
-                    Optional<FracturedAlterworldPortal> optional2 = FracturedAlterworldPortal.getNewPortal(level, pos1, direction);
+                            Optional<FracturedAlterworldPortal> optional2 = FracturedAlterworldPortal.getNewPortal(level, pos1, direction);
 
-                    if (optional2.isPresent()) {
-                        KnowledgeManager knowledgeManager = KnowledgeManager.getServerState(level.getServer());
-                        Optional<Knowledge> knowledge = knowledgeBlockEntity.getKnowledge() != null ? Optional.of(knowledgeBlockEntity.getKnowledge()) : reinforcedDeepslateBlock.getKnowledgePool(blockState).getRandom(level.random);
-                        if (knowledge.isPresent()) {
-                            if (knowledgeManager.learn(player, knowledge.get())) {
-                                ServerPlayNetworking.send((ServerPlayer) player, new LearnKnowledgeS2C(knowledge.get().type(), Sets.newHashSet(knowledge.get())));
+                            if (optional2.isPresent()) {
+                                KnowledgeManager knowledgeManager = KnowledgeManager.getServerState(level.getServer());
+                                Optional<Knowledge> knowledge = knowledgeBlockEntity.getKnowledge() != null ? Optional.of(knowledgeBlockEntity.getKnowledge()) : reinforcedDeepslateBlock.getKnowledgePool(blockState).getRandom(level.random);
+                                if (knowledge.isPresent()) {
+                                    if (knowledgeManager.learn(player, knowledge.get())) {
+                                        ServerPlayNetworking.send((ServerPlayer) player, new LearnKnowledgeS2C(knowledge.get().type(), Sets.newHashSet(knowledge.get())));
 
-                                EquipmentSlot equipmentSlot = itemStack.equals(player.getItemBySlot(EquipmentSlot.OFFHAND)) ? EquipmentSlot.OFFHAND : EquipmentSlot.MAINHAND;
-                                itemStack.hurtAndBreak(1, player, equipmentSlot);
+                                        EquipmentSlot equipmentSlot = itemStack.equals(player.getItemBySlot(EquipmentSlot.OFFHAND)) ? EquipmentSlot.OFFHAND : EquipmentSlot.MAINHAND;
+                                        itemStack.hurtAndBreak(1, player, equipmentSlot);
 
-                                knowledgeBlockEntity.setKnowledge(knowledge.get());
+                                        knowledgeBlockEntity.setKnowledge(knowledge.get());
+                                    }
+                                }
+
+                                optional2.get().createPortal(level);
+                                level.playSound(null, optional2.get().lowerCorner(), TheAlterworldSoundEvents.STRUCTURE_ANCIENT_CITY_PORTAL_OPEN, SoundSource.AMBIENT, .5f, .75f);
+                                knowledgeBlockEntity.setPlayerLearned(player);
+                                break;
                             }
                         }
-
-                        optional2.get().createPortal(level);
-                        level.playSound(null, optional2.get().lowerCorner(), TheAlterworldSoundEvents.STRUCTURE_ANCIENT_CITY_PORTAL_OPEN, SoundSource.AMBIENT, .5f, .75f);
-                        knowledgeBlockEntity.setPlayerLearned(player);
-                        break;
                     }
                 }
             }
