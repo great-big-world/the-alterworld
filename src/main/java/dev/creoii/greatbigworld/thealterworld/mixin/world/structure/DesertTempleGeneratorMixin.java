@@ -48,8 +48,9 @@ public abstract class DesertTempleGeneratorMixin extends ScatteredFeaturePiece {
     @Inject(method = "postProcess", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/levelgen/structure/structures/DesertPyramidPiece;placeBlock(Lnet/minecraft/world/level/WorldGenLevel;Lnet/minecraft/world/level/block/state/BlockState;IIILnet/minecraft/world/level/levelgen/structure/BoundingBox;)V", ordinal = 32, shift = At.Shift.AFTER))
     private void gbw$placeDesertTemplePortal1(WorldGenLevel world, StructureManager structureAccessor, ChunkGenerator chunkGenerator, RandomSource random, BoundingBox chunkBox, ChunkPos chunkPos, BlockPos pivot, CallbackInfo ci, @Local int l) {
         if (!hasPlacedPortal && l > 7 && l < 17) {
-            BlockState frameState = world.registryAccess().lookup(Registries.DIMENSION_TYPE).get().wrapAsHolder(world.dimensionType()).is(BuiltinDimensionTypes.OVERWORLD) ? TheAlterworldBlocks.REINFORCED_DEEPSLATE.defaultBlockState().setValue(ReinforcedDeepslateBlock.CAN_FRACTURE, true).setValue(ReinforcedDeepslateBlock.RUNE, ReinforcedDeepslateBlock.Rune.DESERT) : Blocks.CHISELED_SANDSTONE.defaultBlockState();
-            int x = 4;
+            BlockState runeState = world.registryAccess().lookup(Registries.DIMENSION_TYPE).get().wrapAsHolder(world.dimensionType()).is(BuiltinDimensionTypes.OVERWORLD) ? TheAlterworldBlocks.REINFORCED_DEEPSLATE.defaultBlockState().setValue(ReinforcedDeepslateBlock.CAN_FRACTURE, true).setValue(ReinforcedDeepslateBlock.RUNE, ReinforcedDeepslateBlock.Rune.DESERT) : Blocks.CHISELED_SANDSTONE.defaultBlockState();
+            BlockState frameState = world.registryAccess().lookup(Registries.DIMENSION_TYPE).get().wrapAsHolder(world.dimensionType()).is(BuiltinDimensionTypes.OVERWORLD) ? Blocks.REINFORCED_DEEPSLATE.defaultBlockState() : Blocks.CHISELED_SANDSTONE.defaultBlockState();
+            int x = width - 5;
 
             placeBlock(world, frameState, x, 0, l, chunkBox);
             placeBlock(world, frameState, x, 0, l - 1, chunkBox);
@@ -58,7 +59,7 @@ public abstract class DesertTempleGeneratorMixin extends ScatteredFeaturePiece {
             placeBlock(world, frameState, x, 1, l, chunkBox);
             placeBlock(world, frameState, x, 1, l - 3, chunkBox);
 
-            placeBlock(world, frameState, x, 2, l - 3, chunkBox);
+            placeBlock(world, runeState, x, 2, l - 3, chunkBox);
             placeBlock(world, frameState, x, 2, l, chunkBox);
 
             placeBlock(world, frameState, x, 3, l, chunkBox);
