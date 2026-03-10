@@ -14,6 +14,7 @@
     "entity.EntityMixin",
     "entity.LivingEntityMixin",
     "entity.PigMixin",
+    "entity.ServerPlayerMixin",
     "entity.SkeletonEntityMixin",
     "entity.WolfMixin",
     "entity.ZombieEntityMixin",
