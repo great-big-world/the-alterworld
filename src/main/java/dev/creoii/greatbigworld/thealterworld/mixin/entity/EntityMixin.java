@@ -40,8 +40,8 @@ public abstract class EntityMixin {
             if (((Entity) (Object) this) instanceof LivingEntity living) {
                 if (state.getValue(AlterworldPortalBlock.FRACTURED)) {
                     living.removeVehicle();
-                    int ticks = getRandom().nextIntBetweenInclusive(620, 3620);
-                    living.addEffect(new MobEffectInstance(TheAlterworldStatusEffects.PLANAR_FRACTURE, ticks /* 30 seconds to 3 minutes */, 0, false, false));
+                    int ticks = getRandom().nextIntBetweenInclusive(620, 3620); /* 30 seconds to 3 minutes */
+                    living.addEffect(new MobEffectInstance(TheAlterworldStatusEffects.PLANAR_FRACTURE, ticks, 0, false, false));
                     level.destroyBlock(blockPosition, false);
 
                     if (state.getValue(BlockStateProperties.HORIZONTAL_AXIS) == Direction.Axis.X) {
