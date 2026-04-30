@@ -61,12 +61,7 @@ public abstract class JungleTempleGeneratorMixin extends ScatteredFeaturePiece {
         placeBlock(world, frameState, 6, 0, 14, chunkBox);
         placeBlock(world, frameState, 7, 0, 14, chunkBox);
 
-        placeBlock(world, Blocks.AIR.defaultBlockState(), 5, -3, 14, chunkBox);
-        placeBlock(world, Blocks.AIR.defaultBlockState(), 6, -3, 14, chunkBox);
-        placeBlock(world, Blocks.AIR.defaultBlockState(), 5, -2, 14, chunkBox);
-        placeBlock(world, Blocks.AIR.defaultBlockState(), 6, -2, 14, chunkBox);
-        placeBlock(world, Blocks.AIR.defaultBlockState(), 5, -1, 14, chunkBox);
-        placeBlock(world, Blocks.AIR.defaultBlockState(), 6, -1, 14, chunkBox);
+        generateAirBox(world, chunkBox, 5, -3, 14, 6, -1, 14);
 
         generateBox(world, chunkBox, 4, -4, 15, 7, 0, 15, false, random, STONE_SELECTOR);
         generateBox(world, chunkBox, 4, 1, 13, 7, 1, 15, false, random, STONE_SELECTOR);

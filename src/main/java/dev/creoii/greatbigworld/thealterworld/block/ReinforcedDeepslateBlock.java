@@ -2,6 +2,7 @@ package dev.creoii.greatbigworld.thealterworld.block;
 
 import dev.creoii.greatbigworld.GreatBigWorld;
 import dev.creoii.greatbigworld.block.KnowledgeBlock;
+import dev.creoii.greatbigworld.block.PlaceableByStructure;
 import dev.creoii.greatbigworld.block.entity.KnowledgeBlockEntity;
 import dev.creoii.greatbigworld.knowledge.Knowledge;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldBlocks;
@@ -13,6 +14,7 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.util.random.WeightedList;
 import net.minecraft.world.InteractionResult;
@@ -20,6 +22,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.item.equipment.trim.TrimPatterns;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -31,7 +34,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.Nullable;
 
-public class ReinforcedDeepslateBlock extends KnowledgeBlock implements EntityBlock {
+public class ReinforcedDeepslateBlock extends KnowledgeBlock implements EntityBlock, PlaceableByStructure {
     public static final EnumProperty<Rune> RUNE = EnumProperty.create("rune", Rune.class);
     public static final BooleanProperty CAN_FRACTURE = BooleanProperty.create("can_fracture");
     public static final BooleanProperty FRACTURED = BooleanProperty.create("fractured");
@@ -60,6 +63,42 @@ public class ReinforcedDeepslateBlock extends KnowledgeBlock implements EntityBl
         return InteractionResult.PASS;
     }
 
+    @Override
+    public void onPlaceByStructure(ServerLevelAccessor level, BlockState state, BlockPos pos) {
+        if (!state.getValue(FRACTURED) && level instanceof ServerLevel level1) {
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+            if (blockEntity instanceof KnowledgeBlockEntity knowledgeBlockEntity) {
+                Vec3 vec3 = Vec3.atLowerCornerOf(pos).add(0d, .5d, 0d);
+                String rune = state.getValue(RUNE).getSerializedName();
+
+                PlayerLookup.tracking(level1, pos).forEach(serverPlayer -> {
+                    if (knowledgeBlockEntity.hasPlayerLearned(serverPlayer))
+                        ServerPlayNetworking.send(serverPlayer, new AncientGlowS2C(vec3, rune));
+                });
+
+                level.scheduleTick(pos, TheAlterworldBlocks.REINFORCED_DEEPSLATE, 30);
+            }
+        }
+    }
+
+    @Override
+    protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource randomSource) {
+        if (!state.getValue(FRACTURED) && state.is(this)) {
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+            if (blockEntity instanceof KnowledgeBlockEntity knowledgeBlockEntity) {
+                Vec3 vec3 = Vec3.atLowerCornerOf(pos).add(0d, .5d, 0d);
+                String rune = state.getValue(RUNE).getSerializedName();
+
+                PlayerLookup.tracking(level, pos).forEach(serverPlayer -> {
+                    if (knowledgeBlockEntity.hasPlayerLearned(serverPlayer))
+                        ServerPlayNetworking.send(serverPlayer, new AncientGlowS2C(vec3, rune));
+                });
+
+                level.scheduleTick(pos, TheAlterworldBlocks.REINFORCED_DEEPSLATE, 30);
+            }
+        }
+    }
+
     public static void fractureAt(ServerLevel level, BlockPos pos, int lifetime) {
         BlockState state = level.getBlockState(pos);
         if (state.is(TheAlterworldBlocks.REINFORCED_DEEPSLATE)) {
@@ -67,7 +106,6 @@ public class ReinforcedDeepslateBlock extends KnowledgeBlock implements EntityBl
 
             String rune = state.getValue(RUNE).getSerializedName();
             Vec3 vec3 = Vec3.atLowerCornerOf(pos).add(0d, .5d, 0d);
-            System.out.println(lifetime);
             PlayerLookup.tracking(level, pos).forEach(serverPlayer -> {
                 ServerPlayNetworking.send(serverPlayer, new FractureS2C(vec3, lifetime, rune));
             });
@@ -100,6 +138,25 @@ public class ReinforcedDeepslateBlock extends KnowledgeBlock implements EntityBl
 
         public WeightedList<Knowledge> getKnowledgePool() {
             return knowledgePool;
+        }
+    }
+
+    public record AncientGlowS2C(Vec3 vec3, String rune) implements CustomPacketPayload {
+        public static final CustomPacketPayload.Type<AncientGlowS2C> PACKET_ID = new CustomPacketPayload.Type<>(Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "ancient_glow"));
+        public static final StreamCodec<RegistryFriendlyByteBuf, AncientGlowS2C> PACKET_CODEC = StreamCodec.ofMember(AncientGlowS2C::write, AncientGlowS2C::new);
+
+        public AncientGlowS2C(RegistryFriendlyByteBuf buf) {
+            this(buf.readVec3(), buf.readUtf());
+        }
+
+        public void write(RegistryFriendlyByteBuf buf) {
+            buf.writeVec3(vec3);
+            buf.writeUtf(rune);
+        }
+
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return PACKET_ID;
         }
     }
 

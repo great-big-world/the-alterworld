@@ -18,13 +18,15 @@ import org.joml.Quaternionf;
 
 public class TranslucentStillParticle extends SingleQuadParticle {
     private final Vec3 rotation;
+    private final boolean fade;
 
-    protected TranslucentStillParticle(ClientLevel clientLevel, double d, double e, double f, double g, double h, double i, TextureAtlasSprite textureAtlasSprite, int lifetime, Vec3 rotation) {
+    protected TranslucentStillParticle(ClientLevel clientLevel, double d, double e, double f, double g, double h, double i, TextureAtlasSprite textureAtlasSprite, int lifetime, Vec3 rotation, boolean fade) {
         super(clientLevel, d, e, f, g, h, i, textureAtlasSprite);
         this.lifetime = lifetime;
         hasPhysics = false;
         this.rotation = rotation;
         quadSize = .5f;
+        this.fade = fade;
     }
 
     @Override
@@ -33,7 +35,8 @@ public class TranslucentStillParticle extends SingleQuadParticle {
 
     @Override
     public void extract(QuadParticleRenderState quadParticleRenderState, Camera camera, float f) {
-        setAlpha((float) (lifetime - age) / lifetime);
+        if (fade)
+            setAlpha((float) (lifetime - age) / lifetime);
 
         Quaternionf quaternionf = new Quaternionf();
 
@@ -57,7 +60,7 @@ public class TranslucentStillParticle extends SingleQuadParticle {
         public static final Factory INSTANCE = new Factory();
 
         public Particle createParticle(TranslucentStillParticleOptions particleOptions, ClientLevel clientLevel, double d, double e, double f, double g, double h, double i, RandomSource randomSource) {
-            return new TranslucentStillParticle(clientLevel, d, e, f, g, h, i, Minecraft.getInstance().getAtlasManager().getAtlasOrThrow(AtlasIds.PARTICLES).getSprite(particleOptions.sprite()), particleOptions.lifetime(), particleOptions.rotation());
+            return new TranslucentStillParticle(clientLevel, d, e, f, g, h, i, Minecraft.getInstance().getAtlasManager().getAtlasOrThrow(AtlasIds.PARTICLES).getSprite(particleOptions.sprite()), particleOptions.lifetime(), particleOptions.rotation(), particleOptions.fade());
         }
     }
 }
