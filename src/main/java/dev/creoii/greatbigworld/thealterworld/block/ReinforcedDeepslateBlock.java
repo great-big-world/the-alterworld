@@ -72,7 +72,7 @@ public class ReinforcedDeepslateBlock extends KnowledgeBlock implements EntityBl
                 String rune = state.getValue(RUNE).getSerializedName();
 
                 PlayerLookup.tracking(level1, pos).forEach(serverPlayer -> {
-                    if (knowledgeBlockEntity.hasPlayerLearned(serverPlayer))
+                    if (!knowledgeBlockEntity.hasPlayerLearned(serverPlayer))
                         ServerPlayNetworking.send(serverPlayer, new AncientGlowS2C(vec3, rune));
                 });
 
@@ -90,7 +90,7 @@ public class ReinforcedDeepslateBlock extends KnowledgeBlock implements EntityBl
                 String rune = state.getValue(RUNE).getSerializedName();
 
                 PlayerLookup.tracking(level, pos).forEach(serverPlayer -> {
-                    if (knowledgeBlockEntity.hasPlayerLearned(serverPlayer))
+                    if (!knowledgeBlockEntity.hasPlayerLearned(serverPlayer))
                         ServerPlayNetworking.send(serverPlayer, new AncientGlowS2C(vec3, rune));
                 });
 
