@@ -66,18 +66,14 @@ public class ReinforcedDeepslateBlock extends KnowledgeBlock implements EntityBl
     @Override
     public void onPlaceByStructure(ServerLevelAccessor level, BlockState state, BlockPos pos) {
         if (!state.getValue(FRACTURED) && level instanceof ServerLevel level1) {
-            BlockEntity blockEntity = level.getBlockEntity(pos);
-            if (blockEntity instanceof KnowledgeBlockEntity knowledgeBlockEntity) {
-                Vec3 vec3 = Vec3.atLowerCornerOf(pos).add(0d, .5d, 0d);
-                String rune = state.getValue(RUNE).getSerializedName();
+            Vec3 vec3 = Vec3.atLowerCornerOf(pos).add(0d, .5d, 0d);
+            String rune = state.getValue(RUNE).getSerializedName();
 
-                PlayerLookup.tracking(level1, pos).forEach(serverPlayer -> {
-                    if (!knowledgeBlockEntity.hasPlayerLearned(serverPlayer))
-                        ServerPlayNetworking.send(serverPlayer, new AncientGlowS2C(vec3, rune));
-                });
+            PlayerLookup.tracking(level1, pos).forEach(serverPlayer -> {
+                ServerPlayNetworking.send(serverPlayer, new AncientGlowS2C(vec3, rune));
+            });
 
-                level.scheduleTick(pos, TheAlterworldBlocks.REINFORCED_DEEPSLATE, 30);
-            }
+            level.scheduleTick(pos, TheAlterworldBlocks.REINFORCED_DEEPSLATE, 30);
         }
     }
 
