@@ -2,7 +2,6 @@ package dev.creoii.greatbigworld.thealterworld.mixin.entity;
 
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import com.mojang.authlib.GameProfile;
-import dev.creoii.greatbigworld.GreatBigWorld;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldStatusEffects;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
@@ -25,7 +24,7 @@ public abstract class ServerPlayerMixin extends Player {
 
     @WrapWithCondition(method = "startSleepInBed", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerPlayer;setRespawnPosition(Lnet/minecraft/server/level/ServerPlayer$RespawnConfig;Z)V"))
     private boolean gbw$dontSetSpawnWhenFractured(ServerPlayer instance, ServerPlayer.RespawnConfig respawnConfig, boolean bl) {
-        return !instance.hasEffect(TheAlterworldStatusEffects.PLANAR_FRACTURE) && instance.level().dimension() == GreatBigWorld.ALTERWORLD_KEY;
+        return !instance.hasEffect(TheAlterworldStatusEffects.PLANAR_FRACTURE);
     }
 
     @Inject(method = "teleport(Lnet/minecraft/world/level/portal/TeleportTransition;)Lnet/minecraft/server/level/ServerPlayer;", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerLevel;getLevelData()Lnet/minecraft/world/level/storage/LevelData;"))
