@@ -21,16 +21,6 @@ public final class TheAlterworldItems {
         });
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.BUILDING_BLOCKS).register(entries -> {
             entries.addAfter(Items.REINFORCED_DEEPSLATE, REINFORCED_DEEPSLATE);
-            entries.getDisplayStacks().replaceAll(stack -> {
-                if (stack.is(Items.REINFORCED_DEEPSLATE))
-                    return REINFORCED_DEEPSLATE.getDefaultInstance();
-                return stack;
-            });
-            entries.getSearchTabStacks().replaceAll(stack -> {
-                if (stack.is(Items.REINFORCED_DEEPSLATE))
-                    return REINFORCED_DEEPSLATE.getDefaultInstance();
-                return stack;
-            });
         });
     }
 }

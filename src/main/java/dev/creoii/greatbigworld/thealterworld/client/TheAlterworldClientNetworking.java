@@ -15,10 +15,10 @@ public final class TheAlterworldClientNetworking {
             String rune = fractureS2C.rune();
             context.client().execute(() -> {
                 Identifier particleId = Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "rune/" + rune);
-                context.client().level.addParticle(new TranslucentStillParticleOptions(particleId, lifetime, new Vec3(0d, 180d, 0d)), vec3.x + .5d, vec3.y, vec3.z - .001d, 0f, 0f, 0f);
-                context.client().level.addParticle(new TranslucentStillParticleOptions(particleId, lifetime), vec3.x + .5d, vec3.y, vec3.z + 1.001d, 0f, 0f, 0f);
-                context.client().level.addParticle(new TranslucentStillParticleOptions(particleId, lifetime, new Vec3(0d, 270, 0d)), vec3.x - .001d, vec3.y, vec3.z + .5d, 0f, 0f, 0f);
-                context.client().level.addParticle(new TranslucentStillParticleOptions(particleId, lifetime, new Vec3(0d, 90, 0d)), vec3.x + 1.001d, vec3.y, vec3.z + .5d, 0f, 0f, 0f);
+                context.client().level.addAlwaysVisibleParticle(new TranslucentStillParticleOptions(particleId, lifetime, new Vec3(0d, 180d, 0d)), vec3.x + .5d, vec3.y, vec3.z - .001d, 0f, 0f, 0f);
+                context.client().level.addAlwaysVisibleParticle(new TranslucentStillParticleOptions(particleId, lifetime), vec3.x + .5d, vec3.y, vec3.z + 1.001d, 0f, 0f, 0f);
+                context.client().level.addAlwaysVisibleParticle(new TranslucentStillParticleOptions(particleId, lifetime, new Vec3(0d, 270, 0d)), vec3.x - .001d, vec3.y, vec3.z + .5d, 0f, 0f, 0f);
+                context.client().level.addAlwaysVisibleParticle(new TranslucentStillParticleOptions(particleId, lifetime, new Vec3(0d, 90, 0d)), vec3.x + 1.001d, vec3.y, vec3.z + .5d, 0f, 0f, 0f);
             });
         });
 
@@ -27,10 +27,10 @@ public final class TheAlterworldClientNetworking {
             String rune = fractureS2C.rune();
             context.client().execute(() -> {
                 Identifier particleId = Identifier.fromNamespaceAndPath(GreatBigWorld.NAMESPACE, "rune/" + rune);
-                context.client().level.addParticle(new TranslucentStillParticleOptions(particleId, 30, new Vec3(0d, 180d, 0d), false), vec3.x + .5d, vec3.y, vec3.z - .001d, 0f, 0f, 0f);
-                context.client().level.addParticle(new TranslucentStillParticleOptions(particleId, 30, false), vec3.x + .5d, vec3.y, vec3.z + 1.001d, 0f, 0f, 0f);
-                context.client().level.addParticle(new TranslucentStillParticleOptions(particleId, 30, new Vec3(0d, 270, 0d), false), vec3.x - .001d, vec3.y, vec3.z + .5d, 0f, 0f, 0f);
-                context.client().level.addParticle(new TranslucentStillParticleOptions(particleId, 30, new Vec3(0d, 90, 0d), false), vec3.x + 1.001d, vec3.y, vec3.z + .5d, 0f, 0f, 0f);
+                context.client().level.addAlwaysVisibleParticle(new TranslucentStillParticleOptions(particleId, 30, new Vec3(0d, 180d, 0d), false), vec3.x + .5d, vec3.y, vec3.z - .001d, 0f, 0f, 0f);
+                context.client().level.addAlwaysVisibleParticle(new TranslucentStillParticleOptions(particleId, 30, false), vec3.x + .5d, vec3.y, vec3.z + 1.001d, 0f, 0f, 0f);
+                context.client().level.addAlwaysVisibleParticle(new TranslucentStillParticleOptions(particleId, 30, new Vec3(0d, 270, 0d), false), vec3.x - .001d, vec3.y, vec3.z + .5d, 0f, 0f, 0f);
+                context.client().level.addAlwaysVisibleParticle(new TranslucentStillParticleOptions(particleId, 30, new Vec3(0d, 90, 0d), false), vec3.x + 1.001d, vec3.y, vec3.z + .5d, 0f, 0f, 0f);
             });
         });
     }

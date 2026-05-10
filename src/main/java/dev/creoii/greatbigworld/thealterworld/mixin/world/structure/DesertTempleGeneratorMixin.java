@@ -48,7 +48,7 @@ public abstract class DesertTempleGeneratorMixin extends ScatteredFeaturePiece {
         placeBlock(worldGenLevel, Blocks.CHISELED_SANDSTONE.defaultBlockState(), i + 1, j + 1, k, boundingBox);
         placeBlock(worldGenLevel, Blocks.CHISELED_SANDSTONE.defaultBlockState(), i, j + 2, k, boundingBox);
 
-        BlockState runeState = worldGenLevel.registryAccess().lookup(Registries.DIMENSION_TYPE).get().wrapAsHolder(worldGenLevel.dimensionType()).is(BuiltinDimensionTypes.OVERWORLD) ? TheAlterworldBlocks.REINFORCED_DEEPSLATE.defaultBlockState().setValue(ReinforcedDeepslateBlock.CAN_FRACTURE, true).setValue(ReinforcedDeepslateBlock.RUNE, ReinforcedDeepslateBlock.Rune.JUNGLE) : Blocks.CHISELED_SANDSTONE.defaultBlockState();
+        BlockState runeState = worldGenLevel.registryAccess().lookup(Registries.DIMENSION_TYPE).get().wrapAsHolder(worldGenLevel.dimensionType()).is(BuiltinDimensionTypes.OVERWORLD) ? TheAlterworldBlocks.REINFORCED_DEEPSLATE.defaultBlockState().setValue(ReinforcedDeepslateBlock.CAN_FRACTURE, true).setValue(ReinforcedDeepslateBlock.RUNE, ReinforcedDeepslateBlock.Rune.DESERT) : Blocks.CHISELED_SANDSTONE.defaultBlockState();
         BlockState frameState = worldGenLevel.registryAccess().lookup(Registries.DIMENSION_TYPE).get().wrapAsHolder(worldGenLevel.dimensionType()).is(BuiltinDimensionTypes.OVERWORLD) ? Blocks.REINFORCED_DEEPSLATE.defaultBlockState() : Blocks.CHISELED_SANDSTONE.defaultBlockState();
 
         placeBlock(worldGenLevel, frameState, i - 1, j - 1, k - 3, boundingBox);
