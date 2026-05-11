@@ -461,7 +461,7 @@
             ],
             "continentalness": [
               -0.19,
-              1
+              0.3
             ],
             "erosion": [
               -0.2225,
@@ -473,36 +473,6 @@
             ],
             "humidity": [
               -0.1,
-              0.1
-            ],
-            "depth": [
-              0,
-              0
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_forest"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -1,
-              -0.26666668
-            ],
-            "continentalness": [
-              -0.19,
-              1
-            ],
-            "erosion": [
-              -0.2225,
-              0.05
-            ],
-            "temperature": [
-              -0.45,
-              -0.15
-            ],
-            "humidity": [
-              0.1,
               0.3
             ],
             "depth": [
@@ -511,7 +481,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -1189,40 +1159,10 @@
             ],
             "temperature": [
               -0.45,
-              0.55
-            ],
-            "humidity": [
-              -0.1,
-              0.1
-            ],
-            "depth": [
-              0,
-              0
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_forest"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -1,
-              -0.7666667
-            ],
-            "continentalness": [
-              -0.11,
-              0.03
-            ],
-            "erosion": [
-              -0.78,
-              0.55
-            ],
-            "temperature": [
-              -0.45,
               -0.15
             ],
             "humidity": [
-              0.1,
+              -0.1,
               0.3
             ],
             "depth": [
@@ -1231,7 +1171,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -1322,6 +1262,36 @@
             "offset": 0
           },
           "biome": "great_big_world:alter_plains"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              -1,
+              -0.7666667
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              -0.78,
+              0.55
+            ],
+            "temperature": [
+              -0.15,
+              0.55
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "depth": [
+              0,
+              0
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:alter_forest"
         },
         {
           "parameters": {
@@ -1579,41 +1549,11 @@
             ],
             "temperature": [
               -0.45,
-              -0.15
-            ],
-            "humidity": [
-              -1,
-              1
-            ],
-            "depth": [
-              0,
-              0
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_swamp"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -1,
-              -0.93333334
-            ],
-            "continentalness": [
-              -0.11,
-              1
-            ],
-            "erosion": [
-              0.55,
-              1
-            ],
-            "temperature": [
-              -0.15,
               0.2
             ],
             "humidity": [
               -1,
-              0.1
+              1
             ],
             "depth": [
               0,
@@ -1622,36 +1562,6 @@
             "offset": 0
           },
           "biome": "great_big_world:alter_swamp"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -1,
-              -0.93333334
-            ],
-            "continentalness": [
-              -0.11,
-              1
-            ],
-            "erosion": [
-              0.55,
-              1
-            ],
-            "temperature": [
-              -0.15,
-              1
-            ],
-            "humidity": [
-              0.1,
-              1
-            ],
-            "depth": [
-              0,
-              0
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_swamp_river"
         },
         {
           "parameters": {
@@ -1673,7 +1583,7 @@
             ],
             "humidity": [
               -1,
-              0.1
+              1
             ],
             "depth": [
               0,
@@ -1961,7 +1871,7 @@
             ],
             "continentalness": [
               0.03,
-              1
+              0.3
             ],
             "erosion": [
               -0.78,
@@ -1973,36 +1883,6 @@
             ],
             "humidity": [
               -0.1,
-              0.1
-            ],
-            "depth": [
-              0,
-              0
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_forest"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -1,
-              -0.93333334
-            ],
-            "continentalness": [
-              0.03,
-              1
-            ],
-            "erosion": [
-              -0.78,
-              0.45
-            ],
-            "temperature": [
-              -0.45,
-              -0.15
-            ],
-            "humidity": [
-              0.1,
               0.3
             ],
             "depth": [
@@ -2011,7 +1891,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -2688,6 +2568,66 @@
               -0.2225
             ],
             "temperature": [
+              -0.45,
+              -0.15
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "depth": [
+              0,
+              0
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:alter_forest"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              -1,
+              -0.93333334
+            ],
+            "continentalness": [
+              0.3,
+              1
+            ],
+            "erosion": [
+              -0.78,
+              -0.2225
+            ],
+            "temperature": [
+              -0.45,
+              -0.15
+            ],
+            "humidity": [
+              0.1,
+              0.3
+            ],
+            "depth": [
+              0,
+              0
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:alter_taiga"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              -1,
+              -0.93333334
+            ],
+            "continentalness": [
+              0.3,
+              1
+            ],
+            "erosion": [
+              -0.78,
+              -0.2225
+            ],
+            "temperature": [
               -0.15,
               0.2
             ],
@@ -2731,7 +2671,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_deep_dark"
+          "biome": "minecraft:pale_garden"
         },
         {
           "parameters": {
@@ -2882,6 +2822,36 @@
             "offset": 0
           },
           "biome": "great_big_world:alter_plains"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              -1,
+              -0.93333334
+            ],
+            "continentalness": [
+              0.3,
+              1
+            ],
+            "erosion": [
+              -0.2225,
+              0.45
+            ],
+            "temperature": [
+              -0.45,
+              -0.15
+            ],
+            "humidity": [
+              -0.1,
+              0.3
+            ],
+            "depth": [
+              0,
+              0
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -3229,40 +3199,10 @@
             ],
             "temperature": [
               -0.45,
-              0.55
-            ],
-            "humidity": [
-              -0.1,
-              0.1
-            ],
-            "depth": [
-              0,
-              0
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_forest"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.93333334,
-              -0.7666667
-            ],
-            "continentalness": [
-              -0.19,
-              -0.11
-            ],
-            "erosion": [
-              -1,
-              1
-            ],
-            "temperature": [
-              -0.45,
               -0.15
             ],
             "humidity": [
-              0.1,
+              -0.1,
               0.3
             ],
             "depth": [
@@ -3271,7 +3211,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -3362,6 +3302,36 @@
             "offset": 0
           },
           "biome": "great_big_world:alter_plains"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              -0.93333334,
+              -0.7666667
+            ],
+            "continentalness": [
+              -0.19,
+              -0.11
+            ],
+            "erosion": [
+              -1,
+              1
+            ],
+            "temperature": [
+              -0.15,
+              0.55
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "depth": [
+              0,
+              0
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:alter_forest"
         },
         {
           "parameters": {
@@ -3559,40 +3529,10 @@
             ],
             "temperature": [
               -0.45,
-              0.55
-            ],
-            "humidity": [
-              -0.1,
-              0.1
-            ],
-            "depth": [
-              0,
-              0
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_forest"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.93333334,
-              -0.4
-            ],
-            "continentalness": [
-              -0.11,
-              1
-            ],
-            "erosion": [
-              0.55,
-              1
-            ],
-            "temperature": [
-              -0.45,
               -0.15
             ],
             "humidity": [
-              0.1,
+              -0.1,
               0.3
             ],
             "depth": [
@@ -3601,7 +3541,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -3692,6 +3632,36 @@
             "offset": 0
           },
           "biome": "great_big_world:alter_plains"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              -0.93333334,
+              -0.4
+            ],
+            "continentalness": [
+              -0.11,
+              1
+            ],
+            "erosion": [
+              0.55,
+              1
+            ],
+            "temperature": [
+              -0.15,
+              0.55
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "depth": [
+              0,
+              0
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:alter_forest"
         },
         {
           "parameters": {
@@ -4147,7 +4117,7 @@
           "parameters": {
             "weirdness": [
               -0.93333334,
-              -0.05
+              -0.4
             ],
             "continentalness": [
               0.03,
@@ -4155,7 +4125,7 @@
             ],
             "erosion": [
               -0.375,
-              0.45
+              -0.2225
             ],
             "temperature": [
               -0.45,
@@ -4177,7 +4147,7 @@
           "parameters": {
             "weirdness": [
               -0.93333334,
-              -0.05
+              -0.4
             ],
             "continentalness": [
               0.03,
@@ -4185,7 +4155,7 @@
             ],
             "erosion": [
               -0.375,
-              0.45
+              -0.2225
             ],
             "temperature": [
               -0.45,
@@ -4291,7 +4261,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_dark_forest"
+          "biome": "minecraft:pale_garden"
         },
         {
           "parameters": {
@@ -4352,6 +4322,36 @@
             "offset": 0
           },
           "biome": "great_big_world:alter_plains"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              -0.93333334,
+              -0.05
+            ],
+            "continentalness": [
+              0.03,
+              1
+            ],
+            "erosion": [
+              0.05,
+              0.45
+            ],
+            "temperature": [
+              -0.45,
+              -0.15
+            ],
+            "humidity": [
+              -0.1,
+              0.3
+            ],
+            "depth": [
+              0,
+              0
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -4638,6 +4638,66 @@
               0.05
             ],
             "temperature": [
+              -0.45,
+              -0.15
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "depth": [
+              0,
+              0
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:alter_forest"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              -0.93333334,
+              -0.4
+            ],
+            "continentalness": [
+              0.3,
+              1
+            ],
+            "erosion": [
+              -0.2225,
+              0.05
+            ],
+            "temperature": [
+              -0.45,
+              -0.15
+            ],
+            "humidity": [
+              0.1,
+              0.3
+            ],
+            "depth": [
+              0,
+              0
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:alter_taiga"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              -0.93333334,
+              -0.4
+            ],
+            "continentalness": [
+              0.3,
+              1
+            ],
+            "erosion": [
+              -0.2225,
+              0.05
+            ],
+            "temperature": [
               -0.15,
               0.2
             ],
@@ -4681,7 +4741,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_dark_forest"
+          "biome": "minecraft:pale_garden"
         },
         {
           "parameters": {
@@ -4969,40 +5029,10 @@
             ],
             "temperature": [
               -0.45,
-              0.55
-            ],
-            "humidity": [
-              -0.1,
-              0.1
-            ],
-            "depth": [
-              0,
-              0
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_forest"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.7666667,
-              -0.4
-            ],
-            "continentalness": [
-              -0.19,
-              0.03
-            ],
-            "erosion": [
-              -0.78,
-              0.45
-            ],
-            "temperature": [
-              -0.45,
               -0.15
             ],
             "humidity": [
-              0.1,
+              -0.1,
               0.3
             ],
             "depth": [
@@ -5011,7 +5041,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -5102,6 +5132,36 @@
             "offset": 0
           },
           "biome": "great_big_world:alter_plains"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              -0.7666667,
+              -0.4
+            ],
+            "continentalness": [
+              -0.19,
+              0.03
+            ],
+            "erosion": [
+              -0.78,
+              0.45
+            ],
+            "temperature": [
+              -0.15,
+              0.55
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "depth": [
+              0,
+              0
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:alter_forest"
         },
         {
           "parameters": {
@@ -5629,40 +5689,10 @@
             ],
             "temperature": [
               -0.45,
-              0.55
-            ],
-            "humidity": [
-              -0.1,
-              0.1
-            ],
-            "depth": [
-              0,
-              0
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_forest"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.7666667,
-              -0.4
-            ],
-            "continentalness": [
-              -0.19,
-              1
-            ],
-            "erosion": [
-              0.55,
-              1
-            ],
-            "temperature": [
-              -0.45,
               -0.15
             ],
             "humidity": [
-              0.1,
+              -0.1,
               0.3
             ],
             "depth": [
@@ -5671,7 +5701,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -5762,6 +5792,36 @@
             "offset": 0
           },
           "biome": "great_big_world:alter_plains"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              -0.7666667,
+              -0.4
+            ],
+            "continentalness": [
+              -0.19,
+              1
+            ],
+            "erosion": [
+              0.55,
+              1
+            ],
+            "temperature": [
+              -0.15,
+              0.55
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "depth": [
+              0,
+              0
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:alter_forest"
         },
         {
           "parameters": {
@@ -6139,40 +6199,10 @@
             ],
             "temperature": [
               -0.45,
-              0.55
-            ],
-            "humidity": [
-              -0.1,
-              0.1
-            ],
-            "depth": [
-              0,
-              0
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_forest"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.56666666,
-              -0.4
-            ],
-            "continentalness": [
-              -0.19,
-              -0.11
-            ],
-            "erosion": [
-              -1,
-              1
-            ],
-            "temperature": [
-              -0.45,
               -0.15
             ],
             "humidity": [
-              0.1,
+              -0.1,
               0.3
             ],
             "depth": [
@@ -6181,7 +6211,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -6272,6 +6302,36 @@
             "offset": 0
           },
           "biome": "great_big_world:alter_plains"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              -0.56666666,
+              -0.4
+            ],
+            "continentalness": [
+              -0.19,
+              -0.11
+            ],
+            "erosion": [
+              -1,
+              1
+            ],
+            "temperature": [
+              -0.15,
+              0.55
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "depth": [
+              0,
+              0
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:alter_forest"
         },
         {
           "parameters": {
@@ -6799,40 +6859,10 @@
             ],
             "temperature": [
               -0.45,
-              0.55
-            ],
-            "humidity": [
-              -0.1,
-              0.1
-            ],
-            "depth": [
-              0,
-              0
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_forest"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.56666666,
-              -0.4
-            ],
-            "continentalness": [
-              -0.11,
-              0.03
-            ],
-            "erosion": [
-              0.45,
-              1
-            ],
-            "temperature": [
-              -0.45,
               -0.15
             ],
             "humidity": [
-              0.1,
+              -0.1,
               0.3
             ],
             "depth": [
@@ -6841,7 +6871,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -6932,6 +6962,36 @@
             "offset": 0
           },
           "biome": "great_big_world:alter_plains"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              -0.56666666,
+              -0.4
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              0.45,
+              1
+            ],
+            "temperature": [
+              -0.15,
+              0.55
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "depth": [
+              0,
+              0
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:alter_forest"
         },
         {
           "parameters": {
@@ -7429,40 +7489,10 @@
             ],
             "temperature": [
               -0.45,
-              0.55
-            ],
-            "humidity": [
-              -0.1,
-              0.1
-            ],
-            "depth": [
-              0,
-              0
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_forest"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.4,
-              -0.05
-            ],
-            "continentalness": [
-              -0.11,
-              0.03
-            ],
-            "erosion": [
-              -0.78,
-              0.55
-            ],
-            "temperature": [
-              -0.45,
               -0.15
             ],
             "humidity": [
-              0.1,
+              -0.1,
               0.3
             ],
             "depth": [
@@ -7471,7 +7501,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -7562,6 +7592,36 @@
             "offset": 0
           },
           "biome": "great_big_world:alter_plains"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              -0.4,
+              -0.05
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              -0.78,
+              0.55
+            ],
+            "temperature": [
+              -0.15,
+              0.55
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "depth": [
+              0,
+              0
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:alter_forest"
         },
         {
           "parameters": {
@@ -7729,41 +7789,11 @@
             ],
             "temperature": [
               -0.45,
-              -0.15
-            ],
-            "humidity": [
-              -1,
-              1
-            ],
-            "depth": [
-              0,
-              0
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_swamp"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.4,
-              0.4
-            ],
-            "continentalness": [
-              -0.11,
-              1
-            ],
-            "erosion": [
-              0.55,
-              1
-            ],
-            "temperature": [
-              -0.15,
               0.2
             ],
             "humidity": [
               -1,
-              0.1
+              1
             ],
             "depth": [
               0,
@@ -7772,36 +7802,6 @@
             "offset": 0
           },
           "biome": "great_big_world:alter_swamp"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.4,
-              0.4
-            ],
-            "continentalness": [
-              -0.11,
-              1
-            ],
-            "erosion": [
-              0.55,
-              1
-            ],
-            "temperature": [
-              -0.15,
-              1
-            ],
-            "humidity": [
-              0.1,
-              1
-            ],
-            "depth": [
-              0,
-              0
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_swamp_river"
         },
         {
           "parameters": {
@@ -7823,7 +7823,7 @@
             ],
             "humidity": [
               -1,
-              0.1
+              1
             ],
             "depth": [
               0,
@@ -8051,7 +8051,7 @@
             ],
             "continentalness": [
               0.03,
-              1
+              0.3
             ],
             "erosion": [
               -0.78,
@@ -8063,36 +8063,6 @@
             ],
             "humidity": [
               -0.1,
-              0.1
-            ],
-            "depth": [
-              0,
-              0
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_forest"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.4,
-              -0.05
-            ],
-            "continentalness": [
-              0.03,
-              1
-            ],
-            "erosion": [
-              -0.78,
-              0.45
-            ],
-            "temperature": [
-              -0.45,
-              -0.15
-            ],
-            "humidity": [
-              0.1,
               0.3
             ],
             "depth": [
@@ -8101,7 +8071,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -8418,6 +8388,66 @@
               -0.2225
             ],
             "temperature": [
+              -0.45,
+              -0.15
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "depth": [
+              0,
+              0
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:alter_forest"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              -0.4,
+              -0.26666668
+            ],
+            "continentalness": [
+              0.3,
+              1
+            ],
+            "erosion": [
+              -0.78,
+              -0.2225
+            ],
+            "temperature": [
+              -0.45,
+              -0.15
+            ],
+            "humidity": [
+              0.1,
+              0.3
+            ],
+            "depth": [
+              0,
+              0
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:alter_taiga"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              -0.4,
+              -0.26666668
+            ],
+            "continentalness": [
+              0.3,
+              1
+            ],
+            "erosion": [
+              -0.78,
+              -0.2225
+            ],
+            "temperature": [
               -0.15,
               0.2
             ],
@@ -8461,7 +8491,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_dark_forest"
+          "biome": "minecraft:pale_garden"
         },
         {
           "parameters": {
@@ -8582,6 +8612,36 @@
             "offset": 0
           },
           "biome": "great_big_world:alter_plains"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              -0.4,
+              -0.05
+            ],
+            "continentalness": [
+              0.3,
+              1
+            ],
+            "erosion": [
+              -0.2225,
+              0.45
+            ],
+            "temperature": [
+              -0.45,
+              -0.15
+            ],
+            "humidity": [
+              -0.1,
+              0.3
+            ],
+            "depth": [
+              0,
+              0
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -8989,40 +9049,10 @@
             ],
             "temperature": [
               -0.45,
-              0.55
-            ],
-            "humidity": [
-              -0.1,
-              0.1
-            ],
-            "depth": [
-              0,
-              0
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_forest"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.26666668,
-              -0.05
-            ],
-            "continentalness": [
-              -0.11,
-              1
-            ],
-            "erosion": [
-              -1,
-              0.55
-            ],
-            "temperature": [
-              -0.45,
               -0.15
             ],
             "humidity": [
-              0.1,
+              -0.1,
               0.3
             ],
             "depth": [
@@ -9031,7 +9061,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -9122,6 +9152,36 @@
             "offset": 0
           },
           "biome": "great_big_world:alter_plains"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              -0.26666668,
+              -0.05
+            ],
+            "continentalness": [
+              -0.11,
+              1
+            ],
+            "erosion": [
+              -1,
+              0.55
+            ],
+            "temperature": [
+              -0.15,
+              0.55
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "depth": [
+              0,
+              0
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:alter_forest"
         },
         {
           "parameters": {
@@ -9383,396 +9443,6 @@
             ],
             "humidity": [
               -1,
-              0.3
-            ],
-            "depth": [
-              0,
-              0
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_frozen_river"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.05,
-              0.05
-            ],
-            "continentalness": [
-              -0.19,
-              -0.11
-            ],
-            "erosion": [
-              -1,
-              1
-            ],
-            "temperature": [
-              -1,
-              -0.15
-            ],
-            "humidity": [
-              0.3,
-              1
-            ],
-            "depth": [
-              0,
-              0
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_cold_river"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.05,
-              0.05
-            ],
-            "continentalness": [
-              -0.19,
-              -0.11
-            ],
-            "erosion": [
-              -1,
-              1
-            ],
-            "temperature": [
-              -0.45,
-              0.55
-            ],
-            "humidity": [
-              -1,
-              0.1
-            ],
-            "depth": [
-              0,
-              0
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_river"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.05,
-              0.05
-            ],
-            "continentalness": [
-              -0.19,
-              -0.11
-            ],
-            "erosion": [
-              -1,
-              1
-            ],
-            "temperature": [
-              -0.45,
-              -0.15
-            ],
-            "humidity": [
-              0.1,
-              1
-            ],
-            "depth": [
-              0,
-              0
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_cold_river"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.05,
-              0.05
-            ],
-            "continentalness": [
-              -0.19,
-              -0.11
-            ],
-            "erosion": [
-              -1,
-              1
-            ],
-            "temperature": [
-              -0.15,
-              0.2
-            ],
-            "humidity": [
-              0.1,
-              1
-            ],
-            "depth": [
-              0,
-              0
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_river"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.05,
-              0.05
-            ],
-            "continentalness": [
-              -0.19,
-              -0.11
-            ],
-            "erosion": [
-              -1,
-              1
-            ],
-            "temperature": [
-              0.2,
-              0.55
-            ],
-            "humidity": [
-              0.1,
-              1
-            ],
-            "depth": [
-              0,
-              0
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_jungle_river"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.05,
-              0.05
-            ],
-            "continentalness": [
-              -0.19,
-              -0.11
-            ],
-            "erosion": [
-              -1,
-              1
-            ],
-            "temperature": [
-              0.55,
-              1
-            ],
-            "humidity": [
-              -1,
-              1
-            ],
-            "depth": [
-              0,
-              0
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_desert_river"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.05,
-              0.05
-            ],
-            "continentalness": [
-              -0.11,
-              0.03
-            ],
-            "erosion": [
-              -1,
-              0.55
-            ],
-            "temperature": [
-              -1,
-              -0.15
-            ],
-            "humidity": [
-              0.3,
-              1
-            ],
-            "depth": [
-              0,
-              0
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_cold_river"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.05,
-              0.05
-            ],
-            "continentalness": [
-              -0.11,
-              0.03
-            ],
-            "erosion": [
-              -1,
-              0.55
-            ],
-            "temperature": [
-              -0.45,
-              0.55
-            ],
-            "humidity": [
-              -1,
-              0.1
-            ],
-            "depth": [
-              0,
-              0
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_river"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.05,
-              0.05
-            ],
-            "continentalness": [
-              -0.11,
-              0.03
-            ],
-            "erosion": [
-              -1,
-              0.55
-            ],
-            "temperature": [
-              -0.45,
-              -0.15
-            ],
-            "humidity": [
-              0.1,
-              1
-            ],
-            "depth": [
-              0,
-              0
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_cold_river"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.05,
-              0.05
-            ],
-            "continentalness": [
-              -0.11,
-              0.03
-            ],
-            "erosion": [
-              -1,
-              0.55
-            ],
-            "temperature": [
-              -0.15,
-              0.2
-            ],
-            "humidity": [
-              0.1,
-              1
-            ],
-            "depth": [
-              0,
-              0
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_river"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.05,
-              0.05
-            ],
-            "continentalness": [
-              -0.11,
-              0.03
-            ],
-            "erosion": [
-              -1,
-              0.55
-            ],
-            "temperature": [
-              0.2,
-              0.55
-            ],
-            "humidity": [
-              0.1,
-              1
-            ],
-            "depth": [
-              0,
-              0
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_jungle_river"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.05,
-              0.05
-            ],
-            "continentalness": [
-              -0.11,
-              0.03
-            ],
-            "erosion": [
-              -1,
-              0.55
-            ],
-            "temperature": [
-              0.55,
-              1
-            ],
-            "humidity": [
-              -1,
-              1
-            ],
-            "depth": [
-              0,
-              0
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_desert_river"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.05,
-              0.05
-            ],
-            "continentalness": [
-              -0.11,
-              1
-            ],
-            "erosion": [
-              0.55,
-              1
-            ],
-            "temperature": [
-              -1,
-              -0.45
-            ],
-            "humidity": [
-              0.3,
               1
             ],
             "depth": [
@@ -9782,6 +9452,66 @@
             "offset": 0
           },
           "biome": "great_big_world:alter_frozen_river"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              -0.05,
+              0.05
+            ],
+            "continentalness": [
+              -0.19,
+              -0.11
+            ],
+            "erosion": [
+              -1,
+              1
+            ],
+            "temperature": [
+              -0.45,
+              1
+            ],
+            "humidity": [
+              -1,
+              1
+            ],
+            "depth": [
+              0,
+              0
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:alter_river"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              -0.05,
+              0.05
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              -1,
+              0.55
+            ],
+            "temperature": [
+              -0.45,
+              1
+            ],
+            "humidity": [
+              -1,
+              1
+            ],
+            "depth": [
+              0,
+              0
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:alter_river"
         },
         {
           "parameters": {
@@ -9863,6 +9593,36 @@
             ],
             "humidity": [
               -0.1,
+              0.1
+            ],
+            "depth": [
+              0,
+              0
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:snowy_aspen_forest"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              -0.05,
+              0.05
+            ],
+            "continentalness": [
+              0.03,
+              1
+            ],
+            "erosion": [
+              -1,
+              -0.375
+            ],
+            "temperature": [
+              -1,
+              -0.45
+            ],
+            "humidity": [
+              0.1,
               0.3
             ],
             "depth": [
@@ -9991,7 +9751,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -10373,7 +10133,7 @@
             ],
             "humidity": [
               -1,
-              0.3
+              1
             ],
             "depth": [
               0,
@@ -10398,101 +10158,11 @@
               0.55
             ],
             "temperature": [
-              -1,
-              -0.15
-            ],
-            "humidity": [
-              0.3,
-              1
-            ],
-            "depth": [
-              0,
-              0
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_cold_river"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.05,
-              0.05
-            ],
-            "continentalness": [
-              0.03,
-              1
-            ],
-            "erosion": [
-              -0.375,
-              0.55
-            ],
-            "temperature": [
               -0.45,
-              0.55
+              1
             ],
             "humidity": [
               -1,
-              0.1
-            ],
-            "depth": [
-              0,
-              0
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_river"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.05,
-              0.05
-            ],
-            "continentalness": [
-              0.03,
-              1
-            ],
-            "erosion": [
-              -0.375,
-              0.55
-            ],
-            "temperature": [
-              -0.45,
-              -0.15
-            ],
-            "humidity": [
-              0.1,
-              1
-            ],
-            "depth": [
-              0,
-              0
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_cold_river"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.05,
-              0.05
-            ],
-            "continentalness": [
-              0.03,
-              1
-            ],
-            "erosion": [
-              -0.375,
-              0.55
-            ],
-            "temperature": [
-              -0.15,
-              0.2
-            ],
-            "humidity": [
-              0.1,
               1
             ],
             "depth": [
@@ -10502,66 +10172,6 @@
             "offset": 0
           },
           "biome": "great_big_world:alter_river"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.05,
-              0.05
-            ],
-            "continentalness": [
-              0.03,
-              1
-            ],
-            "erosion": [
-              -0.375,
-              0.55
-            ],
-            "temperature": [
-              0.2,
-              0.55
-            ],
-            "humidity": [
-              0.1,
-              1
-            ],
-            "depth": [
-              0,
-              0
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_jungle_river"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.05,
-              0.05
-            ],
-            "continentalness": [
-              0.03,
-              1
-            ],
-            "erosion": [
-              -0.375,
-              0.55
-            ],
-            "temperature": [
-              0.55,
-              1
-            ],
-            "humidity": [
-              -1,
-              1
-            ],
-            "depth": [
-              0,
-              0
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_desert_river"
         },
         {
           "parameters": {
@@ -10763,6 +10373,36 @@
             ],
             "humidity": [
               -0.1,
+              0.1
+            ],
+            "depth": [
+              0,
+              0
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:snowy_aspen_forest"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              0.05,
+              0.56666666
+            ],
+            "continentalness": [
+              -0.19,
+              0.03
+            ],
+            "erosion": [
+              0.45,
+              0.55
+            ],
+            "temperature": [
+              -1,
+              -0.45
+            ],
+            "humidity": [
+              0.1,
               0.3
             ],
             "depth": [
@@ -10891,7 +10531,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -11213,6 +10853,36 @@
             ],
             "humidity": [
               -0.1,
+              0.1
+            ],
+            "depth": [
+              0,
+              0
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:snowy_aspen_forest"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              0.05,
+              0.26666668
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              -1,
+              1
+            ],
+            "temperature": [
+              -1,
+              -0.45
+            ],
+            "humidity": [
+              0.1,
               0.3
             ],
             "depth": [
@@ -11341,7 +11011,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -11933,6 +11603,36 @@
             ],
             "humidity": [
               -0.1,
+              0.1
+            ],
+            "depth": [
+              0,
+              0
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:snowy_aspen_forest"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              0.05,
+              0.26666668
+            ],
+            "continentalness": [
+              0.03,
+              1
+            ],
+            "erosion": [
+              -0.375,
+              1
+            ],
+            "temperature": [
+              -1,
+              -0.45
+            ],
+            "humidity": [
+              0.1,
               0.3
             ],
             "depth": [
@@ -12383,6 +12083,36 @@
             ],
             "humidity": [
               -0.1,
+              0.1
+            ],
+            "depth": [
+              0,
+              0
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:snowy_aspen_forest"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              0.26666668,
+              0.56666666
+            ],
+            "continentalness": [
+              -0.19,
+              0.03
+            ],
+            "erosion": [
+              -0.2225,
+              1
+            ],
+            "temperature": [
+              -1,
+              -0.45
+            ],
+            "humidity": [
+              0.1,
               0.3
             ],
             "depth": [
@@ -12511,7 +12241,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -13321,7 +13051,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -13703,6 +13433,36 @@
             ],
             "humidity": [
               -0.1,
+              0.1
+            ],
+            "depth": [
+              0,
+              0
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:snowy_aspen_forest"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              0.26666668,
+              0.56666666
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              -0.375,
+              1
+            ],
+            "temperature": [
+              -1,
+              -0.45
+            ],
+            "humidity": [
+              0.1,
               0.3
             ],
             "depth": [
@@ -13981,7 +13741,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -14333,6 +14093,36 @@
             ],
             "humidity": [
               -0.1,
+              0.1
+            ],
+            "depth": [
+              0,
+              0
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:snowy_aspen_forest"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              0.26666668,
+              1
+            ],
+            "continentalness": [
+              0.03,
+              1
+            ],
+            "erosion": [
+              -0.375,
+              0.45
+            ],
+            "temperature": [
+              -1,
+              -0.45
+            ],
+            "humidity": [
+              0.1,
               0.3
             ],
             "depth": [
@@ -14573,6 +14363,36 @@
             ],
             "humidity": [
               -0.1,
+              0.1
+            ],
+            "depth": [
+              0,
+              0
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:snowy_aspen_forest"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              0.26666668,
+              1
+            ],
+            "continentalness": [
+              0.03,
+              1
+            ],
+            "erosion": [
+              0.55,
+              1
+            ],
+            "temperature": [
+              -1,
+              -0.45
+            ],
+            "humidity": [
+              0.1,
               0.3
             ],
             "depth": [
@@ -14791,7 +14611,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_dark_forest"
+          "biome": "minecraft:pale_garden"
         },
         {
           "parameters": {
@@ -14925,36 +14745,6 @@
             ],
             "erosion": [
               -0.375,
-              0.45
-            ],
-            "temperature": [
-              -1,
-              -0.45
-            ],
-            "humidity": [
-              0.1,
-              0.3
-            ],
-            "depth": [
-              0,
-              0
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_snowy_taiga"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              0.26666668,
-              1
-            ],
-            "continentalness": [
-              0.3,
-              1
-            ],
-            "erosion": [
-              -0.375,
               -0.2225
             ],
             "temperature": [
@@ -14993,7 +14783,7 @@
             ],
             "humidity": [
               -0.1,
-              0.3
+              0.1
             ],
             "depth": [
               0,
@@ -15001,7 +14791,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_snowy_taiga"
+          "biome": "great_big_world:snowy_aspen_forest"
         },
         {
           "parameters": {
@@ -15121,7 +14911,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -15443,6 +15233,36 @@
             ],
             "humidity": [
               -0.1,
+              0.1
+            ],
+            "depth": [
+              0,
+              0
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:snowy_aspen_forest"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              0.4,
+              0.56666666
+            ],
+            "continentalness": [
+              -0.19,
+              -0.11
+            ],
+            "erosion": [
+              -1,
+              1
+            ],
+            "temperature": [
+              -1,
+              -0.45
+            ],
+            "humidity": [
+              0.1,
               0.3
             ],
             "depth": [
@@ -15571,7 +15391,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -15991,7 +15811,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -16537,36 +16357,6 @@
           "parameters": {
             "weirdness": [
               0.4,
-              1
-            ],
-            "continentalness": [
-              0.03,
-              1
-            ],
-            "erosion": [
-              -0.375,
-              0.45
-            ],
-            "temperature": [
-              -1,
-              -0.45
-            ],
-            "humidity": [
-              0.1,
-              0.3
-            ],
-            "depth": [
-              0,
-              0
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_snowy_taiga"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              0.4,
               0.93333334
             ],
             "continentalness": [
@@ -16801,7 +16591,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_dark_forest"
+          "biome": "minecraft:pale_garden"
         },
         {
           "parameters": {
@@ -16823,7 +16613,7 @@
             ],
             "humidity": [
               -0.1,
-              0.3
+              0.1
             ],
             "depth": [
               0,
@@ -16831,7 +16621,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_snowy_taiga"
+          "biome": "great_big_world:snowy_aspen_forest"
         },
         {
           "parameters": {
@@ -16951,7 +16741,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -17221,7 +17011,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_dark_forest"
+          "biome": "minecraft:pale_garden"
         },
         {
           "parameters": {
@@ -17333,7 +17123,7 @@
             ],
             "humidity": [
               -0.1,
-              0.3
+              0.1
             ],
             "depth": [
               0,
@@ -17341,7 +17131,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_snowy_taiga"
+          "biome": "great_big_world:snowy_aspen_forest"
         },
         {
           "parameters": {
@@ -17461,7 +17251,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -18001,7 +17791,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -18353,6 +18143,36 @@
             ],
             "humidity": [
               -0.1,
+              0.1
+            ],
+            "depth": [
+              0,
+              0
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:snowy_aspen_forest"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              0.56666666,
+              0.93333334
+            ],
+            "continentalness": [
+              -0.19,
+              1
+            ],
+            "erosion": [
+              -0.375,
+              0.45
+            ],
+            "temperature": [
+              -1,
+              -0.45
+            ],
+            "humidity": [
+              0.1,
               0.3
             ],
             "depth": [
@@ -18623,6 +18443,36 @@
             ],
             "humidity": [
               -0.1,
+              0.1
+            ],
+            "depth": [
+              0,
+              0
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:snowy_aspen_forest"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              0.56666666,
+              1
+            ],
+            "continentalness": [
+              -0.19,
+              1
+            ],
+            "erosion": [
+              0.55,
+              1
+            ],
+            "temperature": [
+              -1,
+              -0.45
+            ],
+            "humidity": [
+              0.1,
               0.3
             ],
             "depth": [
@@ -18751,7 +18601,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -19043,6 +18893,36 @@
             ],
             "humidity": [
               -0.1,
+              0.1
+            ],
+            "depth": [
+              0,
+              0
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:snowy_aspen_forest"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              0.7666667,
+              0.93333334
+            ],
+            "continentalness": [
+              -0.19,
+              -0.11
+            ],
+            "erosion": [
+              -1,
+              1
+            ],
+            "temperature": [
+              -1,
+              -0.45
+            ],
+            "humidity": [
+              0.1,
               0.3
             ],
             "depth": [
@@ -19171,7 +19051,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -19793,6 +19673,36 @@
             ],
             "humidity": [
               -0.1,
+              0.1
+            ],
+            "depth": [
+              0,
+              0
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:snowy_aspen_forest"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              0.7666667,
+              1
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              0.45,
+              1
+            ],
+            "temperature": [
+              -1,
+              -0.45
+            ],
+            "humidity": [
+              0.1,
               0.3
             ],
             "depth": [
@@ -19921,7 +19831,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -20303,6 +20213,36 @@
             ],
             "humidity": [
               -0.1,
+              0.1
+            ],
+            "depth": [
+              0,
+              0
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:snowy_aspen_forest"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              0.93333334,
+              1
+            ],
+            "continentalness": [
+              -0.19,
+              0.03
+            ],
+            "erosion": [
+              -0.2225,
+              1
+            ],
+            "temperature": [
+              -1,
+              -0.45
+            ],
+            "humidity": [
+              0.1,
               0.3
             ],
             "depth": [
@@ -20431,7 +20371,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -20581,7 +20521,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -20723,6 +20663,36 @@
             ],
             "humidity": [
               -0.1,
+              0.1
+            ],
+            "depth": [
+              0,
+              0
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:snowy_aspen_forest"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              0.93333334,
+              1
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              -0.375,
+              1
+            ],
+            "temperature": [
+              -1,
+              -0.45
+            ],
+            "humidity": [
+              0.1,
               0.3
             ],
             "depth": [
@@ -20779,41 +20749,11 @@
             ],
             "temperature": [
               -0.45,
-              -0.15
-            ],
-            "humidity": [
-              -1,
-              1
-            ],
-            "depth": [
-              0,
-              0
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_swamp"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              0.93333334,
-              1
-            ],
-            "continentalness": [
-              -0.11,
-              1
-            ],
-            "erosion": [
-              0.55,
-              1
-            ],
-            "temperature": [
-              -0.15,
               0.2
             ],
             "humidity": [
               -1,
-              0.1
+              1
             ],
             "depth": [
               0,
@@ -20822,36 +20762,6 @@
             "offset": 0
           },
           "biome": "great_big_world:alter_swamp"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              0.93333334,
-              1
-            ],
-            "continentalness": [
-              -0.11,
-              1
-            ],
-            "erosion": [
-              0.55,
-              1
-            ],
-            "temperature": [
-              -0.15,
-              1
-            ],
-            "humidity": [
-              0.1,
-              1
-            ],
-            "depth": [
-              0,
-              0
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_swamp_river"
         },
         {
           "parameters": {
@@ -20873,7 +20783,7 @@
             ],
             "humidity": [
               -1,
-              0.1
+              1
             ],
             "depth": [
               0,
@@ -21181,7 +21091,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -21473,7 +21383,7 @@
             ],
             "humidity": [
               -0.1,
-              0.3
+              0.1
             ],
             "depth": [
               0,
@@ -21481,7 +21391,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_snowy_taiga"
+          "biome": "great_big_world:snowy_aspen_forest"
         },
         {
           "parameters": {
@@ -21691,7 +21601,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_dark_forest"
+          "biome": "minecraft:pale_garden"
         },
         {
           "parameters": {
@@ -21803,7 +21713,7 @@
             ],
             "humidity": [
               -0.1,
-              0.3
+              0.1
             ],
             "depth": [
               0,
@@ -21811,7 +21721,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_snowy_taiga"
+          "biome": "great_big_world:snowy_aspen_forest"
         },
         {
           "parameters": {
@@ -21931,7 +21841,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -22691,7 +22601,7 @@
             ],
             "continentalness": [
               -0.19,
-              1
+              0.3
             ],
             "erosion": [
               -0.2225,
@@ -22703,36 +22613,6 @@
             ],
             "humidity": [
               -0.1,
-              0.1
-            ],
-            "depth": [
-              1,
-              1
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_forest"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -1,
-              -0.26666668
-            ],
-            "continentalness": [
-              -0.19,
-              1
-            ],
-            "erosion": [
-              -0.2225,
-              0.05
-            ],
-            "temperature": [
-              -0.45,
-              -0.15
-            ],
-            "humidity": [
-              0.1,
               0.3
             ],
             "depth": [
@@ -22741,7 +22621,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -23419,40 +23299,10 @@
             ],
             "temperature": [
               -0.45,
-              0.55
-            ],
-            "humidity": [
-              -0.1,
-              0.1
-            ],
-            "depth": [
-              1,
-              1
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_forest"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -1,
-              -0.7666667
-            ],
-            "continentalness": [
-              -0.11,
-              0.03
-            ],
-            "erosion": [
-              -0.78,
-              0.55
-            ],
-            "temperature": [
-              -0.45,
               -0.15
             ],
             "humidity": [
-              0.1,
+              -0.1,
               0.3
             ],
             "depth": [
@@ -23461,7 +23311,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -23552,6 +23402,36 @@
             "offset": 0
           },
           "biome": "great_big_world:alter_plains"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              -1,
+              -0.7666667
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              -0.78,
+              0.55
+            ],
+            "temperature": [
+              -0.15,
+              0.55
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "depth": [
+              1,
+              1
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:alter_forest"
         },
         {
           "parameters": {
@@ -23809,41 +23689,11 @@
             ],
             "temperature": [
               -0.45,
-              -0.15
-            ],
-            "humidity": [
-              -1,
-              1
-            ],
-            "depth": [
-              1,
-              1
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_swamp"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -1,
-              -0.93333334
-            ],
-            "continentalness": [
-              -0.11,
-              1
-            ],
-            "erosion": [
-              0.55,
-              1
-            ],
-            "temperature": [
-              -0.15,
               0.2
             ],
             "humidity": [
               -1,
-              0.1
+              1
             ],
             "depth": [
               1,
@@ -23852,36 +23702,6 @@
             "offset": 0
           },
           "biome": "great_big_world:alter_swamp"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -1,
-              -0.93333334
-            ],
-            "continentalness": [
-              -0.11,
-              1
-            ],
-            "erosion": [
-              0.55,
-              1
-            ],
-            "temperature": [
-              -0.15,
-              1
-            ],
-            "humidity": [
-              0.1,
-              1
-            ],
-            "depth": [
-              1,
-              1
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_swamp_river"
         },
         {
           "parameters": {
@@ -23903,7 +23723,7 @@
             ],
             "humidity": [
               -1,
-              0.1
+              1
             ],
             "depth": [
               1,
@@ -24191,7 +24011,7 @@
             ],
             "continentalness": [
               0.03,
-              1
+              0.3
             ],
             "erosion": [
               -0.78,
@@ -24203,36 +24023,6 @@
             ],
             "humidity": [
               -0.1,
-              0.1
-            ],
-            "depth": [
-              1,
-              1
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_forest"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -1,
-              -0.93333334
-            ],
-            "continentalness": [
-              0.03,
-              1
-            ],
-            "erosion": [
-              -0.78,
-              0.45
-            ],
-            "temperature": [
-              -0.45,
-              -0.15
-            ],
-            "humidity": [
-              0.1,
               0.3
             ],
             "depth": [
@@ -24241,7 +24031,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -24918,6 +24708,66 @@
               -0.2225
             ],
             "temperature": [
+              -0.45,
+              -0.15
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "depth": [
+              1,
+              1
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:alter_forest"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              -1,
+              -0.93333334
+            ],
+            "continentalness": [
+              0.3,
+              1
+            ],
+            "erosion": [
+              -0.78,
+              -0.2225
+            ],
+            "temperature": [
+              -0.45,
+              -0.15
+            ],
+            "humidity": [
+              0.1,
+              0.3
+            ],
+            "depth": [
+              1,
+              1
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:alter_taiga"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              -1,
+              -0.93333334
+            ],
+            "continentalness": [
+              0.3,
+              1
+            ],
+            "erosion": [
+              -0.78,
+              -0.2225
+            ],
+            "temperature": [
               -0.15,
               0.2
             ],
@@ -24961,7 +24811,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_dark_forest"
+          "biome": "minecraft:pale_garden"
         },
         {
           "parameters": {
@@ -25112,6 +24962,36 @@
             "offset": 0
           },
           "biome": "great_big_world:alter_plains"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              -1,
+              -0.93333334
+            ],
+            "continentalness": [
+              0.3,
+              1
+            ],
+            "erosion": [
+              -0.2225,
+              0.45
+            ],
+            "temperature": [
+              -0.45,
+              -0.15
+            ],
+            "humidity": [
+              -0.1,
+              0.3
+            ],
+            "depth": [
+              1,
+              1
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -25459,40 +25339,10 @@
             ],
             "temperature": [
               -0.45,
-              0.55
-            ],
-            "humidity": [
-              -0.1,
-              0.1
-            ],
-            "depth": [
-              1,
-              1
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_forest"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.93333334,
-              -0.7666667
-            ],
-            "continentalness": [
-              -0.19,
-              -0.11
-            ],
-            "erosion": [
-              -1,
-              1
-            ],
-            "temperature": [
-              -0.45,
               -0.15
             ],
             "humidity": [
-              0.1,
+              -0.1,
               0.3
             ],
             "depth": [
@@ -25501,7 +25351,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -25592,6 +25442,36 @@
             "offset": 0
           },
           "biome": "great_big_world:alter_plains"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              -0.93333334,
+              -0.7666667
+            ],
+            "continentalness": [
+              -0.19,
+              -0.11
+            ],
+            "erosion": [
+              -1,
+              1
+            ],
+            "temperature": [
+              -0.15,
+              0.55
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "depth": [
+              1,
+              1
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:alter_forest"
         },
         {
           "parameters": {
@@ -25789,40 +25669,10 @@
             ],
             "temperature": [
               -0.45,
-              0.55
-            ],
-            "humidity": [
-              -0.1,
-              0.1
-            ],
-            "depth": [
-              1,
-              1
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_forest"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.93333334,
-              -0.4
-            ],
-            "continentalness": [
-              -0.11,
-              1
-            ],
-            "erosion": [
-              0.55,
-              1
-            ],
-            "temperature": [
-              -0.45,
               -0.15
             ],
             "humidity": [
-              0.1,
+              -0.1,
               0.3
             ],
             "depth": [
@@ -25831,7 +25681,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -25922,6 +25772,36 @@
             "offset": 0
           },
           "biome": "great_big_world:alter_plains"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              -0.93333334,
+              -0.4
+            ],
+            "continentalness": [
+              -0.11,
+              1
+            ],
+            "erosion": [
+              0.55,
+              1
+            ],
+            "temperature": [
+              -0.15,
+              0.55
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "depth": [
+              1,
+              1
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:alter_forest"
         },
         {
           "parameters": {
@@ -26377,7 +26257,7 @@
           "parameters": {
             "weirdness": [
               -0.93333334,
-              -0.05
+              -0.4
             ],
             "continentalness": [
               0.03,
@@ -26385,7 +26265,7 @@
             ],
             "erosion": [
               -0.375,
-              0.45
+              -0.2225
             ],
             "temperature": [
               -0.45,
@@ -26407,7 +26287,7 @@
           "parameters": {
             "weirdness": [
               -0.93333334,
-              -0.05
+              -0.4
             ],
             "continentalness": [
               0.03,
@@ -26415,7 +26295,7 @@
             ],
             "erosion": [
               -0.375,
-              0.45
+              -0.2225
             ],
             "temperature": [
               -0.45,
@@ -26521,7 +26401,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_dark_forest"
+          "biome": "minecraft:pale_garden"
         },
         {
           "parameters": {
@@ -26582,6 +26462,36 @@
             "offset": 0
           },
           "biome": "great_big_world:alter_plains"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              -0.93333334,
+              -0.05
+            ],
+            "continentalness": [
+              0.03,
+              1
+            ],
+            "erosion": [
+              0.05,
+              0.45
+            ],
+            "temperature": [
+              -0.45,
+              -0.15
+            ],
+            "humidity": [
+              -0.1,
+              0.3
+            ],
+            "depth": [
+              1,
+              1
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -26868,6 +26778,66 @@
               0.05
             ],
             "temperature": [
+              -0.45,
+              -0.15
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "depth": [
+              1,
+              1
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:alter_forest"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              -0.93333334,
+              -0.4
+            ],
+            "continentalness": [
+              0.3,
+              1
+            ],
+            "erosion": [
+              -0.2225,
+              0.05
+            ],
+            "temperature": [
+              -0.45,
+              -0.15
+            ],
+            "humidity": [
+              0.1,
+              0.3
+            ],
+            "depth": [
+              1,
+              1
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:alter_taiga"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              -0.93333334,
+              -0.4
+            ],
+            "continentalness": [
+              0.3,
+              1
+            ],
+            "erosion": [
+              -0.2225,
+              0.05
+            ],
+            "temperature": [
               -0.15,
               0.2
             ],
@@ -26911,7 +26881,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_dark_forest"
+          "biome": "minecraft:pale_garden"
         },
         {
           "parameters": {
@@ -27199,40 +27169,10 @@
             ],
             "temperature": [
               -0.45,
-              0.55
-            ],
-            "humidity": [
-              -0.1,
-              0.1
-            ],
-            "depth": [
-              1,
-              1
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_forest"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.7666667,
-              -0.4
-            ],
-            "continentalness": [
-              -0.19,
-              0.03
-            ],
-            "erosion": [
-              -0.78,
-              0.45
-            ],
-            "temperature": [
-              -0.45,
               -0.15
             ],
             "humidity": [
-              0.1,
+              -0.1,
               0.3
             ],
             "depth": [
@@ -27241,7 +27181,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -27332,6 +27272,36 @@
             "offset": 0
           },
           "biome": "great_big_world:alter_plains"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              -0.7666667,
+              -0.4
+            ],
+            "continentalness": [
+              -0.19,
+              0.03
+            ],
+            "erosion": [
+              -0.78,
+              0.45
+            ],
+            "temperature": [
+              -0.15,
+              0.55
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "depth": [
+              1,
+              1
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:alter_forest"
         },
         {
           "parameters": {
@@ -27859,40 +27829,10 @@
             ],
             "temperature": [
               -0.45,
-              0.55
-            ],
-            "humidity": [
-              -0.1,
-              0.1
-            ],
-            "depth": [
-              1,
-              1
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_forest"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.7666667,
-              -0.4
-            ],
-            "continentalness": [
-              -0.19,
-              1
-            ],
-            "erosion": [
-              0.55,
-              1
-            ],
-            "temperature": [
-              -0.45,
               -0.15
             ],
             "humidity": [
-              0.1,
+              -0.1,
               0.3
             ],
             "depth": [
@@ -27901,7 +27841,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -27992,6 +27932,36 @@
             "offset": 0
           },
           "biome": "great_big_world:alter_plains"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              -0.7666667,
+              -0.4
+            ],
+            "continentalness": [
+              -0.19,
+              1
+            ],
+            "erosion": [
+              0.55,
+              1
+            ],
+            "temperature": [
+              -0.15,
+              0.55
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "depth": [
+              1,
+              1
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:alter_forest"
         },
         {
           "parameters": {
@@ -28369,40 +28339,10 @@
             ],
             "temperature": [
               -0.45,
-              0.55
-            ],
-            "humidity": [
-              -0.1,
-              0.1
-            ],
-            "depth": [
-              1,
-              1
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_forest"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.56666666,
-              -0.4
-            ],
-            "continentalness": [
-              -0.19,
-              -0.11
-            ],
-            "erosion": [
-              -1,
-              1
-            ],
-            "temperature": [
-              -0.45,
               -0.15
             ],
             "humidity": [
-              0.1,
+              -0.1,
               0.3
             ],
             "depth": [
@@ -28411,7 +28351,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -28502,6 +28442,36 @@
             "offset": 0
           },
           "biome": "great_big_world:alter_plains"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              -0.56666666,
+              -0.4
+            ],
+            "continentalness": [
+              -0.19,
+              -0.11
+            ],
+            "erosion": [
+              -1,
+              1
+            ],
+            "temperature": [
+              -0.15,
+              0.55
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "depth": [
+              1,
+              1
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:alter_forest"
         },
         {
           "parameters": {
@@ -29029,40 +28999,10 @@
             ],
             "temperature": [
               -0.45,
-              0.55
-            ],
-            "humidity": [
-              -0.1,
-              0.1
-            ],
-            "depth": [
-              1,
-              1
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_forest"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.56666666,
-              -0.4
-            ],
-            "continentalness": [
-              -0.11,
-              0.03
-            ],
-            "erosion": [
-              0.45,
-              1
-            ],
-            "temperature": [
-              -0.45,
               -0.15
             ],
             "humidity": [
-              0.1,
+              -0.1,
               0.3
             ],
             "depth": [
@@ -29071,7 +29011,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -29162,6 +29102,36 @@
             "offset": 0
           },
           "biome": "great_big_world:alter_plains"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              -0.56666666,
+              -0.4
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              0.45,
+              1
+            ],
+            "temperature": [
+              -0.15,
+              0.55
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "depth": [
+              1,
+              1
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:alter_forest"
         },
         {
           "parameters": {
@@ -29659,40 +29629,10 @@
             ],
             "temperature": [
               -0.45,
-              0.55
-            ],
-            "humidity": [
-              -0.1,
-              0.1
-            ],
-            "depth": [
-              1,
-              1
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_forest"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.4,
-              -0.05
-            ],
-            "continentalness": [
-              -0.11,
-              0.03
-            ],
-            "erosion": [
-              -0.78,
-              0.55
-            ],
-            "temperature": [
-              -0.45,
               -0.15
             ],
             "humidity": [
-              0.1,
+              -0.1,
               0.3
             ],
             "depth": [
@@ -29701,7 +29641,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -29792,6 +29732,36 @@
             "offset": 0
           },
           "biome": "great_big_world:alter_plains"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              -0.4,
+              -0.05
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              -0.78,
+              0.55
+            ],
+            "temperature": [
+              -0.15,
+              0.55
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "depth": [
+              1,
+              1
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:alter_forest"
         },
         {
           "parameters": {
@@ -29959,41 +29929,11 @@
             ],
             "temperature": [
               -0.45,
-              -0.15
-            ],
-            "humidity": [
-              -1,
-              1
-            ],
-            "depth": [
-              1,
-              1
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_swamp"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.4,
-              0.4
-            ],
-            "continentalness": [
-              -0.11,
-              1
-            ],
-            "erosion": [
-              0.55,
-              1
-            ],
-            "temperature": [
-              -0.15,
               0.2
             ],
             "humidity": [
               -1,
-              0.1
+              1
             ],
             "depth": [
               1,
@@ -30002,36 +29942,6 @@
             "offset": 0
           },
           "biome": "great_big_world:alter_swamp"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.4,
-              0.4
-            ],
-            "continentalness": [
-              -0.11,
-              1
-            ],
-            "erosion": [
-              0.55,
-              1
-            ],
-            "temperature": [
-              -0.15,
-              1
-            ],
-            "humidity": [
-              0.1,
-              1
-            ],
-            "depth": [
-              1,
-              1
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_swamp_river"
         },
         {
           "parameters": {
@@ -30053,7 +29963,7 @@
             ],
             "humidity": [
               -1,
-              0.1
+              1
             ],
             "depth": [
               1,
@@ -30281,7 +30191,7 @@
             ],
             "continentalness": [
               0.03,
-              1
+              0.3
             ],
             "erosion": [
               -0.78,
@@ -30293,36 +30203,6 @@
             ],
             "humidity": [
               -0.1,
-              0.1
-            ],
-            "depth": [
-              1,
-              1
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_forest"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.4,
-              -0.05
-            ],
-            "continentalness": [
-              0.03,
-              1
-            ],
-            "erosion": [
-              -0.78,
-              0.45
-            ],
-            "temperature": [
-              -0.45,
-              -0.15
-            ],
-            "humidity": [
-              0.1,
               0.3
             ],
             "depth": [
@@ -30331,7 +30211,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -30648,6 +30528,66 @@
               -0.2225
             ],
             "temperature": [
+              -0.45,
+              -0.15
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "depth": [
+              1,
+              1
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:alter_forest"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              -0.4,
+              -0.26666668
+            ],
+            "continentalness": [
+              0.3,
+              1
+            ],
+            "erosion": [
+              -0.78,
+              -0.2225
+            ],
+            "temperature": [
+              -0.45,
+              -0.15
+            ],
+            "humidity": [
+              0.1,
+              0.3
+            ],
+            "depth": [
+              1,
+              1
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:alter_taiga"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              -0.4,
+              -0.26666668
+            ],
+            "continentalness": [
+              0.3,
+              1
+            ],
+            "erosion": [
+              -0.78,
+              -0.2225
+            ],
+            "temperature": [
               -0.15,
               0.2
             ],
@@ -30691,7 +30631,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_dark_forest"
+          "biome": "minecraft:pale_garden"
         },
         {
           "parameters": {
@@ -30812,6 +30752,36 @@
             "offset": 0
           },
           "biome": "great_big_world:alter_plains"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              -0.4,
+              -0.05
+            ],
+            "continentalness": [
+              0.3,
+              1
+            ],
+            "erosion": [
+              -0.2225,
+              0.45
+            ],
+            "temperature": [
+              -0.45,
+              -0.15
+            ],
+            "humidity": [
+              -0.1,
+              0.3
+            ],
+            "depth": [
+              1,
+              1
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -31219,40 +31189,10 @@
             ],
             "temperature": [
               -0.45,
-              0.55
-            ],
-            "humidity": [
-              -0.1,
-              0.1
-            ],
-            "depth": [
-              1,
-              1
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_forest"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.26666668,
-              -0.05
-            ],
-            "continentalness": [
-              -0.11,
-              1
-            ],
-            "erosion": [
-              -1,
-              0.55
-            ],
-            "temperature": [
-              -0.45,
               -0.15
             ],
             "humidity": [
-              0.1,
+              -0.1,
               0.3
             ],
             "depth": [
@@ -31261,7 +31201,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -31352,6 +31292,36 @@
             "offset": 0
           },
           "biome": "great_big_world:alter_plains"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              -0.26666668,
+              -0.05
+            ],
+            "continentalness": [
+              -0.11,
+              1
+            ],
+            "erosion": [
+              -1,
+              0.55
+            ],
+            "temperature": [
+              -0.15,
+              0.55
+            ],
+            "humidity": [
+              -0.1,
+              0.1
+            ],
+            "depth": [
+              1,
+              1
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:alter_forest"
         },
         {
           "parameters": {
@@ -31613,396 +31583,6 @@
             ],
             "humidity": [
               -1,
-              0.3
-            ],
-            "depth": [
-              1,
-              1
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_frozen_river"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.05,
-              0.05
-            ],
-            "continentalness": [
-              -0.19,
-              -0.11
-            ],
-            "erosion": [
-              -1,
-              1
-            ],
-            "temperature": [
-              -1,
-              -0.15
-            ],
-            "humidity": [
-              0.3,
-              1
-            ],
-            "depth": [
-              1,
-              1
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_cold_river"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.05,
-              0.05
-            ],
-            "continentalness": [
-              -0.19,
-              -0.11
-            ],
-            "erosion": [
-              -1,
-              1
-            ],
-            "temperature": [
-              -0.45,
-              0.55
-            ],
-            "humidity": [
-              -1,
-              0.1
-            ],
-            "depth": [
-              1,
-              1
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_river"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.05,
-              0.05
-            ],
-            "continentalness": [
-              -0.19,
-              -0.11
-            ],
-            "erosion": [
-              -1,
-              1
-            ],
-            "temperature": [
-              -0.45,
-              -0.15
-            ],
-            "humidity": [
-              0.1,
-              1
-            ],
-            "depth": [
-              1,
-              1
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_cold_river"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.05,
-              0.05
-            ],
-            "continentalness": [
-              -0.19,
-              -0.11
-            ],
-            "erosion": [
-              -1,
-              1
-            ],
-            "temperature": [
-              -0.15,
-              0.2
-            ],
-            "humidity": [
-              0.1,
-              1
-            ],
-            "depth": [
-              1,
-              1
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_river"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.05,
-              0.05
-            ],
-            "continentalness": [
-              -0.19,
-              -0.11
-            ],
-            "erosion": [
-              -1,
-              1
-            ],
-            "temperature": [
-              0.2,
-              0.55
-            ],
-            "humidity": [
-              0.1,
-              1
-            ],
-            "depth": [
-              1,
-              1
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_jungle_river"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.05,
-              0.05
-            ],
-            "continentalness": [
-              -0.19,
-              -0.11
-            ],
-            "erosion": [
-              -1,
-              1
-            ],
-            "temperature": [
-              0.55,
-              1
-            ],
-            "humidity": [
-              -1,
-              1
-            ],
-            "depth": [
-              1,
-              1
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_desert_river"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.05,
-              0.05
-            ],
-            "continentalness": [
-              -0.11,
-              0.03
-            ],
-            "erosion": [
-              -1,
-              0.55
-            ],
-            "temperature": [
-              -1,
-              -0.15
-            ],
-            "humidity": [
-              0.3,
-              1
-            ],
-            "depth": [
-              1,
-              1
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_cold_river"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.05,
-              0.05
-            ],
-            "continentalness": [
-              -0.11,
-              0.03
-            ],
-            "erosion": [
-              -1,
-              0.55
-            ],
-            "temperature": [
-              -0.45,
-              0.55
-            ],
-            "humidity": [
-              -1,
-              0.1
-            ],
-            "depth": [
-              1,
-              1
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_river"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.05,
-              0.05
-            ],
-            "continentalness": [
-              -0.11,
-              0.03
-            ],
-            "erosion": [
-              -1,
-              0.55
-            ],
-            "temperature": [
-              -0.45,
-              -0.15
-            ],
-            "humidity": [
-              0.1,
-              1
-            ],
-            "depth": [
-              1,
-              1
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_cold_river"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.05,
-              0.05
-            ],
-            "continentalness": [
-              -0.11,
-              0.03
-            ],
-            "erosion": [
-              -1,
-              0.55
-            ],
-            "temperature": [
-              -0.15,
-              0.2
-            ],
-            "humidity": [
-              0.1,
-              1
-            ],
-            "depth": [
-              1,
-              1
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_river"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.05,
-              0.05
-            ],
-            "continentalness": [
-              -0.11,
-              0.03
-            ],
-            "erosion": [
-              -1,
-              0.55
-            ],
-            "temperature": [
-              0.2,
-              0.55
-            ],
-            "humidity": [
-              0.1,
-              1
-            ],
-            "depth": [
-              1,
-              1
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_jungle_river"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.05,
-              0.05
-            ],
-            "continentalness": [
-              -0.11,
-              0.03
-            ],
-            "erosion": [
-              -1,
-              0.55
-            ],
-            "temperature": [
-              0.55,
-              1
-            ],
-            "humidity": [
-              -1,
-              1
-            ],
-            "depth": [
-              1,
-              1
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_desert_river"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.05,
-              0.05
-            ],
-            "continentalness": [
-              -0.11,
-              1
-            ],
-            "erosion": [
-              0.55,
-              1
-            ],
-            "temperature": [
-              -1,
-              -0.45
-            ],
-            "humidity": [
-              0.3,
               1
             ],
             "depth": [
@@ -32012,6 +31592,66 @@
             "offset": 0
           },
           "biome": "great_big_world:alter_frozen_river"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              -0.05,
+              0.05
+            ],
+            "continentalness": [
+              -0.19,
+              -0.11
+            ],
+            "erosion": [
+              -1,
+              1
+            ],
+            "temperature": [
+              -0.45,
+              1
+            ],
+            "humidity": [
+              -1,
+              1
+            ],
+            "depth": [
+              1,
+              1
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:alter_river"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              -0.05,
+              0.05
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              -1,
+              0.55
+            ],
+            "temperature": [
+              -0.45,
+              1
+            ],
+            "humidity": [
+              -1,
+              1
+            ],
+            "depth": [
+              1,
+              1
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:alter_river"
         },
         {
           "parameters": {
@@ -32093,6 +31733,36 @@
             ],
             "humidity": [
               -0.1,
+              0.1
+            ],
+            "depth": [
+              1,
+              1
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:snowy_aspen_forest"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              -0.05,
+              0.05
+            ],
+            "continentalness": [
+              0.03,
+              1
+            ],
+            "erosion": [
+              -1,
+              -0.375
+            ],
+            "temperature": [
+              -1,
+              -0.45
+            ],
+            "humidity": [
+              0.1,
               0.3
             ],
             "depth": [
@@ -32221,7 +31891,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -32603,7 +32273,7 @@
             ],
             "humidity": [
               -1,
-              0.3
+              1
             ],
             "depth": [
               1,
@@ -32628,101 +32298,11 @@
               0.55
             ],
             "temperature": [
-              -1,
-              -0.15
-            ],
-            "humidity": [
-              0.3,
-              1
-            ],
-            "depth": [
-              1,
-              1
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_cold_river"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.05,
-              0.05
-            ],
-            "continentalness": [
-              0.03,
-              1
-            ],
-            "erosion": [
-              -0.375,
-              0.55
-            ],
-            "temperature": [
               -0.45,
-              0.55
+              1
             ],
             "humidity": [
               -1,
-              0.1
-            ],
-            "depth": [
-              1,
-              1
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_river"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.05,
-              0.05
-            ],
-            "continentalness": [
-              0.03,
-              1
-            ],
-            "erosion": [
-              -0.375,
-              0.55
-            ],
-            "temperature": [
-              -0.45,
-              -0.15
-            ],
-            "humidity": [
-              0.1,
-              1
-            ],
-            "depth": [
-              1,
-              1
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_cold_river"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.05,
-              0.05
-            ],
-            "continentalness": [
-              0.03,
-              1
-            ],
-            "erosion": [
-              -0.375,
-              0.55
-            ],
-            "temperature": [
-              -0.15,
-              0.2
-            ],
-            "humidity": [
-              0.1,
               1
             ],
             "depth": [
@@ -32732,66 +32312,6 @@
             "offset": 0
           },
           "biome": "great_big_world:alter_river"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.05,
-              0.05
-            ],
-            "continentalness": [
-              0.03,
-              1
-            ],
-            "erosion": [
-              -0.375,
-              0.55
-            ],
-            "temperature": [
-              0.2,
-              0.55
-            ],
-            "humidity": [
-              0.1,
-              1
-            ],
-            "depth": [
-              1,
-              1
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_jungle_river"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              -0.05,
-              0.05
-            ],
-            "continentalness": [
-              0.03,
-              1
-            ],
-            "erosion": [
-              -0.375,
-              0.55
-            ],
-            "temperature": [
-              0.55,
-              1
-            ],
-            "humidity": [
-              -1,
-              1
-            ],
-            "depth": [
-              1,
-              1
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_desert_river"
         },
         {
           "parameters": {
@@ -32993,6 +32513,36 @@
             ],
             "humidity": [
               -0.1,
+              0.1
+            ],
+            "depth": [
+              1,
+              1
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:snowy_aspen_forest"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              0.05,
+              0.56666666
+            ],
+            "continentalness": [
+              -0.19,
+              0.03
+            ],
+            "erosion": [
+              0.45,
+              0.55
+            ],
+            "temperature": [
+              -1,
+              -0.45
+            ],
+            "humidity": [
+              0.1,
               0.3
             ],
             "depth": [
@@ -33121,7 +32671,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -33443,6 +32993,36 @@
             ],
             "humidity": [
               -0.1,
+              0.1
+            ],
+            "depth": [
+              1,
+              1
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:snowy_aspen_forest"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              0.05,
+              0.26666668
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              -1,
+              1
+            ],
+            "temperature": [
+              -1,
+              -0.45
+            ],
+            "humidity": [
+              0.1,
               0.3
             ],
             "depth": [
@@ -33571,7 +33151,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -34163,6 +33743,36 @@
             ],
             "humidity": [
               -0.1,
+              0.1
+            ],
+            "depth": [
+              1,
+              1
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:snowy_aspen_forest"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              0.05,
+              0.26666668
+            ],
+            "continentalness": [
+              0.03,
+              1
+            ],
+            "erosion": [
+              -0.375,
+              1
+            ],
+            "temperature": [
+              -1,
+              -0.45
+            ],
+            "humidity": [
+              0.1,
               0.3
             ],
             "depth": [
@@ -34613,6 +34223,36 @@
             ],
             "humidity": [
               -0.1,
+              0.1
+            ],
+            "depth": [
+              1,
+              1
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:snowy_aspen_forest"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              0.26666668,
+              0.56666666
+            ],
+            "continentalness": [
+              -0.19,
+              0.03
+            ],
+            "erosion": [
+              -0.2225,
+              1
+            ],
+            "temperature": [
+              -1,
+              -0.45
+            ],
+            "humidity": [
+              0.1,
               0.3
             ],
             "depth": [
@@ -34741,7 +34381,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -35551,7 +35191,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -35933,6 +35573,36 @@
             ],
             "humidity": [
               -0.1,
+              0.1
+            ],
+            "depth": [
+              1,
+              1
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:snowy_aspen_forest"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              0.26666668,
+              0.56666666
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              -0.375,
+              1
+            ],
+            "temperature": [
+              -1,
+              -0.45
+            ],
+            "humidity": [
+              0.1,
               0.3
             ],
             "depth": [
@@ -36211,7 +35881,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -36563,6 +36233,36 @@
             ],
             "humidity": [
               -0.1,
+              0.1
+            ],
+            "depth": [
+              1,
+              1
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:snowy_aspen_forest"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              0.26666668,
+              1
+            ],
+            "continentalness": [
+              0.03,
+              1
+            ],
+            "erosion": [
+              -0.375,
+              0.45
+            ],
+            "temperature": [
+              -1,
+              -0.45
+            ],
+            "humidity": [
+              0.1,
               0.3
             ],
             "depth": [
@@ -36803,6 +36503,36 @@
             ],
             "humidity": [
               -0.1,
+              0.1
+            ],
+            "depth": [
+              1,
+              1
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:snowy_aspen_forest"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              0.26666668,
+              1
+            ],
+            "continentalness": [
+              0.03,
+              1
+            ],
+            "erosion": [
+              0.55,
+              1
+            ],
+            "temperature": [
+              -1,
+              -0.45
+            ],
+            "humidity": [
+              0.1,
               0.3
             ],
             "depth": [
@@ -37021,7 +36751,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_dark_forest"
+          "biome": "minecraft:pale_garden"
         },
         {
           "parameters": {
@@ -37155,36 +36885,6 @@
             ],
             "erosion": [
               -0.375,
-              0.45
-            ],
-            "temperature": [
-              -1,
-              -0.45
-            ],
-            "humidity": [
-              0.1,
-              0.3
-            ],
-            "depth": [
-              1,
-              1
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_snowy_taiga"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              0.26666668,
-              1
-            ],
-            "continentalness": [
-              0.3,
-              1
-            ],
-            "erosion": [
-              -0.375,
               -0.2225
             ],
             "temperature": [
@@ -37223,7 +36923,7 @@
             ],
             "humidity": [
               -0.1,
-              0.3
+              0.1
             ],
             "depth": [
               1,
@@ -37231,7 +36931,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_snowy_taiga"
+          "biome": "great_big_world:snowy_aspen_forest"
         },
         {
           "parameters": {
@@ -37351,7 +37051,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -37673,6 +37373,36 @@
             ],
             "humidity": [
               -0.1,
+              0.1
+            ],
+            "depth": [
+              1,
+              1
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:snowy_aspen_forest"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              0.4,
+              0.56666666
+            ],
+            "continentalness": [
+              -0.19,
+              -0.11
+            ],
+            "erosion": [
+              -1,
+              1
+            ],
+            "temperature": [
+              -1,
+              -0.45
+            ],
+            "humidity": [
+              0.1,
               0.3
             ],
             "depth": [
@@ -37801,7 +37531,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -38221,7 +37951,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -38767,36 +38497,6 @@
           "parameters": {
             "weirdness": [
               0.4,
-              1
-            ],
-            "continentalness": [
-              0.03,
-              1
-            ],
-            "erosion": [
-              -0.375,
-              0.45
-            ],
-            "temperature": [
-              -1,
-              -0.45
-            ],
-            "humidity": [
-              0.1,
-              0.3
-            ],
-            "depth": [
-              1,
-              1
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_snowy_taiga"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              0.4,
               0.93333334
             ],
             "continentalness": [
@@ -39031,7 +38731,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_dark_forest"
+          "biome": "minecraft:pale_garden"
         },
         {
           "parameters": {
@@ -39053,7 +38753,7 @@
             ],
             "humidity": [
               -0.1,
-              0.3
+              0.1
             ],
             "depth": [
               1,
@@ -39061,7 +38761,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_snowy_taiga"
+          "biome": "great_big_world:snowy_aspen_forest"
         },
         {
           "parameters": {
@@ -39181,7 +38881,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -39451,7 +39151,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_dark_forest"
+          "biome": "minecraft:pale_garden"
         },
         {
           "parameters": {
@@ -39563,7 +39263,7 @@
             ],
             "humidity": [
               -0.1,
-              0.3
+              0.1
             ],
             "depth": [
               1,
@@ -39571,7 +39271,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_snowy_taiga"
+          "biome": "great_big_world:snowy_aspen_forest"
         },
         {
           "parameters": {
@@ -39691,7 +39391,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -40231,7 +39931,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -40583,6 +40283,36 @@
             ],
             "humidity": [
               -0.1,
+              0.1
+            ],
+            "depth": [
+              1,
+              1
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:snowy_aspen_forest"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              0.56666666,
+              0.93333334
+            ],
+            "continentalness": [
+              -0.19,
+              1
+            ],
+            "erosion": [
+              -0.375,
+              0.45
+            ],
+            "temperature": [
+              -1,
+              -0.45
+            ],
+            "humidity": [
+              0.1,
               0.3
             ],
             "depth": [
@@ -40853,6 +40583,36 @@
             ],
             "humidity": [
               -0.1,
+              0.1
+            ],
+            "depth": [
+              1,
+              1
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:snowy_aspen_forest"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              0.56666666,
+              1
+            ],
+            "continentalness": [
+              -0.19,
+              1
+            ],
+            "erosion": [
+              0.55,
+              1
+            ],
+            "temperature": [
+              -1,
+              -0.45
+            ],
+            "humidity": [
+              0.1,
               0.3
             ],
             "depth": [
@@ -40981,7 +40741,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -41273,6 +41033,36 @@
             ],
             "humidity": [
               -0.1,
+              0.1
+            ],
+            "depth": [
+              1,
+              1
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:snowy_aspen_forest"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              0.7666667,
+              0.93333334
+            ],
+            "continentalness": [
+              -0.19,
+              -0.11
+            ],
+            "erosion": [
+              -1,
+              1
+            ],
+            "temperature": [
+              -1,
+              -0.45
+            ],
+            "humidity": [
+              0.1,
               0.3
             ],
             "depth": [
@@ -41401,7 +41191,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -42023,6 +41813,36 @@
             ],
             "humidity": [
               -0.1,
+              0.1
+            ],
+            "depth": [
+              1,
+              1
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:snowy_aspen_forest"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              0.7666667,
+              1
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              0.45,
+              1
+            ],
+            "temperature": [
+              -1,
+              -0.45
+            ],
+            "humidity": [
+              0.1,
               0.3
             ],
             "depth": [
@@ -42151,7 +41971,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -42533,6 +42353,36 @@
             ],
             "humidity": [
               -0.1,
+              0.1
+            ],
+            "depth": [
+              1,
+              1
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:snowy_aspen_forest"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              0.93333334,
+              1
+            ],
+            "continentalness": [
+              -0.19,
+              0.03
+            ],
+            "erosion": [
+              -0.2225,
+              1
+            ],
+            "temperature": [
+              -1,
+              -0.45
+            ],
+            "humidity": [
+              0.1,
               0.3
             ],
             "depth": [
@@ -42661,7 +42511,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -42811,7 +42661,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -42953,6 +42803,36 @@
             ],
             "humidity": [
               -0.1,
+              0.1
+            ],
+            "depth": [
+              1,
+              1
+            ],
+            "offset": 0
+          },
+          "biome": "great_big_world:snowy_aspen_forest"
+        },
+        {
+          "parameters": {
+            "weirdness": [
+              0.93333334,
+              1
+            ],
+            "continentalness": [
+              -0.11,
+              0.03
+            ],
+            "erosion": [
+              -0.375,
+              1
+            ],
+            "temperature": [
+              -1,
+              -0.45
+            ],
+            "humidity": [
+              0.1,
               0.3
             ],
             "depth": [
@@ -43009,41 +42889,11 @@
             ],
             "temperature": [
               -0.45,
-              -0.15
-            ],
-            "humidity": [
-              -1,
-              1
-            ],
-            "depth": [
-              1,
-              1
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_swamp"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              0.93333334,
-              1
-            ],
-            "continentalness": [
-              -0.11,
-              1
-            ],
-            "erosion": [
-              0.55,
-              1
-            ],
-            "temperature": [
-              -0.15,
               0.2
             ],
             "humidity": [
               -1,
-              0.1
+              1
             ],
             "depth": [
               1,
@@ -43052,36 +42902,6 @@
             "offset": 0
           },
           "biome": "great_big_world:alter_swamp"
-        },
-        {
-          "parameters": {
-            "weirdness": [
-              0.93333334,
-              1
-            ],
-            "continentalness": [
-              -0.11,
-              1
-            ],
-            "erosion": [
-              0.55,
-              1
-            ],
-            "temperature": [
-              -0.15,
-              1
-            ],
-            "humidity": [
-              0.1,
-              1
-            ],
-            "depth": [
-              1,
-              1
-            ],
-            "offset": 0
-          },
-          "biome": "great_big_world:alter_swamp_river"
         },
         {
           "parameters": {
@@ -43103,7 +42923,7 @@
             ],
             "humidity": [
               -1,
-              0.1
+              1
             ],
             "depth": [
               1,
@@ -43411,7 +43231,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
@@ -43703,7 +43523,7 @@
             ],
             "humidity": [
               -0.1,
-              0.3
+              0.1
             ],
             "depth": [
               1,
@@ -43711,7 +43531,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_snowy_taiga"
+          "biome": "great_big_world:snowy_aspen_forest"
         },
         {
           "parameters": {
@@ -43921,7 +43741,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_dark_forest"
+          "biome": "minecraft:pale_garden"
         },
         {
           "parameters": {
@@ -44033,7 +43853,7 @@
             ],
             "humidity": [
               -0.1,
-              0.3
+              0.1
             ],
             "depth": [
               1,
@@ -44041,7 +43861,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_snowy_taiga"
+          "biome": "great_big_world:snowy_aspen_forest"
         },
         {
           "parameters": {
@@ -44161,7 +43981,7 @@
             ],
             "offset": 0
           },
-          "biome": "great_big_world:alter_taiga"
+          "biome": "great_big_world:aspen_forest"
         },
         {
           "parameters": {
