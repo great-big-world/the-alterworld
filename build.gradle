@@ -16,4 +16,5 @@ dependencies {
     common(project(path: ':architects-assembly', configuration: 'namedElements')) { transitive false }
     common(project(path: ':flora-and-fauna', configuration: 'namedElements')) { transitive false }
     common(project(path: ':swords-and-shields', configuration: 'namedElements')) { transitive false }
+    common(project(path: ':chilling-peaks', configuration: 'namedElements')) { transitive false }
 }

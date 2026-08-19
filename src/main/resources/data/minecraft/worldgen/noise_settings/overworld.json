@@ -572,8 +572,7 @@
                     "if_true": {
                       "type": "minecraft:biome",
                       "biome_is": [
-                        "minecraft:swamp",
-                        "great_big_world:swamp_river"
+                        "minecraft:swamp"
                       ]
                     },
                     "then_run": {
