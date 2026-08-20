@@ -37,6 +37,8 @@ public final class TheAlterworldStructureTriggers {
     public static void register() {
         ANCIENT_PORTAL_ACTIVATION = Registry.register(GBWRegistries.STRUCTURE_TRIGGERS, ANCIENT_PORTAL_ACTIVATION_TRIGGER, new StructureTrigger(ANCIENT_PORTAL_ACTIVATION_TRIGGER, TheAlterworldStructureTriggerDataTypes.ANCIENT_PORTAL, (world, pos, state, structureStart, group) -> {
             if (group != null && group.data() instanceof AncientPortalTriggerData(BlockPos.MutableBlockPos portalPos, Map<BlockPos, Boolean> positions)) {
+                boolean markDirty = false;
+
                 Direction.Axis searchAxis = Direction.Axis.X;
                 if (portalPos.equals(BlockPos.ZERO)) { // portal pos should never equal 0,0,0 since an Ancient Portal always generates at y=-162 in the mod
                     Tuple<BlockPos, Direction.Axis> pair = getPortalPosAndAxis(world, pos);
@@ -51,33 +53,29 @@ public final class TheAlterworldStructureTriggers {
                         positions.put(pos.relative(searchAxis, i).below(4), false);
                     }
 
-                    StructureTriggerManager.getServerState(world).setDirty();
+                    markDirty = true;
                 }
 
-                positions.entrySet().stream().filter(entry -> !entry.getValue()).forEach(entry -> {
-                    BlockState state1 = world.getBlockState(entry.getKey());
-                    if (state1.is(TheAlterworldBlocks.ANCIENT_PEDESTAL) && state1.getValue(AncientPedestalBlock.HAS_OFFERING)) {
-                        entry.setValue(true);
-                        StructureTriggerManager.getServerState(world).setDirty();
-                    }
-                });
+                for (Map.Entry<BlockPos, Boolean> entry : positions.entrySet()) {
+                    if (entry.getValue())
+                        continue;
 
-                if (positions.values().stream().filter(Boolean::booleanValue).count() >= 4) {
+                    BlockState pedestal = world.getBlockState(entry.getKey());
+
+                    if (pedestal.is(TheAlterworldBlocks.ANCIENT_PEDESTAL) && pedestal.getValue(AncientPedestalBlock.HAS_OFFERING)) {
+                        entry.setValue(true);
+                        markDirty = true;
+                    }
+                }
+
+                if (positions.values().stream().allMatch(Boolean::booleanValue)) {
                     Optional<AlterworldPortal> optional = AlterworldPortal.getNewPortal(world, portalPos, searchAxis);
                     optional.ifPresent(portal -> {
                         world.playSound(null, portalPos, TheAlterworldSoundEvents.STRUCTURE_ANCIENT_CITY_PORTAL_OPEN, SoundSource.AMBIENT, 2f, .75f);
 
                         Player player = world.getNearestPlayer(PORTAL_ACTIVATION_TARGETING_CONDITIONS, portalPos.getX(), portalPos.getY(), portalPos.getZ());
                         if (player != null && player.isAlive()) {
-                            BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
-                            for (int x = portalPos.getX() - 32; x <= portalPos.getX() + 32; x += 8) {
-                                for (int y = portalPos.getY() - 8; y <= portalPos.getY() + 8; y += 8) {
-                                    for (int z = portalPos.getZ() - 32; z <= portalPos.getZ() + 32; z += 8) {
-                                        mutable.set(x, y, z);
-                                        world.gameEvent(TheAlterworldGameEvents.ANCIENT_PORTAL_ACTIVATED, mutable, GameEvent.Context.of(player));
-                                    }
-                                }
-                            }
+                            world.gameEvent(TheAlterworldGameEvents.ANCIENT_PORTAL_ACTIVATED, portalPos, GameEvent.Context.of(player));
                         }
 
                         positions.keySet().forEach(pos1 -> {
@@ -96,9 +94,12 @@ public final class TheAlterworldStructureTriggers {
 
                         portal.createPortal(world);
                     });
-                    StructureTriggerManager.getServerState(world).setDirty();
+                    markDirty = true;
                     return true;
                 }
+
+                if (markDirty)
+                    StructureTriggerManager.getServerState(world);
                 return false;
             }
             return true;
