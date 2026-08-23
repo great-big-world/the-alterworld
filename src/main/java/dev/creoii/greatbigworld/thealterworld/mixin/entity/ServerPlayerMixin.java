@@ -2,6 +2,7 @@ package dev.creoii.greatbigworld.thealterworld.mixin.entity;
 
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import com.mojang.authlib.GameProfile;
+import dev.creoii.greatbigworld.GreatBigWorld;
 import dev.creoii.greatbigworld.thealterworld.registry.TheAlterworldStatusEffects;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
@@ -32,7 +33,10 @@ public abstract class ServerPlayerMixin extends Player {
         if (hasEffect(TheAlterworldStatusEffects.PLANAR_FRACTURE)) {
             if (!isCreative())
                 removeVehicle();
-            removeEffect(TheAlterworldStatusEffects.PLANAR_FRACTURE);
+
+            if (teleportTransition.newLevel().dimension() != GreatBigWorld.ALTERWORLD_KEY) {
+                removeEffect(TheAlterworldStatusEffects.PLANAR_FRACTURE);
+            }
         }
     }
 }
